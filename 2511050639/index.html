@@ -1,0 +1,542 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé - Aaron Munro</title>
+    <style>
+        /* Part 2: HTML/CSS Style Guide */
+
+        /* CSS Variables from Style Guide */
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #CCCCCC;
+            --accent-color: #FFD700;
+            --text-color: #333333;
+            --font-heading1: bold 32px "Arial", sans-serif;
+            --font-heading2: bold 24px "Arial", sans-serif;
+            --font-body: normal 16px "Arial", sans-serif;
+            --line-height-body: 1.6;
+        }
+
+        /* General Body & Layout */
+        body {
+            font: var(--font-body);
+            color: var(--text-color);
+            background-color: #fdfdfd;
+            margin: 0;
+            padding: 0;
+            line-height: var(--line-height-body);
+        }
+
+        .resume-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 40px;
+            background-color: #fff;
+            border: 1px solid var(--secondary-color);
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+
+        .main-content {
+            grid-column: 1 / -1;
+        }
+
+        .sidebar {
+            display: none; /* Hidden by default, activated in desktop view */
+        }
+        
+        /* Typography & Visual Hierarchy */
+        h1, h2, h3, h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            font-family: "Arial", sans-serif;
+        }
+
+        h1 {
+            font: var(--font-heading1);
+        }
+
+        h2 {
+            font: var(--font-heading2);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            margin-top: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        
+        h4 {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #444; /* Slightly less prominent than h3 */
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 0;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Header Section */
+        header {
+            text-align: left;
+            margin-bottom: 2em;
+            grid-column: 1 / -1;
+        }
+        
+        header h1 {
+            margin-bottom: 0.1em;
+        }
+
+        header .job-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5em;
+        }
+
+        header .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+            margin-top: 1em;
+        }
+        
+        header .contact-info li {
+            margin: 0;
+        }
+
+        /* Work Experience Section */
+        #experience .job-entry {
+            margin-bottom: 1.5em;
+        }
+
+        #experience .job-meta {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 0.5em;
+        }
+
+        /* Skills Section */
+        #skills .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        #skills .skill-category {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        #skills h3 {
+             font-size: 1.1em;
+             margin-bottom: 0.5em;
+             border-bottom: 1px solid var(--secondary-color);
+             padding-bottom: 4px;
+        }
+        
+        #skills ul {
+            list-style-type: disc;
+        }
+
+        /* Portfolio Gallery Section */
+        #portfolio .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2em;
+            margin-top: 1em;
+        }
+
+        #portfolio .portfolio-entry .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 1em;
+        }
+
+        #portfolio .portfolio-entry iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        #portfolio .portfolio-entry p {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        /* Export Button Styles */
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 2em;
+            grid-column: 1 / -1;
+        }
+        .export-buttons button {
+            padding: 10px 15px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .export-buttons button:hover {
+            background-color: #fff;
+            color: var(--primary-color);
+        }
+
+        /* Responsive Guidelines */
+        @media (max-width: 480px) {
+            .resume-container {
+                padding: 15px;
+                margin: 0;
+                border: none;
+                box-shadow: none;
+            }
+            h1 { font-size: 26px; }
+            h2 { font-size: 20px; }
+            header .contact-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+            .export-buttons {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .resume-container {
+                padding: 25px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .resume-container {
+                grid-template-columns: 2fr 1fr; /* Two-column layout */
+                gap: 40px;
+            }
+            .main-content {
+                grid-column: 1 / 2;
+            }
+            .sidebar {
+                grid-column: 2 / 3;
+                display: block;
+            }
+            /* Remove margins between sections in the same column */
+            .main-content > section, .sidebar > section {
+                margin-bottom: 0;
+                padding-bottom: 1.5em; /* Add padding to compensate for removed margin */
+            }
+             .main-content > section:last-child, .sidebar > section:last-child {
+                padding-bottom: 0;
+            }
+        }
+
+        /* Export & Print Optimisation */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 18mm 15mm;
+            }
+
+            body {
+                background-color: #fff;
+                color: #000;
+                font-size: 10pt; /* Adjust font size for print */
+            }
+
+            .resume-container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+                display: block; /* Revert grid for print */
+            }
+            
+            .sidebar, .export-buttons {
+                display: none;
+            }
+
+            h1, h2, h3, h4, a {
+                color: #000 !important;
+            }
+            
+            h2 {
+                border-bottom-color: #ccc;
+                margin-top: 1.2em;
+                font-size: 18pt;
+            }
+            h1 { font-size: 22pt; }
+            h3 { font-size: 12pt; }
+
+            section, .job-entry, .portfolio-entry {
+                page-break-inside: avoid;
+            }
+            
+            a {
+                text-decoration: none;
+            }
+
+            #portfolio { display: none; } /* Hide videos in print */
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-container">
+    <header role="banner">
+        <h1>Aaron Munro</h1>
+        <p class="job-title">ILS Digital Media Designer</p>
+        <ul class="contact-info">
+            <li><a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></li>
+            <li>0477742636</li>
+            <li>Forrestfield, WA, Australia</li>
+            <li><a href="http://www.vector6.com.au/resume" target="_blank">www.vector6.com.au/resume</a></li>
+        </ul>
+    </header>
+
+    <main role="main" class="main-content">
+        <section id="summary">
+            <h2>Summary</h2>
+            <p>
+                Highly experienced 3D Artist and Developer with over 20 years of expertise in creating detailed visualisations and interactive media from technical data, including CAD plans and engineering models. Specialises in developing immersive training content and simulations for industrial, infrastructure, and corporate sectors. Proven ability to manage projects from concept and storyboarding through to final media deployment across various digital platforms.
+            </p>
+        </section>
+
+        <section id="experience">
+            <h2>Work Experience</h2>
+            
+            <article class="job-entry">
+                <h3>Specialised in 3D Development</h3>
+                <p class="job-meta">Viewport XR | 2023 – 2024</p>
+                <ul>
+                    <li>Specialised in Unreal Engine Development for immersive experiences.</li>
+                    <li>Produced video content with After Effects, Adobe Premiere and Davinci Resolve.</li>
+                    <li>Involved in Autodesk InfraWorks Site Works and Road Infrastructure Development.</li>
+                </ul>
+            </article>
+
+            <article class="job-entry">
+                <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+                <p class="job-meta">Vector 6 | 2016 – 2023</p>
+                <ul>
+                    <li>Collaborated on various 3D visualisation projects.</li>
+                    <li>Performed Matterport scanning and photogrammetry with Reality Capture.</li>
+                    <li>Transformed high poly photogrammetry models into optimised low poly versions for VR.</li>
+                    <li>Developed 3D models and specialised material development for Unreal Engine.</li>
+                </ul>
+            </article>
+
+            <article class="job-entry">
+                <h3>Senior 3D Artist/Developer</h3>
+                <p class="job-meta">Minnovare | 2019</p>
+                <ul>
+                    <li>Hired as a graphic artist/3D Developer.</li>
+                    <li>Developing simulations and animations for underground mine core drilling to showcase their highly accurate underground global positioning system.</li>
+                </ul>
+            </article>
+
+            <article class="job-entry">
+                <h3>Senior 3D Artist/Developer</h3>
+                <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+                <ul>
+                    <li>Managed projects and led project teams, including project quoting and client liaison.</li>
+                    <li>Responsible for storyboarding, script outline, project planning, and time management.</li>
+                    <li>Developed 3D models, character animation, equipment rigging, and vehicle animation.</li>
+                    <li>Conducted on-site panoramic photography and environment lighting.</li>
+                    <li>Performed video editing, voiceover editing, and post-production effects.</li>
+                </ul>
+            </article>
+            
+            <article class="job-entry">
+                <h3>3D Artist</h3>
+                <p class="job-meta">3D Millipede | March 2005 – March 2006</p>
+                <ul>
+                    <li>Hired as a 3D modeller for converting 2D Architectural plans for multi-storey residential complexes.</li>
+                    <li>Developed accurate 3D models from CAD plans (AutoCAD).</li>
+                    <li>Conducted on-site photography and composited 3D models into photography.</li>
+                </ul>
+            </article>
+            
+            <article class="job-entry">
+                <h3>Lead 3D Artist</h3>
+                <p class="job-meta">Cell Media | August 2003 – December 2004</p>
+                <ul>
+                    <li>Primarily developing safety videos in industrial workplaces.</li>
+                    <li>3D development & animation for training inductions.</li>
+                    <li>Character animation and mechanical rigging using 3DS Max, Photoshop, Illustrator, After Effects, and Premiere.</li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="specialized-projects">
+            <h2>Specialized Project Experience</h2>
+            <p>
+                Contributed to major Australian infrastructure projects including the Perth Underground Bus Port, Elizabeth Quay, Perth City Link / Yagan Square, and the Butler to Perth Rail Link Project, demonstrating experience with large-scale, complex visualisations.
+            </p>
+        </section>
+        
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <div class="portfolio-grid">
+                <article class="portfolio-entry">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/CTSQjUXnUK4" title="Western Health 'Reframe Your Response' - Immersive Training Experience for Frontline Health Workers" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h4>Western Health 'Reframe Your Response' - Immersive Training Experience for Frontline Health Workers</h4>
+                    <p>Directly demonstrates experience in creating immersive training experiences, which is a core responsibility of the job.</p>
+                </article>
+                <article class="portfolio-entry">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h4>Projects and Dev over the last few years</h4>
+                    <p>Showcases a wide range of relevant technical skills including real-time engines (Unity VR), photogrammetry, and 3D animation.</p>
+                </article>
+                <article class="portfolio-entry">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/QLEcGUWuTgE" title="METRONET Yanchep Rail Extension Linewide Flythrough 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h4>METRONET Yanchep Rail Extension Linewide Flythrough 1</h4>
+                    <p>Highlights experience in large-scale infrastructure visualisation, relevant to the employer's work in the energy, resources, and infrastructure sectors.</p>
+                </article>
+                <article class="portfolio-entry">
+                     <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h4>Showreel Aaron Munro 2016</h4>
+                    <p>Provides a comprehensive overview of work from a 10-year period at Last Pixel, demonstrating long-term experience in 3D development.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <aside class="sidebar">
+         <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Technical Skills</h3>
+                    <ul>
+                        <li>AutoCAD</li>
+                        <li>Adobe Creative Suite (Photoshop, Illustrator, Premier Pro, After Effects)</li>
+                        <li>3DS Max</li>
+                        <li>Unreal Engine</li>
+                        <li>Unity</li>
+                        <li>Substance Suite</li>
+                        <li>Zbrush</li>
+                        <li>Blender 3D</li>
+                        <li>Teamcenter</li>
+                        <li>SharePoint</li>
+                        <li>Microsoft Office</li>
+                        <li>DSLR Camera Operation</li>
+                        <li>VR / XR Headsets</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Project Management</li>
+                        <li>Client Liaison</li>
+                        <li>Storyboarding & Scripting</li>
+                        <li>On-site Photography</li>
+                        <li>Media Asset Organisation</li>
+                        <li>Technical Data Translation</li>
+                        <li>Interactive Media Development</li>
+                        <li>Workflow Automation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </aside>
+
+    <footer role="contentinfo">
+        <div class="export-buttons">
+            <button id="download-pdf">Download as PDF</button>
+            <button id="download-docx">Download as DOCX</button>
+            <button id="download-cover-letter">Download Cover Letter</button>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const downloadsData = {
+          "downloads": [
+            {
+              "id": "resume",
+              "name": "Resume_251002-0405_VRIFY",
+              "path": "./Resume_251002-0405_VRIFY.docx"
+            },
+            {
+              "id": "coverLetter",
+              "name": "Cover-Letter_251002-0406_VRIFY",
+              "path": "./Cover-Letter_251002-0406_VRIFY.docx"
+            }
+          ]
+        };
+
+        function downloadFile(fileId) {
+          const fileInfo = downloadsData.downloads.find(d => d.id === fileId);
+          if (fileInfo) {
+            const link = document.createElement('a');
+            link.href = fileInfo.path;
+            link.download = fileInfo.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          }
+        }
+
+        document.getElementById('download-pdf').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('download-docx').addEventListener('click', function() {
+            downloadFile('resume');
+        });
+
+        document.getElementById('download-cover-letter').addEventListener('click', function() {
+            downloadFile('coverLetter');
+        });
+    });
+</script>
+
+</body>
+</html>
+ 
