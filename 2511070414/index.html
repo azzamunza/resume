@@ -1,0 +1,392 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Munro | Vehicle Photographer</title>
+    <style>
+        /* Part 2: HTML/CSS Style Guide */
+
+        /* CSS Variables */
+        :root {
+            --primary-color: #FFD900;
+            --secondary-color: #000000;
+            --background-color: #FFFFFF;
+            --font-family: 'Roboto', sans-serif;
+            --heading-font-weight: 700;
+            --body-font-weight: 400;
+            --body-font-size: 16px;
+            --body-line-height: 1.5;
+        }
+
+        /* Global & Typography */
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+            font-size: var(--body-font-size);
+            line-height: var(--body-line-height);
+            margin: 0;
+            padding: 0;
+        }
+
+        .resume-container {
+            max-width: 960px;
+            margin: 2em auto;
+            padding: 2em;
+            border: 1px solid #ddd;
+        }
+
+        h1, h2, h3 {
+            font-weight: var(--heading-font-weight);
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        h1 { font-size: 2.5em; margin-bottom: 0.2em; }
+        h2 { font-size: 1.8em; border-bottom: 2px solid var(--primary-color); padding-bottom: 0.3em; margin-top: 1.5em; margin-bottom: 1em; }
+        h3 { font-size: 1.2em; margin-bottom: 0.2em; }
+
+        p { margin-top: 0; }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 0.5em;
+        }
+
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* Header / Contact Info */
+        .resume-header {
+            text-align: center;
+            padding-bottom: 1em;
+            margin-bottom: 2em;
+            border-bottom: 1px solid #eee;
+        }
+        .resume-header h1 {
+            color: var(--secondary-color);
+        }
+        .resume-header p {
+            font-size: 1em;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .contact-info a, .contact-info span {
+            margin: 0 10px;
+        }
+
+        /* Work Experience Section */
+        #experience .job-entry {
+            margin-bottom: 2em;
+        }
+        #experience .job-meta {
+            font-weight: var(--heading-font-weight);
+            color: #555;
+            margin-bottom: 0.8em;
+        }
+        #experience .job-duties {
+            list-style-type: disc;
+        }
+        
+        section {
+             margin-bottom: 0;
+             padding-bottom: 0;
+        }
+
+        article, .job-entry, .skills-container, .portfolio-gallery {
+            margin-bottom: 0;
+        }
+
+        /* Skills Section */
+        #skills .skills-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        #skills .skill-category {
+            width: 48%;
+        }
+        #skills h3 {
+             border-left: 4px solid var(--primary-color);
+             padding-left: 10px;
+        }
+
+        /* Portfolio Section */
+        #portfolio .portfolio-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .portfolio-item .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 1em;
+        }
+        .portfolio-item .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .portfolio-item p {
+            font-size: 0.9em;
+            color: #333;
+        }
+        .portfolio-item strong {
+            display: block;
+            font-size: 1em;
+            color: var(--secondary-color);
+        }
+
+        /* Export Buttons */
+        .export-buttons {
+            text-align: center;
+            margin-top: 2em;
+            padding-top: 1em;
+            border-top: 1px solid #eee;
+        }
+
+        .export-buttons button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+            padding: 10px 20px;
+            margin: 5px;
+            font-weight: var(--heading-font-weight);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .export-buttons button:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+
+        /* Responsive Guidelines */
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 1em;
+                margin: 1em;
+            }
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.5em; }
+            #skills .skills-container {
+                flex-direction: column;
+            }
+            #skills .skill-category {
+                width: 100%;
+                margin-bottom: 1.5em;
+            }
+            #portfolio .portfolio-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+         @media (min-width: 769px) {
+            .resume-columns {
+                display: flex;
+                justify-content: space-between;
+            }
+            .main-column {
+                width: 65%;
+            }
+            .sidebar-column {
+                width: 32%;
+            }
+        }
+
+        /* Print Optimization */
+        @page { 
+            size: A4 portrait; 
+            margin: 18mm 15mm; 
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                font-size: 10pt;
+                color: #000;
+            }
+            .resume-container {
+                border: none;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+            h2 {
+                border-bottom: 2px solid #000;
+            }
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+            .job-entry, .skill-category, .portfolio-item {
+                page-break-inside: avoid;
+            }
+            .portfolio-item .video-container, .export-buttons {
+                display: none;
+            }
+            .portfolio-item strong::after {
+                content: " (Video at " attr(data-video-url) ")";
+                font-weight: normal;
+                font-style: italic;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main role="main" class="resume-container">
+        <header role="banner" class="resume-header">
+            <h1>Aaron Munro</h1>
+            <p>Vehicle Photographer</p>
+            <div class="contact-info">
+                <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a> |
+                <span>0477742636</span> |
+                <span>84A Sussex Road, Forrestfield, WA 6058</span> |
+                <a href="http://www.vector6.com.au/resume" target="_blank">www.vector6.com.au/resume</a>
+            </div>
+        </header>
+
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <p>A highly skilled digital artist with foundational experience in professional photography, photo editing, and video production, seeking to apply these skills to the Vehicle Photographer role. Possesses a valid manual driver's license and is confident in maneuvering vehicles, aligning perfectly with the core requirements of the position. Eager to leverage a strong technical background and a proactive approach in a fast-paced automotive dealership environment.</p>
+        </section>
+
+        <div class="resume-columns">
+            <div class="main-column">
+                <section id="experience">
+                    <h2>Work Experience</h2>
+                    <article class="job-entry">
+                        <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+                        <p class="job-meta">Vector 6 | 2016 – 2023</p>
+                        <ul class="job-duties">
+                            <li>Produced high-quality escort photography, demonstrating practical camera and lighting skills.</li>
+                            <li>Performed high-quality photo grading and patching/skin smoothing using Adobe Photoshop and Lightroom.</li>
+                            <li>Designed and implemented graphical elements for web and print.</li>
+                        </ul>
+                    </article>
+                    <article class="job-entry">
+                        <h3>Senior 3D Artist/Developer</h3>
+                        <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+                        <ul class="job-duties">
+                            <li>Conducted on-site panoramic photography for environment and asset development.</li>
+                            <li>Managed rendering, post-grading, post-effects, and video editing.</li>
+                            <li>Developed vehicle animations and handled equipment rigging.</li>
+                        </ul>
+                    </article>
+                    <article class="job-entry">
+                        <h3>3D Artist</h3>
+                        <p class="job-meta">3D Millipede | March 2005 – March 2006</p>
+                        <ul class="job-duties">
+                            <li>Performed on-site photography to create photo compositions by overlaying 3D models in situ.</li>
+                        </ul>
+                    </article>
+                </section>
+            </div>
+            <div class="sidebar-column">
+                <section id="skills">
+                    <h2>Skills</h2>
+                    <div class="skills-container">
+                        <div class="skill-category">
+                            <h3>Technical Skills</h3>
+                            <ul>
+                                <li>Adobe Photoshop</li>
+                                <li>Adobe Lightroom</li>
+                                <li>Adobe Premiere</li>
+                                <li>Davinci Resolve</li>
+                                <li>On-site Photography</li>
+                                <li>Image Retouching</li>
+                                <li>Photo Grading</li>
+                                <li>Video Content Production</li>
+                                <li>Basic Computer Skills</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Core Competencies</h3>
+                            <ul>
+                                <li>Manual and Automatic Vehicle Driving</li>
+                                <li>Parking in Tight Spaces</li>
+                                <li>Excellent Time Management</li>
+                                <li>Reliability and Flexibility</li>
+                                <li>Proactive Work Ethic</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section id="portfolio">
+            <h2>Portfolio Gallery</h2>
+            <div class="portfolio-gallery">
+                <article class="portfolio-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/QLEcGUWuTgE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <strong data-video-url="https://www.youtube.com/watch?v=QLEcGUWuTgE">METRONET Yanchep Rail Extension Linewide Flythrough 1</strong>
+                    <p>Demonstrates experience in creating dynamic video content featuring large vehicles (trains), relevant to filming vehicles.</p>
+                </article>
+                <article class="portfolio-item">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/piMQ2ZpvQGs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <strong data-video-url="https://www.youtube.com/watch?v=piMQ2ZpvQGs">Busport - 3D Development Visualisation</strong>
+                    <p>Showcases the ability to create visualisations of a vehicle-centric environment, indicating an understanding of how to present vehicles effectively.</p>
+                </article>
+            </div>
+        </section>
+
+        <footer role="contentinfo" class="export-buttons">
+            <button onclick="downloadAsPDF()">Download as PDF</button>
+            <button onclick="downloadFile('resume')">Download as DOCX</button>
+            <button onclick="downloadFile('coverLetter')">Download Cover Letter</button>
+        </footer>
+    </main>
+
+    <script>
+        function downloadAsPDF() {
+            window.print();
+        }
+
+        function downloadFile(fileId) {
+            const downloadsFilePath = './downloads.json';
+            
+            fetch(downloadsFilePath)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const fileData = data.downloads.find(item => item.id === fileId);
+                    if (fileData) {
+                        const link = document.createElement('a');
+                        link.href = fileData.path;
+                        link.download = fileData.name;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else {
+                        console.error('File data not found for id: ' + fileId);
+                        alert('Error: Download information not found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching or processing downloads.json:', error);
+                    alert('Could not retrieve download information. Please ensure the downloads.json file is accessible.');
+                });
+        }
+    </script>
+</body>
+</html>
+ 
