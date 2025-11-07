@@ -1,0 +1,459 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Munro - Résumé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Part 2: HTML/CSS Style Guide */
+
+        /* CSS Variables */
+        :root {
+            --primary-yellow: #FFD700;
+            --black: #000000;
+            --white: #FFFFFF;
+
+            --font-headings: 'Roboto', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+
+            --font-weight-heading: 700;
+            --font-weight-body: 400;
+
+            --h1-size: 32px;
+            --h2-size: 28px;
+            --h3-size: 24px;
+            --body-text-size: 16px;
+            --body-line-height: 1.5;
+
+            --link-color: #000000;
+            --link-hover-color: #FFD700;
+            --link-decoration: underline;
+
+            /* Spacing & Layout */
+            --margin-section: 24px;
+            --padding-main: 20px;
+            --item-spacing: 16px;
+            --bullet-indent: 20px;
+        }
+
+        /* General Body & Typography */
+        body {
+            font-family: var(--font-body);
+            font-weight: var(--font-weight-body);
+            font-size: var(--body-text-size);
+            line-height: var(--body-line-height);
+            color: var(--black);
+            background-color: var(--white);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: var(--padding-main);
+        }
+
+        /* Headings & Visual Hierarchy */
+        h1, h2, h3 {
+            font-family: var(--font-headings);
+            font-weight: var(--font-weight-heading);
+            margin-top: 0;
+            margin-bottom: var(--item-spacing);
+            color: var(--black);
+        }
+
+        h1 {
+            font-size: var(--h1-size);
+            border-bottom: 2px solid var(--primary-yellow);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: var(--h2-size);
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 8px;
+            margin-top: var(--margin-section);
+        }
+
+        h3 {
+            font-size: var(--h3-size);
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: var(--item-spacing);
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: var(--link-decoration);
+        }
+
+        a:hover {
+            color: var(--link-hover-color);
+        }
+
+        ul {
+            padding-left: var(--bullet-indent);
+            margin-top: 0;
+        }
+
+        li {
+            margin-bottom: calc(var(--item-spacing) / 2);
+        }
+
+        /* Header & Contact Info */
+        .resume-header {
+            text-align: center;
+            margin-bottom: var(--margin-section);
+        }
+
+        .resume-header h1 {
+            margin-bottom: 8px;
+        }
+        
+        .resume-header .target-title {
+            font-size: var(--h3-size);
+            font-weight: var(--font-weight-body);
+            font-family: var(--font-headings);
+            margin-top: 0;
+            margin-bottom: var(--item-spacing);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            font-size: calc(var(--body-text-size) * 0.9);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: var(--margin-section);
+        }
+
+        /* Work Experience Section */
+        #experience .job-entry {
+            margin-bottom: var(--margin-section);
+        }
+
+        #experience .job-meta {
+            font-weight: var(--font-weight-heading);
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        #experience .job-duties {
+          list-style-type: disc;
+        }
+
+        /* Skills Section */
+        #skills .skills-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--margin-section);
+        }
+        
+        #skills .skills-category ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        #skills .skills-category li {
+            background-color: #f0f0f0;
+            border-left: 5px solid var(--primary-yellow);
+            padding: 8px 12px;
+            margin-bottom: 8px;
+        }
+
+        /* Portfolio Section */
+        #portfolio .portfolio-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--margin-section);
+        }
+        
+        #portfolio .portfolio-entry {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #portfolio .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: var(--item-spacing);
+        }
+
+        #portfolio .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #portfolio h3 {
+            font-size: calc(var(--h3-size) * 0.8);
+            margin-bottom: 8px;
+        }
+        
+        #portfolio p {
+            font-size: calc(var(--body-text-size) * 0.9);
+        }
+
+        /* Export Buttons Styling */
+        .export-buttons {
+            text-align: center;
+            margin-top: var(--margin-section);
+            padding-top: var(--margin-section);
+            border-top: 1px solid #ccc;
+        }
+
+        .export-buttons button, .export-buttons a {
+            display: inline-block;
+            background-color: var(--primary-yellow);
+            color: var(--black);
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            font-family: var(--font-headings);
+            font-weight: var(--font-weight-heading);
+            text-decoration: none;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .export-buttons button:hover, .export-buttons a:hover {
+            background-color: #e6c300;
+        }
+
+        /* Responsive Guidelines */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            }
+
+            #skills .skills-container,
+            #portfolio .portfolio-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Optimisation */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 18mm 15mm;
+            }
+
+            body {
+                background-color: var(--white);
+                color: var(--black);
+                font-size: 10pt;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            h1, h2, h3, a {
+                color: var(--black) !important;
+            }
+            
+            h2 {
+              border-bottom: 1px solid var(--black);
+            }
+
+            a {
+                text-decoration: none;
+            }
+            
+            #skills .skills-category li {
+              background-color: #eee !important;
+              border-left: 3px solid #ccc !important;
+            }
+            
+            #portfolio, .export-buttons {
+              display: none;
+            }
+
+            section, .job-entry {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="container" role="main">
+        <header class="resume-header" role="banner">
+            <h1>Aaron Munro</h1>
+            <p class="target-title">Vehicle Photographer</p>
+            <div class="contact-info">
+                <span><a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></span>
+                <span>0477742636</span>
+                <span>84A Sussex Road, Forrestfield, WA 6058</span>
+                <span><a href="http://www.vector6.com.au/resume" target="_blank" rel="noopener noreferrer">www.vector6.com.au/resume</a></span>
+            </div>
+        </header>
+
+        <section id="summary" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Summary</h2>
+            <p>A creative professional with a strong background in photography, video production, and post-production, seeking to apply these skills to the role of Vehicle Photographer. Possesses a valid manual driver's license and is confident in maneuvering vehicles. Experienced in on-site photography, image retouching, and video editing, with a proactive approach to completing tasks in a fast-paced environment.</p>
+        </section>
+
+        <section id="experience" aria-labelledby="experience-heading">
+            <h2 id="experience-heading">Work Experience</h2>
+
+            <article class="job-entry">
+                <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+                <p class="job-meta">Vector 6 | 2016 – 2023</p>
+                <ul class="job-duties">
+                    <li>Produced high-quality escort photography</li>
+                    <li>Performed image retouching with Adobe Photoshop</li>
+                    <li>Performed high-quality photo grading and patching/skin smoothing</li>
+                </ul>
+            </article>
+
+            <article class="job-entry">
+                <h3>Senior 3D Artist/Developer</h3>
+                <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+                <ul class="job-duties">
+                    <li>On-site panoramic photography</li>
+                    <li>Video editing, voiceover editing</li>
+                </ul>
+            </article>
+
+            <article class="job-entry">
+                <h3>3D Artist</h3>
+                <p class="job-meta">3D Millipede | March 2005 – March 2006</p>
+                <ul class="job-duties">
+                    <li>On-site Photography of each site would be taken, and our 3D models would be overlaid in situ</li>
+                    <li>Bending our 3D models into photography</li>
+                    <li>Photo compositions</li>
+                </ul>
+            </article>
+
+        </section>
+
+        <section id="skills" aria-labelledby="skills-heading">
+            <h2 id="skills-heading">Skills</h2>
+            <div class="skills-container">
+                <div class="skills-category">
+                    <h3>Technical Skills</h3>
+                    <ul>
+                        <li>Photography</li>
+                        <li>Video Production</li>
+                        <li>Adobe Photoshop</li>
+                        <li>Adobe Premiere</li>
+                        <li>Davinci Resolve</li>
+                        <li>Image Retouching</li>
+                        <li>Photo Grading</li>
+                    </ul>
+                </div>
+                <div class="skills-category">
+                    <h3>Core Competencies</h3>
+                    <ul>
+                        <li>Manual and Automatic Vehicle Driving</li>
+                        <li>Parking in Tight Spaces</li>
+                        <li>Basic Computer Skills</li>
+                        <li>Time Management</li>
+                        <li>Reliability</li>
+                        <li>Flexibility</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section id="portfolio" aria-labelledby="portfolio-heading">
+            <h2 id="portfolio-heading">Portfolio</h2>
+            <div class="portfolio-gallery">
+            
+                <article class="portfolio-entry">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Projects and Dev over the last few years</h3>
+                    <p>This video demonstrates a strong understanding of visual composition, camera tracking, and real-time rendering, which are transferable skills for vehicle videography.</p>
+                </article>
+                
+                <article class="portfolio-entry">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <h3>Showreel Aaron Munro 2016</h3>
+                    <p>This showreel highlights skills in 3D visualization and animation, showcasing an eye for detail and dynamic presentation relevant to creating engaging vehicle videos.</p>
+                </article>
+                
+            </div>
+        </section>
+
+        <footer class="export-buttons" role="contentinfo">
+            <button id="downloadPdf">Download as PDF</button>
+            <a id="downloadDocx" href="#" download>Download as DOCX</a>
+            <a id="downloadCoverLetter" href="#" download>Download Cover Letter</a>
+        </footer>
+        
+    </main>
+
+    <script>
+        // PDF Download Button
+        document.getElementById('downloadPdf').addEventListener('click', () => {
+            window.print();
+        });
+
+        // DOCX and Cover Letter Download Buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadInfo = {
+              "downloads": [
+                {
+                  "id": "resume",
+                  "name": "Resume_251002-0405_VRIFY.docx",
+                  "path": "./Resume_251002-0405_VRIFY.docx"
+                },
+                {
+                  "id": "coverLetter",
+                  "name": "Cover-Letter_251002-0406_VRIFY.docx",
+                  "path": "./Cover-Letter_251002-0406_VRIFY.docx"
+                }
+              ]
+            };
+
+            const resumeData = downloadInfo.downloads.find(d => d.id === 'resume');
+            const coverLetterData = downloadInfo.downloads.find(d => d.id === 'coverLetter');
+
+            const docxLink = document.getElementById('downloadDocx');
+            if (docxLink && resumeData) {
+                docxLink.href = resumeData.path;
+                docxLink.setAttribute('download', resumeData.name);
+            }
+
+            const coverLetterLink = document.getElementById('downloadCoverLetter');
+            if (coverLetterLink && coverLetterData) {
+                coverLetterLink.href = coverLetterData.path;
+                coverLetterLink.setAttribute('download', coverLetterData.name);
+            }
+        });
+    </script>
+
+</body>
+</html>
+ 
