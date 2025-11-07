@@ -1,0 +1,392 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé - Aaron Munro</title>
+    <style>
+        /* Part 2: HTML/CSS Style Guide */
+        :root {
+            --primary-color: #003366; /* Deep Blue */
+            --secondary-color: #F0F0F0; /* Light Gray */
+            --accent-color: #FF6600; /* Bright Orange */
+            --text-color: #333333; /* Dark Gray */
+
+            --font-primary: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --font-secondary: "Georgia", serif;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-color);
+            background-color: #fff;
+            margin: 0 auto;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        /* --- TYPOGRAPHY & VISUAL HIERARCHY --- */
+        h1, h2, h3 {
+            font-family: var(--font-primary);
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 0.25em;
+        }
+
+        h2 {
+            font-size: 24px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            margin-top: 24px;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: var(--text-color);
+        }
+        
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 0;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        /* --- LAYOUT & SPACING --- */
+        .resume-header, .resume-footer {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            margin: 2px 0;
+            font-size: 16px;
+        }
+
+        section {
+            margin-bottom: 24px;
+        }
+
+        .job-entry {
+            margin-bottom: 20px;
+        }
+
+        .job-meta {
+            font-family: var(--font-secondary);
+            font-style: normal;
+            font-weight: bold;
+            color: #555;
+            margin: 0 0 10px 0;
+        }
+        
+        .skills-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        .skills-column {
+            width: 48%;
+        }
+
+        .portfolio-gallery {
+            margin-top: 20px;
+        }
+
+        .portfolio-item {
+            margin-bottom: 20px;
+        }
+        
+        .portfolio-item iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+
+        /* --- BUTTONS --- */
+        .export-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 14px;
+        }
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* --- RESPONSIVE GUIDELINES --- */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            h1 { font-size: 28px; }
+            h2 { font-size: 22px; }
+            h3 { font-size: 18px; }
+            
+            .skills-container {
+                flex-direction: column;
+                gap: 0;
+            }
+            .skills-column {
+                width: 100%;
+            }
+        }
+        
+        /* --- EXPORT & PRINT OPTIMISATION --- */
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 0;
+                font-size: 11pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            a {
+                text-decoration: none;
+                color: var(--primary-color);
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 18mm 15mm;
+            }
+            
+            h2 {
+                padding-bottom: 5px;
+                margin-top: 20px;
+            }
+
+            section, .job-entry, .portfolio-item {
+                page-break-inside: avoid;
+            }
+            
+            .portfolio-gallery, .resume-footer, .export-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header role="banner" class="resume-header">
+    <h1>Aaron Munro</h1>
+    <p>3D Artist / Developer (CG Visualisation & Virtual Reality)</p>
+    <div class="contact-info">
+        <p>
+            <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a> | 
+            0477742636 | 
+            Forrestfield, WA, Australia |
+            <a href="http://www.vector6.com.au/resume" target="_blank">www.vector6.com.au/resume</a>
+        </p>
+    </div>
+</header>
+
+<div class="export-buttons">
+    <button id="pdf-download" class="btn">Download as PDF</button>
+    <a id="docx-download" class="btn">Download as DOCX</a>
+    <a id="cover-letter-download" class="btn">Download Cover Letter</a>
+</div>
+
+<main role="main">
+    <section id="summary">
+        <h2>Summary</h2>
+        <p>Highly motivated 3D Artist and Developer with a strong desire to excel in the CG visualisation industry, particularly in virtual reality. Specialises in advanced 3D development, real-time engine proficiency with Unreal and Unity, and AI-integrated workflow automation. Brings extensive experience in architectural visualisation, immersive media production, and interactive experiences, consistently delivering high-quality visual content.</p>
+    </section>
+
+    <section id="experience">
+        <h2>Work Experience</h2>
+        <article class="job-entry">
+            <h3>Specialised in 3D Development</h3>
+            <p class="job-meta">Viewport XR | 2023 – 2024</p>
+            <ul class="job-duties">
+                <li>Specialised in Unreal Engine Development for immersive experiences.</li>
+                <li>Developed interactive objects and advanced real-time 3D graphics with Unreal and Unity.</li>
+                <li>Executed fluid dynamics simulations with Embergen and particle simulations with TYFlow.</li>
+                <li>Developed custom dynamic assets for Railclone and Forest Pack Pro.</li>
+                <li>Utilised ElevenLabs Generative AI for voiceovers and worked on MetaHuman asset pipelines.</li>
+            </ul>
+        </article>
+        <article class="job-entry">
+            <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+            <p class="job-meta">Vector 6 | 2016 – 2023</p>
+            <ul class="job-duties">
+                <li>Collaborated on various 3D visualisation projects.</li>
+                <li>Automated data workflows using Python and integrated third-party APIs.</li>
+                <li>Performed Matterport scanning and photogrammetry with Reality Capture.</li>
+                <li>Transformed high poly photogrammetry models into optimised low poly versions for VR projects.</li>
+                <li>Developed GUI systems and implemented FMETP streaming in Unity.</li>
+            </ul>
+        </article>
+        <article class="job-entry">
+            <h3>Senior 3D Artist/Developer</h3>
+            <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+            <ul class="job-duties">
+                <li>Managed projects, led project teams, and handled client liaison.</li>
+                <li>Developed PBR materials and advanced Substance graphs in Substance Designer.</li>
+                <li>Generated rigged characters and machinery for animation.</li>
+                <li>Developed internal software and dynamic input systems to enhance workflow automation.</li>
+            </ul>
+        </article>
+    </section>
+    
+    <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skills-column">
+                <h3>Technical Skills</h3>
+                <ul class="skills-list">
+                    <li>Unreal Engine</li>
+                    <li>Unity</li>
+                    <li>3DS Max</li>
+                    <li>Zbrush</li>
+                    <li>Substance Suite (Painter, Designer)</li>
+                    <li>Embergen</li>
+                    <li>TYFlow</li>
+                    <li>Railclone</li>
+                    <li>Forest Pack Pro</li>
+                    <li>Adobe Suite (Photoshop, After Effects, Premiere)</li>
+                    <li>Davinci Resolve</li>
+                    <li>Python</li>
+                    <li>AI Integration (ElevenLabs, Make.com)</li>
+                </ul>
+            </div>
+            <div class="skills-column">
+                <h3>Core Competencies</h3>
+                <ul class="skills-list">
+                    <li>Real-Time 3D Graphics</li>
+                    <li>Immersive Experience Development</li>
+                    <li>3D Modelling & Texturing</li>
+                    <li>Animation & Rigging</li>
+                    <li>VFX & Simulation</li>
+                    <li>Workflow Automation</li>
+                    <li>Project Management</li>
+                    <li>Client Liaison</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="certifications-projects">
+         <h2>Certifications & Specialized Projects</h2>
+         <article>
+            <h3>AI Generalist Course</h3>
+            <p>Completed Aug 2025: Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications.</p>
+         </article>
+         <article>
+             <h3>Specialized Project Experience</h3>
+             <p>Contributed to major infrastructure and iconic projects including Elizabeth Quay, Perth Underground Bus Port, and Fremantle Ports Outer Harbour, creating visual content for significant city developments.</p>
+         </article>
+    </section>
+    
+    <section id="portfolio">
+        <h2>Portfolio Gallery</h2>
+        <div class="portfolio-gallery">
+            <article class="portfolio-item">
+                <h3>Projects and Dev over the last few years</h3>
+                <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><strong>Skills Showcase:</strong> Showcases a wide range of relevant skills including real-time, Unity VR, Octane Renderer, photogrammetry, and character animation.</p>
+            </article>
+            <article class="portfolio-item">
+                <h3>METRONET Yanchep Rail Extension Linewide Flythrough 1</h3>
+                <iframe src="https://www.youtube.com/embed/QLEcGUWuTgE" title="METRONET Yanchep Rail Extension Linewide Flythrough 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><strong>Skills Showcase:</strong> Demonstrates recent professional work in 3D visualisation for a major infrastructure project at Viewport XR.</p>
+            </article>
+            <article class="portfolio-item">
+                <h3>Showreel Aaron Munro 2016</h3>
+                <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><strong>Skills Showcase:</strong> Provides a comprehensive overview of work and capabilities from a long-term senior role at Last Pixel.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer role="contentinfo" class="resume-footer">
+    <p>This résumé was built with semantic HTML and CSS.</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DOWNLOAD BUTTONS ---
+        
+        // Data for file downloads
+        const downloadData = {
+          "downloads": [
+            {
+              "id": "resume",
+              "name": "Resume_251002-0405_VRIFY",
+              "path": "./Resume_251002-0405_VRIFY.docx"
+            },
+            {
+              "id": "coverLetter",
+              "name": "Cover-Letter_251002-0406_VRIFY",
+              "path": "./Cover-Letter_251002-0406_VRIFY.docx"
+            }
+          ]
+        };
+
+        // PDF download functionality
+        const pdfButton = document.getElementById('pdf-download');
+        if (pdfButton) {
+            pdfButton.addEventListener('click', () => {
+                window.print();
+            });
+        }
+
+        // DOCX resume download functionality
+        const resumeInfo = downloadData.downloads.find(d => d.id === 'resume');
+        const docxLink = document.getElementById('docx-download');
+        if (resumeInfo && docxLink) {
+            docxLink.href = resumeInfo.path;
+            docxLink.setAttribute('download', resumeInfo.name);
+        }
+
+        // Cover Letter download functionality
+        const coverLetterInfo = downloadData.downloads.find(d => d.id === 'coverLetter');
+        const coverLetterLink = document.getElementById('cover-letter-download');
+        if (coverLetterInfo && coverLetterLink) {
+            coverLetterLink.href = coverLetterInfo.path;
+            coverLetterLink.setAttribute('download', coverLetterInfo.name);
+        }
+    });
+</script>
+
+</body>
+</html>
+ 
