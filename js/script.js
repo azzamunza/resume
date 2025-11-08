@@ -160,7 +160,14 @@ async function loadYouTubePortfolio() {
         
         // Get the portfolio layout mode
         const portfolioSection = document.querySelector('#portfolio');
-        const layoutMode = portfolioSection && portfolioSection.classList.contains('layout-full') ? 'full' : 'column';
+        let layoutMode = 'column'; // default
+        if (portfolioSection) {
+            if (portfolioSection.classList.contains('layout-full')) {
+                layoutMode = 'full';
+            } else if (portfolioSection.classList.contains('layout-left') || portfolioSection.classList.contains('layout-right')) {
+                layoutMode = 'column';
+            }
+        }
         
         // Create the portfolio list structure
         const portfolioList = document.createElement('ul');
@@ -246,15 +253,6 @@ async function loadYouTubePortfolio() {
         // Re-initialize print controls for the newly added checkboxes
         initializePrintControls();
         
-        // Add layout change listener for portfolio
-        const portfolioLayoutSelector = document.querySelector('.layout-selector[data-section="portfolio"]');
-        if (portfolioLayoutSelector) {
-            portfolioLayoutSelector.addEventListener('change', function() {
-                // Reload portfolio with new layout
-                loadYouTubePortfolio();
-            });
-        }
-        
     } catch (error) {
         console.error('Error loading YouTube portfolio:', error);
         const container = document.getElementById('portfolio-videos-container');
@@ -311,6 +309,21 @@ function initializeSections() {
     // Initialize display toggles and layout selectors
     initializeDisplayToggles();
     initializeLayoutSelectors();
+    
+    // Initialize section layouts from selectors
+    initializeLayoutClasses();
+}
+
+/**
+ * Initialize layout classes for all sections based on their selector values
+ */
+function initializeLayoutClasses() {
+    const selectors = document.querySelectorAll('.layout-selector');
+    selectors.forEach(selector => {
+        const sectionId = selector.getAttribute('data-section');
+        const layout = selector.value;
+        setLayout(sectionId, layout);
+    });
 }
 
 /**
@@ -518,6 +531,11 @@ function setLayout(sectionId, layout) {
     
     // Add new layout class
     section.classList.add(`layout-${layout}`);
+    
+    // If this is the portfolio section, reload videos to apply new layout
+    if (sectionId === 'portfolio') {
+        loadYouTubePortfolio();
+    }
 }
 
 /**
