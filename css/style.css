@@ -568,11 +568,6 @@ footer[role="contentinfo"] {
   text-align: center;
 }
 
-/* Print Hidden Class */
-[data-print-id].print-hidden {
-  display: none !important;
-}
-
 /* Responsive Layout */
 @media (max-width: 480px) {
   .main-container { 
@@ -701,3 +696,4 @@ footer[role="contentinfo"] {
   size: A4 portrait;
   margin: 18mm 15mm;
 }
+
