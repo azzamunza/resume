@@ -30,44 +30,67 @@
 
         <main role="main" aria-label="Resume of Aaron Munro">
             <!-- Professional Summary -->
-            <section id="summary" data-print-id="summary">
+            <section id="summary" data-print-id="summary" data-section="summary">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="summary" checked aria-label="Include Professional Summary"> Professional Summary</h2>
+                    <div class="section-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="display-toggle" data-section="summary">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label"><span class="mode-bullets">Bullets</span> <span class="mode-summary">Summary</span></span>
+                        </label>
+                        <select class="layout-selector" data-section="summary" aria-label="Layout for Professional Summary">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="section-content">
-                    <p>Strong desire to be involved in the CG visualisation industry, especially virtual reality. Specialised in advanced 3D development, real-time engine proficiency with Unreal and Unity, and AI-integrated workflow automation with advanced prompt engineering capabilities. Extensive experience across architectural visualisation, interactive media production, immersive experiences, and render farm management. Leveraging business intelligence and data-driven strategy to optimise workflows and deliver innovative solutions. Developing a pipeline for VR development, with interest in light field technology and immersive media.</p>
+                <div class="section-content" data-content-section="summary">
+                    <!-- Content will be dynamically loaded -->
                 </div>
             </section>
 
             <!-- Qualifications -->
-            <section id="qualifications" data-print-id="qualifications">
+            <section id="qualifications" data-print-id="qualifications" data-section="qualifications">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="qualifications" checked aria-label="Include Qualifications"> Qualifications</h2>
+                    <div class="section-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="display-toggle" data-section="qualifications">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label"><span class="mode-bullets">Bullets</span> <span class="mode-summary">Summary</span></span>
+                        </label>
+                        <select class="layout-selector" data-section="qualifications" aria-label="Layout for Qualifications">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="section-content">
-                    <ul class="qualifications-list">
-                        <li data-print-id="qual-ai">
-                            <input type="checkbox" class="print-toggle item-toggle" data-target="qual-ai" checked aria-label="Include AI Generalist Course">
-                            <strong>AI Generalist Course</strong> – Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications, Advanced Prompt Engineering (August 2025)
-                        </li>
-                        <li data-print-id="qual-diploma">
-                            <input type="checkbox" class="print-toggle item-toggle" data-target="qual-diploma" checked aria-label="Include Advanced Diploma">
-                            <strong>Advanced Diploma of Information Technology</strong> – Interactive Multimedia (1998)
-                        </li>
-                        <li data-print-id="qual-cert4">
-                            <input type="checkbox" class="print-toggle item-toggle" data-target="qual-cert4" checked aria-label="Include Certificate IV">
-                            <strong>Certificate IV</strong> (1997)
-                        </li>
-                    </ul>
+                <div class="section-content" data-content-section="qualifications">
+                    <!-- Content will be dynamically loaded -->
                 </div>
             </section>
 
             <!-- Work Experience -->
-            <section id="experience" data-print-id="experience">
+            <section id="experience" data-print-id="experience" data-section="experience">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="experience" checked aria-label="Include Work Experience"> Work Experience</h2>
+                    <div class="section-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="display-toggle" data-section="experience">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label"><span class="mode-bullets">Bullets</span> <span class="mode-summary">Summary</span></span>
+                        </label>
+                        <select class="layout-selector" data-section="experience" aria-label="Layout for Work Experience">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="section-content">
+                <div class="section-content" data-content-section="experience">
                     <!-- Viewport XR -->
                     <article class="job-entry" data-print-id="job-viewport">
                         <div class="job-title-row">
@@ -219,11 +242,23 @@
             </section>
 
             <!-- Project-Specific Roles -->
-            <section id="projects" data-print-id="projects">
+            <section id="projects" data-print-id="projects" data-section="projects">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="projects" checked aria-label="Include Projects"> Project-Specific Roles</h2>
+                    <div class="section-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="display-toggle" data-section="projects">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label"><span class="mode-bullets">Bullets</span> <span class="mode-summary">Summary</span></span>
+                        </label>
+                        <select class="layout-selector" data-section="projects" aria-label="Layout for Projects">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="section-content">
+                <div class="section-content" data-content-section="projects">
                     <article class="project-entry" data-print-id="project-spacescan">
                         <div class="project-title-row">
                             <input type="checkbox" class="print-toggle item-toggle" data-target="project-spacescan" checked aria-label="Include Spacescan">
@@ -312,11 +347,23 @@
             </section>
 
             <!-- Technical Skills -->
-            <section id="skills" data-print-id="skills">
+            <section id="skills" data-print-id="skills" data-section="skills">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="skills" checked aria-label="Include Technical Skills"> Technical Skills</h2>
+                    <div class="section-controls">
+                        <label class="toggle-switch">
+                            <input type="checkbox" class="display-toggle" data-section="skills">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label"><span class="mode-bullets">Bullets</span> <span class="mode-summary">Summary</span></span>
+                        </label>
+                        <select class="layout-selector" data-section="skills" aria-label="Layout for Technical Skills">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="section-content">
+                <div class="section-content" data-content-section="skills">
                     <div class="skill-category" data-print-id="skills-3d">
                         <h3><input type="checkbox" class="print-toggle item-toggle" data-target="skills-3d" checked aria-label="Include 3D Skills"> 3D Modelling & Real-Time Engines</h3>
                         <ul class="skill-tags">
