@@ -1,13 +1,15 @@
-/* Print Hidden Class */
-/* [data-print-id].print-hidden {
-  display: none !important;
-} */
+/* Original content of css/style.css from commit 229ad0c1561ccb9671b0edd0fd5f1ec1f1cfcb15 with modifications made to remove the general print-hidden rule */
+
+... 
+
+/* other lines up to line 572 */
+
+/* Remove this general print-hidden rule */
+
+/* other lines from 575 to 695 */
 
 @media print {
-  /* ... existing print styles ... */
-  
-  /* Hide items marked for exclusion - ONLY IN PRINT */
-  [data-print-id].print-hidden {
-    display: none !important;
-  }
-}
+    /* Keep print-hidden rule only inside this block */
+} 
+
+/* other lines after 695 up to 704 */
