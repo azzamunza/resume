@@ -1,7 +1,11 @@
 /**
  * Aaron Munro Resume - JavaScript
  * Print customisation with inline checkboxes
+ * Enhanced with JSON data loading, toggle switches, and column layouts
  */
+
+// Global resume data storage
+let resumeData = null;
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', function() {
@@ -9,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadPrintPreferences();
     updateFooterYear();
     loadYouTubePortfolio();
+    loadResumeData();
 });
 
 /**
@@ -242,3 +247,305 @@ document.addEventListener('keydown', function(e) {
         window.print();
     }
 });
+
+/**
+ * Load resume data from JSON file
+ */
+async function loadResumeData() {
+    try {
+        const response = await fetch('resume-data.json');
+        resumeData = await response.json();
+        
+        // Initialize sections with data
+        initializeSections();
+        
+        // Load display preferences from localStorage
+        loadDisplayPreferences();
+        
+    } catch (error) {
+        console.error('Error loading resume data:', error);
+        // Fall back to existing HTML content if JSON fails to load
+    }
+}
+
+/**
+ * Initialize sections with content from JSON
+ */
+function initializeSections() {
+    if (!resumeData) return;
+    
+    // Render each section
+    renderSection('summary', resumeData.summary);
+    renderSection('qualifications', resumeData.qualifications);
+    renderSection('experience', resumeData.experience);
+    renderSection('projects', resumeData.projects);
+    renderSection('skills', resumeData.skills);
+    
+    // Initialize display toggles and layout selectors
+    initializeDisplayToggles();
+    initializeLayoutSelectors();
+}
+
+/**
+ * Render section content based on display mode
+ */
+function renderSection(sectionId, data) {
+    const contentElement = document.querySelector(`[data-content-section="${sectionId}"]`);
+    if (!contentElement) return;
+    
+    const displayMode = getDisplayMode(sectionId);
+    
+    if (displayMode === 'summary') {
+        renderSummaryMode(contentElement, sectionId, data);
+    } else {
+        renderBulletsMode(contentElement, sectionId, data);
+    }
+}
+
+/**
+ * Render content in summary mode
+ */
+function renderSummaryMode(contentElement, sectionId, data) {
+    if (sectionId === 'summary') {
+        contentElement.innerHTML = `<p class="summary-paragraph">${data.summary}</p>`;
+    } else if (sectionId === 'qualifications') {
+        contentElement.innerHTML = `<p class="summary-paragraph">${data.summary}</p>`;
+    } else if (sectionId === 'experience') {
+        contentElement.innerHTML = `<p class="summary-paragraph">${data.summary}</p>`;
+    } else if (sectionId === 'projects') {
+        contentElement.innerHTML = `<p class="summary-paragraph">${data.summary}</p>`;
+    } else if (sectionId === 'skills') {
+        contentElement.innerHTML = `<p class="summary-paragraph">${data.summary}</p>`;
+    }
+}
+
+/**
+ * Render content in bullets mode
+ */
+function renderBulletsMode(contentElement, sectionId, data) {
+    if (sectionId === 'summary') {
+        const bulletsList = data.bullets.map(bullet => `<li>${bullet}</li>`).join('');
+        contentElement.innerHTML = `<ul class="bullets-list">${bulletsList}</ul>`;
+    } else if (sectionId === 'qualifications') {
+        const qualsList = data.items.map(qual => `
+            <li data-print-id="${qual.id}">
+                <input type="checkbox" class="print-toggle item-toggle" data-target="${qual.id}" checked aria-label="Include ${qual.title}">
+                <strong>${qual.title}</strong> ${qual.description ? '– ' + qual.description : ''} ${qual.date ? '(' + qual.date + ')' : ''}
+            </li>
+        `).join('');
+        contentElement.innerHTML = `<ul class="qualifications-list">${qualsList}</ul>`;
+    } else if (sectionId === 'experience') {
+        const jobsHtml = data.jobs.map(job => `
+            <article class="job-entry" data-print-id="${job.id}">
+                <div class="job-title-row">
+                    <input type="checkbox" class="print-toggle item-toggle" data-target="${job.id}" checked aria-label="Include ${job.company}">
+                    <div class="job-info">
+                        <h3>${job.title}</h3>
+                        <p class="job-meta">${job.company} | ${job.period}</p>
+                    </div>
+                </div>
+                ${job.note ? `<p class="note"><em>${job.note}</em></p>` : ''}
+                <ul class="job-duties">
+                    ${job.duties.map(duty => `<li>${duty}</li>`).join('')}
+                </ul>
+            </article>
+        `).join('');
+        contentElement.innerHTML = jobsHtml;
+    } else if (sectionId === 'projects') {
+        const projectsHtml = data.items.map(project => `
+            <article class="project-entry" data-print-id="${project.id}">
+                <div class="project-title-row">
+                    <input type="checkbox" class="print-toggle item-toggle" data-target="${project.id}" checked aria-label="Include ${project.title}">
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p class="project-meta">${project.role}${project.period ? ' | ' + project.period : ''}</p>
+                    </div>
+                </div>
+                <ul>
+                    ${project.description.map(desc => `<li>${desc}</li>`).join('')}
+                </ul>
+            </article>
+        `).join('');
+        
+        // Add notable projects section
+        const notableProjects = `
+            <div class="notable-projects">
+                <h3>Major Infrastructure & Iconic Projects</h3>
+                <div class="project-badges">
+                    <span class="badge">Elizabeth Quay</span>
+                    <span class="badge">Perth Underground Bus Port</span>
+                    <span class="badge">Perth City Link / Yagan Square</span>
+                    <span class="badge">Fremantle Ports Outer Harbour</span>
+                    <span class="badge">Butler to Perth Rail Link</span>
+                </div>
+            </div>
+        `;
+        
+        contentElement.innerHTML = projectsHtml + notableProjects;
+    } else if (sectionId === 'skills') {
+        const skillsHtml = data.categories.map(category => `
+            <div class="skill-category" data-print-id="${category.id}">
+                <h3><input type="checkbox" class="print-toggle item-toggle" data-target="${category.id}" checked aria-label="Include ${category.title}"> ${category.title}</h3>
+                <ul class="skill-tags">
+                    ${category.items.map(skill => `<li>${skill}</li>`).join('')}
+                </ul>
+            </div>
+        `).join('');
+        contentElement.innerHTML = skillsHtml;
+    }
+    
+    // Re-initialize print controls for newly added checkboxes
+    initializePrintControls();
+}
+
+/**
+ * Initialize display toggle switches
+ */
+function initializeDisplayToggles() {
+    const toggles = document.querySelectorAll('.display-toggle');
+    
+    toggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const sectionId = this.getAttribute('data-section');
+            const displayMode = this.checked ? 'summary' : 'bullets';
+            
+            setDisplayMode(sectionId, displayMode);
+            
+            // Re-render the section
+            const sectionData = getSectionData(sectionId);
+            if (sectionData) {
+                renderSection(sectionId, sectionData);
+            }
+            
+            // Save preference
+            saveDisplayPreferences();
+        });
+    });
+}
+
+/**
+ * Initialize layout selectors
+ */
+function initializeLayoutSelectors() {
+    const selectors = document.querySelectorAll('.layout-selector');
+    
+    selectors.forEach(selector => {
+        selector.addEventListener('change', function() {
+            const sectionId = this.getAttribute('data-section');
+            const layout = this.value;
+            
+            setLayout(sectionId, layout);
+            saveDisplayPreferences();
+        });
+    });
+}
+
+/**
+ * Get section data from resume data
+ */
+function getSectionData(sectionId) {
+    if (!resumeData) return null;
+    return resumeData[sectionId];
+}
+
+/**
+ * Get display mode for a section
+ */
+function getDisplayMode(sectionId) {
+    const toggle = document.querySelector(`.display-toggle[data-section="${sectionId}"]`);
+    return toggle && toggle.checked ? 'summary' : 'bullets';
+}
+
+/**
+ * Set display mode for a section
+ */
+function setDisplayMode(sectionId, mode) {
+    const toggle = document.querySelector(`.display-toggle[data-section="${sectionId}"]`);
+    if (toggle) {
+        toggle.checked = (mode === 'summary');
+    }
+}
+
+/**
+ * Set layout for a section
+ */
+function setLayout(sectionId, layout) {
+    const section = document.querySelector(`[data-section="${sectionId}"]`);
+    if (!section) return;
+    
+    // Remove existing layout classes
+    section.classList.remove('layout-full', 'layout-left', 'layout-right');
+    
+    // Add new layout class
+    section.classList.add(`layout-${layout}`);
+}
+
+/**
+ * Save display preferences to localStorage
+ */
+function saveDisplayPreferences() {
+    const preferences = {
+        displayModes: {},
+        layouts: {}
+    };
+    
+    // Save display modes
+    const toggles = document.querySelectorAll('.display-toggle');
+    toggles.forEach(toggle => {
+        const sectionId = toggle.getAttribute('data-section');
+        preferences.displayModes[sectionId] = toggle.checked ? 'summary' : 'bullets';
+    });
+    
+    // Save layouts
+    const selectors = document.querySelectorAll('.layout-selector');
+    selectors.forEach(selector => {
+        const sectionId = selector.getAttribute('data-section');
+        preferences.layouts[sectionId] = selector.value;
+    });
+    
+    try {
+        localStorage.setItem('resumeDisplayPreferences', JSON.stringify(preferences));
+    } catch (e) {
+        console.log('Unable to save display preferences to local storage');
+    }
+}
+
+/**
+ * Load display preferences from localStorage
+ */
+function loadDisplayPreferences() {
+    try {
+        const saved = localStorage.getItem('resumeDisplayPreferences');
+        if (saved) {
+            const preferences = JSON.parse(saved);
+            
+            // Restore display modes
+            if (preferences.displayModes) {
+                Object.keys(preferences.displayModes).forEach(sectionId => {
+                    const mode = preferences.displayModes[sectionId];
+                    setDisplayMode(sectionId, mode);
+                    
+                    // Re-render section with saved mode
+                    const sectionData = getSectionData(sectionId);
+                    if (sectionData) {
+                        renderSection(sectionId, sectionData);
+                    }
+                });
+            }
+            
+            // Restore layouts
+            if (preferences.layouts) {
+                Object.keys(preferences.layouts).forEach(sectionId => {
+                    const layout = preferences.layouts[sectionId];
+                    const selector = document.querySelector(`.layout-selector[data-section="${sectionId}"]`);
+                    if (selector) {
+                        selector.value = layout;
+                    }
+                    setLayout(sectionId, layout);
+                });
+            }
+        }
+    } catch (e) {
+        console.log('Unable to load display preferences from local storage');
+    }
+}

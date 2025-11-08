@@ -1,0 +1,362 @@
+{
+  "summary": {
+    "bullets": [
+      "Strong desire to be involved in the CG visualisation industry, especially virtual reality.",
+      "Specialised in advanced 3D development, real-time engine proficiency with Unreal and Unity.",
+      "AI-integrated workflow automation with advanced prompt engineering capabilities.",
+      "Extensive experience across architectural visualisation, interactive media production, immersive experiences, and render farm management.",
+      "Leveraging business intelligence and data-driven strategy to optimise workflows and deliver innovative solutions.",
+      "Developing a pipeline for VR development, with interest in light field technology and immersive media."
+    ],
+    "summary": "Accomplished 3D Artist/Developer with 25+ years of experience in CG visualisation and virtual reality. Expert in Unreal Engine, Unity, and advanced 3D development with proven track record in architectural visualisation, interactive media, and immersive experiences. Combines technical excellence with AI-driven workflow automation and business intelligence to deliver cutting-edge solutions."
+  },
+  "qualifications": {
+    "items": [
+      {
+        "id": "qual-ai",
+        "title": "AI Generalist Course",
+        "description": "Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications, Advanced Prompt Engineering",
+        "date": "August 2025",
+        "summary": "Comprehensive AI training covering methodologies, automation, and advanced prompt engineering for business applications."
+      },
+      {
+        "id": "qual-diploma",
+        "title": "Advanced Diploma of Information Technology",
+        "description": "Interactive Multimedia",
+        "date": "1998",
+        "summary": "Advanced qualification in interactive multimedia technology and development."
+      },
+      {
+        "id": "qual-cert4",
+        "title": "Certificate IV",
+        "description": "",
+        "date": "1997",
+        "summary": "Professional certification in information technology."
+      }
+    ],
+    "summary": "Highly qualified professional with advanced diplomas in IT and Interactive Multimedia, complemented by cutting-edge AI specialisation including advanced prompt engineering and workflow automation."
+  },
+  "experience": {
+    "jobs": [
+      {
+        "id": "job-viewport",
+        "title": "Specialised in 3D Development",
+        "company": "Viewport XR",
+        "period": "2023 – 2024",
+        "duties": [
+          "Specialised in Unreal Engine Development for immersive experiences",
+          "Advanced real-time 3D graphics and interactive object development with Unreal and Unity",
+          "Proficient in 3D modelling with 3DS Max and Zbrush",
+          "Game object development and shader development",
+          "Expertise in material development using Substance Suite",
+          "Vehicle and character rigging, skinning, and animating including specific projects: Rigging Vehicles, Madcar, and Custom Train Carriage Rig",
+          "Developed custom dynamic assets for Railclone and Forest Pack Pro including Custom Dynamic Railclone Library Assets and Custom Forest Pack Pro Library Creation",
+          "Executed fluid dynamics simulations with Embergen, LiquiGen, and GeoGen",
+          "Particle simulations across Unity and Unreal Engine with 3DS Max-Tyflow particle simulation system",
+          "Produced video content with After Effects, Adobe Premiere and DaVinci Resolve",
+          "Developed pipelines for custom assets for MetaHumans including MetaHuman Lipsync pipelines",
+          "Utilised ElevenLabs Generative AI voiceovers",
+          "Autodesk InfraWorks Site Works and Road Infrastructure Development"
+        ],
+        "summary": "Led cutting-edge 3D development at Viewport XR, specialising in Unreal Engine for immersive experiences. Developed advanced real-time graphics, custom dynamic assets, fluid simulations, and MetaHuman pipelines while integrating AI-powered solutions."
+      },
+      {
+        "id": "job-vector6",
+        "title": "Sole Trader, Freelance 3D Artist/Developer & Web Developer",
+        "company": "Vector 6",
+        "period": "2016 – 2023",
+        "note": "This freelance work occurred concurrently with other employment during this period.",
+        "duties": [
+          "Collaborated on various 3D visualisation projects",
+          "Technical problem-solving and developed internal software/tools for team collaboration",
+          "Automated data workflows using Python and structured spreadsheet logic",
+          "Integrated third-party APIs including TMDB and Watchmode APIs to automate image retrieval and media data handling",
+          "Developed credential handling and asset tracking systems",
+          "Developed dynamic websites using PHP/CSS including custom web development solutions",
+          "Designed graphical elements using Adobe XD and Animate",
+          "Created SVG icons and logos",
+          "Produced high-quality photography and image retouching",
+          "Created fully baked interior scenes using 3DS Max, Substance Suite, and Octane Render",
+          "Performed Matterport scanning and photogrammetry with Reality Capture",
+          "Developed 3D models and specialised material development for Unreal Engine",
+          "Developed GUI systems for Unity and implemented FMETP streaming"
+        ],
+        "summary": "Operated successful freelance business providing 3D visualisation, web development, and technical solutions. Automated workflows with Python, integrated third-party APIs, and delivered high-quality 3D content while developing custom tools and systems."
+      },
+      {
+        "id": "job-minnovare",
+        "title": "Senior 3D Artist/Developer",
+        "company": "Minnovare",
+        "period": "2019",
+        "duties": [
+          "Developing simulations and animations for underground mine core drilling",
+          "Showcasing highly accurate underground global positioning system"
+        ],
+        "summary": "Created advanced simulations and animations for underground mining, demonstrating expertise in technical visualisation and precision global positioning systems."
+      },
+      {
+        "id": "job-lastpixel",
+        "title": "Senior 3D Artist/Developer",
+        "company": "Last Pixel",
+        "period": "October 2006 – March 2016",
+        "duties": [
+          "Managed projects and led project teams",
+          "Project quoting and client liaison",
+          "Storyboarding, script outline, project planning, time management",
+          "Developed proposed residential cities",
+          "Developed PBR materials and advanced Substance graphs in Substance Designer",
+          "Custom dynamic assets for Railclone and Forest Pack Pro",
+          "3D modelling, character animation, equipment rigging, vehicle animation",
+          "On-site panoramic photography",
+          "Environment lighting, object texturing, camera & scene development",
+          "Generated rigged characters and machinery for animation",
+          "Render farm management using RPManager and Deadline",
+          "Post-grading, post-effects, video editing, voiceover editing",
+          "Max scripting for automation and efficiency",
+          "Developed Excel and Photoshop dynamic input systems for sequential animation",
+          "Developed internal software to enhance team collaboration"
+        ],
+        "summary": "Senior role managing major 3D visualisation projects over 9 years. Led teams, handled client relations, developed advanced materials and custom assets, managed render farms, and created automation tools while delivering large-scale architectural visualisations."
+      },
+      {
+        "id": "job-3dmillipede",
+        "title": "3D Artist",
+        "company": "3D Millipede",
+        "period": "March 2005 – March 2006",
+        "duties": [
+          "3D modeller for converting 2D Architectural plans for multi-storey residential complexes",
+          "Developed accurate 3D models from CAD plans (AutoCAD)",
+          "Texture & render photorealistic images in 3DS Max",
+          "On-site photography, overlaying 3D models in situ"
+        ],
+        "summary": "Specialised in architectural visualisation, converting 2D CAD plans into photorealistic 3D models for multi-storey residential projects with on-site photography integration."
+      },
+      {
+        "id": "job-cellmedia",
+        "title": "Lead 3D Artist",
+        "company": "Cell Media",
+        "period": "August 2003 – December 2004",
+        "duties": [
+          "3D Modeller and character creator/rigger/animator",
+          "Developing safety videos in industrial workplaces",
+          "3D development & animation for training inductions",
+          "Character animation, mechanical rigging, particle flow development"
+        ],
+        "summary": "Led 3D content creation for industrial safety and training videos, developing characters, mechanical rigs, and particle effects for workplace education."
+      },
+      {
+        "id": "job-ibp",
+        "title": "3D Artist",
+        "company": "IBP Interactive Business Presentations",
+        "period": "November 1999 – June 2003",
+        "duties": [
+          "Developed interactive business presentations for delivery as Master CD",
+          "Interactive menu systems, client information, and animations",
+          "Developed 3D elements for video presentations",
+          "Creating interactive programs using Macromedia Director",
+          "3D modelling, video editing, video composition, DVD production"
+        ],
+        "summary": "Created interactive multimedia business presentations combining 3D elements, animations, and interactive menu systems using Macromedia Director for CD and DVD distribution."
+      }
+    ],
+    "summary": "25+ years of progressive experience in 3D visualisation and development, from interactive multimedia to cutting-edge VR and real-time engines. Proven track record in project management, team leadership, and delivering complex architectural and immersive experiences."
+  },
+  "projects": {
+    "items": [
+      {
+        "id": "project-spacescan",
+        "title": "Spacescan Collaboration",
+        "role": "3D Developer/Artist",
+        "period": "October 2017 – January 2023",
+        "description": [
+          "Collaborated on various 3D visualisation projects",
+          "Matterport scanning and photogrammetry with Reality Capture",
+          "Developed 3D models and specialised material development for Unreal Engine"
+        ],
+        "summary": "Long-term collaboration delivering 3D visualisation with advanced scanning technology and Unreal Engine material development."
+      },
+      {
+        "id": "project-langtrees",
+        "title": "Langtrees Website Design",
+        "role": "Web Developer & Designer",
+        "period": "February 2022 – July 2022",
+        "description": [
+          "Developed graphical elements for website",
+          "PHP/CSS for dynamic website development",
+          "Created SVG icons and logos using Adobe XD",
+          "Developed animations with Adobe Animate"
+        ],
+        "summary": "Complete website design and development project featuring custom graphics, SVG assets, and dynamic animations."
+      },
+      {
+        "id": "project-vastness",
+        "title": "Vastness - Curtin University",
+        "role": "Unity VR Meta Quest Development",
+        "period": "January 2021 – July 2021",
+        "description": [
+          "Created fully baked interior scene using 3DS Max, Substance Suite, and Octane Render",
+          "Developed GUI systems for Unity and implemented FMETP streaming"
+        ],
+        "summary": "VR application for Meta Quest featuring fully baked interior environments and custom GUI systems with streaming capabilities."
+      },
+      {
+        "id": "project-abc",
+        "title": "ABC Virtual Reality Mini Beasts",
+        "role": "Unity Virtual Reality",
+        "period": "",
+        "description": [
+          "Transformed high-poly photogrammetry models into optimised low-poly versions for VR",
+          "Applied Substance materials for Unity and animated models using CAT"
+        ],
+        "summary": "VR educational experience optimising photogrammetry assets for performance while maintaining visual quality."
+      },
+      {
+        "id": "project-thalu",
+        "title": "THALU: DREAMTIME IS NOW",
+        "role": "Unity Virtual Reality",
+        "period": "",
+        "description": [
+          "Conceptualised and developed the evolving virtual landscape",
+          "Created and animated 'God hands'",
+          "Devised world transformation processes"
+        ],
+        "summary": "Innovative VR experience bringing Dreamtime stories to life through evolving landscapes and interactive world transformations."
+      }
+    ],
+    "summary": "Diverse portfolio of high-profile projects spanning VR development, architectural visualisation, web development, and interactive experiences. Notable work includes educational VR, cultural storytelling, and major infrastructure projects."
+  },
+  "skills": {
+    "categories": [
+      {
+        "id": "skills-3d",
+        "title": "3D Modelling & Real-Time Engines",
+        "items": [
+          "3DS Max (20 years experience)",
+          "Zbrush",
+          "Unreal Engine",
+          "Unity",
+          "CAT",
+          "MetaHuman",
+          "SketchUp"
+        ],
+        "summary": "Expert-level proficiency in industry-standard 3D tools with 20 years of 3DS Max experience and deep knowledge of real-time engines."
+      },
+      {
+        "id": "skills-materials",
+        "title": "Materials & Rendering",
+        "items": [
+          "Substance Suite (Painter, Designer)",
+          "Octane Render",
+          "V-Ray",
+          "Corona",
+          "RNDR Network Rendering",
+          "RPManager",
+          "Deadline"
+        ],
+        "summary": "Advanced material creation and rendering expertise across multiple platforms, including render farm management and network rendering."
+      },
+      {
+        "id": "skills-vfx",
+        "title": "VFX & Simulation",
+        "items": [
+          "Embergen",
+          "LiquiGen",
+          "GeoGen",
+          "TYFlow",
+          "Railclone",
+          "Forest Pack Pro",
+          "SpeedTree",
+          "Particle Flow"
+        ],
+        "summary": "Comprehensive VFX capabilities including fluid dynamics, particle systems, and procedural asset generation."
+      },
+      {
+        "id": "skills-imaging",
+        "title": "Digital Imaging & Video",
+        "items": [
+          "Adobe Photoshop",
+          "Adobe Illustrator",
+          "Adobe After Effects",
+          "Adobe Premiere",
+          "Adobe Lightroom",
+          "Adobe XD",
+          "Adobe Animate",
+          "DaVinci Resolve",
+          "Topaz Suite",
+          "Canva"
+        ],
+        "summary": "Complete digital imaging and video production pipeline from photography to final post-production."
+      },
+      {
+        "id": "skills-scanning",
+        "title": "Scanning & Photogrammetry",
+        "items": [
+          "Matterport",
+          "Reality Capture",
+          "PTGui",
+          "KRPano",
+          "InfraWorks",
+          "AutoCAD",
+          "Revit"
+        ],
+        "summary": "Advanced 3D scanning and photogrammetry with CAD integration for accurate real-world capture and visualization."
+      },
+      {
+        "id": "skills-programming",
+        "title": "Programming & IT",
+        "items": [
+          "Python",
+          "HTML/CSS/JavaScript",
+          "PHP",
+          "JSON",
+          "Excel (Advanced)",
+          "Max Scripting",
+          "FMETP Streaming",
+          "Git"
+        ],
+        "summary": "Strong programming foundation enabling workflow automation, web development, and custom tool creation."
+      },
+      {
+        "id": "skills-ai",
+        "title": "AI & Automation",
+        "items": [
+          "ChatGPT",
+          "Claude",
+          "Gemini",
+          "Advanced Prompt Engineering",
+          "Chain of Thought Prompting",
+          "Tree of Thought Prompting",
+          "Zero-Shot & Few-Shot Prompting",
+          "Meta-Prompting",
+          "Business Intelligence & Strategy",
+          "Multi-Tool Integration",
+          "Make.com",
+          "ElevenLabs",
+          "Midjourney",
+          "Stable Diffusion",
+          "Leonardo.ai",
+          "Lumai",
+          "RunwayML",
+          "Huggingface",
+          "Google Colab"
+        ],
+        "summary": "Cutting-edge AI expertise with advanced prompt engineering techniques and integration of multiple AI tools for workflow automation and generative content."
+      },
+      {
+        "id": "skills-professional",
+        "title": "Professional Skills",
+        "items": [
+          "Project Management",
+          "Client Liaison",
+          "Team Leadership",
+          "Storyboarding",
+          "Photography",
+          "Video Direction",
+          "Workflow Automation"
+        ],
+        "summary": "Comprehensive professional skills in project management, team leadership, and client relations backed by technical expertise."
+      }
+    ],
+    "summary": "Comprehensive technical expertise spanning 3D development, real-time engines, VFX, programming, and cutting-edge AI integration. 20+ years of industry experience with continuous adaptation to emerging technologies."
+  }
+}
