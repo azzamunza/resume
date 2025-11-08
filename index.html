@@ -488,9 +488,16 @@
             </section>
 
             <!-- Portfolio Videos -->
-            <section id="portfolio" data-print-id="portfolio">
+            <section id="portfolio" data-print-id="portfolio" data-section="portfolio">
                 <div class="section-header">
                     <h2><input type="checkbox" class="print-toggle" data-target="portfolio" checked aria-label="Include Portfolio"> Portfolio Videos</h2>
+                    <div class="section-controls">
+                        <select class="layout-selector" data-section="portfolio" aria-label="Layout for Portfolio">
+                            <option value="full">Full Width</option>
+                            <option value="left">Left Column</option>
+                            <option value="right">Right Column</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="section-content">
                     <p class="portfolio-intro">Below is a selection of my professional work showcasing 3D visualisation, VR development, infrastructure projects, and technical capabilities. Check the boxes to include specific videos in your PDF export.</p>

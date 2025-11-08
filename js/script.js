@@ -158,9 +158,20 @@ async function loadYouTubePortfolio() {
         const container = document.getElementById('portfolio-videos-container');
         if (!container) return;
         
+        // Get the portfolio layout mode
+        const portfolioSection = document.querySelector('#portfolio');
+        let layoutMode = 'column'; // default
+        if (portfolioSection) {
+            if (portfolioSection.classList.contains('layout-full')) {
+                layoutMode = 'full';
+            } else if (portfolioSection.classList.contains('layout-left') || portfolioSection.classList.contains('layout-right')) {
+                layoutMode = 'column';
+            }
+        }
+        
         // Create the portfolio list structure
         const portfolioList = document.createElement('ul');
-        portfolioList.className = 'portfolio-videos-list';
+        portfolioList.className = `portfolio-videos-list portfolio-layout-${layoutMode}`;
         
         videos.forEach((video, index) => {
             const listItem = document.createElement('li');
@@ -175,23 +186,30 @@ async function loadYouTubePortfolio() {
             checkbox.checked = true;
             checkbox.setAttribute('aria-label', `Include ${video.title}`);
             
-            // Create thumbnail container
-            const thumbnailContainer = document.createElement('div');
-            thumbnailContainer.className = 'video-thumbnail-container';
+            // Create media container for both iframe and thumbnail
+            const mediaContainer = document.createElement('div');
+            mediaContainer.className = 'video-media-container';
             
+            // Create YouTube iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${video.video_id}`;
+            iframe.width = "100%";
+            iframe.height = "315";
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.className = 'video-iframe';
+            iframe.loading = 'lazy';
+            
+            // Create thumbnail for print mode
             const thumbnail = document.createElement('img');
             thumbnail.src = `https://img.youtube.com/vi/${video.video_id}/mqdefault.jpg`;
             thumbnail.alt = video.title;
-            thumbnail.className = 'video-thumbnail';
+            thumbnail.className = 'video-thumbnail print-only';
             thumbnail.loading = 'lazy';
             
-            const thumbnailLink = document.createElement('a');
-            thumbnailLink.href = video.url;
-            thumbnailLink.target = '_blank';
-            thumbnailLink.rel = 'noopener';
-            thumbnailLink.appendChild(thumbnail);
-            
-            thumbnailContainer.appendChild(thumbnailLink);
+            mediaContainer.appendChild(iframe);
+            mediaContainer.appendChild(thumbnail);
             
             // Create content container
             const contentContainer = document.createElement('div');
@@ -214,10 +232,17 @@ async function loadYouTubePortfolio() {
                 contentContainer.appendChild(description);
             }
             
-            // Assemble the list item
+            // Assemble the list item based on layout mode
             listItem.appendChild(checkbox);
-            listItem.appendChild(thumbnailContainer);
-            listItem.appendChild(contentContainer);
+            if (layoutMode === 'full') {
+                // Full width: thumbnail left (50%), info right (50%)
+                listItem.appendChild(mediaContainer);
+                listItem.appendChild(contentContainer);
+            } else {
+                // Column: stacked vertically
+                listItem.appendChild(mediaContainer);
+                listItem.appendChild(contentContainer);
+            }
             
             portfolioList.appendChild(listItem);
         });
@@ -284,6 +309,21 @@ function initializeSections() {
     // Initialize display toggles and layout selectors
     initializeDisplayToggles();
     initializeLayoutSelectors();
+    
+    // Initialize section layouts from selectors
+    initializeLayoutClasses();
+}
+
+/**
+ * Initialize layout classes for all sections based on their selector values
+ */
+function initializeLayoutClasses() {
+    const selectors = document.querySelectorAll('.layout-selector');
+    selectors.forEach(selector => {
+        const sectionId = selector.getAttribute('data-section');
+        const layout = selector.value;
+        setLayout(sectionId, layout);
+    });
 }
 
 /**
@@ -335,21 +375,34 @@ function renderBulletsMode(contentElement, sectionId, data) {
         `).join('');
         contentElement.innerHTML = `<ul class="qualifications-list">${qualsList}</ul>`;
     } else if (sectionId === 'experience') {
-        const jobsHtml = data.jobs.map(job => `
-            <article class="job-entry" data-print-id="${job.id}">
-                <div class="job-title-row">
-                    <input type="checkbox" class="print-toggle item-toggle" data-target="${job.id}" checked aria-label="Include ${job.company}">
-                    <div class="job-info">
-                        <h3>${job.title}</h3>
-                        <p class="job-meta">${job.company} | ${job.period}</p>
+        const jobsHtml = data.jobs.map(job => {
+            const jobMode = getJobDisplayMode(job.id);
+            const contentHtml = jobMode === 'summary' 
+                ? `<p class="summary-paragraph">${job.summary}</p>`
+                : `<ul class="job-duties">${job.duties.map(duty => `<li>${duty}</li>`).join('')}</ul>`;
+            
+            return `
+                <article class="job-entry" data-print-id="${job.id}">
+                    <div class="job-title-row">
+                        <input type="checkbox" class="print-toggle item-toggle" data-target="${job.id}" checked aria-label="Include ${job.company}">
+                        <div class="job-info">
+                            <h3>${job.title}</h3>
+                            <p class="job-meta">${job.company} | ${job.period}</p>
+                        </div>
+                        <label class="toggle-switch job-toggle">
+                            <span class="toggle-text">Bullets</span>
+                            <input type="checkbox" class="job-mode-toggle" data-job="${job.id}" ${jobMode === 'summary' ? 'checked' : ''}>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-text">Summary</span>
+                        </label>
                     </div>
-                </div>
-                ${job.note ? `<p class="note"><em>${job.note}</em></p>` : ''}
-                <ul class="job-duties">
-                    ${job.duties.map(duty => `<li>${duty}</li>`).join('')}
-                </ul>
-            </article>
-        `).join('');
+                    ${job.note ? `<p class="note"><em>${job.note}</em></p>` : ''}
+                    <div class="job-content" data-job-content="${job.id}">
+                        ${contentHtml}
+                    </div>
+                </article>
+            `;
+        }).join('');
         contentElement.innerHTML = jobsHtml;
     } else if (sectionId === 'projects') {
         const projectsHtml = data.items.map(project => `
@@ -478,6 +531,11 @@ function setLayout(sectionId, layout) {
     
     // Add new layout class
     section.classList.add(`layout-${layout}`);
+    
+    // If this is the portfolio section, reload videos to apply new layout
+    if (sectionId === 'portfolio') {
+        loadYouTubePortfolio();
+    }
 }
 
 /**
@@ -547,5 +605,79 @@ function loadDisplayPreferences() {
         }
     } catch (e) {
         console.log('Unable to load display preferences from local storage');
+    }
+    
+    // Initialize job-level toggles after loading preferences
+    initializeJobToggles();
+}
+
+/**
+ * Get display mode for a specific job
+ */
+function getJobDisplayMode(jobId) {
+    try {
+        const saved = localStorage.getItem('resumeDisplayPreferences');
+        if (saved) {
+            const preferences = JSON.parse(saved);
+            if (preferences.jobModes && preferences.jobModes[jobId]) {
+                return preferences.jobModes[jobId];
+            }
+        }
+    } catch (e) {
+        console.log('Unable to get job display mode');
+    }
+    return 'bullets'; // Default to bullets
+}
+
+/**
+ * Initialize job-level toggle switches
+ */
+function initializeJobToggles() {
+    const jobToggles = document.querySelectorAll('.job-mode-toggle');
+    
+    jobToggles.forEach(toggle => {
+        toggle.addEventListener('change', function() {
+            const jobId = this.getAttribute('data-job');
+            const mode = this.checked ? 'summary' : 'bullets';
+            
+            // Get the job data
+            const experienceData = getSectionData('experience');
+            if (!experienceData) return;
+            
+            const job = experienceData.jobs.find(j => j.id === jobId);
+            if (!job) return;
+            
+            // Update the job content
+            const contentElement = document.querySelector(`[data-job-content="${jobId}"]`);
+            if (contentElement) {
+                if (mode === 'summary') {
+                    contentElement.innerHTML = `<p class="summary-paragraph">${job.summary}</p>`;
+                } else {
+                    contentElement.innerHTML = `<ul class="job-duties">${job.duties.map(duty => `<li>${duty}</li>`).join('')}</ul>`;
+                }
+            }
+            
+            // Save preference
+            saveJobDisplayMode(jobId, mode);
+        });
+    });
+}
+
+/**
+ * Save job display mode to localStorage
+ */
+function saveJobDisplayMode(jobId, mode) {
+    try {
+        const saved = localStorage.getItem('resumeDisplayPreferences');
+        const preferences = saved ? JSON.parse(saved) : { displayModes: {}, layouts: {}, jobModes: {} };
+        
+        if (!preferences.jobModes) {
+            preferences.jobModes = {};
+        }
+        
+        preferences.jobModes[jobId] = mode;
+        localStorage.setItem('resumeDisplayPreferences', JSON.stringify(preferences));
+    } catch (e) {
+        console.log('Unable to save job display mode');
     }
 }

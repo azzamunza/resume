@@ -314,11 +314,16 @@ section {
   line-height: var(--body-line);
 }
 
-/* Column Layout System */
+/* Column Layout System - CSS Grid for Independent Column Flow */
 main[role="main"] {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-6);
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+  grid-auto-flow: dense;
+}
+
+section.layout-full {
+  grid-column: 1 / -1;
 }
 
 section.layout-left {
@@ -326,28 +331,7 @@ section.layout-left {
 }
 
 section.layout-right {
-  grid-column: 1;
-}
-
-section.layout-full {
-  grid-column: 1;
-}
-
-/* Two-column layout when left and right exist */
-main[role="main"]:has(section.layout-left):has(section.layout-right) {
-  grid-template-columns: 1fr 1fr;
-}
-
-main[role="main"]:has(section.layout-left):has(section.layout-right) section.layout-left {
-  grid-column: 1;
-}
-
-main[role="main"]:has(section.layout-left):has(section.layout-right) section.layout-right {
   grid-column: 2;
-}
-
-main[role="main"]:has(section.layout-left):has(section.layout-right) section.layout-full {
-  grid-column: 1 / -1;
 }
 
 /* Summary Paragraph Styling */
@@ -439,6 +423,15 @@ main[role="main"]:has(section.layout-left):has(section.layout-right) section.lay
   color: var(--secondary);
   font-size: var(--small-size);
   font-weight: 600;
+}
+
+.job-toggle {
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.job-toggle .toggle-text {
+  font-size: 11px;
 }
 
 .job-duties {
@@ -604,18 +597,40 @@ main[role="main"]:has(section.layout-left):has(section.layout-right) section.lay
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
 }
 
+/* Column layout - stacked vertically */
+.portfolio-videos-list.portfolio-layout-column {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+/* Full width layout - side by side */
+.portfolio-videos-list.portfolio-layout-full {
+  grid-template-columns: 1fr;
+}
+
 .portfolio-video-item {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   background: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 1rem;
   transition: transform 0.2s, box-shadow 0.2s;
+  gap: 1rem;
+}
+
+/* Column layout: checkbox on top, then media, then content */
+.portfolio-layout-column .portfolio-video-item {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
+}
+
+/* Full width layout: checkbox, media (50%), content (50%) */
+.portfolio-layout-full .portfolio-video-item {
+  grid-template-columns: auto 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: start;
 }
 
 .portfolio-video-item:hover {
@@ -624,37 +639,30 @@ main[role="main"]:has(section.layout-left):has(section.layout-right) section.lay
 }
 
 .portfolio-video-item input[type="checkbox"] {
-  margin-bottom: 0.5rem;
   align-self: flex-start;
 }
 
-.video-thumbnail-container {
+.video-media-container {
   width: 100%;
-  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.video-iframe {
+  width: 100%;
+  height: 315px;
+  border-radius: 4px;
+  display: block;
 }
 
 .video-thumbnail {
   width: 100%;
   height: auto;
   border-radius: 4px;
-  display: block;
+  display: none;
 }
 
-.video-thumbnail-container a {
-  display: block;
-  position: relative;
-}
-
-.video-thumbnail-container a::after {
-  content: '▶';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-  pointer-events: none;
+.print-only {
+  display: none;
 }
 
 .video-content h4 {
@@ -816,10 +824,29 @@ footer[role="contentinfo"] {
   }
   
   main[role="main"] { 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
     padding: 20px; 
   }
   
-  section, 
+  section.layout-full {
+    grid-column: 1 / -1;
+  }
+
+  section.layout-left {
+    grid-column: 1;
+  }
+
+  section.layout-right {
+    grid-column: 2;
+  }
+  
+  section { 
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  
   .job-entry,
   .project-entry,
   .skill-category { 
@@ -848,8 +875,13 @@ footer[role="contentinfo"] {
     break-inside: avoid;
   }
   
-  .video-thumbnail-container a::after {
-    display: none;
+  /* YouTube iframes hidden in print, show thumbnails instead */
+  .video-iframe {
+    display: none !important;
+  }
+  
+  .video-thumbnail.print-only {
+    display: block !important;
   }
   
   /* Hide items marked for exclusion */
