@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializePrintControls();
     loadPrintPreferences();
     updateFooterYear();
+    loadYouTubePortfolio();
 });
 
 /**
@@ -140,6 +141,96 @@ window.addEventListener('beforeprint', function() {
 window.addEventListener('afterprint', function() {
     // Any post-print cleanup can go here
 });
+
+/**
+ * Load YouTube videos from youtube.json
+ */
+async function loadYouTubePortfolio() {
+    try {
+        const response = await fetch('youtube.json');
+        const videos = await response.json();
+        
+        const container = document.getElementById('portfolio-videos-container');
+        if (!container) return;
+        
+        // Create the portfolio list structure
+        const portfolioList = document.createElement('ul');
+        portfolioList.className = 'portfolio-videos-list';
+        
+        videos.forEach((video, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'portfolio-video-item';
+            listItem.setAttribute('data-print-id', `portfolio-video-${index}`);
+            
+            // Create checkbox
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'print-toggle item-toggle';
+            checkbox.setAttribute('data-target', `portfolio-video-${index}`);
+            checkbox.checked = true;
+            checkbox.setAttribute('aria-label', `Include ${video.title}`);
+            
+            // Create thumbnail container
+            const thumbnailContainer = document.createElement('div');
+            thumbnailContainer.className = 'video-thumbnail-container';
+            
+            const thumbnail = document.createElement('img');
+            thumbnail.src = `https://img.youtube.com/vi/${video.video_id}/mqdefault.jpg`;
+            thumbnail.alt = video.title;
+            thumbnail.className = 'video-thumbnail';
+            thumbnail.loading = 'lazy';
+            
+            const thumbnailLink = document.createElement('a');
+            thumbnailLink.href = video.url;
+            thumbnailLink.target = '_blank';
+            thumbnailLink.rel = 'noopener';
+            thumbnailLink.appendChild(thumbnail);
+            
+            thumbnailContainer.appendChild(thumbnailLink);
+            
+            // Create content container
+            const contentContainer = document.createElement('div');
+            contentContainer.className = 'video-content';
+            
+            const title = document.createElement('h4');
+            const titleLink = document.createElement('a');
+            titleLink.href = video.url;
+            titleLink.target = '_blank';
+            titleLink.rel = 'noopener';
+            titleLink.textContent = video.title;
+            title.appendChild(titleLink);
+            
+            contentContainer.appendChild(title);
+            
+            if (video.description) {
+                const description = document.createElement('p');
+                description.className = 'video-description';
+                description.textContent = video.description;
+                contentContainer.appendChild(description);
+            }
+            
+            // Assemble the list item
+            listItem.appendChild(checkbox);
+            listItem.appendChild(thumbnailContainer);
+            listItem.appendChild(contentContainer);
+            
+            portfolioList.appendChild(listItem);
+        });
+        
+        container.innerHTML = '';
+        container.appendChild(portfolioList);
+        
+        // Re-initialize print controls for the newly added checkboxes
+        initializePrintControls();
+        
+    } catch (error) {
+        console.error('Error loading YouTube portfolio:', error);
+        const container = document.getElementById('portfolio-videos-container');
+        if (container) {
+            container.innerHTML = '<p class="error-message">Unable to load portfolio videos. Please check the console for details.</p>';
+        }
+    }
+}
 
 /**
  * Keyboard shortcuts
