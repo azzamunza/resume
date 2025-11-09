@@ -164,7 +164,7 @@ async function loadYouTubePortfolio() {
         if (portfolioSection) {
             if (portfolioSection.classList.contains('layout-full')) {
                 layoutMode = 'full';
-            } else if (portfolioSection.classList.contains('layout-left') || portfolioSection.classList.contains('layout-right')) {
+            } else if (portfolioSection.classList.contains('layout-column')) {
                 layoutMode = 'column';
             }
         }
@@ -193,8 +193,6 @@ async function loadYouTubePortfolio() {
             // Create YouTube iframe
             const iframe = document.createElement('iframe');
             iframe.src = `https://www.youtube.com/embed/${video.video_id}`;
-            iframe.width = "100%";
-            iframe.height = "315";
             iframe.setAttribute('frameborder', '0');
             iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
             iframe.setAttribute('allowfullscreen', 'true');
@@ -527,7 +525,7 @@ function setLayout(sectionId, layout) {
     if (!section) return;
     
     // Remove existing layout classes
-    section.classList.remove('layout-full', 'layout-left', 'layout-right');
+    section.classList.remove('layout-full', 'layout-left', 'layout-right', 'layout-column');
     
     // Add new layout class
     section.classList.add(`layout-${layout}`);

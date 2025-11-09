@@ -603,7 +603,7 @@ section {
 
 /* Column layout - stacked vertically */
 .portfolio-videos-list.portfolio-layout-column {
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 1fr;
 }
 
 /* Full width layout - side by side */
@@ -629,7 +629,7 @@ section {
 
 /* Full width layout: checkbox, media (50%), content (50%) */
 .portfolio-layout-full .portfolio-video-item {
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: 1fr;
   align-items: start;
 }
@@ -650,9 +650,10 @@ section {
 
 .video-iframe {
   width: 100%;
-  height: 202px;  /* Reduced by 36% from original 315px (252px - 20%) */
+  aspect-ratio: 16 / 9;
   border-radius: 4px;
   display: block;
+  height: auto;
 }
 
 .video-thumbnail {
@@ -845,6 +846,7 @@ footer[role="contentinfo"] {
   
   main[role="main"] { 
     display: block !important;
+    grid-template-columns: unset !important;
     padding: 0 !important;  /* Remove padding */
   }
   
@@ -853,6 +855,7 @@ footer[role="contentinfo"] {
     page-break-inside: avoid;
     break-inside: avoid;
     width: 100% !important;
+    grid-column: unset !important;
     margin-bottom: 12px !important;  /* Further reduced for tighter fit */
     padding: 0;
   }
