@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Part-time Pay Per Click Specialist Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root{
+      /* Theme */
+      --primary:#0B66C3;
+      --secondary:#FF6A00;
+      --accent:#00ADEF;
+
+      /* Text and surfaces */
+      --bg:#F6F7FB;
+      --card:#FFFFFF;
+      --text-main:#222222;
+      --text-muted:#555555;
+      --border:#E6E6EA;
+
+      /* Typography */
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      --h1: 32px;
+      --h2: 20px;
+      --h3: 16px;
+      --base: 15px;
+      --lh: 1.55;
+
+      /* Spacing */
+      --container-p: 20px;
+      --section-gap: 18px;
+      --block-gap: 10px;
+      --col-gap: 24px;
+
+      /* Cards and shadows */
+      --radius: 10px;
+      --shadow: 0 6px 24px rgba(0,0,0,.06);
+    }
+
+    html, body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font);
+      font-size: var(--base);
+      line-height: var(--lh);
+      margin: 0;
+      padding: 0;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 16px auto;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    header[role="banner"] {
+      padding: 22px var(--container-p) 10px var(--container-p);
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(0deg, #fff 0%, #fff 65%, rgba(11,102,195,0.03) 100%);
+    }
+
+    /* Header top row: name + actions */
+    .header-row {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    h1 {
+      font-size: var(--h1);
+      margin: 0;
+      color: var(--primary);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .role {
+      margin: 4px 0 10px 0;
+      color: var(--secondary);
+      font-weight: 700;
+      font-size: var(--h3);
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .contact a {
+      color: var(--accent);
+      text-decoration: none;
+      word-break: break-word;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .actions button {
+      border: 1px solid var(--primary);
+      background: #fff;
+      color: var(--primary);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .actions button.primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .actions button[disabled]{
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    main[role="main"] {
+      padding: 14px var(--container-p) 20px var(--container-p);
+    }
+
+    /* Two-column independent layout */
+    .layout {
+      display: flex;
+      gap: var(--col-gap);
+      align-items: flex-start;
+    }
+    .col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--section-gap);
+    }
+    .col--side { flex: 0 0 33%; min-width: 260px; }
+    .col--main { flex: 1 1 auto; }
+
+    section {
+      margin: 0;
+    }
+
+    h2 {
+      font-size: var(--h2);
+      color: var(--primary);
+      margin: 0 0 6px 0;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    h3 {
+      font-size: var(--h3);
+      color: var(--secondary);
+      margin: 0 0 6px 0;
+      font-weight: 700;
+    }
+
+    p { margin: 0; }
+
+    .stack { display: flex; flex-direction: column; gap: var(--block-gap); }
+
+    /* Skills columns inside side column */
+    .skills-columns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .skills-columns > div {
+      flex: 1 1 220px;
+      min-width: 220px;
+    }
+    ul {
+      margin: 6px 0 0 0;
+      padding-left: 18px;
+    }
+    li {
+      margin-bottom: 6px;
+    }
+
+    /* Job entries */
+    .job {
+      display: block;
+    }
+    .job .meta {
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .job ul { margin-top: 6px; }
+
+    footer[role="contentinfo"] {
+      padding: 10px var(--container-p) 18px var(--container-p);
+      border-top: 1px solid var(--border);
+      background: #fff;
+    }
+
+    /* Responsive rules */
+    /* Mobile ≤480px: single column */
+    @media (max-width: 480px) {
+      .page { border-radius: 0; box-shadow: none; margin: 0; }
+      .layout { display: block; }
+      .col--side, .col--main { width: 100%; }
+      .skills-columns { flex-direction: column; }
+      h1 { font-size: 26px; }
+      .role { font-size: 14px; }
+      header[role="banner"] { padding: 16px var(--container-p) 10px var(--container-p); }
+      .actions { width: 100%; }
+    }
+
+    /* Tablet 481–768px: balanced layout */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .col--side { flex-basis: 42%; }
+      .col--main { flex-basis: 58%; }
+    }
+
+    /* Desktop ≥769px: two-column layout */
+    @media (min-width: 769px) {
+      .col--side { flex-basis: 34%; }
+      .col--main { flex-basis: 66%; }
+    }
+
+    /* Print styles */
+    @page {
+      size: A4 portrait;
+      margin: 18mm 15mm;
+    }
+    @media print {
+      html, body {
+        background: #fff !important;
+      }
+      .page {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+      }
+      header[role="banner"] {
+        background: #fff !important;
+        border-bottom: 1px solid #00000020;
+      }
+      .actions { display: none !important; }
+      a, a:visited { color: #000 !important; text-decoration: underline; }
+      section, article { break-inside: avoid; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <header role="banner" aria-label="Resume header">
+      <div class="header-row">
+        <div>
+          <h1>Aaron Munro</h1>
+          <div class="role">Part-time Pay Per Click Specialist</div>
+          <ul class="contact" aria-label="Contact details">
+            <li>Email: <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></li>
+            <li>Phone: <a href="tel:0477742636">0477742636</a></li>
+            <li>Location: Forrestfield, WA, Australia</li>
+            <li>Website: <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a></li>
+          </ul>
+        </div>
+        <nav class="actions" aria-label="Export options">
+          <button class="primary" type="button" id="btn-print">Download as PDF</button>
+          <button type="button" id="btn-docx">Download as DOCX</button>
+          <button type="button" id="btn-cover">Download Cover Letter</button>
+        </nav>
+      </div>
+    </header>
+
+    <main role="main" id="main">
+      <div class="layout">
+        <!-- Side column -->
+        <div class="col col--side">
+          <section id="summary" aria-labelledby="summary-h">
+            <h2 id="summary-h">Summary</h2>
+            <div class="stack">
+              <p>I am writing to express my interest in the Part-time Pay Per Click Specialist position. While my core expertise lies in 3D visualisation, interactive development, and workflow automation, I've developed strong abilities in technical problem-solving, data-driven workflow automation, and project management within digital and web-focused environments. My experience includes web development, automation of media/data handling, and collaboration with digital teams on project delivery. I am based in the Perth metro area and have full work rights in Australia.</p>
+            </div>
+          </section>
+
+          <section id="skills" aria-labelledby="skills-h">
+            <h2 id="skills-h">Skills</h2>
+            <div class="skills-columns">
+              <div>
+                <h3>Technical Skills</h3>
+                <ul>
+                  <li>Web Development (PHP, HTML, CSS, JavaScript)</li>
+                  <li>API Integration (Automated image and media handling)</li>
+                  <li>Automation (Python, structured spreadsheets, Make.com)</li>
+                  <li>Microsoft Office Suite including advanced Excel</li>
+                  <li>Adobe Creative Suite (Photoshop, Premiere, After Effects)</li>
+                  <li>Team collaboration tools</li>
+                  <li>Google Sheets as data source</li>
+                  <li>Project workflow automation</li>
+                </ul>
+              </div>
+              <div>
+                <h3>Core Competencies</h3>
+                <ul>
+                  <li>Technical problem-solving</li>
+                  <li>Project planning and management</li>
+                  <li>Client liaison and communication</li>
+                  <li>Multitasking and time management</li>
+                  <li>Creative technology application</li>
+                  <li>Data-driven strategy and reporting</li>
+                  <li>Attention to detail</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Main column -->
+        <div class="col col--main">
+          <section id="experience" aria-labelledby="experience-h">
+            <h2 id="experience-h">Work Experience</h2>
+
+            <article class="job" aria-labelledby="job-vxr">
+              <h3 id="job-vxr">Specialised in 3D Development</h3>
+              <div class="meta">Viewport XR | 2023 – 2024</div>
+              <ul>
+                <li>Collaborated with technical teams to deliver interactive digital content</li>
+                <li>Produced video content and developed pipelines for media assets involving automation and workflow optimisation</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-v6">
+              <h3 id="job-v6">Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+              <div class="meta">Vector 6 | 2016 – 2023</div>
+              <ul>
+                <li>Developed dynamic, data-driven websites and internal collaboration tools</li>
+                <li>Automated workflows for media and content handling using Python and structured spreadsheets</li>
+                <li>Integrated third-party APIs for automated image and media data management</li>
+                <li>Designed graphical elements and performed client project management and delivery</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-lp">
+              <h3 id="job-lp">Senior 3D Artist/Developer</h3>
+              <div class="meta">Last Pixel | October 2006 – March 2016</div>
+              <ul>
+                <li>Led project teams and managed client communications across multiple concurrent projects</li>
+                <li>Implemented workflow automation and internal software solutions to enhance project delivery and reporting</li>
+              </ul>
+            </article>
+          </section>
+
+          <section id="special-projects" aria-labelledby="special-h">
+            <h2 id="special-h">Specialised Project Experience</h2>
+            <div class="stack">
+              <p>Automated content workflows for digital projects, including scripting for automated content creation, image generation, and social media posting using integrated tools (Make.com, Python, Google Sheets).</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer role="contentinfo" aria-label="Footer">
+      <!-- Deliberately minimal to avoid adding any content not provided in Input 2 -->
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const btnPrint = document.getElementById('btn-print');
+      const btnDocx  = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      let downloadsIndex = null;
+
+      function fetchDownloads() {
+        if (downloadsIndex) return Promise.resolve(downloadsIndex);
+        return fetch('./downloads.json', { cache: 'no-store' })
+          .then(r => {
+            if (!r.ok) throw new Error('Failed to load downloads.json');
+            return r.json();
+          })
+          .then(data => {
+            downloadsIndex = (data && Array.isArray(data.downloads)) ? data.downloads : [];
+            return downloadsIndex;
+          })
+          .catch(() => {
+            downloadsIndex = [];
+            return downloadsIndex;
+          });
+      }
+
+      function triggerDownloadById(id) {
+        fetchDownloads().then(list => {
+          const item = list.find(d => d.id === id);
+          if (!item) {
+            alert('Download not available.');
+            return;
+          }
+          const a = document.createElement('a');
+          a.href = item.path;
+          a.download = item.name || '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+      }
+
+      btnPrint.addEventListener('click', () => window.print());
+      btnDocx.addEventListener('click', () => triggerDownloadById('resume'));
+      btnCover.addEventListener('click', () => triggerDownloadById('coverLetter'));
+
+      // Preload index (non-blocking)
+      fetchDownloads();
+    })();
+  </script>
+</body>
+</html>
