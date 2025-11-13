@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Mystery Shopper Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Resume of Aaron Munro for Mystery Shopper application.">
+  <style>
+    :root{
+      /* Palette */
+      --primary:#0055A4;
+      --secondary:#FFBB00;
+      --accent:#E63946;
+      --bg:#FFFFFF;
+      --bg-soft:#F7F7F8;
+      --text-main:#222222;
+      --text-muted:#5A5A5A;
+      --border:#E1E3E6;
+
+      /* Typography */
+      --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol",sans-serif;
+      --h1:32px;
+      --h2:22px;
+      --h3:18px;
+      --body:15px;
+      --small:12px;
+      --lh-compact:1.25;
+      --lh-normal:1.55;
+
+      /* Spacing */
+      --s-2:4px;
+      --s-3:6px;
+      --s-4:8px;
+      --s-5:12px;
+      --s-6:16px;
+      --s-7:20px;
+      --s-8:24px;
+      --s-10:32px;
+
+      /* Layout */
+      --maxw:980px;
+    }
+
+    html,body{background:#f3f4f6;color:var(--text-main);font-family:var(--font-sans);font-size:var(--body);line-height:var(--lh-normal);margin:0;padding:0}
+    .wrap{
+      max-width:var(--maxw);
+      margin:var(--s-10) auto;
+      background:var(--bg);
+      box-shadow:0 10px 40px rgba(0,0,0,.06);
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--border);
+    }
+
+    header[role="banner"]{
+      display:flex;gap:var(--s-8);
+      padding:var(--s-10);
+      border-bottom:3px solid var(--primary);
+      align-items:flex-start;
+      flex-wrap:wrap;
+      background:linear-gradient(180deg,#ffffff 0%, #fbfdff 100%);
+    }
+    .id-block{flex:1 1 300px;min-width:260px}
+    h1{
+      font-size:var(--h1);line-height:var(--lh-compact);margin:0 0 var(--s-2) 0;color:var(--primary);font-weight:700;letter-spacing:-0.3px
+    }
+    .title{font-size:var(--h2);margin:0;color:var(--text-main);font-weight:500}
+    address{
+      font-style:normal;display:flex;flex-direction:column;gap:var(--s-2);min-width:260px
+    }
+    address a{color:var(--primary);text-decoration:underline}
+    .contact-row{display:flex;gap:var(--s-4);align-items:baseline;flex-wrap:wrap}
+    .label{color:var(--primary);font-weight:600;min-width:70px}
+
+    .actions{
+      display:flex;gap:var(--s-4);flex-wrap:wrap;margin-left:auto
+    }
+    .btn{
+      appearance:none;border:1px solid var(--primary);background:#fff;color:var(--primary);
+      padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px;
+    }
+    .btn.secondary{border-color:var(--secondary);color:#6b4a00}
+    .btn:focus{outline:2px solid var(--secondary);outline-offset:2px}
+
+    main[role="main"]{
+      display:flex;gap:var(--s-10);
+      padding:var(--s-10);
+      align-items:flex-start;
+      flex-wrap:wrap;
+    }
+    .col-main{flex:2 1 520px;min-width:300px;display:flex;flex-direction:column;gap:var(--s-8)}
+    .col-side{flex:1 1 320px;min-width:260px;display:flex;flex-direction:column;gap:var(--s-8);border-left:3px solid var(--secondary);padding-left:var(--s-8);background:linear-gradient(180deg,#ffffff 0%, #fafafa 100%)}
+
+    section{margin:0;padding:0}
+    h2{
+      font-size:var(--h2);color:var(--primary);margin:0 0 var(--s-4) 0;font-weight:700;line-height:var(--lh-compact)
+    }
+    h3{
+      font-size:var(--h3);margin:0 0 var(--s-2) 0;font-weight:600;color:var(--text-main)
+    }
+    p{margin:0 0 var(--s-5) 0;color:var(--text-main)}
+    .meta{color:#9b6a00;font-weight:600;font-size:var(--small);margin-bottom:var(--s-3)}
+    .duties{margin:0; padding-left:18px}
+    .duties li{margin:0 0 var(--s-3) 0}
+
+    /* Skills */
+    .skills-group{display:flex;flex-direction:column;gap:var(--s-3)}
+    .skills-label{font-size:11px;color:var(--accent);text-transform:uppercase;font-weight:700;letter-spacing:.5px}
+    .chiplist{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+    .chiplist li{border:1px solid var(--primary);border-radius:16px;padding:3px 10px;background:var(--bg-soft)}
+
+    /* Highlight boxes */
+    .note{
+      background:#F2FAFF;border-left:3px solid var(--accent);padding:10px 14px;border-radius:8px;color:#0a3d5a
+    }
+
+    /* Portfolio */
+    .video-card{border:1px solid var(--border);border-radius:10px;padding:12px;background:#fff}
+    .video-title{font-weight:600;color:#9b6a00;margin:0 0 2px 0}
+    .video-embed{width:100%;max-width:480px;aspect-ratio:16/9;border:none;border-radius:8px}
+    .ext-link{font-size:13px;margin-top:6px}
+
+    footer[role="contentinfo"]{
+      border-top:1px solid var(--border);
+      padding:var(--s-8);
+      text-align:center;
+      color:var(--text-muted);
+      font-size:var(--small)
+    }
+    footer a{color:var(--primary);text-decoration:underline}
+
+    /* Responsive */
+    /* Desktop (>=769px): default two-column */
+    @media (max-width: 768px){
+      /* Tablet 481–768: balanced layout */
+      main[role="main"]{gap:var(--s-8)}
+      .col-main{flex:1 1 100%}
+      .col-side{flex:1 1 100%;border-left:none;border-top:3px solid var(--secondary);padding-left:0;padding-top:var(--s-8)}
+    }
+    @media (max-width: 480px){
+      /* Mobile (<=480px): single column */
+      header[role="banner"]{padding:var(--s-8)}
+      main[role="main"]{padding:var(--s-8)}
+      .actions{width:100%}
+      .btn{flex:1 1 auto}
+    }
+
+    /* Print */
+    @media print{
+      html,body{background:#fff;color:#000}
+      .wrap{box-shadow:none;border:none;border-radius:0;margin:0}
+      header[role="banner"], main[role="main"], section, article, footer{break-inside:avoid;page-break-inside:avoid}
+      .actions{display:none !important}
+      .video-embed{display:none !important}
+      @page{size:A4 portrait; margin:18mm 15mm;}
+      a[href^="http"]::after{content:" (" attr(href) ")"; font-size:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header role="banner" aria-label="Header and contact information">
+      <div class="id-block">
+        <h1>Aaron Munro</h1>
+        <p class="title">Mystery Shopper</p>
+      </div>
+
+      <address aria-label="Contact details">
+        <div class="contact-row">
+          <span class="label">Email:</span>
+          <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a>
+        </div>
+        <div class="contact-row">
+          <span class="label">Phone:</span>
+          <a href="tel:+61477742636" aria-label="Call 04 7774 2636">0477742636</a>
+        </div>
+        <div class="contact-row">
+          <span class="label">Location:</span>
+          <span>84A Sussex Road, Forrestfield, WA 6058</span>
+        </div>
+        <div class="contact-row">
+          <span class="label">Website:</span>
+          <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a>
+        </div>
+      </address>
+
+      <div class="actions" aria-label="Export options">
+        <button class="btn" type="button" id="btn-pdf">Download as PDF</button>
+        <button class="btn secondary" type="button" id="btn-docx">Download as DOCX</button>
+        <button class="btn secondary" type="button" id="btn-cover">Download Cover Letter</button>
+      </div>
+    </header>
+
+    <main role="main">
+      <div class="col-main">
+        <section id="summary" aria-labelledby="summary-h2">
+          <h2 id="summary-h2">Summary</h2>
+          <p>I am writing to express my interest in the Mystery Shopper role at TSHR - Trak and Scarlett. Across my career, I've developed strong abilities in detailed documentation, service assessment, and client feedback based on project-based roles that required precision, reporting, and communication. My technical suite covers accurate reporting, workflow automation, and observational skills applied to a range of visualisation and service assessment projects. I am reliable, self-motivated, have unrestricted work rights in Australia, and have extensive computer and internet proficiency.</p>
+        </section>
+
+        <section id="experience" aria-labelledby="experience-h2">
+          <h2 id="experience-h2">Work Experience</h2>
+
+          <article aria-labelledby="job1-title">
+            <h3 id="job1-title">Specialised in 3D Development</h3>
+            <p class="meta">Viewport XR | 2023 – 2024</p>
+            <ul class="duties">
+              <li>Produced detailed project documentation and reporting for immersive experiences</li>
+              <li>Worked with clients to define, assess, and deliver interactive object development projects</li>
+              <li>Created accurate project and asset records for client and internal assessment</li>
+            </ul>
+          </article>
+
+          <article aria-labelledby="job2-title">
+            <h3 id="job2-title">Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+            <p class="meta">Vector 6 | 2016 – 2023</p>
+            <ul class="duties">
+              <li>Developed internal tools for project collaboration, asset tracking, and reporting</li>
+              <li>Automated workflows to ensure data and project documentation were maintained accurately</li>
+              <li>Delivered client feedback and project updates in written form across multiple projects</li>
+            </ul>
+          </article>
+
+          <article aria-labelledby="job3-title">
+            <h3 id="job3-title">Senior 3D Artist/Developer</h3>
+            <p class="meta">Last Pixel | October 2006 – March 2016</p>
+            <ul class="duties">
+              <li>Liaised with clients on project receivables and deliveries, emphasising clear communication</li>
+              <li>Managed project quoting, deliveries, and documentation for client satisfaction and compliance</li>
+              <li>Produced detailed post-project reports and documented project processes</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="additional" aria-labelledby="additional-h2">
+          <h2 id="additional-h2">Certification &amp; Specialized Project Experience</h2>
+          <p class="note">AI Generalist Course: Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications (Aug 2025)</p>
+          <p class="note">Developed and maintained precise project documentation, compliance reports, and customer feedback forms for both internal and client-focused projects.</p>
+        </section>
+      </div>
+
+      <aside class="col-side" aria-labelledby="skills-h2">
+        <section id="skills">
+          <h2 id="skills-h2">Skills</h2>
+
+          <div class="skills-group">
+            <span class="skills-label">Technical skills</span>
+            <ul class="chiplist" aria-label="Technical skills list">
+              <li>Detailed documentation and reporting</li>
+              <li>Workflow automation (Python, Excel, structured spreadsheet logic)</li>
+              <li>Web browsing and emailing</li>
+              <li>Technical troubleshooting</li>
+              <li>Microsoft Office Suite</li>
+            </ul>
+          </div>
+
+          <div class="skills-group">
+            <span class="skills-label">Core competencies</span>
+            <ul class="chiplist" aria-label="Core competencies list">
+              <li>Attention to detail</li>
+              <li>Excellent written communication</li>
+              <li>Strong spelling and grammar</li>
+              <li>Client liaison</li>
+              <li>Reliability</li>
+              <li>Time management</li>
+              <li>Ability to provide objective feedback</li>
+              <li>Self-motivation</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="portfolio" aria-labelledby="portfolio-h2">
+          <h2 id="portfolio-h2">Portfolio</h2>
+          <div class="video-card">
+            <p class="video-title">Coffey  - envoccata compliance monitoring - Feb 2020</p>
+            <p>Demonstrates experience with compliance monitoring and reporting deliverables</p>
+            <iframe class="video-embed" title="Coffey - envoccata compliance monitoring - Feb 2020" src="https://www.youtube.com/embed/rGk_5FNdKSE" allowfullscreen></iframe>
+            <p class="ext-link">
+              Video link: <a href="https://www.youtube.com/watch?v=rGk_5FNdKSE" target="_blank" rel="noopener">https://www.youtube.com/watch?v=rGk_5FNdKSE</a>
+            </p>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <footer role="contentinfo">
+      &copy; 2024 Aaron Munro
+    </footer>
+  </div>
+
+  <noscript>Enable JavaScript to use the download buttons. You can still print this page to PDF via your browser.</noscript>
+
+  <script>
+    (function(){
+      const btnPDF   = document.getElementById('btn-pdf');
+      const btnDOCX  = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      btnPDF?.addEventListener('click', function(){ window.print(); });
+
+      let downloadsMap = null;
+
+      async function ensureDownloads(){
+        if (downloadsMap) return downloadsMap;
+        try{
+          const res = await fetch('./downloads.json', {cache:'no-store'});
+          if(!res.ok) throw new Error('Failed to load downloads.json');
+          const data = await res.json();
+          downloadsMap = new Map();
+          (data.downloads || []).forEach(item => downloadsMap.set(item.id, item));
+          return downloadsMap;
+        }catch(err){
+          console.warn(err);
+          return null;
+        }
+      }
+
+      async function triggerDownload(id){
+        const map = await ensureDownloads();
+        if(!map || !map.has(id)){
+          alert('Download not available. Please ensure downloads.json and files are present.');
+          return;
+        }
+        const item = map.get(id);
+        const a = document.createElement('a');
+        a.href = item.path;
+        a.download = item.name || '';
+        document.body.appendChild(a);
+        a.click();
+        requestAnimationFrame(()=>a.remove());
+      }
+
+      btnDOCX?.addEventListener('click', ()=>triggerDownload('resume'));
+      btnCover?.addEventListener('click', ()=>triggerDownload('coverLetter'));
+    })();
+  </script>
+</body>
+</html>
