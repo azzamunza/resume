@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aaron Munro – eLearning Developer Résumé</title>
+  <style>
+    :root{
+      /* Brand colours */
+      --primary:#E30613;
+      --secondary:#062B57;
+      --text-main:#333333;
+      --text-muted:#555555;
+      --bg-page:#F5F5F5;
+      --bg-card:#FFFFFF;
+
+      /* Typography (system stack; no external deps) */
+      --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+      --fs-h1: 32px;
+      --fs-h2: 22px;
+      --fs-h3: 18px;
+      --fs-body: 16px;
+      --fs-small: 14px;
+
+      --lh-main:1.6;
+      --fw-bold:700;
+      --fw-regular:400;
+
+      /* Spacing scale */
+      --sp-2xs: 0.25rem;
+      --sp-xs: 0.5rem;
+      --sp-sm: 0.75rem;
+      --sp-md: 1rem;
+      --sp-lg: 1.5rem;
+      --sp-xl: 2rem;
+
+      /* Breakpoints */
+      --bp-mobile: 480px;
+      --bp-tablet: 768px;
+      --bp-desktop: 769px;
+
+      /* Layout */
+      --container-max: 980px;
+      --card-radius: 8px;
+      --elev: 0 2px 28px rgba(6,43,87,0.06);
+
+      /* Columns */
+      --col-gap: 2rem;
+
+      /* Print */
+      --print-margin-v: 18mm;
+      --print-margin-h: 15mm;
+    }
+
+    /* Reset and base */
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    html{background:var(--bg-page);color:var(--text-main)}
+    body{
+      font-family:var(--font-body);
+      font-size:var(--fs-body);
+      line-height:var(--lh-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    main[role="main"]{
+      background:var(--bg-card);
+      max-width:var(--container-max);
+      margin:0 auto;
+      padding: var(--sp-xl) var(--sp-xl);
+      box-shadow: var(--elev);
+      border-radius: var(--card-radius);
+    }
+    @media (max-width: 860px){
+      main[role="main"]{padding: var(--sp-lg) var(--sp-md)}
+    }
+    @media (max-width: var(--bp-mobile)){
+      main[role="main"]{padding: var(--sp-lg) var(--sp-sm); border-radius:0; box-shadow:none}
+    }
+
+    header[role="banner"]{
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: var(--sp-md);
+      margin-bottom: var(--sp-md);
+    }
+    .name-title{
+      display:flex;
+      flex-direction:column;
+      gap: var(--sp-xs);
+    }
+    h1{
+      font-family:var(--font-heading);
+      font-weight:var(--fw-bold);
+      font-size:var(--fs-h1);
+      color:var(--secondary);
+      margin:0 0 var(--sp-2xs) 0;
+      letter-spacing:.01em;
+    }
+    .role-title{
+      font-size: var(--fs-h2);
+      color: var(--primary);
+      font-weight: var(--fw-bold);
+    }
+
+    /* Contact row */
+    .contact-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap: var(--sp-lg);
+      font-size: var(--fs-small);
+      color: var(--text-main);
+      margin-top: var(--sp-sm);
+    }
+    .contact-row a{
+      color: var(--text-main);
+      text-decoration:none;
+    }
+    .contact-row a:hover{color:var(--primary);text-decoration:underline}
+
+    /* Export toolbar */
+    .export-bar{
+      margin-top: var(--sp-sm);
+      display:flex;
+      gap: var(--sp-sm);
+      flex-wrap: wrap;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--secondary);
+      background:#fff;
+      color:var(--secondary);
+      padding:.5rem .75rem;
+      font-size: var(--fs-small);
+      border-radius:6px;
+      cursor:pointer;
+      transition: all .15s ease-in-out;
+    }
+    .btn:hover{background:var(--secondary);color:#fff}
+    .btn-primary{border-color:var(--primary);color:#fff;background:var(--primary)}
+    .btn-primary:hover{filter:brightness(.92)}
+
+    /* Section headings */
+    section > h2{
+      font-family:var(--font-heading);
+      font-weight: var(--fw-bold);
+      font-size: var(--fs-h2);
+      color: var(--primary);
+      margin: 0 0 var(--sp-xs) 0;
+    }
+    h3{
+      font-size: var(--fs-h3);
+      color: var(--secondary);
+      font-weight: var(--fw-bold);
+      margin: 0 0 var(--sp-xs) 0;
+    }
+
+    /* Content columns wrapper */
+    #content{
+      /* Single column by default */
+    }
+    /* Desktop: two-column independent vertical flow using CSS columns */
+    @media (min-width: var(--bp-desktop)){
+      #content{
+        column-count: 2;
+        column-gap: var(--col-gap);
+      }
+    }
+
+    /* Cards/sections in columns */
+    section{
+      break-inside: avoid;
+      margin: 0 0 var(--sp-lg) 0;
+      padding: 0;
+    }
+
+    /* Summary */
+    .summary{
+      font-size: var(--fs-body);
+      color: var(--text-main);
+      margin-bottom: var(--sp-lg);
+    }
+
+    /* Experience */
+    #experience{margin-bottom: var(--sp-lg)}
+    .job-entry{
+      margin: 0 0 var(--sp-md) 0;
+      border-left: 4px solid var(--secondary);
+      padding-left: var(--sp-sm);
+    }
+    .job-meta, .edu-meta{
+      color: var(--text-muted);
+      font-size: var(--fs-small);
+      margin-bottom: var(--sp-xs);
+    }
+    .job-duties{
+      margin: var(--sp-xs) 0 0 var(--sp-sm);
+      padding-left: 1rem;
+      list-style: disc;
+    }
+    .job-duties li{margin-bottom: var(--sp-xs)}
+
+    /* Skills */
+    #skills{
+      display:flex;
+      flex-wrap:wrap;
+      gap: var(--sp-lg);
+      margin-bottom: var(--sp-lg);
+    }
+    .skills-column{min-width: 240px}
+    .skills-list{list-style:none;margin:0;padding:0}
+    .skills-list li{margin-bottom: var(--sp-xs); color: var(--text-main)}
+
+    /* Portfolio */
+    #portfolio{margin-bottom: var(--sp-lg); padding: var(--sp-sm) 0}
+    .portfolio-item{
+      display:flex;
+      gap: var(--sp-md);
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom: var(--sp-md);
+    }
+    .portfolio-video{
+      width: 340px; max-width:100%;
+      height: 192px;
+      background:#000;
+      border-radius:4px;
+      overflow:hidden;
+    }
+    .portfolio-info{
+      flex:1 1 200px;
+      display:flex; flex-direction:column; gap: var(--sp-2xs);
+      color: var(--text-main);
+    }
+    @media (max-width: 700px){
+      .portfolio-item{flex-direction:column}
+      .portfolio-video{width:100%; height:auto; min-height:170px}
+    }
+
+    /* Certifications, Projects */
+    .certifications-list,
+    .project-experience{color: var(--text-main)}
+
+    /* Footer */
+    footer[role="contentinfo"]{
+      margin-top: var(--sp-xl);
+      font-size: var(--fs-small);
+      color: var(--text-main);
+      text-align:left;
+      padding: var(--sp-sm) 0 0 0;
+      border-top: 1px solid #e8e8e8;
+    }
+
+    /* Print */
+    @media print{
+      body, main[role="main"]{background:#fff !important; color:#000 !important; box-shadow:none !important}
+      main[role="main"]{max-width:100%; padding:0; margin:0; border-radius:0}
+      header[role="banner"]{border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:12px}
+      .export-bar, .portfolio-video{display:none !important}
+      #content{column-count: 2; column-gap: 14mm}
+      section, header, footer, article{page-break-inside: avoid !important}
+      @page{size: A4 portrait; margin: var(--print-margin-v) var(--print-margin-h)}
+    }
+  </style>
+</head>
+<body>
+  <main role="main" aria-labelledby="name">
+    <header role="banner" aria-label="Résumé header">
+      <div class="name-title">
+        <h1 id="name">Aaron Munro</h1>
+        <div class="role-title">eLearning Developer (3-Month Fixed-Term Contract)</div>
+      </div>
+
+      <div class="contact-row" aria-label="Contact information">
+        <span>Forrestfield, WA 6058, Australia</span>
+        <span><a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></span>
+        <span><a href="tel:0477742636">0477742636</a></span>
+        <span><a href="http://www.vector6.com.au/resume" target="_blank" rel="noopener noreferrer">www.vector6.com.au/resume</a></span>
+      </div>
+
+      <div class="export-bar" aria-label="Export options">
+        <button type="button" class="btn btn-primary" id="btn-pdf" aria-label="Download as PDF">Download as PDF</button>
+        <button type="button" class="btn" id="btn-docx" aria-label="Download as DOCX">Download as DOCX</button>
+        <button type="button" class="btn" id="btn-cover" aria-label="Download Cover Letter">Download Cover Letter</button>
+      </div>
+    </header>
+
+    <div id="content">
+      <section id="summary" class="summary" aria-label="Professional summary">
+        I am writing to express my interest in the eLearning Developer position at Disaster Relief Australia. With over 20 years’ experience in 3D development, multimedia production, and interactive content, I have a background in creating high-quality training materials and simulations using advanced tools including Adobe Creative Cloud, Unreal Engine, and Unity. I have developed interactive modules, video content, and workflow automation solutions for architectural visualisation, VR, and client training, working closely with instructional designers and multi-disciplinary teams. My skills in project handover documentation and content delivery align with the requirements for designing engaging eLearning experiences for volunteers.
+      </section>
+
+      <section id="experience" aria-label="Relevant Work Experience">
+        <h2>Relevant Work Experience</h2>
+        <!-- Most recent first -->
+        <article class="job-entry" aria-label="Position at Viewport XR">
+          <h3>Specialised in 3D Development</h3>
+          <p class="job-meta">Viewport XR &ndash; 2023 – 2024</p>
+          <ul class="job-duties">
+            <li>Developed immersive, interactive 3D experiences using Unreal Engine and Unity</li>
+            <li>Produced video content with After Effects, Adobe Premiere, and Davinci Resolve</li>
+            <li>Collaborated on infrastructure development and delivered documented custom asset pipelines</li>
+            <li>Worked on project handover involving documentation and asset management</li>
+          </ul>
+        </article>
+
+        <article class="job-entry" aria-label="Freelance work at Vector 6">
+          <h3>Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+          <p class="job-meta">Vector 6 &ndash; 2016 – 2023</p>
+          <ul class="job-duties">
+            <li>Created and delivered 3D visualisation projects and interactive VR training experiences</li>
+            <li>Automated workflows using Python and created internal tools for project collaboration</li>
+            <li>Developed graphical assets and video content using Adobe Creative Cloud tools</li>
+            <li>Integrated third-party APIs for media automation and managed dynamic asset libraries</li>
+          </ul>
+        </article>
+
+        <article class="job-entry" aria-label="Position at Minnovare">
+          <h3>Senior 3D Artist/Developer</h3>
+          <p class="job-meta">Minnovare &ndash; 2019</p>
+          <ul class="job-duties">
+            <li>Developed simulations and animations for technical training materials focused on drilling systems</li>
+            <li>Produced clear documentation for workflows and client assets</li>
+          </ul>
+        </article>
+
+        <article class="job-entry" aria-label="Position at Last Pixel">
+          <h3>Senior 3D Artist/Developer</h3>
+          <p class="job-meta">Last Pixel &ndash; October 2006 – March 2016</p>
+          <ul class="job-duties">
+            <li>Managed projects and teams delivering training animations and visual content</li>
+            <li>Produced 3D asset libraries and dynamic, interactive modules using Adobe Suite</li>
+            <li>Designed PBR materials and animation systems for instructional scenarios</li>
+            <li>Led storyboarding, script outline, and planning for project deliveries</li>
+          </ul>
+        </article>
+
+        <article class="job-entry" aria-label="Position at Cell Media">
+          <h3>Lead 3D Artist</h3>
+          <p class="job-meta">Cell Media &ndash; August 2003 – December 2004</p>
+          <ul class="job-duties">
+            <li>Developed safety training videos for industrial workplaces using 3DS Max, Photoshop, Illustrator, After Effects, and Premiere</li>
+            <li>Created induction modules and produced animation for interactive eLearning materials</li>
+          </ul>
+        </article>
+
+        <article class="job-entry" aria-label="Position at IBP Interactive Business Presentations">
+          <h3>3D Artist</h3>
+          <p class="job-meta">IBP Interactive Business Presentations &ndash; November 1999 – June 2003</p>
+          <ul class="job-duties">
+            <li>Designed interactive business and video presentations for client training purposes</li>
+            <li>Developed 3D and multimedia assets for instructional content and interactive modules</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="skills" aria-label="Skills">
+        <div class="skills-column">
+          <h2>Technical Skills</h2>
+          <ul class="skills-list">
+            <li>3DS Max</li>
+            <li>Zbrush</li>
+            <li>Unreal Engine</li>
+            <li>Unity</li>
+            <li>Substance Suite (Painter, Designer)</li>
+            <li>Adobe Photoshop</li>
+            <li>Adobe Illustrator</li>
+            <li>Adobe After Effects</li>
+            <li>Adobe Premiere</li>
+            <li>Davinci Resolve</li>
+            <li>Adobe Lightroom</li>
+            <li>Adobe XD</li>
+            <li>Adobe Animate</li>
+            <li>Python</li>
+            <li>PHP/CSS</li>
+            <li>HTML/CSS/JavaScript (basic)</li>
+            <li>Make.com (Automation)</li>
+            <li>Matterport</li>
+            <li>Reality Capture</li>
+          </ul>
+        </div>
+        <div class="skills-column">
+          <h2>Core Competencies</h2>
+          <ul class="skills-list">
+            <li>eLearning module development</li>
+            <li>Interactive multimedia content creation</li>
+            <li>Video production and post-processing</li>
+            <li>Workflow automation</li>
+            <li>Project management</li>
+            <li>Client liaison</li>
+            <li>Collaboration with instructional designers</li>
+            <li>Technical problem-solving</li>
+            <li>Creative development</li>
+            <li>Documentation of workflows and assets</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="portfolio" aria-label="Portfolio Gallery">
+        <h2>Portfolio Gallery</h2>
+
+        <div class="portfolio-item">
+          <div class="portfolio-video" aria-label="Video: Projects and Dev over the last few years">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="portfolio-info">
+            <strong>Projects and Dev over the last few years</strong>
+            <span>Demonstrates advanced use of Unity, 3D development, character animation, and real-time rendering relevant to eLearning and training content.</span>
+          </div>
+        </div>
+
+        <div class="portfolio-item">
+          <div class="portfolio-video" aria-label="Video: Western Health 'Reframe Your Response' - Immersive Training Experience for Frontline Health Workers">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/CTSQjUXnUK4" title="Western Health 'Reframe Your Response' - Immersive Training Experience for Frontline Health Workers" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="portfolio-info">
+            <strong>Western Health 'Reframe Your Response' - Immersive Training Experience for Frontline Health Workers</strong>
+            <span>Showcases development of immersive training experiences, aligning with creation of instructional content for volunteer learning.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="certifications" aria-label="Certifications">
+        <h2>Certifications</h2>
+        <div class="certifications-list">
+          Advanced Diploma of Information Technology Interactive Multimedia (1998); Certificate IV of Information Technology Interactive Multimedia (1997); AI Generalist Course covering workflow automation and generative media production (expected Aug 2025).
+        </div>
+      </section>
+
+      <section id="specialproject" aria-label="Specialized Project Experience">
+        <h2>Specialized Project Experience</h2>
+        <div class="project-experience">
+          Led 3D visualisation and multimedia content production for major infrastructure and VR training projects (Elizabeth Quay, Perth Underground Bus Port, Vastness VR with Curtin University, ABC Virtual Reality Mini Beasts). Designed automated content workflows for multi-platform distribution and integrated AI-generated media tools.
+        </div>
+      </section>
+    </div>
+
+    <footer role="contentinfo" aria-label="Footer">
+      &copy; 2024 Aaron Munro. For full portfolio visit <a href="http://www.vector6.com.au/resume" rel="noopener noreferrer" target="_blank">vector6.com.au/resume</a>
+    </footer>
+  </main>
+
+  <script>
+    (function(){
+      const btnPDF = document.getElementById('btn-pdf');
+      const btnDOCX = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      const state = {
+        downloads: null,
+        resumePath: null,
+        coverPath: null
+      };
+
+      function fetchDownloads(){
+        if(state.downloads) return Promise.resolve(state.downloads);
+        return fetch('./downloads.json')
+          .then(r => {
+            if(!r.ok) throw new Error('downloads.json not found');
+            return r.json();
+          })
+          .then(data => {
+            state.downloads = data.downloads || [];
+            const resume = state.downloads.find(d => d.id === 'resume');
+            const cover = state.downloads.find(d => d.id === 'coverLetter');
+            state.resumePath = resume && resume.path ? resume.path : null;
+            state.coverPath = cover && cover.path ? cover.path : null;
+            return state.downloads;
+          })
+          .catch(() => {
+            alert('Download metadata not found (downloads.json). Please ensure the file is placed alongside this page.');
+          });
+      }
+
+      btnPDF.addEventListener('click', function(){
+        window.print();
+      });
+
+      btnDOCX.addEventListener('click', function(){
+        fetchDownloads().then(() => {
+          if(state.resumePath){
+            const a = document.createElement('a');
+            a.href = state.resumePath;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          } else {
+            alert('Resume file path not available.');
+          }
+        });
+      });
+
+      btnCover.addEventListener('click', function(){
+        fetchDownloads().then(() => {
+          if(state.coverPath){
+            const a = document.createElement('a');
+            a.href = state.coverPath;
+            a.download = '';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          } else {
+            alert('Cover letter file path not available.');
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
