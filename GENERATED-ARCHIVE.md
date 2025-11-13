@@ -29,7 +29,20 @@ The `generated.html` file provides a table view of all resume versions stored in
 
 ## Updating with New Folders
 
-When new date-formatted folders are added to the repository:
+### Automatic Updates (GitHub Actions)
+
+When new date-formatted folders are pushed to the main/master branch:
+
+1. A GitHub Actions workflow automatically runs `node generate-folder-data.js`
+2. The workflow updates `folder-data.json` with the new folder information
+3. The updated JSON file is automatically committed and pushed back to the repository
+4. The next time `generated.html` is loaded, it will show the new folders automatically
+
+This is handled by the `.github/workflows/generate-folder-data.yml` workflow.
+
+### Manual Updates
+
+You can also manually update the folder data:
 
 1. Run the generation script:
    ```bash
@@ -38,7 +51,7 @@ When new date-formatted folders are added to the repository:
 
 2. This will scan all date-formatted folders and update `folder-data.json`
 
-3. The next time `generated.html` is loaded, it will show the new folders automatically
+3. Commit and push the changes to the repository
 
 ## File Structure
 
@@ -88,9 +101,16 @@ Run `node generate-folder-data.js` whenever:
 - Files are added/removed from existing folders
 - File names change in any folder
 
-### Automation (Optional)
+### Automation
 
-You can add the script to your build process or CI/CD pipeline to automatically update the JSON file when changes are detected.
+The repository includes a GitHub Actions workflow that automatically updates `folder-data.json`:
+
+- **Workflow File**: `.github/workflows/generate-folder-data.yml`
+- **Trigger**: Runs automatically on push to main/master branch
+- **Process**: Scans folders, updates JSON, commits and pushes changes
+- **Manual Trigger**: Can also be triggered manually from GitHub Actions tab
+
+You can also add the script to your local build process or other CI/CD pipelines.
 
 ## Troubleshooting
 
