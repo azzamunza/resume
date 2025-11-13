@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Real Estate Photographer Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Montserrat and Open Sans from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Company palette (aliases) */
+      --primary: #004AAD;
+      --secondary: #00BFA5;
+      --accent: #FF6F00;
+      --text-main: #333333;
+      --text-muted: #666666;
+      --bg: #FFFFFF;
+
+      /* Original variable names (mapped) */
+      --color-primary: var(--primary);
+      --color-secondary: var(--secondary);
+      --color-accent: var(--accent);
+      --color-text-primary: var(--text-main);
+      --color-text-secondary: var(--text-muted);
+      --color-background: var(--bg);
+
+      /* Typography */
+      --font-primary: 'Montserrat', sans-serif;
+      --font-secondary: 'Open Sans', sans-serif;
+
+      --h1-size: 36px;
+      --h1-weight: 700;
+      --h1-line: 1.2;
+      --h2-size: 30px;
+      --h2-weight: 600;
+      --h2-line: 1.3;
+      --h3-size: 24px;
+      --h3-weight: 600;
+      --h3-line: 1.3;
+      --h4-size: 20px;
+      --h4-weight: 600;
+      --h4-line: 1.4;
+      --body-size: 16px;
+      --body-weight: 400;
+      --body-line: 1.5;
+      --small-size: 14px;
+      --small-weight: 400;
+      --small-line: 1.4;
+
+      /* Spacing units */
+      --space-xxs: 4px;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+    }
+
+    html, body {
+      height: 100%;
+    }
+    html { box-sizing: border-box; }
+    *, *:before, *:after { box-sizing: inherit; }
+
+    body {
+      font-family: var(--font-secondary);
+      font-size: var(--body-size);
+      font-weight: var(--body-weight);
+      line-height: var(--body-line);
+      color: var(--color-text-primary);
+      background: var(--color-background);
+      margin: 0;
+    }
+
+    main[role="main"] {
+      max-width: 1000px;
+      margin: var(--space-lg) auto;
+      padding: var(--space-md);
+      background: var(--color-background);
+    }
+
+    header[role="banner"] {
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-sm);
+    }
+
+    .contact-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xxs);
+    }
+
+    h1 {
+      font-family: var(--font-primary);
+      font-size: var(--h1-size);
+      font-weight: var(--h1-weight);
+      line-height: var(--h1-line);
+      color: var(--color-primary);
+      margin: 0 0 var(--space-xs) 0;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-family: var(--font-primary);
+      font-size: var(--h2-size);
+      font-weight: var(--h2-weight);
+      line-height: var(--h2-line);
+      color: var(--color-secondary);
+      margin: var(--space-md) 0 var(--space-sm) 0;
+      letter-spacing: -0.5px;
+    }
+
+    h3 {
+      font-family: var(--font-primary);
+      font-size: var(--h3-size);
+      font-weight: var(--h3-weight);
+      line-height: var(--h3-line);
+      color: var(--color-accent);
+      margin: var(--space-md) 0 var(--space-xs) 0;
+    }
+
+    h4 {
+      font-family: var(--font-primary);
+      font-size: var(--h4-size);
+      font-weight: var(--h4-weight);
+      line-height: var(--h4-line);
+      color: var(--color-primary);
+      margin: var(--space-xs) 0 var(--space-xxs) 0;
+    }
+
+    /* Buttons */
+    .actions {
+      display: flex;
+      gap: var(--space-xs);
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: var(--space-xs);
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: var(--small-size);
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .btn.secondary {
+      background: #fff;
+      color: var(--color-primary);
+    }
+    .btn:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+
+    /* Link styles */
+    a, .link {
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: text-decoration 0.2s;
+      word-break: break-word;
+    }
+    a:hover, .link:hover {
+      text-decoration: underline;
+    }
+
+    /* Two-column layout */
+    .columns {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+    .col-left, .col-right {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .col-left {
+      flex: 0 0 32%;
+      max-width: 340px;
+    }
+    .col-right {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    /* Sections */
+    section {
+      margin: 0; /* eliminate gaps between stacked sections */
+    }
+
+    /* Experience entries */
+    .job-entry {
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .job-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .job-meta {
+      color: var(--color-text-secondary);
+      font-size: var(--small-size);
+      margin: 0;
+    }
+    .job-duties {
+      margin: var(--space-xs) 0 0 0;
+      padding-left: var(--space-sm);
+      list-style-type: disc;
+      color: var(--color-text-primary);
+    }
+
+    /* Skills layout */
+    .skills-list,
+    .competencies-list {
+      list-style-type: disc;
+      padding-left: var(--space-sm);
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+    .skills-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .skills-block {
+      flex: 1 1 auto;
+      min-width: 210px;
+    }
+
+    /* Portfolio Gallery */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: var(--space-md);
+      margin-top: var(--space-xs);
+    }
+    .portfolio-card {
+      background: #f7f9fb;
+      border-radius: 6px;
+      padding: var(--space-sm);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      min-width: 0;
+    }
+    .portfolio-card h4 {
+      color: var(--color-secondary);
+      margin: var(--space-xs) 0 var(--space-xxs) 0;
+    }
+    .portfolio-card .portfolio-desc {
+      color: var(--color-text-secondary);
+      font-size: var(--small-size);
+      margin-bottom: var(--space-xs);
+    }
+    .portfolio-card iframe {
+      width: 100%;
+      min-height: 192px;
+      aspect-ratio: 16/9;
+      border-radius: 2px;
+      border: none;
+      background: #000;
+    }
+
+    /* Highlighted blocks */
+    .certifications, .project-experience {
+      background: #f4f6f8;
+      padding: var(--space-sm);
+      border-left: 4px solid var(--color-secondary);
+      margin: 0;
+    }
+    .certifications strong,
+    .project-experience strong {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    footer[role="contentinfo"] {
+      margin-top: var(--space-lg);
+    }
+
+    /* Responsive design */
+    /* Mobile ≤480px: single column */
+    @media (max-width: 480px) {
+      main[role="main"] { padding: var(--space-sm); }
+      header[role="banner"] {
+        flex-direction: column;
+        gap: var(--space-xs);
+        align-items: flex-start;
+      }
+      .columns {
+        flex-direction: column;
+        gap: var(--space-md);
+      }
+      .col-left, .col-right {
+        max-width: 100%;
+      }
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Tablet 481–768px: balanced layout (stacked with wider content area and two-up portfolio) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .columns {
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+      .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+      }
+    }
+
+    /* Desktop ≥769px: two-column layout */
+    @media (min-width: 769px) {
+      .columns {
+        flex-direction: row;
+      }
+    }
+
+    /* Print/export optimisation */
+    @media print {
+      body, main {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      main[role="main"] {
+        max-width: 100%;
+        width: auto;
+        margin: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+      header[role="banner"], section, footer[role="contentinfo"] {
+        page-break-inside: avoid;
+      }
+      .actions { display: none !important; }
+      .portfolio-card {
+        box-shadow: none;
+      }
+      a, .link {
+        color: #000 !important;
+        text-decoration: underline !important;
+      }
+      /* Required print page setup */
+      @page {
+        size: A4 portrait;
+        margin: 18mm 15mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main role="main" aria-label="Résumé main content">
+    <header role="banner" aria-label="Résumé header">
+      <div>
+        <h1>Aaron Munro</h1>
+        <div class="contact-block" aria-label="Contact details">
+          <span>Forrestfield, WA, Australia</span>
+          <span><a href="mailto:azzamunza@gmail.com" aria-label="Email Aaron">azzamunza@gmail.com</a></span>
+          <span><a href="tel:0477742636" aria-label="Call Aaron">0477742636</a></span>
+          <span><a href="http://www.vector6.com.au/resume" target="_blank" rel="noopener" aria-label="Website">www.vector6.com.au/resume</a></span>
+        </div>
+        <div class="actions" aria-label="Export actions">
+          <button id="btn-pdf" class="btn" type="button">Download as PDF</button>
+          <button id="btn-docx" class="btn secondary" type="button">Download as DOCX</button>
+          <button id="btn-cover" class="btn secondary" type="button">Download Cover Letter</button>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:0;">Real Estate Photographer</h3>
+      </div>
+    </header>
+
+    <div class="columns" aria-label="Two column layout">
+      <!-- Left column: Summary, Skills, Additional Information -->
+      <aside class="col-left" aria-label="Left column">
+        <section id="summary" aria-label="Professional Summary">
+          <h2>Professional Summary</h2>
+          <p>
+            I am writing to express my interest in the Real Estate Photographer position with Little Hinges. I have over 20 years of experience in architectural visualisation, site photography, and 3D content production, with in-depth expertise in high-quality property imaging for both residential and commercial environments. My professional background demonstrates a strong capacity for delivering precise, detailed imagery, collaborating with diverse clients, and managing multiple site-based assignments independently. I've developed strong abilities in on-site photography, high-end image retouching, and photogrammetry, combining technical skill with a focus on customer experience.
+          </p>
+        </section>
+
+        <section id="skills" aria-label="Skills and Competencies">
+          <h2>Skills &amp; Competencies</h2>
+          <div class="skills-section">
+
+            <div class="skills-block">
+              <h4>Technical Skills</h4>
+              <ul class="skills-list">
+                <li>On-site photography</li>
+                <li>3DS Max</li>
+                <li>Adobe Photoshop</li>
+                <li>Adobe Lightroom</li>
+                <li>Matterport scanning</li>
+                <li>Reality Capture software</li>
+                <li>Octane Render</li>
+                <li>Substance Suite</li>
+                <li>Unity and Unreal Engine (property/scene visualisation)</li>
+                <li>Image retouching</li>
+                <li>Photogrammetry</li>
+                <li>V-Ray and Corona rendering</li>
+              </ul>
+            </div>
+
+            <div class="skills-block">
+              <h4>Core Competencies</h4>
+              <ul class="competencies-list">
+                <li>Attention to detail</li>
+                <li>Client liaison</li>
+                <li>Time management</li>
+                <li>Technical problem-solving</li>
+                <li>Self-management</li>
+                <li>Professional communication</li>
+                <li>Adaptability</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="accolades" aria-label="Additional Information">
+          <h2>Additional Information</h2>
+          <div class="certifications">
+            <strong>Certifications:</strong>
+            <span>Australian driver’s licence (Manual), ABN holder, eligible for unrestricted work rights in Australia</span>
+          </div>
+          <div class="project-experience">
+            <strong>Specialised Project Experience:</strong>
+            <span>Extensive background in Matterport scanning and photogrammetry for both residential and commercial properties, including major Perth infrastructure and city development visualisation.</span>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Right column: Experience, Portfolio -->
+      <div class="col-right" aria-label="Right column">
+        <section id="experience" aria-label="Relevant Work Experience">
+          <h2>Relevant Work Experience</h2>
+
+          <article class="job-entry">
+            <h3>Specialised in 3D Development</h3>
+            <p class="job-meta">Viewport XR &mdash; 2023 – 2024</p>
+            <ul class="job-duties">
+              <li>Specialised in Unreal Engine Development for immersive property and infrastructure visualisations</li>
+              <li>Produced high-quality 3D modelling and rendering, including advanced material and texturing for environments</li>
+            </ul>
+          </article>
+
+          <article class="job-entry">
+            <h3>Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+            <p class="job-meta">Vector 6 &mdash; 2016 – 2023</p>
+            <ul class="job-duties">
+              <li>Produced high-quality escort photography, image retouching, and photo grading for commercial clients</li>
+              <li>Performed Matterport scanning and photogrammetry with Reality Capture for residential and commercial spaces</li>
+              <li>Developed 3D models and materials for realistic renderings used in property/architectural projects</li>
+            </ul>
+          </article>
+
+          <article class="job-entry">
+            <h3>Senior 3D Artist/Developer</h3>
+            <p class="job-meta">Minnovare &mdash; 2019</p>
+            <ul class="job-duties">
+              <li>Created 3D simulations and animations, including accurate visual representations of physical site environments</li>
+            </ul>
+          </article>
+
+          <article class="job-entry">
+            <h3>Senior 3D Artist/Developer</h3>
+            <p class="job-meta">Last Pixel &mdash; October 2006 – March 2016</p>
+            <ul class="job-duties">
+              <li>Managed project teams and client communications for major architectural visualisation projects</li>
+              <li>Carried out on-site panoramic photography and developed photo-realistic 3D environments for commercial properties</li>
+              <li>Performed environmental lighting, object texturing, and camera/scene development for project delivery</li>
+            </ul>
+          </article>
+
+          <article class="job-entry">
+            <h3>3D Artist</h3>
+            <p class="job-meta">3D Millipede &mdash; March 2005 – March 2006</p>
+            <ul class="job-duties">
+              <li>Converted architectural plans to accurate 3D models for multi-storey and residential properties</li>
+              <li>Performed on-site photography and blended 3D models with photographic content for realistic compositions</li>
+            </ul>
+          </article>
+
+          <article class="job-entry">
+            <h3>3D Developer/Artist (Collaboration)</h3>
+            <p class="job-meta">Spacescan &mdash; October 2017 – January 2023</p>
+            <ul class="job-duties">
+              <li>Collaborated on multiple 3D visualisation projects including Matterport scanning and model development for real estate</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="portfolio" aria-label="Portfolio Gallery">
+          <h2>Portfolio Gallery</h2>
+          <div class="portfolio-grid">
+
+            <div class="portfolio-card">
+              <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" allowfullscreen></iframe>
+              <h4>Projects and Dev over the last few years</h4>
+              <div class="portfolio-desc">
+                Showcases high-end 3D Arch Vis, real-time property visualisation, Unity VR and Octane rendering relevant to real estate property marketing.
+              </div>
+            </div>
+
+            <div class="portfolio-card">
+              <iframe src="https://www.youtube.com/embed/ggY59ujm3l8" title="Short 3D clip of a small estate rendered in Octane" allowfullscreen></iframe>
+              <h4>Short 3D clip of a small estate rendered in Octane</h4>
+              <div class="portfolio-desc">
+                Demonstrates real estate imaging and photorealistic rendering for sales/marketing of property listings.
+              </div>
+            </div>
+
+            <div class="portfolio-card">
+              <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016" allowfullscreen></iframe>
+              <h4>Showreel Aaron Munro 2016</h4>
+              <div class="portfolio-desc">
+                Contains architectural visualisation, site photography integration, and property environment work from Last Pixel.
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer role="contentinfo" aria-label="Résumé footer">
+      <hr style="margin: var(--space-lg) 0 var(--space-md) 0; border-color: #e0e0e0;">
+      <div style="font-size: var(--small-size); color: var(--color-text-secondary); text-align: center;">
+        &copy; 2024 Aaron Munro &ndash; Real Estate Photographer Résumé &mdash; <a href="https://www.littlehinges.com.au" class="link" target="_blank" rel="noopener">Little Hinges</a>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    (function() {
+      const btnPdf = document.getElementById('btn-pdf');
+      const btnDocx = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      const cache = { data: null, loaded: false };
+
+      function loadDownloads() {
+        if (cache.loaded) return Promise.resolve(cache.data);
+        return fetch('./downloads.json')
+          .then(res => {
+            if (!res.ok) throw new Error('Unable to load downloads.json');
+            return res.json();
+          })
+          .then(json => {
+            cache.data = json;
+            cache.loaded = true;
+            return json;
+          });
+      }
+
+      function triggerDownloadById(id) {
+        loadDownloads()
+          .then(json => {
+            const item = (json && json.downloads || []).find(d => d.id === id);
+            if (!item) throw new Error('Download not found');
+            const a = document.createElement('a');
+            a.href = item.path;
+            a.download = item.name + '.docx';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+          })
+          .catch(err => {
+            console.error(err);
+            alert('Download is not available at the moment.');
+          });
+      }
+
+      btnPdf?.addEventListener('click', () => window.print());
+      btnDocx?.addEventListener('click', () => triggerDownloadById('resume'));
+      btnCover?.addEventListener('click', () => triggerDownloadById('coverLetter'));
+    })();
+  </script>
+</body>
+</html>
