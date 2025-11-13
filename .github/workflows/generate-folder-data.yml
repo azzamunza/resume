@@ -5,9 +5,10 @@ on:
     branches:
       - main
       - master
-    # Only run if files are added/changed (not just folder-data.json)
+    # Only run if files are added/changed (not just folder-data.json or downloads.json)
     paths-ignore:
       - 'folder-data.json'
+      - '*/downloads.json'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
