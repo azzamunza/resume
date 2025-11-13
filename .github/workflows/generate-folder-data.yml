@@ -5,9 +5,10 @@ on:
     branches:
       - main
       - master
-    # Only run if files are added/changed (not just folder-data.json)
+    # Only run if files are added/changed (not just folder-data.json or downloads.json)
     paths-ignore:
       - 'folder-data.json'
+      - '*/downloads.json'
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
@@ -31,10 +32,15 @@ jobs:
       - name: Run generate-folder-data.js
         run: node generate-folder-data.js
 
+      - name: Run generate-downloads.js
+        run: node generate-downloads.js
+
       - name: Check for changes
         id: git-check
         run: |
           git diff --exit-code folder-data.json || \
+            echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --exit-code */downloads.json || \
             echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push if changed
@@ -43,6 +49,6 @@ jobs:
           git config --local user.email \
             "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add folder-data.json
-          git commit -m "Auto-update folder-data.json [skip ci]"
+          git add folder-data.json */downloads.json
+          git commit -m "Auto-update folder-data.json and downloads.json files [skip ci]"
           git push

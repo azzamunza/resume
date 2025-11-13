@@ -1,0 +1,14 @@
+{
+  "downloads": [
+    {
+      "id": "resume",
+      "name": "resume",
+      "path": "./resume.docx"
+    },
+    {
+      "id": "coverLetter",
+      "name": "cover-letter",
+      "path": "./cover-letter.docx"
+    }
+  ]
+}
