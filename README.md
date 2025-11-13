@@ -48,13 +48,31 @@ The resume includes checkboxes next to every section and subsection, allowing yo
 ### File Structure
 ```
 /
-├── index.html          # Main resume page (comprehensive content)
+├── index.html                    # Main resume page (comprehensive content)
+├── generated.html                # Resume archive table view
+├── folder-data.json             # JSON data for archive (auto-generated)
+├── generate-folder-data.js      # Script to update archive data
 ├── css/
-│   └── style.css      # Styles with print media queries
+│   └── style.css                # Styles with print media queries
 ├── js/
-│   └── script.js      # Print customisation logic
-└── README.md          # This file
+│   └── script.js                # Print customisation logic
+├── .github/
+│   └── workflows/
+│       └── generate-folder-data.yml  # Auto-update workflow
+└── [date-folders]/              # Date-formatted resume versions
+    ├── index.html
+    ├── resume.docx
+    └── cover-letter.docx
 ```
+
+### Resume Archive
+
+The repository includes an automated resume archive system:
+
+- **Archive Page**: `generated.html` displays all resume versions in a table
+- **Auto-Update**: GitHub Actions automatically updates `folder-data.json` when new folders are added
+- **Date Folders**: Store resume versions in YYMMDDhhmm format folders
+- **Documentation**: See `GENERATED-ARCHIVE.md` for full details
 
 ## Deployment
 
