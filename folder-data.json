@@ -1,10 +1,18 @@
 {
   "folders": [
     {
-      "name": "2511140402",
+      "name": "2511140404",
       "files": {
         "html": "index.html",
         "resume": null,
+        "coverLetter": null
+      }
+    },
+    {
+      "name": "2511140402",
+      "files": {
+        "html": "index.html",
+        "resume": "Resume_251113-1708_Little-Hinges.docx",
         "coverLetter": null
       }
     },
@@ -105,5 +113,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-11-13T17:07:25.055Z"
+  "lastUpdated": "2025-11-13T17:08:52.295Z"
 }
