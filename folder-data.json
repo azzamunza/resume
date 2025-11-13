@@ -1,11 +1,19 @@
 {
   "folders": [
     {
+      "name": "2511140406",
+      "files": {
+        "html": "index.html",
+        "resume": null,
+        "coverLetter": null
+      }
+    },
+    {
       "name": "2511140404",
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1709_Pay-Per-Click-Specialist.docx",
-        "coverLetter": null
+        "coverLetter": "Cover-Letter_251113-1710_Bedrock-Digital-Services-trading-as-PerthWeb.docx"
       }
     },
     {
@@ -113,5 +121,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-11-13T17:09:59.786Z"
+  "lastUpdated": "2025-11-13T17:10:50.611Z"
 }
