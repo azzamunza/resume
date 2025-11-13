@@ -5,7 +5,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1718_Marketing-Assistant-Content-Creator-Full-Time.docx",
-        "coverLetter": "Cover-Letter_251113-1719_Private-Advertiser.docx"
+        "coverLetter": "Cover-Letter_251113-1719_Private-Advertiser.docx",
+        "applicationData": {
+          "Company": "Private Advertiser",
+          "Job Title": "Marketing Assistant & Content Creator (Full-Time)",
+          "Job Listing URL": "https://www.seek.com.au/job/88327065?ref=recom-homepage&pos=51&origin=showNewTab#sol=0784eeb0f8fea5cd5b470290fc0ab4c5a07f2f1c"
+        }
       }
     },
     {
@@ -13,7 +18,8 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1714_Content-Producer.docx",
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -21,7 +27,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1712_Disaster-Relief-Australia.docx",
-        "coverLetter": "Cover-Letter_251113-1713_Disaster-Relief-Australia.docx"
+        "coverLetter": "Cover-Letter_251113-1713_Disaster-Relief-Australia.docx",
+        "applicationData": {
+          "Company": "Disaster Relief Australia",
+          "Job Title": "eLearning Developer (3-Month Fixed-Term Contract)",
+          "Job Listing URL": "https://www.seek.com.au/job/88330012?ref=recom-homepage&pos=29&origin=showNewTab#sol=eb9d089bb7e4a0de4de727ccd9051324c9f77399"
+        }
       }
     },
     {
@@ -29,7 +40,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1709_Pay-Per-Click-Specialist.docx",
-        "coverLetter": "Cover-Letter_251113-1710_Bedrock-Digital-Services-trading-as-PerthWeb.docx"
+        "coverLetter": "Cover-Letter_251113-1710_Bedrock-Digital-Services-trading-as-PerthWeb.docx",
+        "applicationData": {
+          "Company": "Bedrock Digital Services trading as PerthWeb",
+          "Job Title": "Part-time Pay Per Click Specialist",
+          "Job Listing URL": "https://www.seek.com.au/job/88260856?ref=recom-homepage&pos=23&origin=showNewTab#sol=eaf8789705043b42fdf9c0e798634d3d89e87656"
+        }
       }
     },
     {
@@ -37,7 +53,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1708_Little-Hinges.docx",
-        "coverLetter": "Cover-Letter_251113-1709_Little-Hinges.docx"
+        "coverLetter": "Cover-Letter_251113-1709_Little-Hinges.docx",
+        "applicationData": {
+          "Company": "Little Hinges",
+          "Job Title": "Real Estate Photographer",
+          "Job Listing URL": "https://www.seek.com.au/job/88440277?ref=recom-homepage&pos=21&origin=showNewTab#sol=8bea60273a03b87c32394d1169492946dbfb1f36"
+        }
       }
     },
     {
@@ -45,7 +66,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1607_TSHR-Trak-and-Scarlett.docx",
-        "coverLetter": "Cover-Letter_251113-1608_TSHR-Trak-and-Scarlett.docx"
+        "coverLetter": "Cover-Letter_251113-1608_TSHR-Trak-and-Scarlett.docx",
+        "applicationData": {
+          "Company": "TSHR - Trak and Scarlett",
+          "Job Title": "Mystery Shopper",
+          "Job Listing URL": "https://www.seek.com.au/job/88374184?ref=recom-homepage&pos=19&origin=showNewTab#sol=af855a69b21ee4311d8b337b3da5b2309bdd06e8"
+        }
       }
     },
     {
@@ -53,7 +79,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1543_Clue.docx",
-        "coverLetter": "Cover-Letter_251113-1544_Clue.docx"
+        "coverLetter": "Cover-Letter_251113-1544_Clue.docx",
+        "applicationData": {
+          "Company": "Clue",
+          "Job Title": "Digital Designer",
+          "Job Listing URL": "https://www.seek.com.au/job/88279246?ref=recom-homepage&pos=8&origin=showNewTab#sol=f99fe649a05255d7bba6954a277beb08723d5e52"
+        }
       }
     },
     {
@@ -61,7 +92,8 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1450_Crib-Creative.docx",
-        "coverLetter": "Cover-Letter_251113-1451_Crib-Creative.docx"
+        "coverLetter": "Cover-Letter_251113-1451_Crib-Creative.docx",
+        "applicationData": null
       }
     },
     {
@@ -69,7 +101,8 @@
       "files": {
         "html": "index.html",
         "resume": null,
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -77,7 +110,8 @@
       "files": {
         "html": "index.html",
         "resume": null,
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -85,7 +119,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume.docx",
-        "coverLetter": "cover-letter.docx"
+        "coverLetter": "cover-letter.docx",
+        "applicationData": null
       }
     },
     {
@@ -93,7 +128,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume.docx",
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -101,7 +137,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume2.docx",
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -109,7 +146,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume2.docx",
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -117,7 +155,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume.docx",
-        "coverLetter": null
+        "coverLetter": null,
+        "applicationData": null
       }
     },
     {
@@ -125,7 +164,8 @@
       "files": {
         "html": "index.html",
         "resume": "resume.docx",
-        "coverLetter": "cover-letter.docx"
+        "coverLetter": "cover-letter.docx",
+        "applicationData": null
       }
     },
     {
@@ -133,9 +173,10 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251002-0405_VRIFY.docx",
-        "coverLetter": "Cover-Letter_251002-0406_VRIFY.docx"
+        "coverLetter": "Cover-Letter_251002-0406_VRIFY.docx",
+        "applicationData": null
       }
     }
   ],
-  "lastUpdated": "2025-11-13T17:19:29.169Z"
+  "lastUpdated": "2025-11-13T17:44:58.964Z"
 }

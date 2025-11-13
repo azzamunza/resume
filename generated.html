@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         .archive-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 40px auto;
             padding: 20px;
         }
@@ -20,60 +20,110 @@
             font-size: 2.5rem;
         }
 
-        .archive-table {
-            width: 100%;
-            border-collapse: collapse;
+        .archive-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .archive-card {
             background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: box-shadow 0.3s, transform 0.2s;
         }
 
-        .archive-table thead {
-            background: #00205B;
-            color: white;
+        .archive-card:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
 
-        .archive-table th {
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-            font-size: 1rem;
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #00205B;
         }
 
-        .archive-table tbody tr {
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .archive-table tbody tr:hover {
-            background: #f5f5f5;
-        }
-
-        .archive-table tbody tr:last-child {
-            border-bottom: none;
-        }
-
-        .archive-table td {
-            padding: 15px;
-            vertical-align: middle;
-        }
-
-        .date-cell {
-            font-weight: 600;
+        .card-date {
+            font-weight: 700;
             color: #00205B;
-            min-width: 150px;
+            font-size: 1.1rem;
+        }
+
+        .application-info {
+            flex: 1;
+            margin-left: 30px;
+        }
+
+        .company-name {
+            font-weight: 700;
+            color: #00205B;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            color: #333;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .job-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #00B8E8;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .job-link:hover {
+            text-decoration: underline;
+        }
+
+        .no-application-data {
+            color: #999;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .file-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .link-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .file-link {
             color: #00B8E8;
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
+            word-break: break-word;
         }
 
         .file-link:hover {
@@ -83,11 +133,12 @@
 
         .copy-icon {
             cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
+            font-size: 1.1rem;
+            padding: 4px;
             border-radius: 4px;
             transition: all 0.2s;
             user-select: none;
+            flex-shrink: 0;
         }
 
         .copy-icon:hover {
@@ -101,6 +152,7 @@
         .not-generated {
             color: #999;
             font-style: italic;
+            font-size: 0.9rem;
         }
 
         .copied-tooltip {
@@ -128,6 +180,13 @@
             opacity: 1;
         }
 
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
         @media print {
             .copy-icon {
                 display: none;
@@ -135,17 +194,33 @@
         }
 
         @media (max-width: 768px) {
-            .archive-table {
-                font-size: 0.9rem;
-            }
-
-            .archive-table th,
-            .archive-table td {
+            .archive-container {
                 padding: 10px;
             }
 
             .archive-title {
                 font-size: 1.8rem;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .application-info {
+                margin-left: 0;
+            }
+
+            .files-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .company-name {
+                font-size: 1.1rem;
+            }
+
+            .job-title {
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -153,19 +228,10 @@
 <body>
     <div class="archive-container">
         <h1 class="archive-title">Resume Archive</h1>
-        <table class="archive-table">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>HTML Resume</th>
-                    <th>Docx Resume</th>
-                    <th>Cover Letter</th>
-                </tr>
-            </thead>
-            <tbody id="archive-tbody">
-                <!-- Table rows will be dynamically generated -->
-            </tbody>
-        </table>
+        <div id="archive-cards" class="archive-cards">
+            <!-- Cards will be dynamically generated -->
+            <div class="loading">Loading...</div>
+        </div>
     </div>
 
     <script>
@@ -237,9 +303,15 @@
             });
         }
 
-        // Create a table cell with link and copy icon
-        function createLinkCell(folderName, fileName) {
-            const td = document.createElement('td');
+        // Create a file link element with copy icon
+        function createFileLink(folderName, fileName, label) {
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+
+            const labelElement = document.createElement('div');
+            labelElement.className = 'file-label';
+            labelElement.textContent = label;
+            fileItem.appendChild(labelElement);
 
             if (fileName) {
                 const container = document.createElement('div');
@@ -263,65 +335,108 @@
 
                 container.appendChild(link);
                 container.appendChild(copyIcon);
-                td.appendChild(container);
+                fileItem.appendChild(container);
             } else {
                 const span = document.createElement('span');
                 span.className = 'not-generated';
                 span.textContent = 'Not Generated';
-                td.appendChild(span);
+                fileItem.appendChild(span);
             }
 
-            return td;
+            return fileItem;
         }
 
-        // Generate table rows
-        async function generateTable() {
-            const tbody = document.getElementById('archive-tbody');
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">Loading...</td></tr>';
+        // Generate cards
+        async function generateCards() {
+            const cardsContainer = document.getElementById('archive-cards');
+            cardsContainer.innerHTML = '<div class="loading">Loading...</div>';
 
             try {
                 // Load folder data from JSON
                 const folders = await loadFolderData();
                 
                 // Clear loading message
-                tbody.innerHTML = '';
+                cardsContainer.innerHTML = '';
                 
                 // Process each folder
                 folders.forEach(folderData => {
                     const folder = folderData.name;
                     const files = folderData.files;
                     
-                    const row = document.createElement('tr');
+                    const card = document.createElement('div');
+                    card.className = 'archive-card';
 
-                    // Date column
-                    const dateCell = document.createElement('td');
-                    dateCell.className = 'date-cell';
-                    dateCell.textContent = formatDate(folder);
-                    row.appendChild(dateCell);
+                    // Card header with date and application info
+                    const header = document.createElement('div');
+                    header.className = 'card-header';
 
-                    // HTML Resume column
-                    row.appendChild(createLinkCell(folder, files.html));
+                    const dateDiv = document.createElement('div');
+                    dateDiv.className = 'card-date';
+                    dateDiv.textContent = formatDate(folder);
+                    header.appendChild(dateDiv);
 
-                    // Docx Resume column
-                    row.appendChild(createLinkCell(folder, files.resume));
+                    // Application information
+                    const appInfo = document.createElement('div');
+                    appInfo.className = 'application-info';
 
-                    // Cover Letter column
-                    row.appendChild(createLinkCell(folder, files.coverLetter));
+                    if (files.applicationData) {
+                        const companyDiv = document.createElement('div');
+                        companyDiv.className = 'company-name';
+                        companyDiv.textContent = files.applicationData.Company || 'N/A';
+                        appInfo.appendChild(companyDiv);
 
-                    tbody.appendChild(row);
+                        const jobTitleDiv = document.createElement('div');
+                        jobTitleDiv.className = 'job-title';
+                        jobTitleDiv.textContent = files.applicationData['Job Title'] || 'N/A';
+                        appInfo.appendChild(jobTitleDiv);
+
+                        if (files.applicationData['Job Listing URL']) {
+                            const jobLink = document.createElement('a');
+                            jobLink.href = files.applicationData['Job Listing URL'];
+                            jobLink.className = 'job-link';
+                            jobLink.target = '_blank';
+                            jobLink.rel = 'noopener noreferrer';
+                            jobLink.innerHTML = '🔗 View Job Listing';
+                            appInfo.appendChild(jobLink);
+                        }
+                    } else {
+                        const noData = document.createElement('div');
+                        noData.className = 'no-application-data';
+                        noData.textContent = 'No application details available';
+                        appInfo.appendChild(noData);
+                    }
+
+                    header.appendChild(appInfo);
+                    card.appendChild(header);
+
+                    // Files grid
+                    const filesGrid = document.createElement('div');
+                    filesGrid.className = 'files-grid';
+
+                    // HTML Resume
+                    filesGrid.appendChild(createFileLink(folder, files.html, 'HTML Resume'));
+
+                    // Docx Resume
+                    filesGrid.appendChild(createFileLink(folder, files.resume, 'Docx Resume'));
+
+                    // Cover Letter
+                    filesGrid.appendChild(createFileLink(folder, files.coverLetter, 'Cover Letter'));
+
+                    card.appendChild(filesGrid);
+                    cardsContainer.appendChild(card);
                 });
                 
                 if (folders.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">No date folders found</td></tr>';
+                    cardsContainer.innerHTML = '<div class="loading">No date folders found</div>';
                 }
             } catch (error) {
-                console.error('Error generating table:', error);
-                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px; color: red;">Error loading data</td></tr>';
+                console.error('Error generating cards:', error);
+                cardsContainer.innerHTML = '<div class="loading" style="color: red;">Error loading data</div>';
             }
         }
 
-        // Initialize table on page load
-        document.addEventListener('DOMContentLoaded', generateTable);
+        // Initialize cards on page load
+        document.addEventListener('DOMContentLoaded', generateCards);
     </script>
 </body>
 </html>
