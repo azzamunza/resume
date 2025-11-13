@@ -32,7 +32,8 @@ function scanFilesInFolder(folderName) {
     const result = {
         html: null,
         resume: null,
-        coverLetter: null
+        coverLetter: null,
+        applicationData: null
     };
     
     // Separate files by type
@@ -45,6 +46,16 @@ function scanFilesInFolder(folderName) {
         // Check for HTML file
         if (file === 'index.html') {
             result.html = file;
+        }
+        // Check for application.json file
+        else if (file === 'application.json') {
+            try {
+                const appDataPath = path.join(folderPath, file);
+                const appDataContent = fs.readFileSync(appDataPath, 'utf8');
+                result.applicationData = JSON.parse(appDataContent);
+            } catch (error) {
+                console.error(`Error reading application.json in ${folderName}:`, error.message);
+            }
         }
         // Check for cover letter files
         else if (lowerFile.includes('cover') && file.endsWith('.docx')) {
