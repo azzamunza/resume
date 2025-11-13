@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Content Producer Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Résumé of Aaron Munro – Content Producer">
+  <style>
+    :root{
+      /* Colours */
+      --primary:#FF7F00;
+      --primary-hover:#FF991F;
+      --secondary:#333333;
+      --background:#FFFFFF;
+      --accent:#00AEEF;
+      --text-main:#333333;
+      --text-muted:#4D4D4F;
+
+      /* Typography */
+      --font-head:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-body:system-ui,-apple-system,'Segoe UI', Roboto, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji';
+      --w-light:300; --w-reg:400; --w-med:600; --w-bold:700;
+
+      --fs-h1:34px;
+      --fs-h2:22px;
+      --fs-h3:18px;
+      --fs-body:15px;
+      --fs-small:13px;
+      --lh-head:1.2;
+      --lh-body:1.6;
+
+      /* Spacing */
+      --space-2:8px;
+      --space-3:12px;
+      --space-4:16px;
+      --space-5:20px;
+      --space-6:24px;
+      --space-7:28px;
+      --space-8:32px;
+
+      --radius:6px;
+      --maxw:1024px;
+      --col-gap:28px;
+    }
+
+    /* Base */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      background:var(--background);
+      color:var(--text-main);
+      font-family:var(--font-body);
+      line-height:var(--lh-body);
+      font-size:var(--fs-body);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Page wrapper for clean print and layout */
+    .container{
+      margin:0 auto;
+      padding: var(--space-6) var(--space-5);
+      max-width: var(--maxw);
+    }
+
+    /* Header */
+    header[role="banner"]{
+      border-bottom:2px solid var(--primary);
+      padding-bottom:var(--space-5);
+      margin-bottom:var(--space-6);
+    }
+    .topbar{
+      display:flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .identity{
+      min-width: 260px;
+    }
+    h1{
+      font-family:var(--font-head);
+      font-weight:var(--w-bold);
+      font-size:var(--fs-h1);
+      line-height:var(--lh-head);
+      color:var(--primary);
+      margin:0 0 var(--space-2) 0;
+      letter-spacing:.6px;
+    }
+    .role{
+      margin:0 0 var(--space-3) 0;
+      font-family:var(--font-head);
+      font-weight:var(--w-med);
+      font-size:var(--fs-h2);
+      text-transform: uppercase;
+      letter-spacing:.6px;
+      color:var(--secondary);
+    }
+    address{
+      margin:0;
+      font-style:normal;
+      color:var(--text-muted);
+    }
+    .contacts a{
+      color:var(--primary);
+      text-decoration:none;
+    }
+    .contacts a:hover{ color:var(--primary-hover); text-decoration:underline; }
+    .contacts span{ white-space:nowrap; }
+    .contacts .sep{ margin: 0 .35rem; color: #999; }
+
+    /* Export actions */
+    .actions{
+      display:flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--primary);
+      background:#fff;
+      color:var(--primary);
+      padding:8px 12px;
+      border-radius: var(--radius);
+      font: inherit;
+      font-weight: var(--w-med);
+      cursor:pointer;
+      line-height:1.2;
+    }
+    .btn:hover{ background: #FFF6EB; border-color: var(--primary-hover); color: var(--primary-hover); }
+    .btn.secondary{
+      border-color:#bbb; color:#333;
+    }
+    .btn.secondary:hover{
+      border-color:#999; background:#f6f6f6;
+    }
+
+    /* Sections */
+    main[role="main"]{
+      column-gap: var(--col-gap);
+      column-fill: balance;
+    }
+    section{
+      break-inside: avoid;
+      margin: 0 0 var(--space-6) 0;
+      padding: 0;
+    }
+    h2{
+      margin:0 0 var(--space-3) 0;
+      font-family:var(--font-head);
+      font-weight:var(--w-bold);
+      font-size:var(--fs-h2);
+      text-transform: uppercase;
+      letter-spacing:.7px;
+      color:var(--primary);
+    }
+    /* Experience */
+    article{
+      break-inside: avoid;
+      margin: 0 0 var(--space-5) 0;
+    }
+    .job-title{
+      margin:0 0 4px 0;
+      font-family:var(--font-head);
+      font-weight:var(--w-med);
+      font-size:var(--fs-h3);
+      text-transform: none;
+      color:var(--secondary);
+      letter-spacing:.2px;
+    }
+    .job-meta{
+      margin:0 0 var(--space-3) 0;
+      color:var(--text-muted);
+    }
+    ul{ margin:0; padding-left: 1.1rem; }
+    li{ margin: 0 0 6px 0; }
+
+    /* Skills split lists keep tidy */
+    .skill-group{ margin: 0 0 var(--space-4) 0; }
+    .skill-group h3{
+      margin:0 0 6px 0;
+      font-weight: var(--w-med);
+      font-size: var(--fs-h3);
+      color: var(--secondary);
+    }
+
+    /* Portfolio list items */
+    .portfolio-item-title{
+      margin:0 0 4px 0;
+      font-weight: var(--w-med);
+      font-size: var(--fs-h3);
+      color: var(--secondary);
+    }
+    .portfolio-link{
+      word-break: break-all;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .portfolio-link:hover{ text-decoration: underline; }
+
+    /* Footer */
+    footer[role="contentinfo"]{
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid #e5e5e5;
+      color: var(--text-muted);
+      font-size: var(--fs-small);
+    }
+
+    /* Responsive */
+    @media (max-width:480px){
+      .container{ padding: var(--space-5) var(--space-4); }
+      main[role="main"]{ column-count: 1; }
+      .actions{ width:100%; }
+    }
+    @media (min-width:481px) and (max-width:768px){
+      main[role="main"]{ column-count: 1; }
+    }
+    @media (min-width:769px){
+      main[role="main"]{ column-count: 2; }
+    }
+
+    /* Print */
+    @media print{
+      @page{ size: A4 portrait; margin: 18mm 15mm; }
+      body{ color:#000; }
+      .btn, .actions{ display:none !important; }
+      a{ color:#000; text-decoration: none; }
+      header[role="banner"]{ border-bottom:1px solid #000; }
+      h1{ color:#000; }
+      h2{ color:#000; }
+      .portfolio-link{ color:#000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header role="banner" aria-label="Header">
+      <div class="topbar">
+        <div class="identity">
+          <h1>Aaron Munro</h1>
+          <p class="role">Content Producer</p>
+          <address class="contacts" aria-label="Contact">
+            <span>Forrestfield, WA, Australia</span>
+            <span class="sep">|</span>
+            <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a>
+            <span class="sep">|</span>
+            <a href="tel:+61477742636">0477742636</a>
+            <br>
+            <a href="https://www.vector6.com.au/resume" class="website" target="_blank" rel="noopener">www.vector6.com.au/resume</a>
+          </address>
+        </div>
+        <nav class="actions" aria-label="Export actions">
+          <button type="button" class="btn" id="btnPrint">Download as PDF</button>
+          <button type="button" class="btn secondary" id="btnDocx">Download as DOCX</button>
+          <button type="button" class="btn secondary" id="btnCover">Download Cover Letter</button>
+        </nav>
+      </div>
+    </header>
+
+    <main role="main" id="main">
+      <section id="summary">
+        <h2>Summary</h2>
+        <p>I am writing to express my interest in the Content Producer role, where I bring substantial experience in content production, AI-driven workflows, and collaboration within the property sector. My background includes hands-on content creation, editing, and multimedia management across digital, video, and print projects for property development, infrastructure, and architectural visualisation. I've developed strong abilities in maintaining brand consistency, streamlining asset pipelines with generative AI, and engaging diverse stakeholders to deliver high-quality content solutions.</p>
+      </section>
+
+      <section id="experience">
+        <h2>Professional Experience</h2>
+
+        <article aria-labelledby="job-viewportxr">
+          <h3 class="job-title" id="job-viewportxr">Specialised in 3D Development</h3>
+          <p class="job-meta">Viewport XR | 2023 – 2024</p>
+          <ul>
+            <li>Produced video content using After Effects, Premiere, and Davinci Resolve for immersive property and infrastructure visualisations</li>
+            <li>Integrated ElevenLabs generative AI for voiceovers within content production pipelines</li>
+            <li>Collaborated on major public property projects, utilising advanced 3D/real-time engines and asset pipelines</li>
+            <li>Ensured stakeholder requirements were translated into engaging multimedia content for digital channels</li>
+          </ul>
+        </article>
+
+        <article aria-labelledby="job-vector6">
+          <h3 class="job-title" id="job-vector6">Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+          <p class="job-meta">Vector 6 | 2016 – 2023</p>
+          <ul>
+            <li>Developed and managed 3D visualisation content for property clients and digital platforms</li>
+            <li>Automated image/media workflows using Python and APIs, improving content delivery efficiency</li>
+            <li>Created web content and dynamic websites (PHP/CSS) for client marketing campaigns</li>
+            <li>Delivered project assets with a focus on high-quality digital imagery and consistent brand application</li>
+          </ul>
+        </article>
+
+        <article aria-labelledby="job-lastpixel">
+          <h3 class="job-title" id="job-lastpixel">Senior 3D Artist/Developer</h3>
+          <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+          <ul>
+            <li>Led content creation for architectural visualisation, including digital and print assets for property developments</li>
+            <li>Managed projects and liaised with clients on deliverables and brand alignment</li>
+            <li>Developed advanced PBR materials and realistic scene compositions for property marketing</li>
+            <li>Handled post-production (rendering, video editing, voiceover editing) for promotional materials</li>
+          </ul>
+        </article>
+
+        <article aria-labelledby="job-3dmillipede">
+          <h3 class="job-title" id="job-3dmillipede">3D Artist</h3>
+          <p class="job-meta">3D Millipede | March 2005 – March 2006</p>
+          <ul>
+            <li>Converted 2D architectural plans into photorealistic 3D models for multi-storey residential and home development marketing</li>
+            <li>Produced digital imagery integrating 3D models and site photography</li>
+          </ul>
+        </article>
+
+        <article aria-labelledby="job-cellmedia">
+          <h3 class="job-title" id="job-cellmedia">Lead 3D Artist</h3>
+          <p class="job-meta">Cell Media | August 2003 – December 2004</p>
+          <ul>
+            <li>Produced and managed training video content for industrial and workplace stakeholders using 3D animation</li>
+          </ul>
+        </article>
+      </section>
+
+      <section id="skills">
+        <h2>Skills &amp; Technologies</h2>
+
+        <div class="skill-group">
+          <h3>Technical Skills</h3>
+          <ul>
+            <li>Unreal Engine</li>
+            <li>Unity</li>
+            <li>3DS Max</li>
+            <li>Zbrush</li>
+            <li>Substance Suite (Painter, Designer)</li>
+            <li>Adobe Photoshop</li>
+            <li>Adobe After Effects</li>
+            <li>Adobe Premiere</li>
+            <li>Davinci Resolve</li>
+            <li>Octane Render</li>
+            <li>V-Ray</li>
+            <li>Railclone</li>
+            <li>Forest Pack Pro</li>
+            <li>Embergen</li>
+            <li>Matterport</li>
+            <li>Reality Capture</li>
+            <li>Python</li>
+            <li>PHP/CSS</li>
+            <li>HTML/CSS/JavaScript (basic)</li>
+            <li>Generative AI (ChatGPT, Claude.ai, Gemini, ElevenLabs, Make.com, Midjourney, Stable Diffusion)</li>
+            <li>Microsoft Office Suite</li>
+            <li>FMETP streaming</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Core Competencies</h3>
+          <ul>
+            <li>Content creation and editing</li>
+            <li>Brand consistency and messaging</li>
+            <li>Collaboration and stakeholder management</li>
+            <li>Project management</li>
+            <li>Workflow automation</li>
+            <li>3D visualisation and design</li>
+            <li>Video and multimedia production</li>
+            <li>Technical problem-solving</li>
+            <li>Image retouching and photography</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="certifications">
+        <h2>Certification</h2>
+        <ul>
+          <li>AI Generalist Course (Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications), August 2025</li>
+        </ul>
+      </section>
+
+      <section id="projects">
+        <h2>Specialised Project Experience</h2>
+        <ul>
+          <li>Worked on high-profile property and infrastructure projects including Elizabeth Quay, Perth Underground Bus Port, Perth City Link / Yagan Square, Fremantle Ports Outer Harbour (Roe 8 link), and Butler to Perth Rail Link, delivering visual assets and content for developmental and marketing campaigns.</li>
+        </ul>
+      </section>
+
+      <section id="portfolio">
+        <h2>Portfolio</h2>
+
+        <article>
+          <h3 class="portfolio-item-title">METRONET Yanchep Rail Extension Linewide Flythrough 1</h3>
+          <p>Showcases property and infrastructure visualisation created during time at Viewport XR, aligning with property industry campaign content.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QLEcGUWuTgE">https://www.youtube.com/watch?v=QLEcGUWuTgE</a></p>
+        </article>
+
+        <article>
+          <h3 class="portfolio-item-title">Busport - 3D Development Visualisation</h3>
+          <p>Demonstrates multimedia content production and visualisation for major public transport property developments.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=piMQ2ZpvQGs">https://www.youtube.com/watch?v=piMQ2ZpvQGs</a></p>
+        </article>
+
+        <article>
+          <h3 class="portfolio-item-title">Projects and Dev over the last few years</h3>
+          <p>Includes projects on 3D architectural visualisation, real-time engines, Unity VR, and AI-enabled workflows consistent with content production for property marketing.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rvEkQWkZ8uw">https://www.youtube.com/watch?v=rvEkQWkZ8uw</a></p>
+        </article>
+
+        <article>
+          <h3 class="portfolio-item-title">Showreel Aaron Munro 2016</h3>
+          <p>Highlights architectural visualisation and high-quality branded content for property clients.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=9wuhG46Dmxc">https://www.youtube.com/watch?v=9wuhG46Dmxc</a></p>
+        </article>
+
+        <article>
+          <h3 class="portfolio-item-title">Saraya - 3D Development Visualisation</h3>
+          <p>Showcases 3D and multimedia visualisations related to property developments.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=cEdttI3xlZ4">https://www.youtube.com/watch?v=cEdttI3xlZ4</a></p>
+        </article>
+
+        <article>
+          <h3 class="portfolio-item-title">Outer Harbour 3D Development Visualisation</h3>
+          <p>Displays digital content production for a major property and infrastructure campaign.</p>
+          <p><a class="portfolio-link" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=MpF3HvBJKMo">https://www.youtube.com/watch?v=MpF3HvBJKMo</a></p>
+        </article>
+      </section>
+    </main>
+
+    <footer role="contentinfo" aria-label="Footer">
+      <p>This single-page résumé is ATS-friendly and ready for export.</p>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const btnPrint = document.getElementById('btnPrint');
+      const btnDocx  = document.getElementById('btnDocx');
+      const btnCover = document.getElementById('btnCover');
+
+      let downloadsIndex = null;
+
+      function loadDownloads() {
+        // Fetch local downloads.json (must be served from the same directory)
+        return fetch('./downloads.json', {cache:'no-cache'})
+          .then(r => {
+            if(!r.ok) throw new Error('downloads.json not found');
+            return r.json();
+          })
+          .then(data => {
+            const map = {};
+            if (data && Array.isArray(data.downloads)) {
+              data.downloads.forEach(d => { if(d && d.id) map[d.id] = d; });
+            }
+            downloadsIndex = map;
+          })
+          .catch(() => {
+            downloadsIndex = {};
+          });
+      }
+
+      function triggerDownloadById(id){
+        if (!downloadsIndex) {
+          // If not loaded yet, load then retry
+          return loadDownloads().then(() => triggerDownloadById(id));
+        }
+        const item = downloadsIndex[id];
+        if (item && item.path) {
+          // Trigger file download/navigation
+          const a = document.createElement('a');
+          a.href = item.path;
+          a.download = item.name || '';
+          a.rel = 'noopener';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } else {
+          alert('Download file is not available. Please ensure downloads.json is present.');
+        }
+      }
+
+      btnPrint.addEventListener('click', () => window.print());
+      btnDocx.addEventListener('click', () => triggerDownloadById('resume'));
+      btnCover.addEventListener('click', () => triggerDownloadById('coverLetter'));
+
+      // Preload index asynchronously (no external calls)
+      loadDownloads();
+    })();
+  </script>
+</body>
+</html>
