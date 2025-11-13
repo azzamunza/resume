@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Digital Designer Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root{
+      /* Colours */
+      --primary:#032E4F;
+      --secondary:#F85C50;
+      --accent:#28C7FA;
+      --bg:#F5F7FA;
+      --paper:#FFFFFF;
+      --text-main:#222222;
+      --text-muted:#555555;
+      --border:#E6E9EE;
+
+      /* Typography */
+      --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      --fs-xxl:38px;
+      --fs-xl:24px;
+      --fs-lg:18px;
+      --fs-md:16px;
+      --fs-sm:14px;
+      --lh-tight:1.2;
+      --lh:1.55;
+
+      /* Spacing */
+      --space-2:8px;
+      --space-3:12px;
+      --space-4:16px;
+      --space-5:20px;
+      --space-6:24px;
+      --space-8:32px;
+      --space-10:40px;
+      --radius:10px;
+      --shadow:0 2px 10px rgba(3,46,79,.08);
+      --maxw:1024px;
+    }
+
+    /* Base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font-sans);
+      font-size:var(--fs-md);
+      line-height:var(--lh);
+      color:var(--text-main);
+      background:var(--bg);
+    }
+
+    /* Header */
+    header[role="banner"]{
+      background:var(--paper);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      max-width:var(--maxw);
+      margin:var(--space-10) auto var(--space-6);
+      padding:var(--space-8);
+    }
+    .topbar{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-4);
+    }
+    h1{
+      margin:0;
+      font-size:var(--fs-xxl);
+      line-height:var(--lh-tight);
+      color:var(--primary);
+    }
+    .role{
+      margin:0;
+      font-size:var(--fs-xl);
+      color:var(--secondary);
+      font-weight:600;
+    }
+    .contacts{
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-4);
+      align-items:center;
+      color:var(--text-muted);
+      font-size:var(--fs-md);
+    }
+    .contacts a{
+      color:var(--primary);
+      text-decoration:none;
+      border-bottom:1px solid transparent;
+    }
+    .contacts a:hover{border-bottom-color:var(--primary)}
+    .actions{
+      margin-top:var(--space-4);
+      display:flex;
+      flex-wrap:wrap;
+      gap:var(--space-3);
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--primary);
+      background:var(--primary);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:8px;
+      font-size:var(--fs-sm);
+      letter-spacing:.3px;
+      text-transform:uppercase;
+      cursor:pointer;
+    }
+    .btn.secondary{
+      background:#fff;
+      color:var(--primary);
+    }
+    .summary{
+      margin-top:var(--space-6);
+      padding-top:var(--space-6);
+      border-top:1px solid var(--border);
+      color:var(--text-main);
+      font-size:var(--fs-lg);
+    }
+
+    /* Layout: Columns */
+    main[role="main"]{
+      max-width:var(--maxw);
+      margin:0 auto var(--space-10);
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-6);
+    }
+    .columns{
+      display:flex;
+      gap:var(--space-6);
+      align-items:flex-start;
+    }
+    .col{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-6);
+      min-width:0;
+    }
+    .col.left{flex:0 1 62%}
+    .col.right{flex:0 1 38%}
+
+    section{
+      background:var(--paper);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:var(--space-6);
+    }
+    h2{
+      margin:0 0 var(--space-4) 0;
+      font-size:var(--fs-xl);
+      color:var(--primary);
+    }
+
+    /* Experience */
+    article.job{
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:var(--space-4);
+      margin:0 0 var(--space-4) 0;
+      background:#FAFBFD;
+    }
+    article.job:last-child{margin-bottom:0}
+    article.job h3{
+      margin:0 0 6px 0;
+      font-size:var(--fs-lg);
+      color:var(--accent);
+    }
+    .meta{
+      margin:0 0 var(--space-3) 0;
+      color:var(--secondary);
+      font-weight:600;
+      font-size:var(--fs-md);
+    }
+    .duties{
+      margin:0;
+      padding-left:22px;
+    }
+    .duties li{margin:6px 0}
+
+    /* Skills */
+    .subhead{
+      margin:var(--space-3) 0 var(--space-2);
+      font-size:var(--fs-lg);
+      color:var(--accent);
+      font-weight:600;
+    }
+    ul.skill-list{
+      margin:0;
+      padding-left:22px;
+    }
+    ul.skill-list li{margin:6px 0}
+
+    /* Portfolio (links only, ATS-friendly) */
+    .portfolio-item{
+      border:1px solid var(--border);
+      border-radius:8px;
+      padding:var(--space-4);
+      background:#FAFBFD;
+      margin-bottom:var(--space-4);
+    }
+    .portfolio-item:last-child{margin-bottom:0}
+    .portfolio-item h3{
+      margin:0 0 6px 0;
+      font-size:var(--fs-lg);
+      color:var(--accent);
+    }
+    .portfolio-item p{
+      margin:0 0 var(--space-3) 0;
+      color:var(--text-main);
+      font-size:var(--fs-md);
+    }
+    .portfolio-item a{
+      color:var(--primary);
+      word-break:break-all;
+    }
+
+    /* Footer */
+    footer[role="contentinfo"]{
+      max-width:var(--maxw);
+      margin:0 auto var(--space-10);
+      color:var(--text-muted);
+      text-align:center;
+      font-size:var(--fs-sm);
+    }
+    footer a{color:var(--primary); text-decoration:none; border-bottom:1px solid transparent}
+    footer a:hover{border-bottom-color:var(--primary)}
+
+    /* Status (for downloads) */
+    #status{
+      margin-top:var(--space-2);
+      font-size:var(--fs-sm);
+      color:var(--text-muted);
+    }
+
+    /* Responsive */
+    /* Mobile ≤480px: single column */
+    @media (max-width:480px){
+      .columns{flex-direction:column}
+      .col.left, .col.right{flex:1 1 auto}
+      header[role="banner"]{margin:var(--space-6) var(--space-4)}
+      main[role="main"]{margin:0 var(--space-4) var(--space-8)}
+    }
+
+    /* Tablet 481–768px: balanced layout */
+    @media (min-width:481px) and (max-width:768px){
+      .columns{flex-direction:row}
+      .col.left, .col.right{flex:1 1 50%}
+      header[role="banner"]{margin:var(--space-8) var(--space-6)}
+      main[role="main"]{margin:0 var(--space-6) var(--space-8)}
+    }
+
+    /* Desktop ≥769px: two-column */
+    @media (min-width:769px){
+      header[role="banner"]{margin:var(--space-10) var(--space-6)}
+      main[role="main"]{margin:0 var(--space-6) var(--space-10)}
+    }
+
+    /* Print */
+    @media print{
+      @page{ size:A4 portrait; margin:18mm 15mm; }
+      body{ background:#fff; }
+      header[role="banner"], section{ box-shadow:none; border:0; }
+      .actions, #status{ display:none !important; }
+      main[role="main"] .columns{ flex-direction:column; gap:0; }
+      .col{ gap:10px; }
+      a{ color:#000; text-decoration:underline; }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Résumé header">
+    <div class="topbar">
+      <div>
+        <h1>Aaron Munro</h1>
+        <p class="role">Digital Designer</p>
+      </div>
+
+      <div class="contacts" aria-label="Contact details">
+        <span>Forrestfield, WA, Australia</span>
+        <span>•</span>
+        <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a>
+        <span>•</span>
+        <a href="tel:0477742636" aria-label="Phone 0477742636">0477742636</a>
+        <span>•</span>
+        <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a>
+      </div>
+
+      <div class="actions" aria-label="Export options">
+        <button class="btn" id="btn-pdf" type="button">Download as PDF</button>
+        <button class="btn secondary" id="btn-docx" type="button">Download as DOCX</button>
+        <button class="btn secondary" id="btn-cover" type="button">Download Cover Letter</button>
+      </div>
+      <div id="status" aria-live="polite"></div>
+    </div>
+
+    <div class="summary">
+      <p>With over 15 years' experience in digital and 3D visualisation, I have developed strong abilities in digital design, UI, website development, and the delivery of creative outputs for a variety of clients and industries. My background spans 3D modelling, web visual design, marketing creative, and multimedia production, with proven capability in collaborative, high-performing agency and freelance environments. My portfolio demonstrates extensive experience in creating impactful digital assets, branded interfaces, and client presentations using Figma, Adobe Creative Cloud, and industry-standard platforms. I am an Australian Citizen based in Western Australia and ready to bring a results-driven approach to digital design at Clue.</p>
+    </div>
+  </header>
+
+  <main role="main" aria-label="Résumé main content">
+    <div class="columns">
+      <!-- Left column: Experience + Projects -->
+      <div class="col left">
+        <section id="experience" aria-label="Work Experience">
+          <h2>Work Experience</h2>
+
+          <article class="job">
+            <h3>Specialised in 3D Development</h3>
+            <p class="meta">Viewport XR | 2023–2024</p>
+            <ul class="duties">
+              <li>Produced advanced real-time 3D graphics and immersive experiences using Unreal Engine, Unity, and Substance Suite</li>
+              <li>Developed interactive objects and digital content for presentations and digital campaigns</li>
+              <li>Created video content and visual assets using Adobe After Effects, Premiere, and Davinci Resolve</li>
+              <li>Worked on animation, rigging, and dynamic asset development for branded digital solutions</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+            <p class="meta">Vector 6 | 2016–2023</p>
+            <ul class="duties">
+              <li>Designed and maintained dynamic websites using PHP/CSS and custom graphics via Adobe XD, Photoshop, and Illustrator</li>
+              <li>Delivered UI and vector design for web, developed SVG icons, logos, and infographics</li>
+              <li>Managed digital creative for campaigns and presentations, including graded photography and high-impact visuals</li>
+              <li>Automated data workflows and asset management to streamline content delivery for clients</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Senior 3D Artist/Developer</h3>
+            <p class="meta">Last Pixel | Oct 2006–Mar 2016</p>
+            <ul class="duties">
+              <li>Worked on digital design outputs including branded visuals, interactive presentations, and infographics</li>
+              <li>Led project teams for large-scale creative campaigns, overseeing concept, layout, and delivery</li>
+              <li>Produced client presentations with detailed design work, post-production, and animation in Adobe Suite</li>
+              <li>Developed PBR materials, advanced graphics, and marketing collateral for digital campaigns</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>3D Developer/Artist (Collaboration)</h3>
+            <p class="meta">Spacescan | Oct 2017–Jan 2023</p>
+            <ul class="duties">
+              <li>Collaborated on a range of 3D visualisation projects for web and interactive applications</li>
+              <li>Contributed specialised digital assets and rendered content for use in client-facing presentations and campaigns</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <h3>Project-based Web Design</h3>
+            <p class="meta">Langtrees | Feb 2022–Jul 2022</p>
+            <ul class="duties">
+              <li>Developed graphical elements and animations for a website using Adobe XD and Animate</li>
+              <li>Created SVG icons and signage, demonstrating strong branding and digital design skills</li>
+            </ul>
+          </article>
+        </section>
+
+        <section id="special-projects" aria-label="Specialised Project Experience">
+          <h2>Specialised Project Experience</h2>
+          <p>In-depth project leadership on large infrastructure visualisation (Elizabeth Quay, Perth Underground Bus Port, Fremantle Ports, Yagan Square); Led advanced digital design and asset creation for VR and interactive applications across agency and freelance contexts.</p>
+        </section>
+      </div>
+
+      <!-- Right column: Skills + Certification + Portfolio -->
+      <div class="col right">
+        <section id="skills" aria-label="Skills and Competencies">
+          <h2>Skills &amp; Competencies</h2>
+
+          <div>
+            <p class="subhead">Technical Skills</p>
+            <ul class="skill-list">
+              <li>Adobe Creative Cloud (Photoshop, Illustrator, After Effects, Premiere, Lightroom, XD, Animate)</li>
+              <li>Figma (via Adobe XD and UI design experience)</li>
+              <li>3DS Max</li>
+              <li>Zbrush</li>
+              <li>Substance Suite (Painter, Designer)</li>
+              <li>Unity</li>
+              <li>Unreal Engine</li>
+              <li>Octane Render</li>
+              <li>V-Ray</li>
+              <li>PHP/CSS</li>
+              <li>HTML/CSS/JavaScript (basic)</li>
+              <li>Davinci Resolve</li>
+              <li>Canva</li>
+            </ul>
+          </div>
+
+          <div>
+            <p class="subhead">Core Competencies</p>
+            <ul class="skill-list">
+              <li>Digital design: websites, UI, graphics, and presentations</li>
+              <li>Layout, visual hierarchy, and attention to detail</li>
+              <li>Collaboration with strategy, marketing, and development teams</li>
+              <li>Project management and client liaison</li>
+              <li>Creative problem-solving</li>
+              <li>Content production (video/post-production, image retouching)</li>
+              <li>Workflow automation</li>
+              <li>Branding (logos, infographics, SVG icons and web graphics)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="education-certifications" aria-label="Certification">
+          <h2>Certification</h2>
+          <p>AI Generalist Course (Core AI Methodologies, Workflow Automation, Generative Media Production), expected Aug 2025</p>
+        </section>
+
+        <section id="portfolio" aria-label="Portfolio">
+          <h2>Portfolio</h2>
+
+          <article class="portfolio-item">
+            <h3>Projects and Dev over the last few years</h3>
+            <p>Showcases recent work in 3D arch vis, real-time graphics, Unity VR, character animation, and various digital design environments aligned with agency digital outputs and presentations.</p>
+            <a href="https://www.youtube.com/watch?v=rvEkQWkZ8uw" target="_blank" rel="noopener">https://www.youtube.com/watch?v=rvEkQWkZ8uw</a>
+          </article>
+
+          <article class="portfolio-item">
+            <h3>Showreel Aaron Munro 2016</h3>
+            <p>Demonstrates work completed at Last Pixel, including digital presentations, 3D design, and multimedia assets relevant to digital design roles in agency settings.</p>
+            <a href="https://www.youtube.com/watch?v=9wuhG46Dmxc" target="_blank" rel="noopener">https://www.youtube.com/watch?v=9wuhG46Dmxc</a>
+          </article>
+
+          <article class="portfolio-item">
+            <h3>Short 3D clip of a small estate rendered in Octane</h3>
+            <p>Highlights 3D visualisation and digital asset creation for marketing and client-facing materials, matching website and campaign work.</p>
+            <a href="https://www.youtube.com/watch?v=ggY59ujm3l8" target="_blank" rel="noopener">https://www.youtube.com/watch?v=ggY59ujm3l8</a>
+          </article>
+
+          <article class="portfolio-item">
+            <h3>Busport - 3D Development Visualisation</h3>
+            <p>Illustrates the creation of digital campaigns, presentations, and high-impact visual outputs for infrastructure branding and communications.</p>
+            <a href="https://www.youtube.com/watch?v=piMQ2ZpvQGs" target="_blank" rel="noopener">https://www.youtube.com/watch?v=piMQ2ZpvQGs</a>
+          </article>
+
+          <article class="portfolio-item">
+            <h3>Brand - Land to Life: 3D Development Visualisation</h3>
+            <p>Shows digital brand storytelling and compelling design for digital campaigns and branding projects.</p>
+            <a href="https://www.youtube.com/watch?v=aOi25uNKh2U" target="_blank" rel="noopener">https://www.youtube.com/watch?v=aOi25uNKh2U</a>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer role="contentinfo" aria-label="Résumé footer">
+    <p>&copy; Aaron Munro · <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      const pdfBtn = document.getElementById('btn-pdf');
+      const docxBtn = document.getElementById('btn-docx');
+      const coverBtn = document.getElementById('btn-cover');
+      const statusEl = document.getElementById('status');
+
+      function setStatus(msg, isError){
+        statusEl.textContent = msg || '';
+        statusEl.style.color = isError ? '#B00020' : 'var(--text-muted)';
+      }
+
+      function triggerDownload(path, filename){
+        const a = document.createElement('a');
+        a.href = path;
+        if (filename) a.download = filename;
+        a.rel = 'noopener';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      async function downloadById(id){
+        setStatus('Preparing download...');
+        try{
+          const res = await fetch('./downloads.json', {cache:'no-store'});
+          if(!res.ok) throw new Error('downloads.json not found');
+          const data = await res.json();
+          const item = (data && data.downloads || []).find(d => d.id === id);
+          if(!item){
+            throw new Error('Download item not found');
+          }
+          triggerDownload(item.path, item.name);
+          setStatus('Download started.');
+        }catch(err){
+          setStatus('Unable to start download. Please ensure downloads.json and files are available locally.', true);
+          console.error(err);
+        }
+      }
+
+      pdfBtn.addEventListener('click', () => window.print());
+      docxBtn.addEventListener('click', () => downloadById('resume'));
+      coverBtn.addEventListener('click', () => downloadById('coverLetter'));
+    })();
+  </script>
+</body>
+</html>
