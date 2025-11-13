@@ -4,7 +4,7 @@
       "name": "2511140404",
       "files": {
         "html": "index.html",
-        "resume": null,
+        "resume": "Resume_251113-1709_Pay-Per-Click-Specialist.docx",
         "coverLetter": null
       }
     },
@@ -13,7 +13,7 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251113-1708_Little-Hinges.docx",
-        "coverLetter": null
+        "coverLetter": "Cover-Letter_251113-1709_Little-Hinges.docx"
       }
     },
     {
@@ -113,5 +113,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-11-13T17:08:52.295Z"
+  "lastUpdated": "2025-11-13T17:09:59.786Z"
 }
