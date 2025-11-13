@@ -1,0 +1,46 @@
+name: Generate Folder Data
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    # Only run if files are added/changed (not just folder-data.json)
+    paths-ignore:
+      - 'folder-data.json'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  generate-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run generate-folder-data.js
+        run: node generate-folder-data.js
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code folder-data.json || \
+            echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if changed
+        if: steps.git-check.outputs.changed == 'true'
+        run: |
+          git config --local user.email \
+            "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add folder-data.json
+          git commit -m "Auto-update folder-data.json [skip ci]"
+          git push
