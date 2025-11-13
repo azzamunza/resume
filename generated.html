@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aaron Munro - Resume Archive">
+    <title>Resume Archive - Aaron Munro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .archive-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .archive-title {
+            text-align: center;
+            color: #00205B;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .archive-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .archive-table thead {
+            background: #00205B;
+            color: white;
+        }
+
+        .archive-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .archive-table tbody tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .archive-table tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        .archive-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        .archive-table td {
+            padding: 15px;
+            vertical-align: middle;
+        }
+
+        .date-cell {
+            font-weight: 600;
+            color: #00205B;
+            min-width: 150px;
+        }
+
+        .link-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .file-link {
+            color: #00B8E8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .file-link:hover {
+            text-decoration: underline;
+            color: #0096c7;
+        }
+
+        .copy-icon {
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .copy-icon:hover {
+            background: #e0e0e0;
+        }
+
+        .copy-icon:active {
+            transform: scale(0.95);
+        }
+
+        .not-generated {
+            color: #999;
+            font-style: italic;
+        }
+
+        .copied-tooltip {
+            position: relative;
+        }
+
+        .copied-tooltip::after {
+            content: 'Copied!';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #222;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .copied-tooltip.show::after {
+            opacity: 1;
+        }
+
+        @media print {
+            .copy-icon {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .archive-table {
+                font-size: 0.9rem;
+            }
+
+            .archive-table th,
+            .archive-table td {
+                padding: 10px;
+            }
+
+            .archive-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="archive-container">
+        <h1 class="archive-title">Resume Archive</h1>
+        <table class="archive-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>HTML Resume</th>
+                    <th>Docx Resume</th>
+                    <th>Cover Letter</th>
+                </tr>
+            </thead>
+            <tbody id="archive-tbody">
+                <!-- Table rows will be dynamically generated -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Load folder data from JSON file
+        async function loadFolderData() {
+            try {
+                const response = await fetch('./folder-data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load folder data');
+                }
+                const data = await response.json();
+                return data.folders;
+            } catch (error) {
+                console.error('Error loading folder data:', error);
+                return [];
+            }
+        }
+
+        // Format date from YYMMDDhhmm format
+        function formatDate(folderName) {
+            if (folderName.length !== 10) return folderName;
+
+            const year = folderName.substring(0, 2);
+            const month = folderName.substring(2, 4);
+            const day = folderName.substring(4, 6);
+            const hour = folderName.substring(6, 8);
+            const minute = folderName.substring(8, 10);
+
+            // Convert YY to full year (assume 20xx for years 00-29, 19xx for 30-99)
+            let fullYear;
+            const yearInt = parseInt(year);
+            if (yearInt >= 0 && yearInt <= 29) {
+                fullYear = `20${year}`;
+            } else {
+                fullYear = `19${year}`;
+            }
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            const monthInt = parseInt(month);
+            
+            // Validate month
+            if (monthInt < 1 || monthInt > 12) {
+                return folderName; // Return raw if invalid
+            }
+            
+            const monthName = months[monthInt - 1];
+
+            return `${day} ${monthName} ${fullYear} ${hour}:${minute}`;
+        }
+
+        // Get absolute URL for a file
+        function getAbsoluteUrl(folderName, fileName) {
+            const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '');
+            return `${baseUrl}/${folderName}/${fileName}`;
+        }
+
+        // Copy URL to clipboard
+        function copyToClipboard(url, iconElement) {
+            navigator.clipboard.writeText(url).then(() => {
+                // Show copied tooltip
+                iconElement.classList.add('show');
+                setTimeout(() => {
+                    iconElement.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Failed to copy URL to clipboard');
+            });
+        }
+
+        // Create a table cell with link and copy icon
+        function createLinkCell(folderName, fileName) {
+            const td = document.createElement('td');
+
+            if (fileName) {
+                const container = document.createElement('div');
+                container.className = 'link-container';
+
+                const link = document.createElement('a');
+                link.href = `${folderName}/${fileName}`;
+                link.className = 'file-link';
+                link.textContent = fileName;
+                link.target = '_blank';
+
+                const copyIcon = document.createElement('span');
+                copyIcon.className = 'copy-icon copied-tooltip';
+                copyIcon.textContent = '📋';
+                copyIcon.title = 'Copy URL';
+                copyIcon.onclick = (e) => {
+                    e.preventDefault();
+                    const url = getAbsoluteUrl(folderName, fileName);
+                    copyToClipboard(url, copyIcon);
+                };
+
+                container.appendChild(link);
+                container.appendChild(copyIcon);
+                td.appendChild(container);
+            } else {
+                const span = document.createElement('span');
+                span.className = 'not-generated';
+                span.textContent = 'Not Generated';
+                td.appendChild(span);
+            }
+
+            return td;
+        }
+
+        // Generate table rows
+        async function generateTable() {
+            const tbody = document.getElementById('archive-tbody');
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">Loading...</td></tr>';
+
+            try {
+                // Load folder data from JSON
+                const folders = await loadFolderData();
+                
+                // Clear loading message
+                tbody.innerHTML = '';
+                
+                // Process each folder
+                folders.forEach(folderData => {
+                    const folder = folderData.name;
+                    const files = folderData.files;
+                    
+                    const row = document.createElement('tr');
+
+                    // Date column
+                    const dateCell = document.createElement('td');
+                    dateCell.className = 'date-cell';
+                    dateCell.textContent = formatDate(folder);
+                    row.appendChild(dateCell);
+
+                    // HTML Resume column
+                    row.appendChild(createLinkCell(folder, files.html));
+
+                    // Docx Resume column
+                    row.appendChild(createLinkCell(folder, files.resume));
+
+                    // Cover Letter column
+                    row.appendChild(createLinkCell(folder, files.coverLetter));
+
+                    tbody.appendChild(row);
+                });
+                
+                if (folders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px;">No date folders found</td></tr>';
+                }
+            } catch (error) {
+                console.error('Error generating table:', error);
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; padding: 20px; color: red;">Error loading data</td></tr>';
+            }
+        }
+
+        // Initialize table on page load
+        document.addEventListener('DOMContentLoaded', generateTable);
+    </script>
+</body>
+</html>
