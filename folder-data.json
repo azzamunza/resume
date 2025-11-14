@@ -5,8 +5,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251114-0638_Pickr.docx",
-        "coverLetter": null,
-        "applicationData": null
+        "coverLetter": "Cover-Letter_251114-0639_Pickr.docx",
+        "applicationData": {
+          "Company": "Pickr",
+          "Job Title": "Technology Journalist",
+          "Job Listing URL": "https://www.pickr.com.au/news/2025/new-gaming-gear-on-the-way-with-steam-frame-vr-machine-pc/"
+        }
       }
     },
     {
@@ -187,5 +191,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-11-14T06:38:50.169Z"
+  "lastUpdated": "2025-11-14T06:39:41.704Z"
 }
