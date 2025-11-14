@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Aaron Munro - Visual Effects Artist Résumé</title>
+  <style>
+    :root{
+      /* Theme */
+      --primary:#0B5FAE;
+      --accent:#FF6A3D;
+      --success:#00A878;
+      --surface:#FFFFFF;
+      --bg:#F5F7FB;
+      --muted:#E9EEF6;
+
+      /* Typography */
+      --text-main:#1F2937;
+      --text-muted:#4B5563;
+      --heading-font: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --body-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+      --h1-size:32px;
+      --h2-size:20px;
+      --h3-size:16px;
+      --body-size:14.5px;
+      --small-size:12.5px;
+
+      /* Spacing */
+      --space-1:6px;
+      --space-2:10px;
+      --space-3:14px;
+      --space-4:18px;
+      --space-5:22px;
+      --space-6:28px;
+      --radius-1:8px;
+      --radius-2:12px;
+      --shadow:0 8px 24px rgba(0,0,0,.06);
+    }
+
+    html{
+      background:var(--bg);
+      color:var(--text-main);
+      -webkit-print-color-adjust:exact !important;
+      print-color-adjust:exact !important;
+    }
+    body{
+      margin:0;
+      font-family:var(--body-font);
+      font-size:var(--body-size);
+      line-height:1.55;
+    }
+
+    .wrap{
+      max-width:980px;
+      margin:24px auto;
+      background:var(--surface);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius-2);
+      overflow:hidden;
+    }
+
+    header[role="banner"]{
+      padding:28px 28px 20px 28px;
+      border-bottom:2px solid var(--primary);
+      display:flex;
+      gap:16px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .id-block{
+      flex:1 1 420px;
+    }
+    h1{
+      font-family:var(--heading-font);
+      font-size:var(--h1-size);
+      font-weight:800;
+      letter-spacing:.5px;
+      color:var(--primary);
+      margin:0 0 6px 0;
+      text-transform:uppercase;
+    }
+    .role{
+      font-weight:700;
+      color:var(--accent);
+      margin:0 0 6px 0;
+    }
+    .location{
+      color:var(--text-muted);
+      font-size:var(--small-size);
+    }
+    .contact{
+      flex:1 1 260px;
+      text-align:right;
+      color:var(--text-muted);
+      font-size:var(--small-size);
+    }
+    .contact a{ color:var(--primary); text-decoration:none; }
+    .contact a:hover, .contact a:focus{ text-decoration:underline; }
+
+    .actions{
+      width:100%;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      margin-top:10px;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--primary);
+      background:var(--surface);
+      color:var(--primary);
+      padding:8px 12px;
+      border-radius:7px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn:hover{ filter:brightness(0.98); }
+    .btn:focus{ outline:2px solid var(--accent); outline-offset:2px; }
+
+    main[role="main"]{
+      padding:22px 28px 28px 28px;
+    }
+
+    /* Two independent columns on desktop */
+    .columns{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+    }
+    aside#sidebar{
+      flex:0 0 36%;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+    section#primary{
+      flex:1 1 auto;
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    section{
+      background:var(--surface);
+      border:1px solid var(--muted);
+      border-radius:var(--radius-1);
+      padding:16px;
+    }
+    h2{
+      font-family:var(--heading-font);
+      font-size:var(--h2-size);
+      font-weight:800;
+      color:var(--text-main);
+      margin:0 0 10px 0;
+    }
+    h3{
+      font-size:var(--h3-size);
+      font-weight:800;
+      margin:0 0 4px 0;
+      color:var(--text-main);
+    }
+    p{ margin:0 0 10px 0; }
+    ul{ padding-left:18px; margin:0; }
+    li{ margin:6px 0; }
+
+    .job-entry{ padding-bottom:10px; }
+    .job-entry + .job-entry{ border-top:1px solid var(--muted); padding-top:12px; }
+    .job-meta{
+      color:var(--success);
+      font-size:var(--small-size);
+      margin:0 0 6px 0;
+      font-weight:600;
+    }
+    .skills-list, .core-list{
+      list-style:none;
+      padding:0;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:8px 0 0 0;
+    }
+    .skills-list li, .core-list li{
+      background:var(--bg);
+      border:1px solid var(--muted);
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:12.5px;
+      color:var(--primary);
+      white-space:nowrap;
+    }
+
+    /* Portfolio as cards */
+    .portfolio-gallery{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:14px;
+    }
+    .portfolio-card{
+      border:1px solid var(--muted);
+      border-radius:10px;
+      padding:10px;
+      background:var(--surface);
+    }
+    .portfolio-card iframe{
+      width:100%;
+      aspect-ratio:16/9;
+      border:0;
+      border-radius:6px;
+      background:#000;
+    }
+    .portfolio-card h4{
+      margin:8px 0 6px 0;
+      font-size:15px;
+      font-weight:800;
+      color:var(--primary);
+    }
+    .portfolio-card .relevance{
+      color:var(--text-muted);
+      font-size:12.5px;
+      margin:0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .wrap{ border-radius:0; box-shadow:none; margin:0; }
+      .contact{ text-align:left; }
+      .columns{ display:block; }
+      aside#sidebar, section#primary{ gap:18px; }
+      .portfolio-gallery{ grid-template-columns:1fr; }
+    }
+    @media (max-width: 480px){
+      header[role="banner"]{ padding:18px; }
+      main[role="main"]{ padding:18px; }
+      section{ padding:14px; }
+      .actions{ flex-wrap:wrap; justify-content:flex-start; }
+    }
+
+    /* Print */
+    @page { size: A4 portrait; margin: 18mm 15mm; }
+    @media print{
+      html, body{ background:#fff !important; }
+      .wrap{ box-shadow:none; border-radius:0; margin:0; }
+      header[role="banner"]{ border-bottom:1px solid #000; }
+      .actions{ display:none !important; }
+      a{ color:#000; text-decoration:none; }
+      .columns{ display:block; }
+      section{ border:0; padding:0; page-break-inside:avoid; }
+      .portfolio-gallery{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header role="banner" aria-label="Header">
+      <div class="id-block">
+        <h1>Aaron Munro</h1>
+        <div class="role">Visual Effects Artist</div>
+        <div class="location">84A Sussex Road, Forrestfield, WA 6058, Australia</div>
+      </div>
+      <div class="contact" aria-label="Contact">
+        <div>Email: <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></div>
+        <div>Phone: <a href="tel:0477742636">0477742636</a></div>
+        <div>Website: <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a></div>
+      </div>
+      <div class="actions" aria-label="Export options">
+        <button id="btn-pdf" class="btn primary" type="button">Download as PDF</button>
+        <button id="btn-docx" class="btn" type="button">Download as DOCX</button>
+        <button id="btn-cover" class="btn" type="button">Download Cover Letter</button>
+      </div>
+    </header>
+
+    <main role="main" id="content">
+      <div class="columns">
+        <aside id="sidebar" aria-label="Side column">
+          <section id="summary">
+            <h2>Summary</h2>
+            <p>I am writing to express my interest in the Visual Effects Artist (Digital Annotation Expert) role with Crossing Hurdles (Mercor referral). I have extensive experience in reviewing, evaluating, and producing multimedia content, with a background in 3D development, VFX, real-time engines, and data-driven project workflows. I've developed strong abilities in tagging, annotating, and processing audio, video, and image data for both interactive and visualisation purposes. My background demonstrates attention to detail, capacity for following structured guidelines, and proficiency with advanced technical toolsets relevant to remote digital annotation work.</p>
+          </section>
+
+          <section id="skills">
+            <h2>Skills</h2>
+            <div>
+              <strong>Technical Skills:</strong>
+              <ul class="skills-list">
+                <li>3DS Max</li>
+                <li>Zbrush</li>
+                <li>Unreal Engine</li>
+                <li>Unity</li>
+                <li>Substance Suite (Painter/Designer)</li>
+                <li>Embergen</li>
+                <li>TYFlow</li>
+                <li>Octane Renderer</li>
+                <li>V-Ray</li>
+                <li>Photoshop</li>
+                <li>After Effects</li>
+                <li>Adobe Premiere</li>
+                <li>Davinci Resolve</li>
+                <li>Matterport</li>
+                <li>Reality Capture</li>
+                <li>Python (automation/data workflows)</li>
+                <li>Adobe Lightroom</li>
+                <li>PHP/CSS</li>
+                <li>AI/Generative Tools (ChatGPT, Claude.ai, Gemini, ElevenLabs, Midjourney, Stable Diffusion)</li>
+                <li>Microsoft Excel (advanced programming/automation)</li>
+                <li>JSON handling</li>
+                <li>Make.com (workflow automation)</li>
+                <li>FMETP streaming</li>
+              </ul>
+            </div>
+            <div style="margin-top:8px">
+              <strong>Core Competencies:</strong>
+              <ul class="core-list">
+                <li>Tagging and annotating multimedia content</li>
+                <li>Evaluating and comparing AI-generated outputs</li>
+                <li>Attention to detail</li>
+                <li>Written and verbal communication</li>
+                <li>Ability to follow instructions precisely</li>
+                <li>Independent remote work</li>
+                <li>Project management</li>
+                <li>Technical problem-solving</li>
+                <li>Client liaison</li>
+                <li>Image and video post-production</li>
+                <li>Workflow automation</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="certification">
+            <h2>Certification</h2>
+            <p>AI Generalist Course (Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications, expected Aug 2025)</p>
+          </section>
+
+          <section id="special-projects">
+            <h2>Specialized Project Experience</h2>
+            <p>Automated content workflows using Python and Make.com; produced immersive VR environments and comprehensive annotation processes on large-scale infrastructure projects; integrated generative AI for automated media handling and evaluation.</p>
+          </section>
+        </aside>
+
+        <section id="primary" aria-label="Primary column">
+          <section id="experience">
+            <h2>Work Experience</h2>
+
+            <article class="job-entry">
+              <h3>Specialised in 3D Development</h3>
+              <p class="job-meta">Viewport XR | 2023 – 2024</p>
+              <ul>
+                <li>Specialised in Unreal Engine and Unity development for immersive visualisation and multimedia content creation</li>
+                <li>Executed particle and fluid dynamics simulations using Embergen and TYFlow</li>
+                <li>Produced video content using After Effects, Adobe Premiere, and Davinci Resolve</li>
+                <li>Tagged, annotated, and developed dynamic visual assets for real-time engines</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+              <p class="job-meta">Vector 6 | 2016 – 2023</p>
+              <ul>
+                <li>Collaborated on 3D visualisation projects with significant video and image content production</li>
+                <li>Automated data workflows for tagging and managing digital media assets using Python and structured spreadsheets</li>
+                <li>Retouched and graded images for web and multimedia using Photoshop and Lightroom</li>
+                <li>Created internal tools for project collaboration and asset tracking</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Senior 3D Artist/Developer</h3>
+              <p class="job-meta">Minnovare | 2019</p>
+              <ul>
+                <li>Developed simulations and multimedia animations to communicate technical concepts</li>
+                <li>Produced annotated and visually explanatory videos for training purposes</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Senior 3D Artist/Developer</h3>
+              <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+              <ul>
+                <li>Managed asset annotation and tagging for visualisation projects</li>
+                <li>Liaised with clients on project deliverables, ensuring quality and consistency</li>
+                <li>Produced and edited video content, including storyboarding and scripting</li>
+                <li>Developed dynamic assets and tools to improve workflow automation</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>3D Artist</h3>
+              <p class="job-meta">3D Millipede | March 2005 – March 2006</p>
+              <ul>
+                <li>Converted 2D to 3D assets for multimedia presentations</li>
+                <li>Tagged, prepared, and integrated content into images/videos for client delivery</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Lead 3D Artist</h3>
+              <p class="job-meta">Cell Media | August 2003 – December 2004</p>
+              <ul>
+                <li>Developed safety and training videos requiring precise asset annotation</li>
+                <li>Handled the entire post-production pipeline for technical multimedia content</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>3D Artist</h3>
+              <p class="job-meta">IBP Interactive Business Presentations | November 1999 – June 2003</p>
+              <ul>
+                <li>Developed interactive business presentations including video and animation content</li>
+                <li>Managed tagging and structuring of multimedia assets for CD and DVD output</li>
+              </ul>
+            </article>
+          </section>
+        </section>
+      </div>
+
+      <section id="portfolio" aria-label="Portfolio Gallery" style="margin-top:22px;">
+        <h2>Portfolio Gallery</h2>
+        <div class="portfolio-gallery">
+          <div class="portfolio-card">
+            <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" allowfullscreen></iframe>
+            <h4>Projects and Dev over the last few years</h4>
+            <p class="relevance">Demonstrates real-time graphics, Unity VR development, VFX, simulation, and a variety of annotation-relevant production workflows including 3D, particle effects, and character animation.</p>
+          </div>
+          <div class="portfolio-card">
+            <iframe src="https://www.youtube.com/embed/QLEcGUWuTgE" title="METRONET Yanchep Rail Extension Linewide Flythrough 1" allowfullscreen></iframe>
+            <h4>METRONET Yanchep Rail Extension Linewide Flythrough 1</h4>
+            <p class="relevance">Illustrates production of multimedia content, video evaluation, and asset tagging as performed during recent employment at Viewport XR.</p>
+          </div>
+          <div class="portfolio-card">
+            <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016" allowfullscreen></iframe>
+            <h4>Showreel Aaron Munro 2016</h4>
+            <p class="relevance">Exhibits a broad range of visual effects, video editing, 3D, and multimedia annotation skills relevant to digital asset tagging and content quality standards.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo" aria-label="Footer"></footer>
+  </div>
+
+  <script>
+    (function(){
+      const btnPDF = document.getElementById('btn-pdf');
+      const btnDOCX = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      btnPDF.addEventListener('click', () => {
+        window.print();
+      });
+
+      async function fetchDownloads(){
+        try{
+          const res = await fetch('./downloads.json', { cache: 'no-store' });
+          if(!res.ok) throw new Error('Failed to load downloads.json');
+          const data = await res.json();
+          return data && data.downloads ? data.downloads : [];
+        }catch(err){
+          alert('Unable to access downloadable files. Please ensure downloads.json is available locally.');
+          return [];
+        }
+      }
+
+      async function downloadById(id){
+        const list = await fetchDownloads();
+        const item = list.find(d => d.id === id);
+        if(!item){
+          alert('Requested file not found.');
+          return;
+        }
+        const a = document.createElement('a');
+        a.href = item.path;
+        a.download = (item.name || 'download') + '.docx';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      btnDOCX.addEventListener('click', () => downloadById('resume'));
+      btnCover.addEventListener('click', () => downloadById('coverLetter'));
+    })();
+  </script>
+</body>
+</html>
