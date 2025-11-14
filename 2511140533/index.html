@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Technology Journalist Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <style>
+    /* === Style Guide (CSS Custom Properties) === */
+    :root{
+      --primary: #000000;
+      --bg: #FFFFFF;
+      --accent: #00A7C4;
+      --muted: #6C757D;
+      --muted-bg: #F8F9FA;
+
+      --font-primary: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+      --font-secondary: Georgia, serif;
+
+      --fs-h1: 36px;
+      --fs-h2: 22px;
+      --fs-h3: 18px;
+      --fs-body: 16px;
+      --fs-small: 14px;
+
+      --fw-regular: 400;
+      --fw-medium: 500;
+      --fw-bold: 700;
+
+      --lh-tight: 1.2;
+      --lh-body: 1.5;
+
+      --radius: 10px;
+      --space-section: 28px;
+      --space-item: 16px;
+
+      --page-max: 1000px;
+      --page-pad: 28px;
+    }
+
+    @page { size: A4 portrait; margin: 18mm 15mm; }
+
+    html, body{
+      margin:0; padding:0;
+      background: var(--bg);
+      color: var(--primary);
+      font-family: var(--font-primary);
+      font-size: var(--fs-body);
+      line-height: var(--lh-body);
+    }
+
+    body{
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: var(--page-pad);
+    }
+
+    header[role="banner"]{
+      border-bottom: 2px solid var(--muted-bg);
+      padding-bottom: 14px;
+      margin-bottom: var(--space-section);
+    }
+
+    h1{
+      font-size: var(--fs-h1);
+      font-weight: var(--fw-bold);
+      margin: 0 0 6px 0;
+      line-height: var(--lh-tight);
+    }
+
+    .target-role{
+      margin: 4px 0 10px 0;
+      color: var(--accent);
+      font-weight: var(--fw-medium);
+      font-size: 20px;
+    }
+
+    .contact{
+      display:flex; flex-wrap:wrap; gap: 12px 20px;
+      font-size: var(--fs-small);
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .contact a, .contact span{
+      color: inherit; text-decoration: none;
+    }
+    .contact a:focus, .contact a:hover{ text-decoration: underline; }
+
+    /* Layout */
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin: 10px 0 0 0;
+    }
+    .btn{
+      appearance:none; border:1px solid var(--accent); background: transparent;
+      color: var(--accent); padding:8px 12px; border-radius:8px; font-size:14px;
+      cursor:pointer;
+    }
+    .btn:hover{ background: var(--muted-bg); }
+    .btn.primary{ background: var(--accent); color:#fff; border-color: var(--accent); }
+
+    main[role="main"]{
+      display:block;
+    }
+
+    /* Columns: independent vertical flow per column (desktop only) */
+    .columns{
+      display:flex; gap: 28px;
+      align-items: flex-start;
+    }
+    .col{
+      display:flex; flex-direction:column; gap: var(--space-section);
+      min-width: 0;
+    }
+    .col-left{ flex: 0 1 60%; }
+    .col-right{ flex: 1 1 40%; }
+
+    section{
+      margin:0; /* eliminate extra gaps between sections */
+    }
+    section + section{ margin-top: 0; }
+    h2{
+      font-size: var(--fs-h2);
+      color: var(--accent);
+      margin: 0 0 10px 0;
+      font-weight: var(--fw-bold);
+    }
+
+    /* Summary */
+    .summary{
+      background: var(--muted-bg);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin: 0;
+    }
+
+    /* Experience */
+    #experience article{
+      background: var(--muted-bg);
+      border-radius: var(--radius);
+      padding: 14px;
+    }
+    #experience article + article{ margin-top: var(--space-item); }
+    #experience h3{
+      font-size: var(--fs-h3);
+      font-weight: var(--fw-medium);
+      margin: 0 0 4px 0;
+    }
+    .job-meta{
+      font-size: var(--fs-small);
+      color: var(--muted);
+      margin: 0 0 8px 0;
+    }
+    .job-duties{
+      margin: 0;
+      padding-left: 20px;
+    }
+    .job-duties li{ margin-bottom: 6px; }
+
+    /* Skills */
+    #skills .group{
+      margin-bottom: var(--space-item);
+    }
+    .skill-list{
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    /* Portfolio */
+    #portfolio .portfolio-entry{
+      background: var(--muted-bg);
+      border-radius: var(--radius);
+      padding: 12px;
+      display:flex; gap: 12px; flex-wrap: wrap;
+    }
+    .portfolio-media{
+      flex: 0 0 320px; max-width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid var(--muted);
+      background: #fff;
+    }
+    .portfolio-details{ flex: 1 1 200px; min-width: 180px; }
+
+    footer[role="contentinfo"]{
+      margin-top: var(--space-section);
+      color: var(--muted);
+      font-size: var(--fs-small);
+      text-align: right;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px){
+      body{ padding: 16px; }
+      .columns{ flex-direction: column; gap: 20px; }
+      .col-left, .col-right{ flex-basis: auto; }
+      header[role="banner"]{ padding-bottom: 10px; }
+      .contact{ flex-direction: column; gap: 6px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px){
+      .columns{ flex-direction: column; gap: 22px; }
+      .col-left, .col-right{ flex-basis: auto; }
+    }
+
+    @media (min-width: 769px){
+      /* Desktop keeps two independent columns */
+    }
+
+    /* Print */
+    @media print{
+      body{ padding: 0; max-width: none; }
+      .actions{ display: none !important; }
+      header[role="banner"]{ border: 0; padding-bottom: 0; margin-bottom: 10px; }
+      section, article{ page-break-inside: avoid; }
+      a{ color: var(--primary) !important; text-decoration: underline !important; }
+    }
+  </style>
+</head>
+<body>
+  <header role="banner" aria-label="Header">
+    <h1>Aaron Munro</h1>
+    <div class="target-role" aria-label="Target Job Title">Technology Journalist</div>
+    <div class="contact" aria-label="Contact Information">
+      <a href="tel:+61477742636" aria-label="Phone">0477742636</a>
+      <a href="mailto:azzamunza@gmail.com" aria-label="Email">azzamunza@gmail.com</a>
+      <span aria-label="Location">84A Sussex Road, Forrestfield, WA 6058, Australia</span>
+      <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener noreferrer" aria-label="Personal Website">www.vector6.com.au/resume</a>
+    </div>
+
+    <div class="actions" aria-label="Export Actions">
+      <button class="btn primary" id="btn-pdf" type="button" aria-label="Download as PDF">Download as PDF</button>
+      <button class="btn" id="btn-docx" type="button" aria-label="Download as DOCX">Download as DOCX</button>
+      <button class="btn" id="btn-cover" type="button" aria-label="Download Cover Letter">Download Cover Letter</button>
+    </div>
+  </header>
+
+  <main role="main" aria-label="Main Content">
+    <div class="columns" aria-label="Resume Columns">
+      <div class="col col-left">
+        <section id="summary" aria-labelledby="summary-title">
+          <h2 id="summary-title">Summary</h2>
+          <p class="summary">
+            I am writing to express my interest in the Technology Journalist role at Pickr. While my background is focused in advanced 3D development, immersive media, and content creation, I've developed strong abilities in translating complex technical processes into clear, visual, and written formats. My experience spans the development and review of cutting-edge tools and platforms for both consumers and industry, including hands-on evaluations, pipeline documentation, and production of guides for wide audiences. I offer a solid foundation in accurate, independent reporting and technical communication within digital media environments.
+          </p>
+        </section>
+
+        <section id="experience" aria-labelledby="experience-title">
+          <h2 id="experience-title">Relevant Work Experience</h2>
+
+          <article>
+            <h3>Specialised in 3D Development</h3>
+            <p class="job-meta">Viewport XR | 2023 – 2024</p>
+            <ul class="job-duties">
+              <li>Produced video content and technical guides using After Effects, Adobe Premiere and Davinci Resolve.</li>
+              <li>Developed and documented pipelines for custom asset development, including MetaHuman Lipsync and generative AI integration.</li>
+              <li>Created immersive experiences and delivered hands-on reviews of advanced hardware and workflows.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+            <p class="job-meta">Vector 6 | 2016 – 2023</p>
+            <ul class="job-duties">
+              <li>Collaborated on and created comprehensive documentation and guides for 3D visualisation and web development projects.</li>
+              <li>Developed internal tools and automated content workflows for project teams, supporting accessible technical understanding.</li>
+              <li>Authored technical and visual content related to emerging technologies, interactive media, and immersive applications.</li>
+            </ul>
+          </article>
+
+          <article>
+            <h3>Senior 3D Artist/Developer</h3>
+            <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+            <ul class="job-duties">
+              <li>Managed client communications and led the creation of project outlines, storyboards, and technical documentation.</li>
+              <li>Produced post-graded video content and edited voiceover streams for various projects.</li>
+              <li>Developed workflow instructions to support quality, accuracy, and repeatable standards for team deliverables.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+
+      <div class="col col-right" aria-label="Sidebar">
+        <section id="qualification" aria-labelledby="qualification-title">
+          <h2 id="qualification-title">Certification</h2>
+          <ul class="skill-list">
+            <li>AI Generalist Course – Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications (Aug 2025, in progress)</li>
+          </ul>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <h2 id="projects-title">Specialized Project Experience</h2>
+          <ul class="skill-list">
+            <li>Produced in-depth technical guides and automated tools for workflow optimisation across immersive media, contributing to effective knowledge transfer within teams and clients.</li>
+          </ul>
+        </section>
+
+        <section id="skills" aria-labelledby="skills-title">
+          <h2 id="skills-title">Technical Skills</h2>
+          <div class="group">
+            <ul class="skill-list">
+              <li>3DS Max</li>
+              <li>Zbrush</li>
+              <li>Unreal Engine</li>
+              <li>Unity</li>
+              <li>Substance Suite</li>
+              <li>Octane Render</li>
+              <li>V-Ray</li>
+              <li>Adobe Photoshop</li>
+              <li>Adobe After Effects</li>
+              <li>Adobe Premiere</li>
+              <li>Davinci Resolve</li>
+              <li>Python Programming</li>
+              <li>Web Development (PHP/CSS/HTML/JavaScript)</li>
+              <li>API Integration</li>
+            </ul>
+          </div>
+
+          <h2 style="margin-top:14px;">Core Competencies</h2>
+          <div class="group">
+            <ul class="skill-list">
+              <li>Technical Writing</li>
+              <li>Content Creation</li>
+              <li>Project Management</li>
+              <li>Workflow Automation</li>
+              <li>Client Liaison</li>
+              <li>Problem-Solving</li>
+              <li>Team Leadership</li>
+              <li>Time Management</li>
+              <li>Unbiased Reporting</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="portfolio" aria-labelledby="portfolio-title">
+          <h2 id="portfolio-title">Portfolio</h2>
+          <article class="portfolio-entry">
+            <div class="portfolio-media" aria-hidden="false">
+              <iframe
+                title="Projects and Dev over the last few years"
+                width="320"
+                height="180"
+                src="https://www.youtube.com/embed/rvEkQWkZ8uw"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="portfolio-details">
+              <strong>Projects and Dev over the last few years</strong>
+              <p>Demonstrates technical communication by presenting complex 3D, VR, and rendering workflows, relevant to hands-on reviews and explaining technology processes.</p>
+              <p><a href="https://www.youtube.com/watch?v=rvEkQWkZ8uw" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=rvEkQWkZ8uw</a></p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer role="contentinfo" aria-label="Footer">
+    <span>© Aaron Munro</span>
+  </footer>
+
+  <script>
+    // Minimal JS: Export Buttons
+    (function(){
+      const btnPDF = document.getElementById('btn-pdf');
+      const btnDOCX = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      if (btnPDF) {
+        btnPDF.addEventListener('click', () => window.print());
+      }
+
+      async function triggerDownload(itemId){
+        try{
+          const res = await fetch('./downloads.json', { cache: 'no-cache' });
+          if(!res.ok) throw new Error('downloads.json not found');
+          const data = await res.json();
+          const item = (data && Array.isArray(data.downloads)) ? data.downloads.find(d => d.id === itemId) : null;
+          if(!item){ throw new Error('Download item not found'); }
+          const a = document.createElement('a');
+          a.href = item.path;
+          a.setAttribute('download', item.name + '.docx');
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        } catch(err){
+          alert('Unable to download the requested file. Please ensure downloads.json and the DOCX files are available.');
+          console.error(err);
+        }
+      }
+
+      if (btnDOCX) {
+        btnDOCX.addEventListener('click', () => triggerDownload('resume'));
+      }
+      if (btnCover) {
+        btnCover.addEventListener('click', () => triggerDownload('coverLetter'));
+      }
+    })();
+  </script>
+</body>
+</html>
