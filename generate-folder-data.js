@@ -10,12 +10,19 @@ const path = require('path');
 
 const DATE_FOLDER_PATTERN = /^\d{10}$/;
 
-function scanFolders() {
-    const currentDir = __dirname;
-    const items = fs.readdirSync(currentDir);
+function scanFolders(directory) {
+    const scanDir = path.join(__dirname, directory);
+    
+    // Check if directory exists
+    if (!fs.existsSync(scanDir)) {
+        console.log(`Directory ${directory} does not exist`);
+        return [];
+    }
+    
+    const items = fs.readdirSync(scanDir);
     
     const dateFolders = items.filter(item => {
-        const itemPath = path.join(currentDir, item);
+        const itemPath = path.join(scanDir, item);
         return fs.statSync(itemPath).isDirectory() && DATE_FOLDER_PATTERN.test(item);
     });
     
@@ -25,8 +32,8 @@ function scanFolders() {
     return dateFolders;
 }
 
-function scanFilesInFolder(folderName) {
-    const folderPath = path.join(__dirname, folderName);
+function scanFilesInFolder(directory, folderName) {
+    const folderPath = path.join(__dirname, directory, folderName);
     const files = fs.readdirSync(folderPath);
     
     const result = {
@@ -92,11 +99,63 @@ function scanFilesInFolder(folderName) {
     return result;
 }
 
-function generateFolderData() {
-    const folders = scanFolders();
+function scanJobFolders(directory) {
+    const scanDir = path.join(__dirname, directory);
     
-    const folderData = folders.map(folder => {
-        const files = scanFilesInFolder(folder);
+    // Check if directory exists
+    if (!fs.existsSync(scanDir)) {
+        console.log(`Directory ${directory} does not exist`);
+        return [];
+    }
+    
+    const items = fs.readdirSync(scanDir);
+    
+    const dateFolders = items.filter(item => {
+        const itemPath = path.join(scanDir, item);
+        return fs.statSync(itemPath).isDirectory() && DATE_FOLDER_PATTERN.test(item);
+    });
+    
+    // Sort in reverse chronological order
+    dateFolders.sort((a, b) => b.localeCompare(a));
+    
+    return dateFolders;
+}
+
+function scanJobFilesInFolder(directory, folderName) {
+    const folderPath = path.join(__dirname, directory, folderName);
+    const files = fs.readdirSync(folderPath);
+    
+    const result = {
+        html: null
+    };
+    
+    files.forEach(file => {
+        // Check for HTML file (job listing)
+        if (file === 'index.html') {
+            result.html = file;
+        }
+    });
+    
+    return result;
+}
+
+function generateFolderData() {
+    // Scan resumes directory
+    const resumeFolders = scanFolders('resumes');
+    
+    const resumeData = resumeFolders.map(folder => {
+        const files = scanFilesInFolder('resumes', folder);
+        return {
+            name: folder,
+            files: files
+        };
+    });
+    
+    // Scan jobs directory
+    const jobFolders = scanJobFolders('jobs');
+    
+    const jobData = jobFolders.map(folder => {
+        const files = scanJobFilesInFolder('jobs', folder);
         return {
             name: folder,
             files: files
@@ -104,7 +163,8 @@ function generateFolderData() {
     });
     
     const data = {
-        folders: folderData,
+        resumes: resumeData,
+        jobs: jobData,
         lastUpdated: new Date().toISOString()
     };
     
@@ -116,8 +176,13 @@ function main() {
     
     const data = generateFolderData();
     
-    console.log(`Found ${data.folders.length} date folders`);
-    data.folders.forEach(folder => {
+    console.log(`\nFound ${data.resumes.length} resume folders in ./resumes/`);
+    data.resumes.forEach(folder => {
+        console.log(`  - ${folder.name}:`, folder.files);
+    });
+    
+    console.log(`\nFound ${data.jobs.length} job folders in ./jobs/`);
+    data.jobs.forEach(folder => {
         console.log(`  - ${folder.name}:`, folder.files);
     });
     

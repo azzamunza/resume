@@ -11,11 +11,18 @@ const path = require('path');
 const DATE_FOLDER_PATTERN = /^\d{10}$/;
 
 function scanFolders() {
-    const currentDir = __dirname;
-    const items = fs.readdirSync(currentDir);
+    const resumesDir = path.join(__dirname, 'resumes');
+    
+    // Check if resumes directory exists
+    if (!fs.existsSync(resumesDir)) {
+        console.log('Error: ./resumes/ directory does not exist');
+        return [];
+    }
+    
+    const items = fs.readdirSync(resumesDir);
     
     const dateFolders = items.filter(item => {
-        const itemPath = path.join(currentDir, item);
+        const itemPath = path.join(resumesDir, item);
         return fs.statSync(itemPath).isDirectory() && DATE_FOLDER_PATTERN.test(item);
     });
     
@@ -26,7 +33,7 @@ function scanFolders() {
 }
 
 function scanFilesInFolder(folderName) {
-    const folderPath = path.join(__dirname, folderName);
+    const folderPath = path.join(__dirname, 'resumes', folderName);
     const files = fs.readdirSync(folderPath);
     
     const result = {
@@ -117,7 +124,7 @@ function main() {
     
     folders.forEach(folder => {
         const downloadsData = generateDownloadsJson(folder);
-        const outputPath = path.join(__dirname, folder, 'downloads.json');
+        const outputPath = path.join(__dirname, 'resumes', folder, 'downloads.json');
         
         // Check if file already exists
         const existed = fs.existsSync(outputPath);
