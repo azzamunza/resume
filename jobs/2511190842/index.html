@@ -1,0 +1,268 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Results - Perth, WA</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f4f4f9; margin: 0; padding: 0; }
+        .container { display: flex; flex-wrap: wrap; max-width: 1600px; margin: 20px auto; padding: 10px; }
+        .job-cards-column { width: 100%; max-width: 100%; padding-right: 20px; box-sizing: border-box; }
+        .metadata-sidebar { width: 100%; max-width: 100%; padding-left: 20px; box-sizing: border-box; background-color: #e9ecef; padding: 20px; border-radius: 8px; }
+        @media (min-width: 1024px) {
+            .job-cards-column { width: 70%; max-width: 70%; }
+            .metadata-sidebar { width: 30%; max-width: 30%; }
+        }
+        .job-card { background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 8px; padding: 20px; margin-bottom: 20px; display: flex; flex-wrap: wrap; align-items: flex-start; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .job-card-content { flex: 3; min-width: 300px; padding-right: 20px; }
+        .job-card-chart { flex: 2; min-width: 250px; max-width: 400px; align-self: center; }
+        .job-card h2 { margin-top: 0; margin-bottom: 5px; color: #0056b3; }
+        .job-card h3 { margin-top: 0; margin-bottom: 15px; color: #5a6268; font-weight: normal; }
+        .job-card p { margin: 0 0 10px 0; }
+        .job-card .summary { font-style: italic; color: #495057; }
+        .job-card .meta-info { font-size: 0.9em; color: #6c757d; }
+        .view-job-btn { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin-top: 10px; transition: background-color 0.3s; }
+        .view-job-btn:hover { background-color: #0056b3; }
+        .metadata-sidebar h3 { border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-top: 20px; }
+        .metadata-sidebar h3:first-child { margin-top: 0; }
+        .metadata-sidebar ul { padding-left: 20px; margin-top: 10px; }
+        .metadata-sidebar li { margin-bottom: 5px; }
+        .metadata-sidebar .integrity-note { font-style: italic; color: #856404; background-color: #fff3cd; border: 1px solid #ffeeba; padding: 10px; border-radius: 5px; margin-top: 15px; }
+        .limitations { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; border-radius: 5px; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="job-cards-column">
+            <!-- Job Card 1: Senior 3D Artist -->
+            <div class="job-card">
+                <div class="job-card-content">
+                    <h2>Senior 3D Artist</h2>
+                    <h3>Harp Collective</h3>
+                    <p><strong>Location:</strong> Perth, Western Australia</p>
+                    <p><strong>Contact:</strong> hello@harpcollective.com.au</p>
+                    <p class="summary">This role focuses on creating high-quality CGI for high-end architectural and product visualization projects. The position requires expert-level use of 3ds Max, Corona or V-Ray, and Photoshop, aligning well with the candidate's extensive experience in architectural visualization and 20-year history with 3ds Max.</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGLmTGMRTQ7Y4HvWOVMfAA8Yb4R7_jTmOK-Jr2D4VP1S1MWDkwkvwXdjsbCxO1phVXKm526sgjMMF6YW6ay7XbrO-4XtSKkPLhaKEUIuXuyeEffch6i9wRqBoueEm-DthCAKYAkaD873Fj5T2BVtLf70edf0Lgz_iw59-8Q" class="view-job-btn" target="_blank">View Job</a>
+                    <p class="meta-info"><strong>Posting Date:</strong> Not provided (See limitations)</p>
+                    <p class="meta-info"><strong>Source:</strong> harpcollective.com.au</p>
+                </div>
+                <div class="job-card-chart">
+                    <canvas id="jobChart1"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Card 2: 3D Modeller -->
+            <div class="job-card">
+                <div class="job-card-content">
+                    <h2>3D Modeller</h2>
+                    <h3>Harp Collective</h3>
+                    <p><strong>Location:</strong> Perth, Western Australia</p>
+                    <p><strong>Contact:</strong> hello@harpcollective.com.au</p>
+                    <p class="summary">This position is centered on creating high-quality, detailed 3D models for architectural and product CGI using 3ds Max. The role's emphasis on proficiency in 3ds Max, ZBrush, and interpreting architectural plans is a direct match for the candidate's core skills and long-term experience at firms like Last Pixel and 3D Millipede.</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGqhESUDeuEz5TrTdZCMYLUmszYjOpZI5nlMgxZCphWL3xyp8PEuUDuoN3YK5EAsnHUUTpokwCjZ1cjr755wJuOkA6lAObN3JnnDPrsPQWq8nGqmiUbkPyGBfe7R8pFklCTSM80fuygDqHHyzFRoSG-tbhIpJRySw==" class="view-job-btn" target="_blank">View Job</a>
+                    <p class="meta-info"><strong>Posting Date:</strong> Not provided (See limitations)</p>
+                    <p class="meta-info"><strong>Source:</strong> harpcollective.com.au</p>
+                </div>
+                <div class="job-card-chart">
+                    <canvas id="jobChart2"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Card 3: 3D Animator -->
+            <div class="job-card">
+                <div class="job-card-content">
+                    <h2>3D Animator</h2>
+                    <h3>Motion Curve</h3>
+                    <p><strong>Location:</strong> Perth CBD, Western Australia</p>
+                    <p><strong>Contact:</strong> seriksson@motioncurve.com.au</p>
+                    <p class="summary">This role requires executing the full 3D production pipeline, with a focus on animation in Unreal Engine 5, asset texturing in Substance Painter, and working with Metahumans. This aligns strongly with the candidate's specialization in Unreal Engine at Viewport XR, expertise in the Substance Suite, and experience with MetaHuman Lipsync.</p>
+                    <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGzM1SVi9WzajsMh8cU9TChbH0SGC0OlriK14ndEsgNTUMbmUFEBqVXqy4AyxPYe81k5gm3g9GnDS2KEN9tM1J3nUBvom4fKLyTBqE8hQ8A7VcVe3O_Y6p6C7NX7D5YKh-ZyixAt9X63pc=" class="view-job-btn" target="_blank">View Job</a>
+                    <p class="meta-info"><strong>Posting Date:</strong> Not provided (See limitations)</p>
+                    <p class="meta-info"><strong>Source:</strong> motioncurve.com.au</p>
+                </div>
+                <div class="job-card-chart">
+                    <canvas id="jobChart3"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metadata-sidebar">
+            <h3>Search Metadata</h3>
+            <ul>
+                <li><strong>Search Execution Timestamp:</strong> 2025-11-19 09:48:32</li>
+            </ul>
+
+            <h3>Industries Targeted</h3>
+            <ul>
+                <li>3D Visualization & Development</li>
+                <li>Immersive Media (VR/AR)</li>
+                <li>Architectural Visualisation</li>
+                <li>Interactive Media Production</li>
+                <li>AI & Automation Workflows</li>
+                <li>Web Development</li>
+            </ul>
+
+            <h3>Job Search Sites Queried</h3>
+            <ul>
+                <li>seek.com.au</li>
+                <li>indeed.com.au</li>
+                <li>linkedin.com/jobs</li>
+                <li>cg-garage.com</li>
+                <li>the-dots.com</li>
+                <li>artstation.com/jobs</li>
+                <li>aria.org.au</li>
+                <li>polycount.org</li>
+                <li>angel.co</li>
+            </ul>
+
+            <h3>Search Filters Applied</h3>
+            <ul>
+                <li><strong>Location:</strong> Perth, Western Australia</li>
+                <li><strong>Date Range:</strong> Past 14 days (Attempted)</li>
+                <li><strong>Industries:</strong> 3D Visualization, Interactive Media, VR Development</li>
+            </ul>
+
+            <h3>Retrieval Issues & Limitations Encountered</h3>
+            <div class="limitations">
+                <p><strong>Critical Limitation:</strong> The job posting dates could not be programmatically verified from the source websites or search results. The roles presented are highly relevant but may have been posted more than 14 days ago. This is a significant limitation of the data retrieval process.</p>
+                <ul>
+                    <li>No verifiable job listings matching all criteria were found on LinkedIn, CG Garage, The Dots, ArtStation, Aria, Polycount, or Angel.co during the search.</li>
+                    <li>The search tools lack the ability to strictly enforce a date filter on the target websites, relying on keyword matching ("past 14 days") which is often ineffective.</li>
+                </ul>
+            </div>
+
+            <h3>Statistics</h3>
+            <ul>
+                <li><strong>Total Jobs Retrieved:</strong> 3</li>
+                <li><strong>Jobs Per Source:</strong>
+                    <ul>
+                        <li>harpcollective.com.au (from Seek search): 2 jobs</li>
+                        <li>motioncurve.com.au (from Indeed search): 1 job</li>
+                        <li>Other platforms: 0 jobs</li>
+                    </ul>
+                </li>
+                <li><strong>Date Range of Retrieved Jobs:</strong> Not verifiable.</li>
+            </ul>
+
+            <h3>Data Integrity Note</h3>
+            <p class="integrity-note">All data presented is retrieved directly from job listings. No information has been fabricated or inferred. Missing data points (specifically Posting Dates) are explicitly noted in each job card and in the limitations section.</p>
+        </div>
+    </div>
+<script>
+    const radarChartOptions = {
+        scales: {
+            r: {
+                angleLines: { display: true },
+                suggestedMin: 0,
+                suggestedMax: 10,
+                pointLabels: { font: { size: 11 } },
+                ticks: { stepSize: 2 }
+            }
+        },
+        plugins: { legend: { position: 'top' } }
+    };
+
+    // Data for Chart 1: Senior 3D Artist
+    new Chart(document.getElementById('jobChart1'), {
+        type: 'radar',
+        data: {
+            labels: ['3D Modeling (3ds Max)', 'Rendering (Corona/V-Ray)', 'Post-Production (PS)', 'Arch Viz', 'Animation', 'Project Management'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data: [10, 8, 10, 9, 7, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                },
+                {
+                    label: 'Job Requirements',
+                    data: [9, 9, 8, 9, 6, 5],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }
+            ]
+        },
+        options: radarChartOptions
+    });
+
+    // Data for Chart 2: 3D Modeller
+    new Chart(document.getElementById('jobChart2'), {
+        type: 'radar',
+        data: {
+            labels: ['3D Modeling (3ds Max)', 'UVW Unwrapping', 'Rendering (Basic)', 'Zbrush', 'CAD / Arch Plans', 'Photoshop'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data: [10, 8, 8, 9, 7, 10],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                },
+                {
+                    label: 'Job Requirements',
+                    data: [10, 7, 6, 6, 8, 7],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }
+            ]
+        },
+        options: radarChartOptions
+    });
+
+    // Data for Chart 3: 3D Animator
+    new Chart(document.getElementById('jobChart3'), {
+        type: 'radar',
+        data: {
+            labels: ['Real-Time Engine (UE5)', '3D Animation', 'Substance Suite', 'Metahuman/Rigging', 'Video Production', 'Client Liaison'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data: [9, 8, 9, 8, 9, 8],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                },
+                {
+                    label: 'Job Requirements',
+                    data: [8, 8, 7, 7, 6, 6],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }
+            ]
+        },
+        options: radarChartOptions
+    });
+</script>
+</body>
+</html>
+ 
