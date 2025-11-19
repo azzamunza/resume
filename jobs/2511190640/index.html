@@ -1,0 +1,137 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .job-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .job-details {
+            flex: 2;
+            min-width: 300px;
+        }
+        .job-chart {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            margin: auto;
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        p {
+            margin: 5px 0;
+            color: #555;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="job-card">
+        <div class="job-details">
+            <h2>CGI Generalist/Unreal Engine Technical Artist</h2>
+            <p><strong>Company:</strong> A New Plane</p>
+            <p><strong>Address:</strong> London</p>
+            <p><strong>Contact Information:</strong> Not Available</p>
+            <p><strong>Source URL:</strong> <a href="https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEC1cVEDlu9dlepLDsmDv7xcOZNScKv1ySphS5OSwMotEzyx6ixG2-2MBct8uh_VZ2Pp_d2amh053UX36XYqbWP8iz4iKsZkB1oVlYMEEOejgeBJby4pPhb8x8R_15PyRSF0471yb3y71A=">View Job Listing</a></p>
+        </div>
+        <div class="job-chart">
+            <canvas id="skillChart1"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const ctx1 = document.getElementById('skillChart1');
+        new Chart(ctx1, {
+            type: 'radar',
+            data: {
+                labels: [
+                    'Unreal Engine 5',
+                    'Metahuman & Animation',
+                    'Animation Workflows',
+                    'Hi-Res Rendering',
+                    '3DS Max',
+                    'Adobe Suite'
+                ],
+                datasets: [{
+                    label: 'Required Level',
+                    data: [5, 3, 3, 3, 4, 3],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                    label: 'Current Level',
+                    data: [5, 4, 4, 4, 5, 5],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 5,
+                        pointLabels: {
+                          font: {
+                            size: 11
+                          }
+                        },
+                        ticks: {
+                           stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Skill Profile vs. Job Requirements'
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+ 
