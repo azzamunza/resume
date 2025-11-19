@@ -5,8 +5,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251119-0341_Marketing-Assistant-Content-Creator.docx",
-        "coverLetter": null,
-        "applicationData": null
+        "coverLetter": "Cover-Letter_251119-0342_Private-Advertiser.docx",
+        "applicationData": {
+          "Company": "Private Advertiser",
+          "Job Title": "Marketing Assistant & Content Creator",
+          "Job Listing URL": "https://www.seek.com.au/job/88327065?ref=search-standalone&type=standard&origin=showNewTab#sol=7eaae1b88ffb76e8c75c00bc243eb129dec94bc0"
+        }
       }
     },
     {
@@ -213,5 +217,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-11-19T03:41:54.567Z"
+  "lastUpdated": "2025-11-19T03:42:47.611Z"
 }
