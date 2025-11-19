@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Marketing Assistant & Content Creator Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{
+      --primary:#0a558c;
+      --primary-contrast:#ffffff;
+      --text-main:#1a1a1a;
+      --text-muted:#5a5f6a;
+      --bg:#ffffff;
+      --surface:#f6f7f9;
+      --border:#e3e6ea;
+
+      --radius:8px;
+
+      --h1:32px;
+      --h2:20px;
+      --h3:16px;
+      --body:15.5px;
+      --small:12.5px;
+
+      --lh-heading:1.25;
+      --lh-body:1.55;
+
+      --space-0:0;
+      --space-1:6px;
+      --space-2:10px;
+      --space-3:14px;
+      --space-4:18px;
+      --space-5:24px;
+      --space-6:32px;
+
+      --col-left:320px;
+      --content-max:1100px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--surface);color:var(--text-main);font:400 var(--body)/var(--lh-body) system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";}
+
+    .page{
+      max-width:var(--content-max);
+      margin:0 auto;
+      padding:var(--space-6) var(--space-5);
+      background:var(--bg);
+    }
+
+    header[role="banner"]{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-3);
+      margin-bottom:var(--space-5);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:var(--space-3);
+      flex-wrap:wrap;
+    }
+
+    h1{
+      font-size:var(--h1);
+      line-height:var(--lh-heading);
+      margin:0;
+      color:var(--primary);
+      letter-spacing:.2px;
+    }
+    .target{
+      margin:0;
+      color:var(--text-muted);
+      font-weight:600;
+    }
+
+    .actions{
+      display:flex;
+      gap:var(--space-2);
+      flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--primary);
+      background:var(--primary);
+      color:var(--primary-contrast);
+      padding:10px 14px;
+      font-weight:600;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .btn.secondary{
+      background:transparent;
+      color:var(--primary);
+    }
+    .btn:focus{outline:2px solid #2b90d9; outline-offset:2px}
+
+    .contact{
+      display:flex;
+      gap:var(--space-4);
+      flex-wrap:wrap;
+      padding:var(--space-3);
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+    }
+    .contact a{color:var(--primary); text-decoration:none}
+    .contact a:hover{text-decoration:underline}
+    .contact-item{font-size:var(--small); color:var(--text-main)}
+
+    main[role="main"]{display:block}
+
+    /* Layout: two columns on desktop, balanced on tablet, single column on mobile */
+    .columns{
+      display:flex;
+      gap:var(--space-6);
+      align-items:flex-start;
+    }
+    .col-left, .col-right{
+      display:flex;
+      flex-direction:column;
+      gap:var(--space-5);
+      min-width:0;
+    }
+    .col-left{
+      flex:0 0 var(--col-left);
+    }
+    .col-right{
+      flex:1 1 auto;
+    }
+
+    section{margin:0}
+    section > h2{
+      font-size:var(--h2);
+      line-height:var(--lh-heading);
+      margin:0 0 var(--space-2) 0;
+      color:var(--primary);
+    }
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:var(--space-4);
+    }
+
+    .summary p{margin:0}
+
+    /* Experience */
+    article.job{
+      padding:0 0 var(--space-4) 0;
+      border-bottom:1px solid var(--border);
+      margin:0 0 var(--space-4) 0;
+    }
+    article.job:last-child{border-bottom:0; margin-bottom:0; padding-bottom:0}
+    .job h3{
+      font-size:var(--h3);
+      line-height:var(--lh-heading);
+      margin:0 0 4px 0;
+      color:var(--text-main);
+      font-weight:700;
+    }
+    .meta{
+      margin:0 0 var(--space-2) 0;
+      font-size:var(--small);
+      color:var(--text-muted);
+      font-weight:600;
+    }
+    .job ul{
+      margin:0;
+      padding-left:18px;
+    }
+    .job li{margin:6px 0}
+
+    /* Skills */
+    .skill-list{
+      columns:1;
+      column-gap:var(--space-6);
+      margin:0;
+      padding-left:18px;
+    }
+    .skill-list li{break-inside:avoid;margin:6px 0}
+
+    /* Portfolio */
+    .video-wrap{
+      position:relative;
+      width:100%;
+      aspect-ratio:16/9;
+      background:#000;
+      border-radius:6px;
+      overflow:hidden;
+    }
+    .video-wrap iframe{
+      position:absolute; inset:0; width:100%; height:100%; border:0;
+    }
+
+    footer[role="contentinfo"]{
+      margin-top:var(--space-6);
+      padding-top:var(--space-3);
+      border-top:1px solid var(--border);
+      font-size:var(--small);
+      color:var(--text-muted);
+    }
+    footer a{color:var(--primary); text-decoration:none}
+    footer a:hover{text-decoration:underline}
+
+    /* Responsive */
+    @media (max-width: 768px){
+      .page{padding:var(--space-5) var(--space-4)}
+      .columns{flex-direction:column}
+      .col-left{flex:1 1 auto}
+      .skill-list{columns:2}
+    }
+    @media (max-width: 480px){
+      h1{font-size:26px}
+      .skill-list{columns:1}
+      .contact{gap:var(--space-2)}
+    }
+
+    /* Print (A4 portrait) */
+    @media print{
+      .page{padding:0;background:#fff}
+      .actions{display:none !important}
+      .card,.contact{border:0;background:#fff;padding:0}
+      .columns{gap:18px}
+      a[href^="http"]:after{content:" (" attr(href) ")"; font-size:10px; color:#666}
+    }
+    @page{
+      size: A4 portrait;
+      margin: 18mm 15mm;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header role="banner" aria-label="Resume header">
+      <div class="topbar">
+        <div>
+          <h1>Aaron Munro</h1>
+          <p class="target">Marketing Assistant & Content Creator</p>
+        </div>
+        <nav class="actions" aria-label="Export options">
+          <button class="btn" id="btnPrint" type="button" aria-label="Download as PDF">Download as PDF</button>
+          <button class="btn secondary" id="btnDocx" type="button" aria-label="Download as DOCX">Download as DOCX</button>
+          <button class="btn secondary" id="btnCover" type="button" aria-label="Download Cover Letter">Download Cover Letter</button>
+        </nav>
+      </div>
+
+      <div class="contact" aria-label="Contact details">
+        <div class="contact-item">Email: <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></div>
+        <div class="contact-item">Phone: <a href="tel:0477742636">0477742636</a></div>
+        <div class="contact-item">Location: Forrestfield, WA, Australia</div>
+        <div class="contact-item">Website: <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a></div>
+      </div>
+    </header>
+
+    <main role="main">
+      <!-- Summary (full width) -->
+      <section class="summary card" aria-labelledby="summary-title">
+        <h2 id="summary-title">Summary</h2>
+        <p>I am writing to express my interest in the Marketing Assistant & Content Creator role. While my background is specialised in 3D development, web design, and media production, I bring extensive experience in digital content creation, graphics, website management, and photography. I've developed strong abilities in Adobe Photoshop, video editing, digital artwork, and technical problem-solving for visual communication projects. My freelance and project experience includes creating web content, retouching images, designing signage, and delivering dynamic visuals for a range of clients.</p>
+      </section>
+
+      <div class="columns" aria-label="Two column layout">
+        <!-- Left column -->
+        <aside class="col-left" aria-label="Sidebar">
+          <section class="card" aria-labelledby="skills-title">
+            <h2 id="skills-title">Relevant Skills</h2>
+
+            <h3 class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Technical Skills</h3>
+            <ul class="skill-list" aria-label="Technical skills">
+              <li>Adobe Photoshop</li>
+              <li>Adobe XD</li>
+              <li>Adobe Animate</li>
+              <li>Adobe Premiere</li>
+              <li>After Effects</li>
+              <li>Davinci Resolve</li>
+              <li>Canva</li>
+              <li>3DS Max</li>
+              <li>Zbrush</li>
+              <li>Substance Suite</li>
+              <li>Octane Render</li>
+              <li>PHP</li>
+              <li>CSS</li>
+              <li>HTML</li>
+              <li>Photography</li>
+              <li>Video editing tools</li>
+            </ul>
+
+            <h3 class="sr-only" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Core Competencies</h3>
+            <ul class="skill-list" aria-label="Core competencies">
+              <li>Content creation for digital platforms</li>
+              <li>Image retouching and photo grading</li>
+              <li>Web development and design</li>
+              <li>Visual storytelling</li>
+              <li>Project planning</li>
+              <li>Technical and creative problem-solving</li>
+              <li>Organisation</li>
+              <li>Team collaboration</li>
+              <li>Client communications</li>
+            </ul>
+          </section>
+
+          <section class="card" aria-labelledby="education-title">
+            <h2 id="education-title">Education &amp; Certifications</h2>
+            <p>Advanced Diploma of Information Technology Interactive Multimedia; Certificate IV of Information Technology Interactive Multimedia; AI Generalist Course (Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications, Aug 2025).</p>
+          </section>
+        </aside>
+
+        <!-- Right column -->
+        <section class="col-right" aria-label="Main content">
+          <section class="card" aria-labelledby="experience-title" id="experience">
+            <h2 id="experience-title">Relevant Work Experience</h2>
+
+            <article class="job" aria-labelledby="job-1-title">
+              <h3 id="job-1-title">Specialised in 3D Development</h3>
+              <p class="meta">Viewport XR — 2023 – 2024</p>
+              <ul>
+                <li>Produced video content with After Effects, Adobe Premiere and Davinci Resolve</li>
+                <li>Developed visual assets for immersive experiences and interactive media</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-2-title">
+              <h3 id="job-2-title">Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+              <p class="meta">Vector 6 — 2016 – 2023</p>
+              <ul>
+                <li>Developed dynamic websites with PHP and CSS, integrating customised graphics and design elements</li>
+                <li>Produced and retouched high-quality photography and performed extensive image editing using Adobe Photoshop</li>
+                <li>Designed signage and full-size decals for promotional and store environments</li>
+                <li>Created SVG icons and logos using Adobe XD and Animate</li>
+                <li>Managed multiple 3D and digital projects involving digital media production</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-3-title">
+              <h3 id="job-3-title">Senior 3D Artist/Developer</h3>
+              <p class="meta">Last Pixel — Oct 2006 – Mar 2016</p>
+              <ul>
+                <li>Managed projects and led client communications for visualisation productions</li>
+                <li>Created visual assets, performed post-production video editing, and delivered content for clients</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-4-title">
+              <h3 id="job-4-title">Lead 3D Artist</h3>
+              <p class="meta">Cell Media — Aug 2003 – Dec 2004</p>
+              <ul>
+                <li>Produced digital graphics and animations for media training videos</li>
+                <li>Used Photoshop, After Effects, and Premiere for media production tasks</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-5-title">
+              <h3 id="job-5-title">3D Artist</h3>
+              <p class="meta">IBP Interactive Business Presentations — Nov 1999 – Jun 2003</p>
+              <ul>
+                <li>Developed interactive presentations and integrated graphic design for multimedia content</li>
+                <li>Handled video editing and web development for client-facing products</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-6-title">
+              <h3 id="job-6-title">Langtrees – Website Design (Project-based)</h3>
+              <p class="meta">Freelance/Contract — Feb 2022 – Jul 2022</p>
+              <ul>
+                <li>Designed web graphics and developed PHP/CSS for dynamic website</li>
+                <li>Produced and graded photography with Adobe Photoshop and Lightroom</li>
+              </ul>
+            </article>
+          </section>
+
+          <section class="card" aria-labelledby="projects-title">
+            <h2 id="projects-title">Specialised Project Experience</h2>
+            <p>Delivered dynamic web and graphic design projects for Langtrees, including signage, full-size decals, and high-quality image grading/retouching for marketing use.</p>
+          </section>
+
+          <section class="card" aria-labelledby="portfolio-title">
+            <h2 id="portfolio-title">Portfolio</h2>
+            <article aria-labelledby="video-1-title">
+              <h3 id="video-1-title" style="margin:0 0 8px 0;font-size:var(--h3);line-height:var(--lh-heading);">Projects and Dev over the last few years</h3>
+              <div class="video-wrap" role="region" aria-label="Embedded video">
+                <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years" allowfullscreen></iframe>
+              </div>
+              <p style="margin:8px 0 0 0;">Demonstrates real-time content creation, video editing, and 3D visualisation using digital tools relevant to content creation.</p>
+            </article>
+          </section>
+        </section>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      <p>&copy; Aaron Munro — www.vector6.com.au/resume</p>
+    </footer>
+  </div>
+
+  <script>
+    (function(){
+      const btnPrint = document.getElementById('btnPrint');
+      const btnDocx  = document.getElementById('btnDocx');
+      const btnCover = document.getElementById('btnCover');
+
+      btnPrint.addEventListener('click', () => window.print());
+
+      let files = {};
+      function setBtnHandler(button, item){
+        if(!button) return;
+        if(!item){ button.setAttribute('aria-disabled','true'); button.disabled = true; return; }
+        button.addEventListener('click', () => {
+          const a = document.createElement('a');
+          a.href = item.path;
+          a.download = item.name || '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+      }
+
+      fetch('./downloads.json')
+        .then(r => r.ok ? r.json() : Promise.reject())
+        .then(data => {
+          if(!data || !Array.isArray(data.downloads)) throw new Error('Invalid downloads.json');
+          data.downloads.forEach(d => files[d.id] = d);
+          setBtnHandler(btnDocx, files['resume']);
+          setBtnHandler(btnCover, files['coverLetter']);
+        })
+        .catch(() => {
+          // Fallback: disable DOCX/cover buttons if downloads.json not available
+          [btnDocx, btnCover].forEach(b => { if(b){ b.disabled = true; b.setAttribute('aria-disabled','true'); } });
+        });
+    })();
+  </script>
+</body>
+</html>
