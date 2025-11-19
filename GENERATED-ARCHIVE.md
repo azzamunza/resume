@@ -1,24 +1,26 @@
-# Generated.html - Resume Archive
+# Resume & Job Archive - resumes/index.html
 
 ## Overview
 
-The `generated.html` file provides a table view of all resume versions stored in date-formatted folders (YYMMDDhhmm format). It automatically displays links to HTML resumes, DOCX resumes, and cover letters for each version.
+The `resumes/index.html` file provides a split-screen view of all resume versions and job listings stored in date-formatted folders (YYMMDDhhmm format). It displays resumes/cover letters on the left and job listings on the right.
 
 ## Features
 
-- **Dynamic Loading**: Reads folder data from `folder-data.json` to display all available resume versions
+- **Split-Screen Layout**: Left side shows resumes/cover letters, right side shows job listings
+- **Dynamic Loading**: Reads folder data from `folder-data.json` to display all available versions
 - **Date Formatting**: Converts folder names (e.g., `2511070204`) to readable dates (e.g., "07 Nov 2025 02:04")
 - **File Links**: Direct links to HTML, DOCX resume, and cover letter files
+- **Job Listing Previews**: Embedded iframes show job listing content
 - **Copy URL Icons**: Click the 📋 icon next to any file to copy its absolute URL to clipboard
 - **Missing File Handling**: Shows "Not Generated" for files that don't exist
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
+- **Responsive Design**: Works on desktop, tablet, and mobile devices (stacks vertically on smaller screens)
 
 ## Usage
 
 ### Viewing the Archive
 
-1. Open `generated.html` in a web browser
-2. The page will load and display all resume versions from the JSON data file
+1. Open `resumes/index.html` in a web browser
+2. The page will load and display all resume versions (left) and job listings (right) from the JSON data file
 
 ### Copying URLs
 
@@ -33,10 +35,10 @@ The `generated.html` file provides a table view of all resume versions stored in
 
 When new date-formatted folders are pushed to the main/master branch:
 
-1. A GitHub Actions workflow automatically runs `node generate-folder-data.js`
-2. The workflow updates `folder-data.json` with the new folder information
-3. The updated JSON file is automatically committed and pushed back to the repository
-4. The next time `generated.html` is loaded, it will show the new folders automatically
+1. A GitHub Actions workflow automatically runs `node generate-folder-data.js` and `node generate-downloads.js`
+2. The workflow updates `folder-data.json` and downloads.json files with the new folder information
+3. The updated JSON files are automatically committed and pushed back to the repository
+4. The next time `resumes/index.html` is loaded, it will show the new folders automatically
 
 This is handled by the `.github/workflows/generate-folder-data.yml` workflow.
 
@@ -57,13 +59,20 @@ You can also manually update the folder data:
 
 ```
 /
-├── generated.html              # The archive webpage
-├── folder-data.json           # JSON data with folder information
+├── folder-data.json           # JSON data with folder information (auto-generated)
 ├── generate-folder-data.js    # Script to scan and update folder data
-└── [date-folders]/            # Date-formatted folders (e.g., 2511070204)
-    ├── index.html             # HTML resume
-    ├── resume.docx            # DOCX resume
-    └── cover-letter.docx      # Cover letter
+├── generate-downloads.js      # Script to generate downloads.json files
+├── resumes/                   # Resume archive directory
+│   ├── index.html             # The archive webpage (split-screen view)
+│   └── [date-folders]/        # Date-formatted folders (e.g., 2511070204)
+│       ├── index.html         # HTML resume
+│       ├── resume.docx        # DOCX resume
+│       ├── cover-letter.docx  # Cover letter
+│       ├── application.json   # Job application metadata
+│       └── downloads.json     # File links (auto-generated)
+└── jobs/                      # Job listings directory
+    └── [date-folders]/        # Date-formatted job folders
+        └── index.html         # Job listing HTML
 ```
 
 ## Date Folder Format
@@ -96,10 +105,16 @@ The page uses the same color scheme as the main resume:
 
 ### Regular Updates
 
-Run `node generate-folder-data.js` whenever:
-- New date folders are added
+Run the generation scripts whenever:
+- New date folders are added to `resumes/` or `jobs/`
 - Files are added/removed from existing folders
 - File names change in any folder
+
+Commands:
+```bash
+node generate-folder-data.js   # Updates folder-data.json
+node generate-downloads.js     # Updates downloads.json in resume folders
+```
 
 ### Automation
 
@@ -114,7 +129,7 @@ You can also add the script to your local build process or other CI/CD pipelines
 
 ## Troubleshooting
 
-**Problem**: Table shows "No date folders found"
+**Problem**: Page shows "No date folders found" or "No job listings found"
 - **Solution**: Run `node generate-folder-data.js` to generate/update the JSON file
 
 **Problem**: New folders don't appear

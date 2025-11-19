@@ -49,29 +49,39 @@ The resume includes checkboxes next to every section and subsection, allowing yo
 ```
 /
 ├── index.html                    # Main resume page (comprehensive content)
-├── generated.html                # Resume archive table view
 ├── folder-data.json             # JSON data for archive (auto-generated)
 ├── generate-folder-data.js      # Script to update archive data
+├── generate-downloads.js        # Script to generate downloads.json files
+├── resumes/                     # Resume archive directory
+│   ├── index.html               # Resume & job archive display (split-screen)
+│   └── [date-folders]/          # Date-formatted resume versions
+│       ├── index.html
+│       ├── resume.docx
+│       ├── cover-letter.docx
+│       ├── application.json     # Job application metadata
+│       └── downloads.json       # File links (auto-generated)
+├── jobs/                        # Job listings directory
+│   └── [date-folders]/          # Date-formatted job listings
+│       └── index.html
 ├── css/
 │   └── style.css                # Styles with print media queries
 ├── js/
 │   └── script.js                # Print customisation logic
-├── .github/
-│   └── workflows/
-│       └── generate-folder-data.yml  # Auto-update workflow
-└── [date-folders]/              # Date-formatted resume versions
-    ├── index.html
-    ├── resume.docx
-    └── cover-letter.docx
+└── .github/
+    └── workflows/
+        └── generate-folder-data.yml  # Auto-update workflow
 ```
 
-### Resume Archive
+### Resume & Job Archive
 
-The repository includes an automated resume archive system:
+The repository includes an automated archive system for resumes and job listings:
 
-- **Archive Page**: `generated.html` displays all resume versions in a table
+- **Archive Page**: `resumes/index.html` displays all resume versions and job listings in a split-screen layout
 - **Auto-Update**: GitHub Actions automatically updates `folder-data.json` when new folders are added
-- **Date Folders**: Store resume versions in YYMMDDhhmm format folders
+- **Date Folders**: 
+  - Store resume versions in `resumes/[YYMMDDhhmm]/` format folders
+  - Store job listings in `jobs/[YYMMDDhhmm]/` format folders
+- **Split-Screen Display**: Left side shows resumes/cover letters, right side shows job listings
 - **Documentation**: See `GENERATED-ARCHIVE.md` for full details
 
 ## Deployment
