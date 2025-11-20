@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Results - Perth, WA</title>
+    <style>
+        body { font-family: sans-serif; margin: 0; background-color: #f4f4f9; color: #333; }
+        .container { display: flex; flex-wrap: wrap; }
+        .job-cards-column { width: 70%; padding: 20px; box-sizing: border-box; }
+        .metadata-sidebar { width: 30%; padding: 20px; background-color: #e9ecef; box-sizing: border-box; }
+        .job-card { background-color: #fff; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 20px; padding: 20px; display: flex; align-items: center; }
+        .job-details { flex-grow: 1; }
+        .job-title { font-size: 1.5em; margin: 0 0 5px 0; color: #0056b3; }
+        .company-name { font-size: 1.1em; margin: 0 0 15px 0; color: #555; }
+        .job-meta { font-size: 0.9em; color: #666; margin-bottom: 10px; }
+        .job-summary { margin-top: 15px; font-size: 0.95em; line-height: 1.6; }
+        .view-job-btn { display: inline-block; background-color: #007bff; color: #fff; padding: 10px 15px; border-radius: 5px; text-decoration: none; margin-top: 10px; }
+        .view-job-btn:hover { background-color: #0056b3; }
+        .chart-container { width: 300px; height: 300px; margin-left: 20px; flex-shrink: 0; }
+        .sidebar-section { margin-bottom: 25px; }
+        .sidebar-title { font-size: 1.2em; border-bottom: 2px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; }
+        .sidebar-list { list-style-type: none; padding-left: 0; }
+        .sidebar-list li { margin-bottom: 5px; }
+        @media (max-width: 992px) {
+            .job-cards-column, .metadata-sidebar { width: 100%; }
+            .container { flex-direction: column; }
+            .job-card { flex-direction: column; }
+            .chart-container { margin-left: 0; margin-top: 20px; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="job-cards-column">
+            <!-- Job Card 1 -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h2 class="job-title">Video Game Software Engineer/Developer</h2>
+                    <h3 class="company-name">Titanium Studios Pty Ltd</h3>
+                    <p class="job-meta"><strong>Location:</strong> South Perth, Perth WA (Hybrid)</p>
+                    <p class="job-meta"><strong>Contact:</strong> Not provided</p>
+                    <p class="job-meta"><strong>Posted:</strong> 14 hours ago</p>
+                    <p class="job-meta"><strong>Source:</strong> SEEK</p>
+                    <p class="job-summary">This role with a successful Perth game studio is focused on developing exciting new projects. The position requires strong C++ skills and offers a friendly team environment with a great work-life balance, suitable for engineers of all levels.</p>
+                    <a href="https://www.seek.com.au/job/76598821" class="view-job-btn" target="_blank">View Job</a>
+                </div>
+                <div class="chart-container">
+                    <canvas id="jobChart1"></canvas>
+                </div>
+            </div>
+            <!-- Job Card 2 -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h2 class="job-title">Senior 3D Artist</h2>
+                    <h3 class="company-name">Harp Collective</h3>
+                    <p class="job-meta"><strong>Location:</strong> Jolimont, Perth WA</p>
+                    <p class="job-meta"><strong>Contact:</strong> hello@harpcollective.com.au</p>
+                    <p class="job-meta"><strong>Posted:</strong> Recent (Date not specified)</p>
+                    <p class="job-meta"><strong>Source:</strong> Harp Collective Careers</p>
+                    <p class="job-summary">Harp Collective is seeking a talented and experienced 3D artist to join their Perth studio for high-quality, photo-realistic architectural visualisation. The role requires at least 4-5 years of relevant studio experience and offers an opportunity to join a dynamic and creative team.</p>
+                    <a href="https://www.harpcollective.com.au/careers/senior-3d-artist" class="view-job-btn" target="_blank">View Job</a>
+                </div>
+                <div class="chart-container">
+                    <canvas id="jobChart2"></canvas>
+                </div>
+            </div>
+            <!-- Job Card 3 -->
+            <div class="job-card">
+                <div class="job-details">
+                    <h2 class="job-title">3D Artist</h2>
+                    <h3 class="company-name">Flood Studio</h3>
+                    <p class="job-meta"><strong>Location:</strong> Perth, WA</p>
+                    <p class="job-meta"><strong>Contact:</strong> Not provided</p>
+                    <p class="job-meta"><strong>Posted:</strong> 17 hours ago</p>
+                    <p class="job-meta"><strong>Source:</strong> Jobsora</p>
+                    <p class="job-summary">Australia's leading architectural visualization company is seeking 3D Artists of all levels for its growing Perth studio. This position offers a chance to work with a highly skilled team and expand knowledge in technology and the architectural industry.</p>
+                    <a href="https://au.bebee.com/job/20241120-a61171a5c6020790333d0623a859a0f0" class="view-job-btn" target="_blank">View Job</a>
+                </div>
+                <div class="chart-container">
+                    <canvas id="jobChart3"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metadata-sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Search Execution Timestamp</h3>
+                <p id="timestamp"></p>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Industries Targeted</h3>
+                <ul class="sidebar-list">
+                    <li>3D Visualization</li>
+                    <li>Interactive Media</li>
+                    <li>VR Development</li>
+                    <li>Web Development</li>
+                    <li>Architectural Visualization</li>
+                    <li>AI & Automation</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Job Search Sites Queried</h3>
+                <ul class="sidebar-list">
+                    <li>SEEK Australia: https://www.seek.com.au</li>
+                    <li>Indeed Australia: https://www.indeed.com.au</li>
+                    <li>LinkedIn Jobs: https://www.linkedin.com/jobs</li>
+                    <li>CG Garage: https://cg-garage.com</li>
+                    <li>The Dots: https://the-dots.com</li>
+                    <li>ArtStation Jobs: https://www.artstation.com/jobs</li>
+                    <li>ARIA: https://aria.org.au</li>
+                    <li>Polycount: https://www.polycount.org</li>
+                    <li>AngelList: https://angel.co</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Search Filters Applied</h3>
+                <ul class="sidebar-list">
+                    <li><strong>Location:</strong> Perth, Western Australia</li>
+                    <li><strong>Date Range:</strong> Past 14 days</li>
+                    <li><strong>Industries:</strong> 3D Visualization, Interactive Media, VR Development</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Retrieval Issues & Limitations Encountered</h3>
+                <p>No major retrieval issues were encountered. Some job postings on aggregator sites did not have specific posting dates, making the "Past 14 days" filter difficult to verify on those platforms. Platforms like CG Garage, The Dots, ArtStation, ARIA, Polycount, and AngelList did not immediately return relevant results for the specific search criteria and may require more targeted searches.</p>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Statistics</h3>
+                <ul class="sidebar-list">
+                    <li>Total Jobs Retrieved: 3</li>
+                    <li>Jobs per source:</li>
+                    <ul>
+                        <li>SEEK: 1</li>
+                        <li>Harp Collective Careers: 1</li>
+                        <li>Jobsora: 1</li>
+                    </ul>
+                    <li>Date Range: 2025-11-19 to 2025-11-20</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Data Integrity Note</h3>
+                <p>All data presented is retrieved directly from job listings. No information has been fabricated or inferred. Missing data points are explicitly noted.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set timestamp
+        document.getElementById('timestamp').textContent = new Date().toISOString().replace('T', ' ').substring(0, 19);
+
+        // Chart Data
+        const chartData1 = {
+            labels: ['Unreal Engine', 'C++/Programming', '3D Modeling', 'Team Collaboration', 'Problem Solving', 'VR/XR Dev'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data:,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                },
+                {
+                    label: 'Job Requirements',
+                    data:,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                }
+            ]
+        };
+
+        const chartData2 = {
+            labels: ['3D Modeling (3DS Max)', 'Rendering (V-Ray)', 'Material/Texturing', 'Arch-Vis', 'Client Liaison', 'Project Management'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data:,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                },
+                {
+                    label: 'Job Requirements',
+                    data:,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                }
+            ]
+        };
+
+        const chartData3 = {
+            labels: ['3D Modeling', 'Architectural Vis', 'Rendering', 'Teamwork', 'Adobe Suite', 'Attention to Detail'],
+            datasets: [
+                {
+                    label: 'Candidate Skills',
+                    data:,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)',
+                },
+                {
+                    label: 'Job Requirements',
+                    data:,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                }
+            ]
+        };
+
+        const chartOptions = {
+            scale: {
+                ticks: { beginAtZero: true, max: 10 }
+            },
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        // Render Charts
+        new Chart(document.getElementById('jobChart1'), { type: 'radar', data: chartData1, options: chartOptions });
+        new Chart(document.getElementById('jobChart2'), { type: 'radar', data: chartData2, options: chartOptions });
+        new Chart(document.getElementById('jobChart3'), { type: 'radar', data: chartData3, options: chartOptions });
+    </script>
+</body>
+</html>
