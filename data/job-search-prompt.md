@@ -22,24 +22,12 @@ Act as a specialized job search analyst with expertise in:
 - Create a skills inventory for matching against job requirements
 
 #### Task 2: Retrieve Multiple Job Listings from Predefined Job Search Platforms
-**IMPORTANT: Use ONLY these 9 predefined job search URLs. Do NOT search for additional sites.**
+**IMPORTANT: Use ONLY the predefined job search platforms specified in the SearchSites document. Do NOT search for additional sites.**
 
-Query the following job search platforms for available positions:
-1. https://www.seek.com.au
-2. https://www.indeed.com.au
-3. https://www.linkedin.com/jobs
-4. https://cg-garage.com
-5. https://the-dots.com
-6. https://www.artstation.com/jobs
-7. https://aria.org.au
-8. https://www.polycount.org
-9. https://angel.co
+Query the job search platforms listed in the **SearchSites** document for available positions. The SearchSites document contains the complete list of search platforms, URLs, and filtering requirements.
 
-**Filtering Requirements:**
-- **Location Filter:** Perth, Western Australia ONLY
-- **Date Filter:** Jobs posted within the past 14 days (2 weeks) ONLY
-- **Quantity:** Retrieve as many relevant job listings as available from each platform
-- **Data Integrity:** If a platform returns no results, explicitly note this in the metadata sidebar
+**Job Role Targeting:**
+Use the job roles listed in the **JobRoles** document to target suitable positions. Match job listings against these role categories to ensure relevance to the candidate's expertise and career goals.
 
 **For Each Job Listing, Extract:**
 - Job title
@@ -145,7 +133,7 @@ The metadata sidebar must display:
    - Example: "3D Visualization, Interactive Media, VR Development, Web Development, Architectural Visualization"
 
 3. **Job Search Sites Queried**
-   - Complete list of the 9 predefined URLs that were queried
+   - Complete list of all predefined URLs from SearchSites document that were queried
    - Include platform names and URLs
 
 4. **Search Filters Applied**
@@ -201,8 +189,12 @@ The metadata sidebar must display:
 
 ## Prompt-Data Separation
 
-**Data:** [The Work History document will be inserted here]
+**Order of Data Documents:**
+1. This job search prompt (job-search-prompt.md)
+2. SearchSites document - contains all job search platforms and URLs
+3. JobRoles document - contains suitable job titles and role categories
+4. Work History document - contains comprehensive work experience and skills
 
 ---
 
-**IMPORTANT NOTE:** The Work History data follows BELOW this prompt. Ensure the Work History document is provided in full before executing the job search and analysis tasks.
+**IMPORTANT NOTE:** Ensure all three data documents (SearchSites, JobRoles, and Work History) are provided in the correct order before executing the job search and analysis tasks.
