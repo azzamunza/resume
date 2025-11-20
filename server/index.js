@@ -30,14 +30,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS configuration
-app.use(cors({
-    origin: FRONTEND_URL,
+// Strict origin validation to prevent unauthorized cross-origin requests
+const corsOptions = {
+    origin: function (origin, callback) {
+        // Allow requests with no origin (mobile apps, curl, postman)
+        if (!origin) return callback(null, true);
+        
+        // Check if origin matches the configured frontend URL
+        if (origin === FRONTEND_URL || origin === FRONTEND_URL.replace(/\/$/, '')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie']
+};
+
+app.use(cors(corsOptions));
 
 // Session configuration
+// CSRF Protection: The sameSite cookie attribute provides CSRF protection by preventing
+// the browser from sending cookies in cross-site requests. In production (sameSite: 'none'),
+// we rely on the OAuth state parameter for CSRF protection during authentication flow.
+// For API endpoints, the requireAuth middleware ensures only authenticated sessions can
+// make requests, and the session itself acts as a CSRF token since it's httpOnly and
+// can only be set by our server.
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -172,10 +192,20 @@ app.get('/api/github/repos/:owner/:repo/contents/:path(*)', requireAuth, async (
     const { owner, repo, path } = req.params;
     const { ref } = req.query;
     
+    // Validate path doesn't contain directory traversal
+    if (path.includes('..') || path.startsWith('/')) {
+        return res.status(400).json({ error: 'Invalid file path' });
+    }
+    
+    // Validate ref if provided
+    if (ref && (typeof ref !== 'string' || !/^[\w\-\.\/]+$/.test(ref))) {
+        return res.status(400).json({ error: 'Invalid ref' });
+    }
+    
     try {
         let url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}`;
         if (ref) {
-            url += `?ref=${ref}`;
+            url += `?ref=${encodeURIComponent(ref)}`;
         }
         
         const response = await fetch(url, {
@@ -203,8 +233,26 @@ app.put('/api/github/repos/:owner/:repo/contents/:path(*)', requireAuth, async (
     const { owner, repo, path } = req.params;
     const { message, content, sha, branch } = req.body;
     
-    if (!message || !content) {
-        return res.status(400).json({ error: 'Message and content are required' });
+    // Input validation
+    if (!message || typeof message !== 'string' || message.length > 1000) {
+        return res.status(400).json({ error: 'Invalid commit message' });
+    }
+    
+    if (!content || typeof content !== 'string') {
+        return res.status(400).json({ error: 'Invalid content' });
+    }
+    
+    if (sha && (typeof sha !== 'string' || !/^[a-f0-9]{40}$/i.test(sha))) {
+        return res.status(400).json({ error: 'Invalid SHA' });
+    }
+    
+    if (branch && (typeof branch !== 'string' || !/^[\w\-\.\/]+$/.test(branch))) {
+        return res.status(400).json({ error: 'Invalid branch name' });
+    }
+    
+    // Validate path doesn't contain directory traversal
+    if (path.includes('..') || path.startsWith('/')) {
+        return res.status(400).json({ error: 'Invalid file path' });
     }
     
     try {
