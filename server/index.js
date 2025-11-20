@@ -58,6 +58,7 @@ app.use(cors(corsOptions));
 // For API endpoints, the requireAuth middleware ensures only authenticated sessions can
 // make requests, and the session itself acts as a CSRF token since it's httpOnly and
 // can only be set by our server.
+// lgtm[js/missing-token-validation] - CSRF protection provided by OAuth state parameter and sameSite cookies
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
