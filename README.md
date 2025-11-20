@@ -108,11 +108,11 @@ The archive page includes an integrated editor for managing job search configura
 
 - **Browser-Based Editing**: Edit `SearchSites.md` and `JobRoles.md` directly in the browser
 - **Live Preview**: View current file contents loaded from the repository
-- **Secure GitHub Integration**: 
-  - Authenticate using GitHub OAuth Device Flow
+- **Secure GitHub Integration** (Two Options):
+  - **Backend OAuth Server (Recommended)**: Uses Web Application Flow with backend server - no CORS issues, more secure
+  - **Device Flow (Legacy)**: Direct frontend authentication using GitHub Device Flow
   - Changes saved directly to the repository via GitHub API
   - OAuth verification ensures repository access permissions
-  - Credentials stored securely in browser localStorage
 - **File Management**:
   - `SearchSites.md`: Contains job search platforms and filtering requirements
   - `JobRoles.md`: Lists suitable job titles organized by tier
@@ -120,7 +120,16 @@ The archive page includes an integrated editor for managing job search configura
 
 #### Using GitHub OAuth Authentication
 
-To use the editor feature:
+**Option 1: Backend OAuth Server (Recommended)**
+
+1. Deploy the backend server (see `BACKEND_DEPLOYMENT.md`)
+2. Update frontend to use backend API (see `FRONTEND_INTEGRATION.md`)
+3. On the archive page, click "Login with GitHub"
+4. You'll be redirected to GitHub to authorize
+5. After authorization, you're redirected back automatically
+6. Once authenticated, you can edit and save files directly to the repository
+
+**Option 2: Device Flow (Legacy)**
 
 1. On the archive page, click "Login with GitHub"
 2. A modal will appear with a verification code
@@ -130,7 +139,7 @@ To use the editor feature:
 6. Return to the archive page - authentication will complete automatically
 7. Once authenticated, you can edit and save files directly to the repository
 
-This uses GitHub's Device Flow for secure authentication without requiring you to manually create access tokens.
+See `OAUTH_SETUP.md` for detailed authentication setup instructions.
 
 ## Deployment
 

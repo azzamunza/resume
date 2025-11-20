@@ -2,11 +2,27 @@
 
 This document explains how to set up GitHub OAuth authentication for the resume website's file editor.
 
+## ⚠️ IMPORTANT UPDATE
+
+This repository now supports **two OAuth methods**:
+
+1. **Backend OAuth Server (Recommended)** - Uses Web Application Flow with a backend server to resolve CORS issues
+2. **Device Flow (Legacy)** - Direct frontend authentication (original implementation)
+
 ## Current Configuration
 
-- **Client ID**: `Ov23liDEPGpyLygXjFwY`
-- **Authentication Method**: Device Flow
+### Backend OAuth Server (New)
+- **Authentication Method**: Web Application Flow
+- **Backend Server**: Node.js/Express server (in `/server` directory)
 - **Required Scopes**: `repo` (full control of private repositories)
+- **Advantages**: No CORS issues, secure token storage, better UX
+- **Setup Required**: Deploy backend server (see BACKEND_DEPLOYMENT.md)
+
+### Device Flow (Legacy)
+- **Client ID**: `Ov23liDEPGpyLygXjFwY`
+- **Authentication Method**: Device Flow (direct frontend)
+- **Required Scopes**: `repo` (full control of private repositories)
+- **Limitations**: May have CORS issues, less secure token storage
 
 ## GitHub OAuth App Configuration
 
@@ -94,21 +110,63 @@ GitHub API rate limits apply:
 - **Device Flow polling**: Should poll at 5+ second intervals
 - The implementation respects GitHub's recommended intervals
 
-### 8. Alternative Authentication Methods
+### 8. Backend OAuth Server (Recommended)
 
-If Device Flow doesn't work (e.g., in restricted networks):
+**✅ Now Implemented!** The repository includes a complete backend OAuth server implementation.
+
+**Why Use Backend OAuth?**
+- ✅ Resolves CORS issues completely
+- ✅ Secure token storage (server-side sessions)
+- ✅ Better user experience (seamless redirect)
+- ✅ Production-ready and scalable
+- ✅ No manual code entry required
+
+**Setup Instructions:**
+
+1. **Deploy Backend Server**
+   - See `BACKEND_DEPLOYMENT.md` for detailed deployment instructions
+   - Deploy to Vercel (recommended), Heroku, Railway, or any Node.js host
+   - Backend code is in `/server` directory
+
+2. **Create New GitHub OAuth App**
+   - Go to https://github.com/settings/developers
+   - Create a new OAuth App (separate from Device Flow app)
+   - Set callback URL to: `https://your-backend-url.com/api/auth/callback`
+   - Copy Client ID and Client Secret
+
+3. **Configure Backend**
+   - Set environment variables (Client ID, Client Secret, Frontend URL, etc.)
+   - See `server/.env.example` for all required variables
+
+4. **Update Frontend**
+   - See `FRONTEND_INTEGRATION.md` for integration steps
+   - Update frontend to use backend API endpoints
+   - Test authentication flow
+
+**Benefits over Device Flow:**
+- No CORS errors when calling GitHub API
+- More secure (tokens never exposed to frontend)
+- Better mobile experience (no code copying)
+- Supports standard OAuth Web Application Flow
+- Session-based authentication (no localStorage)
+
+**Files:**
+- `server/index.js` - Backend server implementation
+- `server/package.json` - Dependencies
+- `server/README.md` - Backend API documentation
+- `js/github-oauth-backend.js` - Frontend integration code
+- `BACKEND_DEPLOYMENT.md` - Deployment guide
+- `FRONTEND_INTEGRATION.md` - Frontend integration guide
+
+### 9. Alternative Authentication Methods (Legacy)
+
+If neither Device Flow nor Backend OAuth work:
 
 **Option 1: Personal Access Token (Manual)**
-Users can still use the old method by modifying the code to accept manual token entry.
+Users can manually create and paste GitHub Personal Access Tokens (not recommended for production).
 
-**Option 2: GitHub OAuth Web Flow**
-Requires a server-side callback handler to exchange the authorization code for a token. This would require:
-- A serverless function (e.g., Netlify Functions, Vercel Functions)
-- Secure storage of the client secret
-- Callback URL configuration
-
-**Option 3: GitHub App**
-More complex but provides finer-grained permissions and better security.
+**Option 2: GitHub App**
+More complex but provides finer-grained permissions and better security. Would require separate implementation.
 
 ## Support
 
