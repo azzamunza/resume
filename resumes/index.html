@@ -7,17 +7,92 @@
     <title>Resume Archive - Aaron Munro</title>
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .archive-container {
-            max-width: 1800px;
-            margin: 40px auto;
-            padding: 20px;
+        * {
+            box-sizing: border-box;
         }
 
-        .archive-title {
-            text-align: center;
-            color: #00205B;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        /* Sticky Header Styles */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #00205B;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        .site-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            padding: 20px 30px 10px;
+            margin: 0;
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            background: #00205B;
+            border-bottom: 2px solid #00B8E8;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: rgba(0, 184, 232, 0.1);
+            color: white;
+        }
+
+        .tab-button.active {
+            background: rgba(0, 184, 232, 0.2);
+            color: white;
+            border-bottom: 3px solid #FFB81C;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* Tab Panels */
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .archive-container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .split-container {
@@ -309,28 +384,348 @@
                 font-size: 0.95rem;
             }
         }
+
+        /* Editor Section Styles */
+        .editor-section {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .editor-title {
+            text-align: center;
+            color: #00205B;
+            margin-bottom: 30px;
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .auth-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .auth-status-text {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-authenticated {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .status-not-authenticated {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #00B8E8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0096c7;
+        }
+
+        .btn-success {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #45a049;
+        }
+
+        .btn-danger {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #da190b;
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .editor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .editor-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .editor-card-title {
+            color: #00205B;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #00B8E8;
+            padding-bottom: 10px;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: border-color 0.3s;
+        }
+
+        .editor-textarea:focus {
+            outline: none;
+            border-color: #00B8E8;
+        }
+
+        .editor-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .save-status {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .save-status.success {
+            color: #4CAF50;
+        }
+
+        .save-status.error {
+            color: #f44336;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #00B8E8;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .info-box strong {
+            color: #00205B;
+        }
+
+        @media (max-width: 1400px) {
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .split-container {
+                flex-direction: column;
+            }
+
+            .left-column,
+            .right-column {
+                width: 100%;
+            }
+
+            .tab-navigation {
+                flex-wrap: wrap;
+            }
+
+            .tab-button {
+                flex: 1 1 50%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .site-title {
+                font-size: 1.4rem;
+                padding: 15px 20px 10px;
+            }
+
+            .tab-button {
+                flex: 1 1 100%;
+                font-size: 0.9rem;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+            }
+
+            .archive-container,
+            .editor-section {
+                padding: 20px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="archive-container">
-        <h1 class="archive-title">Resume & Job Search Archive</h1>
-        <div class="split-container">
-            <div class="left-column">
-                <h2 class="section-title">Resumes & Cover Letters</h2>
+    <!-- Sticky Header -->
+    <header class="site-header">
+        <div class="header-content">
+            <h1 class="site-title">Aaron Munro - Professional Resume & Job Search Portal</h1>
+            
+            <!-- Tab Navigation -->
+            <nav class="tab-navigation">
+                <button class="tab-button active" onclick="switchTab('resumes')">Resumes & Cover Letters</button>
+                <button class="tab-button" onclick="switchTab('jobs')">Job Listings</button>
+                <button class="tab-button" onclick="switchTab('config')">Job Search Config</button>
+                <button class="tab-button" onclick="switchTab('history')">Work History</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        
+        <!-- Tab 1: Resumes & Cover Letters -->
+        <div id="tab-resumes" class="tab-panel active">
+            <div class="archive-container">
+                <h2 class="section-title">Resumes & Cover Letters Archive</h2>
                 <div id="archive-cards" class="archive-cards">
                     <!-- Resume cards will be dynamically generated -->
                     <div class="loading">Loading...</div>
                 </div>
             </div>
-            <div class="right-column">
-                <h2 class="section-title">Job Listings</h2>
+        </div>
+
+        <!-- Tab 2: Job Listings -->
+        <div id="tab-jobs" class="tab-panel">
+            <div class="archive-container">
+                <h2 class="section-title">Job Listings Archive</h2>
                 <div id="job-cards" class="job-cards">
                     <!-- Job cards will be dynamically generated -->
                     <div class="loading">Loading...</div>
                 </div>
             </div>
         </div>
-    </div>
+
+        <!-- Tab 3: Job Search Config -->
+        <div id="tab-config" class="tab-panel">
+            <div class="editor-section">
+                <h2 class="editor-title">Job Search Configuration Editor</h2>
+                
+                <div class="info-box">
+                    <p><strong>About this section:</strong> Edit your job search configuration files directly in the browser.</p>
+                    <p><strong>Security:</strong> Changes are saved securely to GitHub using OAuth authentication. Only authorized users can save changes.</p>
+                    <p><strong>Files:</strong> SearchSites.md contains job search platforms, JobRoles.md contains target job titles.</p>
+                </div>
+
+                <div class="auth-section">
+                    <div class="auth-status">
+                        <span class="auth-status-text">Authentication Status:</span>
+                        <span id="auth-status" class="status-indicator status-not-authenticated">Not Authenticated</span>
+                    </div>
+                    <div>
+                        <button id="auth-button" class="btn btn-primary" onclick="handleAuth()">Authenticate with GitHub</button>
+                        <button id="logout-button" class="btn btn-danger" onclick="handleLogout()" style="display: none;">Logout</button>
+                    </div>
+                    <div id="user-info" style="margin-top: 15px; color: #666; font-size: 0.95rem;"></div>
+                </div>
+
+                <div class="editor-container">
+                    <div class="editor-grid">
+                        <div class="editor-card">
+                            <h3 class="editor-card-title">SearchSites.md</h3>
+                            <textarea id="searchsites-editor" class="editor-textarea" placeholder="Loading..."></textarea>
+                            <div class="editor-actions">
+                                <span id="searchsites-status" class="save-status"></span>
+                                <button class="btn btn-success" onclick="saveFile('SearchSites')" id="save-searchsites" disabled>Save to GitHub</button>
+                            </div>
+                        </div>
+
+                        <div class="editor-card">
+                            <h3 class="editor-card-title">JobRoles.md</h3>
+                            <textarea id="jobroles-editor" class="editor-textarea" placeholder="Loading..."></textarea>
+                            <div class="editor-actions">
+                                <span id="jobroles-status" class="save-status"></span>
+                                <button class="btn btn-success" onclick="saveFile('JobRoles')" id="save-jobroles" disabled>Save to GitHub</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4: Work History -->
+        <div id="tab-history" class="tab-panel">
+            <div class="editor-section">
+                <h2 class="editor-title">Work History Editor</h2>
+                
+                <div class="info-box">
+                    <p><strong>About this section:</strong> Edit your comprehensive work history document.</p>
+                    <p><strong>Security:</strong> Changes are saved securely to GitHub using OAuth authentication.</p>
+                    <p><strong>File:</strong> work-history.md contains detailed work experience, skills, qualifications, and writing preferences.</p>
+                </div>
+
+                <div class="editor-container">
+                    <div class="editor-card">
+                        <h3 class="editor-card-title">work-history.md</h3>
+                        <textarea id="workhistory-editor" class="editor-textarea" style="min-height: 600px;" placeholder="Loading..."></textarea>
+                        <div class="editor-actions">
+                            <span id="workhistory-status" class="save-status"></span>
+                            <button class="btn btn-success" onclick="saveFile('WorkHistory')" id="save-workhistory" disabled>Save to GitHub</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
 
     <script>
         // Load folder data from JSON file
@@ -589,6 +984,328 @@
 
         // Initialize cards on page load
         document.addEventListener('DOMContentLoaded', generateCards);
+
+        // ============================================
+        // Tab Switching Functionality
+        // ============================================
+
+        function switchTab(tabName) {
+            // Hide all tab panels
+            const panels = document.querySelectorAll('.tab-panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected panel and activate button
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+            event.target.classList.add('active');
+            
+            // Scroll to top smoothly
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // GitHub OAuth and File Editor Functionality
+        // ============================================
+
+        const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY'; // This will need to be replaced with actual OAuth App Client ID
+        const GITHUB_REPO_OWNER = 'azzamunza';
+        const GITHUB_REPO_NAME = 'resume';
+        const GITHUB_BRANCH = 'main';
+        
+        let accessToken = null;
+        let userInfo = null;
+
+        // Load files on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Check if returning from OAuth
+            checkOAuthCallback();
+            
+            // Check for stored token
+            checkStoredAuth();
+            
+            // Load file contents
+            await loadFileContents();
+        });
+
+        // Check if this is an OAuth callback
+        function checkOAuthCallback() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            
+            if (code) {
+                // Clear URL parameters
+                window.history.replaceState({}, document.title, window.location.pathname);
+                
+                // Exchange code for token (in production, this should be done server-side)
+                // For now, we'll use GitHub's device flow or manual token
+                showMessage('OAuth callback received. Please configure token exchange.', 'info');
+            }
+        }
+
+        // Check for stored authentication
+        function checkStoredAuth() {
+            accessToken = localStorage.getItem('github_access_token');
+            userInfo = JSON.parse(localStorage.getItem('github_user_info') || 'null');
+            
+            if (accessToken && userInfo) {
+                updateAuthUI(true);
+            }
+        }
+
+        // Handle authentication
+        function handleAuth() {
+            // For security, we'll use GitHub's Personal Access Token flow
+            // User needs to create a token with repo scope at: https://github.com/settings/tokens
+            
+            const token = prompt(
+                'GitHub Personal Access Token Required\n\n' +
+                'To save changes to GitHub, you need a Personal Access Token with "repo" scope.\n\n' +
+                'Steps to create a token:\n' +
+                '1. Go to: https://github.com/settings/tokens\n' +
+                '2. Click "Generate new token (classic)"\n' +
+                '3. Select "repo" scope\n' +
+                '4. Generate token and copy it\n\n' +
+                'Paste your token below:'
+            );
+            
+            if (token && token.trim()) {
+                accessToken = token.trim();
+                
+                // Verify token by getting user info
+                fetch('https://api.github.com/user', {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Invalid token');
+                    }
+                    return response.json();
+                })
+                .then(user => {
+                    // Check if user has access to the repo
+                    return fetch(`https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}`, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('No access to repository');
+                        }
+                        return user;
+                    });
+                })
+                .then(user => {
+                    userInfo = {
+                        login: user.login,
+                        name: user.name,
+                        id: user.id
+                    };
+                    
+                    // Store in localStorage
+                    localStorage.setItem('github_access_token', accessToken);
+                    localStorage.setItem('github_user_info', JSON.stringify(userInfo));
+                    
+                    updateAuthUI(true);
+                    showMessage(`Successfully authenticated as ${user.login}`, 'success');
+                })
+                .catch(error => {
+                    console.error('Authentication error:', error);
+                    alert('Authentication failed. Please check your token and try again.\n\nError: ' + error.message);
+                    accessToken = null;
+                    userInfo = null;
+                });
+            }
+        }
+
+        // Handle logout
+        function handleLogout() {
+            if (confirm('Are you sure you want to logout?')) {
+                accessToken = null;
+                userInfo = null;
+                localStorage.removeItem('github_access_token');
+                localStorage.removeItem('github_user_info');
+                updateAuthUI(false);
+                showMessage('Logged out successfully', 'info');
+            }
+        }
+
+        // Update authentication UI
+        function updateAuthUI(authenticated) {
+            const authStatus = document.getElementById('auth-status');
+            const authButton = document.getElementById('auth-button');
+            const logoutButton = document.getElementById('logout-button');
+            const userInfoDiv = document.getElementById('user-info');
+            const saveButtons = document.querySelectorAll('[id^="save-"]');
+            
+            if (authenticated && userInfo) {
+                authStatus.textContent = 'Authenticated';
+                authStatus.className = 'status-indicator status-authenticated';
+                authButton.style.display = 'none';
+                logoutButton.style.display = 'inline-block';
+                userInfoDiv.innerHTML = `Logged in as: <strong>${userInfo.login}</strong>${userInfo.name ? ` (${userInfo.name})` : ''}`;
+                
+                // Enable save buttons
+                saveButtons.forEach(btn => btn.disabled = false);
+            } else {
+                authStatus.textContent = 'Not Authenticated';
+                authStatus.className = 'status-indicator status-not-authenticated';
+                authButton.style.display = 'inline-block';
+                logoutButton.style.display = 'none';
+                userInfoDiv.innerHTML = '';
+                
+                // Disable save buttons
+                saveButtons.forEach(btn => btn.disabled = true);
+            }
+        }
+
+        // Load file contents from GitHub
+        async function loadFileContents() {
+            try {
+                // Load SearchSites.md
+                const searchSitesResponse = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}/data/SearchSites.md`);
+                if (searchSitesResponse.ok) {
+                    const searchSitesContent = await searchSitesResponse.text();
+                    document.getElementById('searchsites-editor').value = searchSitesContent;
+                } else {
+                    document.getElementById('searchsites-editor').value = '# Error loading file\n\nCould not load SearchSites.md';
+                }
+                
+                // Load JobRoles.md
+                const jobRolesResponse = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}/data/JobRoles.md`);
+                if (jobRolesResponse.ok) {
+                    const jobRolesContent = await jobRolesResponse.text();
+                    document.getElementById('jobroles-editor').value = jobRolesContent;
+                } else {
+                    document.getElementById('jobroles-editor').value = '# Error loading file\n\nCould not load JobRoles.md';
+                }
+
+                // Load work-history.md
+                const workHistoryResponse = await fetch(`https://raw.githubusercontent.com/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/${GITHUB_BRANCH}/data/work-history.md`);
+                if (workHistoryResponse.ok) {
+                    const workHistoryContent = await workHistoryResponse.text();
+                    document.getElementById('workhistory-editor').value = workHistoryContent;
+                } else {
+                    document.getElementById('workhistory-editor').value = '# Error loading file\n\nCould not load work-history.md';
+                }
+            } catch (error) {
+                console.error('Error loading files:', error);
+                showMessage('Error loading files from GitHub', 'error');
+            }
+        }
+
+        // Save file to GitHub
+        async function saveFile(fileType) {
+            if (!accessToken) {
+                alert('Please authenticate with GitHub first');
+                return;
+            }
+            
+            let fileName, filePath, editorId, statusId, saveButtonId;
+            
+            if (fileType === 'SearchSites') {
+                fileName = 'SearchSites.md';
+                filePath = 'data/SearchSites.md';
+                editorId = 'searchsites-editor';
+                statusId = 'searchsites-status';
+                saveButtonId = 'save-searchsites';
+            } else if (fileType === 'JobRoles') {
+                fileName = 'JobRoles.md';
+                filePath = 'data/JobRoles.md';
+                editorId = 'jobroles-editor';
+                statusId = 'jobroles-status';
+                saveButtonId = 'save-jobroles';
+            } else if (fileType === 'WorkHistory') {
+                fileName = 'work-history.md';
+                filePath = 'data/work-history.md';
+                editorId = 'workhistory-editor';
+                statusId = 'workhistory-status';
+                saveButtonId = 'save-workhistory';
+            }
+            
+            const content = document.getElementById(editorId).value;
+            const statusElement = document.getElementById(statusId);
+            const saveButton = document.getElementById(saveButtonId);
+            
+            // Disable save button during save
+            saveButton.disabled = true;
+            statusElement.textContent = 'Saving...';
+            statusElement.className = 'save-status';
+            
+            try {
+                // Get the current file SHA (required for updating)
+                const fileInfoResponse = await fetch(
+                    `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}?ref=${GITHUB_BRANCH}`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    }
+                );
+                
+                if (!fileInfoResponse.ok) {
+                    throw new Error('Could not get file information');
+                }
+                
+                const fileInfo = await fileInfoResponse.json();
+                const sha = fileInfo.sha;
+                
+                // Update the file
+                const updateResponse = await fetch(
+                    `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${filePath}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: `Update ${fileName} via web editor`,
+                            content: btoa(unescape(encodeURIComponent(content))), // Base64 encode with UTF-8 support
+                            sha: sha,
+                            branch: GITHUB_BRANCH
+                        })
+                    }
+                );
+                
+                if (!updateResponse.ok) {
+                    const errorData = await updateResponse.json();
+                    throw new Error(errorData.message || 'Failed to update file');
+                }
+                
+                statusElement.textContent = 'Saved successfully! ✓';
+                statusElement.className = 'save-status success';
+                
+                // Clear status after 3 seconds
+                setTimeout(() => {
+                    statusElement.textContent = '';
+                    statusElement.className = 'save-status';
+                }, 3000);
+                
+            } catch (error) {
+                console.error('Save error:', error);
+                statusElement.textContent = 'Error saving: ' + error.message;
+                statusElement.className = 'save-status error';
+            } finally {
+                // Re-enable save button
+                saveButton.disabled = false;
+            }
+        }
+
+        // Show message helper
+        function showMessage(message, type) {
+            // Simple console log for now
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
     </script>
 </body>
 </html>

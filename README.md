@@ -45,6 +45,24 @@ The resume includes checkboxes next to every section and subsection, allowing yo
 4. Click "Download as PDF" or press Ctrl/Cmd+P to print
 5. The browser print dialog opens with your customised content
 
+### Job Search Automation (Make.com Integration)
+
+The `data/` directory contains files for AI-powered job search automation:
+
+1. **job-search-prompt.md**: Main prompt for the AI agent with detailed instructions
+2. **SearchSites.md**: List of job search platforms and filtering requirements
+3. **JobRoles.md**: Target job titles organized by tier (best-fit to accessible roles)
+4. **work-history.md**: Comprehensive work history and skills inventory
+
+**Workflow Order in Make.com:**
+1. Load `job-search-prompt.md` (instructions)
+2. Load `SearchSites.md` (where to search)
+3. Load `JobRoles.md` (what roles to target)
+4. Load `work-history.md` (candidate background)
+5. AI agent processes all documents and generates job search results
+
+These files can be edited directly in the browser via the Job Search Configuration Editor on `resumes/index.html`.
+
 ### File Structure
 ```
 /
@@ -83,6 +101,34 @@ The repository includes an automated archive system for resumes and job listings
   - Store job listings in `jobs/[YYMMDDhhmm]/` format folders
 - **Split-Screen Display**: Left side shows resumes/cover letters, right side shows job listings
 - **Documentation**: See `GENERATED-ARCHIVE.md` for full details
+
+### Job Search Configuration Editor
+
+The archive page includes an integrated editor for managing job search configuration files:
+
+- **Browser-Based Editing**: Edit `SearchSites.md` and `JobRoles.md` directly in the browser
+- **Live Preview**: View current file contents loaded from the repository
+- **Secure GitHub Integration**: 
+  - Authenticate using GitHub Personal Access Token
+  - Changes saved directly to the repository via GitHub API
+  - Token verification ensures repository access permissions
+  - Credentials stored securely in browser localStorage
+- **File Management**:
+  - `SearchSites.md`: Contains job search platforms and filtering requirements
+  - `JobRoles.md`: Lists suitable job titles organized by tier
+- **Status Indicators**: Real-time feedback on authentication and save operations
+
+#### Setting Up GitHub Personal Access Token
+
+To use the editor feature:
+
+1. Go to [GitHub Settings > Tokens](https://github.com/settings/tokens)
+2. Click "Generate new token (classic)"
+3. Give it a descriptive name (e.g., "Resume Site Editor")
+4. Select the `repo` scope (full control of private repositories)
+5. Generate the token and copy it
+6. On the archive page, click "Authenticate with GitHub" and paste your token
+7. Once authenticated, you can edit and save files directly to the repository
 
 ## Deployment
 
