@@ -12,7 +12,7 @@
 
 6. 3D Modeller (Intermediate/Senior)
 7. VFX Artist and Simulation Specialist
-8. Photogrammetry Specialist / Scan-to-Model Artist
+8. Photogrammetry Specialist and Scan-to-Model Artist
 9. Character Rigger and Animation Specialist
 10. Motion Graphics and Video Production Artist
 11. Generative AI and AI Workflow Automation Specialist
