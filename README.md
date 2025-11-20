@@ -109,26 +109,28 @@ The archive page includes an integrated editor for managing job search configura
 - **Browser-Based Editing**: Edit `SearchSites.md` and `JobRoles.md` directly in the browser
 - **Live Preview**: View current file contents loaded from the repository
 - **Secure GitHub Integration**: 
-  - Authenticate using GitHub Personal Access Token
+  - Authenticate using GitHub OAuth Device Flow
   - Changes saved directly to the repository via GitHub API
-  - Token verification ensures repository access permissions
+  - OAuth verification ensures repository access permissions
   - Credentials stored securely in browser localStorage
 - **File Management**:
   - `SearchSites.md`: Contains job search platforms and filtering requirements
   - `JobRoles.md`: Lists suitable job titles organized by tier
 - **Status Indicators**: Real-time feedback on authentication and save operations
 
-#### Setting Up GitHub Personal Access Token
+#### Using GitHub OAuth Authentication
 
 To use the editor feature:
 
-1. Go to [GitHub Settings > Tokens](https://github.com/settings/tokens)
-2. Click "Generate new token (classic)"
-3. Give it a descriptive name (e.g., "Resume Site Editor")
-4. Select the `repo` scope (full control of private repositories)
-5. Generate the token and copy it
-6. On the archive page, click "Authenticate with GitHub" and paste your token
+1. On the archive page, click "Login with GitHub"
+2. A modal will appear with a verification code
+3. Click "Open GitHub to Authorize" to open GitHub in a new tab
+4. Enter the verification code shown in the modal
+5. Authorize the application
+6. Return to the archive page - authentication will complete automatically
 7. Once authenticated, you can edit and save files directly to the repository
+
+This uses GitHub's Device Flow for secure authentication without requiring you to manually create access tokens.
 
 ## Deployment
 
