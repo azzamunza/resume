@@ -1012,11 +1012,18 @@
         // GitHub OAuth and File Editor Functionality
         // ============================================
 
-        // Backend API URL for OAuth (comment out to use local server)
-        // UPDATE THIS with your deployed Vercel backend URL once deployed
-        window.BACKEND_API_URL = 'https://your-backend-url.vercel.app';
+        // Backend API URL for OAuth
+        // For production: Set this to your deployed Vercel backend URL (e.g., 'https://resume-backend.vercel.app')
+        // For local development: Use 'http://localhost:3000'
+        // Leave as placeholder to show configuration needed error message
+        window.BACKEND_API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000' 
+            : 'https://your-backend-url.vercel.app';
         
-        const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY'; // GitHub OAuth App Client ID (only used for Device Flow fallback)
+        // NOTE: GitHub OAuth Client ID is intentionally public (client-side)
+        // The Client Secret is NEVER exposed and is only used server-side in the backend
+        // This Client ID is kept for Device Flow reference but is not actively used
+        const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY'; // GitHub OAuth App Client ID (Device Flow - not actively used)
         const GITHUB_REPO_OWNER = 'azzamunza';
         const GITHUB_REPO_NAME = 'resume';
         const GITHUB_BRANCH = 'main';
