@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D Grid-Based Fluid Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: #e0e0e0;
+        }
+        canvas {
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            background-color: #1e1e30;
+            touch-action: none; /* Prevent mobile browser gestures */
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .controls {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .slider-group {
+            min-width: 250px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        input[type="range"] {
+            width: 100%;
+            accent-color: #4cc9f0;
+            height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+            -webkit-appearance: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-2xl font-bold mb-4">2D Fluid Smoke Simulator</h1>
+        <canvas id="fluidCanvas"></canvas>
+
+        <div class="controls">
+            <div class="slider-group">
+                <label>Diffusion Rate (Viscosity) <span id="val-diffusion">0.00001</span></label>
+                <input type="range" id="diffusion" min="0" max="0.0001" step="0.00001" value="0.00001">
+            </div>
+            <div class="slider-group">
+                <label>Vorticity Confinement (Realism) <span id="val-vorticity">0.0</span></label>
+                <input type="range" id="vorticity" min="0.0" max="1.0" step="0.1" value="0.0">
+            </div>
+            <div class="slider-group">
+                <label>Resolution (Grid Size) <span id="val-res">64x64</span></label>
+                <input type="range" id="res" min="32" max="128" step="32" value="64">
+            </div>
+            <div class="slider-group">
+                <label>Smoke Decay (Density Loss) <span id="val-decay">0.99</span></label>
+                <input type="range" id="decay" min="0.95" max="1.0" step="0.01" value="0.99">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Fluid Simulation Class (Based on Jos Stam's Stable Fluids) ---
+        class Fluid {
+            constructor(N, dt, diffusion, viscosity) {
+                this.N = N; // Grid size N x N
+                this.dt = dt; // Delta time
+                this.diff = diffusion; // Diffusion rate (viscosity for smoke)
+                this.visc = viscosity; // Viscosity for velocity (ignored in this simple version, using 0)
+                
+                this.size = N * N;
+
+                // Density fields
+                this.density = new Array(this.size).fill(0);
+                this.prevDensity = new Array(this.size).fill(0);
+
+                // Velocity fields (u for x-velocity, v for y-velocity)
+                this.Vx = new Array(this.size).fill(0);
+                this.Vy = new Array(this.size).fill(0);
+                this.prevVx = new Array(this.size).fill(0);
+                this.prevVy = new Array(this.size).fill(0);
+
+                // Vorticity (for confinement)
+                this.vorticity = new Array(this.size).fill(0);
+
+                // Utility constants
+                this.IX = (x, y) => x + y * N; // Index function
+                this.vorticityStrength = 0.0;
+                this.decayRate = 0.99;
+            }
+
+            // --- Core Solvers (Simplified) ---
+
+            // Sets boundaries (prevents fluid from escaping the grid)
+            set_bnd(b, x) {
+                const N = this.N;
+                for (let i = 1; i < N - 1; i++) {
+                    // Left/Right boundaries
+                    x[this.IX(i, 0)] = b == 2 ? -x[this.IX(i, 1)] : x[this.IX(i, 1)];
+                    x[this.IX(i, N - 1)] = b == 2 ? -x[this.IX(i, N - 2)] : x[this.IX(i, N - 2)];
+                    // Top/Bottom boundaries
+                    x[this.IX(0, i)] = b == 1 ? -x[this.IX(1, i)] : x[this.IX(1, i)];
+                    x[this.IX(N - 1, i)] = b == 1 ? -x[this.IX(N - 2, i)] : x[this.IX(N - 2, i)];
+                }
+
+                // Corner handling (simple average)
+                x[this.IX(0, 0)] = 0.5 * (x[this.IX(1, 0)] + x[this.IX(0, 1)]);
+                x[this.IX(0, N - 1)] = 0.5 * (x[this.IX(1, N - 1)] + x[this.IX(0, N - 2)]);
+                x[this.IX(N - 1, 0)] = 0.5 * (x[this.IX(N - 2, 0)] + x[this.IX(N - 1, 1)]);
+                x[this.IX(N - 1, N - 1)] = 0.5 * (x[this.IX(N - 2, N - 1)] + x[this.IX(N - 1, N - 2)]);
+            }
+
+            // Diffusion solver (Gauss-Seidel relaxation)
+            // Iteratively spreads a quantity (x) across the grid
+            lin_solve(b, x, x0, a, c) {
+                const N = this.N;
+                for (let k = 0; k < 20; k++) { // 20 iterations for stability/accuracy
+                    for (let j = 1; j < N - 1; j++) {
+                        for (let i = 1; i < N - 1; i++) {
+                            x[this.IX(i, j)] = (x0[this.IX(i, j)] + a * (
+                                x[this.IX(i + 1, j)] +
+                                x[this.IX(i - 1, j)] +
+                                x[this.IX(i, j + 1)] +
+                                x[this.IX(i, j - 1)]
+                            )) / c;
+                        }
+                    }
+                    this.set_bnd(b, x);
+                }
+            }
+
+            // Advection solver (Moves quantities based on velocity)
+            // Uses linear interpolation (Bilinear in 2D) for stable transport
+            advect(b, d, d0, velocX, velocY) {
+                const N = this.N;
+                let i0, i1, j0, j1;
+                let x, y, s0, s1, t0, t1, dt0;
+
+                dt0 = this.dt * (N - 2);
+
+                for (let j = 1; j < N - 1; j++) {
+                    for (let i = 1; i < N - 1; i++) {
+                        // Go backwards in time to find where the current cell's content came from
+                        x = i - dt0 * velocX[this.IX(i, j)];
+                        y = j - dt0 * velocY[this.IX(i, j)];
+
+                        // Clamp x, y to stay within grid bounds (1 to N-2)
+                        x = Math.max(0.5, x);
+                        x = Math.min(N - 1.5, x);
+                        y = Math.max(0.5, y);
+                        y = Math.min(N - 1.5, y);
+
+                        i0 = Math.floor(x);
+                        i1 = i0 + 1;
+                        j0 = Math.floor(y);
+                        j1 = j0 + 1;
+
+                        s1 = x - i0;
+                        s0 = 1 - s1;
+                        t1 = y - j0;
+                        t0 = 1 - t1;
+
+                        // Bilinear interpolation (get the weighted average from the 4 surrounding cells)
+                        d[this.IX(i, j)] =
+                            s0 * (t0 * d0[this.IX(i0, j0)] + t1 * d0[this.IX(i0, j1)]) +
+                            s1 * (t0 * d0[this.IX(i1, j0)] + t1 * d0[this.IX(i1, j1)]);
+                    }
+                }
+                this.set_bnd(b, d);
+            }
+
+            // --- Vorticity Confinement ---
+            // A common hack to make the fluid look more "swirly" and less diffusive
+            vorticity_confinement() {
+                const N = this.N;
+                for (let j = 1; j < N - 1; j++) {
+                    for (let i = 1; i < N - 1; i++) {
+                        // Calculate vorticity (curl of the velocity field)
+                        const iX = this.IX(i, j);
+                        this.vorticity[iX] = this.Vx[this.IX(i, j + 1)] - this.Vx[this.IX(i, j - 1)] -
+                                             this.Vy[this.IX(i + 1, j)] + this.Vy[this.IX(i - 1, j)];
+                    }
+                }
+
+                for (let j = 1; j < N - 1; j++) {
+                    for (let i = 1; i < N - 1; i++) {
+                        // Calculate gradient of vorticity magnitude (center of swirl)
+                        const iX = this.IX(i, j);
+                        const v_mag = Math.abs(this.vorticity[iX]);
+                        const grad_x = Math.abs(this.vorticity[this.IX(i + 1, j)]) - Math.abs(this.vorticity[this.IX(i - 1, j)]);
+                        const grad_y = Math.abs(this.vorticity[this.IX(i, j + 1)]) - Math.abs(this.vorticity[this.IX(i, j - 1)]);
+                        
+                        // Normal vector to the swirl center (N)
+                        let N_x = grad_x;
+                        let N_y = grad_y;
+                        const N_len = Math.sqrt(N_x * N_x + N_y * N_y) + 1e-5; // Add epsilon for stability
+                        N_x /= N_len;
+                        N_y /= N_len;
+
+                        // Apply force to keep the swirl stable
+                        this.Vx[iX] += this.vorticityStrength * this.dt * (N_x * v_mag);
+                        this.Vy[iX] += this.vorticityStrength * this.dt * (N_y * v_mag);
+                    }
+                }
+            }
+
+            // Helper for density diffusion
+            diffuse(b, x, x0, diff) {
+                const N = this.N;
+                let a = this.dt * diff * (N - 2) * (N - 2);
+                this.lin_solve(b, x, x0, a, 1 + 4 * a);
+            }
+
+            // --- Full Simulation Step ---
+            step() {
+                const N = this.N;
+                let temp;
+                
+                // 1. Velocity step: Diffusion -> Advection -> Vorticity
+                // Diffuse velocity
+                this.diffuse(1, this.prevVx, this.Vx, this.visc);
+                this.diffuse(2, this.prevVy, this.Vy, this.visc);
+                
+                // Advect velocity
+                temp = this.Vx; this.Vx = this.prevVx; this.prevVx = temp;
+                temp = this.Vy; this.Vy = this.prevVy; this.prevVy = temp;
+                
+                this.advect(1, this.Vx, this.prevVx, this.prevVx, this.prevVy);
+                this.advect(2, this.Vy, this.prevVy, this.prevVx, this.prevVy);
+                
+                // Apply vorticity confinement
+                if (this.vorticityStrength > 0) {
+                    this.vorticity_confinement();
+                }
+                
+                // 2. Density step: Diffusion -> Advection -> Decay
+                this.diffuse(0, this.prevDensity, this.density, this.diff);
+                
+                temp = this.density; this.density = this.prevDensity; this.prevDensity = temp;
+                
+                this.advect(0, this.density, this.prevDensity, this.Vx, this.Vy);
+                
+                // Decay the density (smoke dissipates)
+                for (let i = 0; i < this.size; i++) {
+                    this.density[i] *= this.decayRate;
+                }
+            }
+
+            // --- External Input Functions ---
+            addDensity(x, y, amount) {
+                this.density[this.IX(x, y)] += amount;
+            }
+
+            addVelocity(x, y, amountX, amountY) {
+                const iX = this.IX(x, y);
+                this.Vx[iX] += amountX;
+                this.Vy[iX] += amountY;
+            }
+        }
+
+        // --- Canvas Setup and Simulation Loop ---
+        const canvas = document.getElementById('fluidCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Simulation variables
+        let width, height;
+        let N; // Grid Resolution
+        let fluid;
+        let cellWidth;
+
+        // Mouse tracking for fluid input
+        let mouseX = 0, mouseY = 0;
+        let prevMouseX = 0, prevMouseY = 0;
+        let isDragging = false;
+
+        function initializeSimulation() {
+            N = parseInt(document.getElementById('res').value);
+            width = 512;
+            height = 512;
+            canvas.width = width;
+            canvas.height = height;
+            cellWidth = width / N;
+
+            // Initialize fluid sim: N (res), dt (timestep), diffusion, viscosity(0)
+            const diffusion = parseFloat(document.getElementById('diffusion').value);
+            fluid = new Fluid(N, 0.1, diffusion, 0);
+            
+            fluid.vorticityStrength = parseFloat(document.getElementById('vorticity').value);
+            fluid.decayRate = parseFloat(document.getElementById('decay').value);
+            
+            // Initial burst of velocity in the center
+            const center = Math.floor(N/2);
+            fluid.addDensity(center, center, 500);
+            fluid.addVelocity(center, center, 0, -50);
+        }
+        
+        function updateAndDraw() {
+            // Add continuous smoke source at the center bottom
+            const centerX = Math.floor(N / 2);
+            const bottomY = Math.floor(N * 0.8);
+            fluid.addDensity(centerX, bottomY, 100);
+            fluid.addVelocity(centerX, bottomY, 0, -10);
+            
+            // Step the simulation
+            fluid.step();
+            
+            // Draw the simulation result (density field)
+            const imageData = ctx.createImageData(width, height);
+            const data = imageData.data;
+            const N_grid = fluid.N; // Use a local variable for clarity
+
+            for (let j = 0; j < N_grid; j++) {
+                for (let i = 0; i < N_grid; i++) {
+                    const density = fluid.density[fluid.IX(i, j)];
+                    
+                    // Map density to color (e.g., a smoky white/cyan gradient)
+                    // Amplify the density value to make it more visible
+                    const colorVal = Math.min(255, Math.floor(density * 2));
+                    
+                    // Draw cell as a block of color in the canvas
+                    for (let py = 0; py < cellWidth; py++) {
+                        for (let px = 0; px < cellWidth; px++) {
+                            const canvasX = Math.floor(i * cellWidth + px);
+                            const canvasY = Math.floor(j * cellWidth + py);
+                            const index = (canvasX + canvasY * width) * 4;
+
+                            // Color is a smoky blue/white
+                            data[index + 0] = colorVal;           // R
+                            data[index + 1] = Math.floor(colorVal * 0.8);     // G
+                            data[index + 2] = Math.min(255, Math.floor(colorVal * 1.5));     // B (make it slightly blue/cyan)
+                            data[index + 3] = 255;                // Alpha
+                        }
+                    }
+                }
+            }
+            
+            ctx.putImageData(imageData, 0, 0);
+            
+            requestAnimationFrame(updateAndDraw);
+        }
+
+        // --- Input Handling ---
+
+        function getGridCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+            const canvasX = (clientX - rect.left) * scaleX;
+            const canvasY = (clientY - rect.top) * scaleY;
+            
+            return {
+                x: Math.min(N - 1, Math.max(0, Math.floor(canvasX / cellWidth))),
+                y: Math.min(N - 1, Math.max(0, Math.floor(canvasY / cellWidth)))
+            };
+        }
+
+        function mouseMoveHandler(e) {
+            e.preventDefault(); // Prevent scrolling on mobile
+            
+            const grid = getGridCoords(e);
+            
+            const currentGridX = grid.x;
+            const currentGridY = grid.y;
+
+            if (isDragging) {
+                // Calculate velocity to inject
+                const velX = (currentGridX - prevMouseX) * 2;
+                const velY = (currentGridY - prevMouseY) * 2;
+
+                // Inject density and velocity at the current position
+                // Spread the injection over a 3x3 kernel for a smoother effect
+                const radius = 1;
+                for (let j = -radius; j <= radius; j++) {
+                    for (let i = -radius; i <= radius; i++) {
+                        const cellX = currentGridX + i;
+                        const cellY = currentGridY + j;
+                        if (cellX > 0 && cellX < N - 1 && cellY > 0 && cellY < N - 1) {
+                            fluid.addDensity(cellX, cellY, 50);
+                            fluid.addVelocity(cellX, cellY, velX, velY);
+                        }
+                    }
+                }
+            }
+            
+            prevMouseX = currentGridX;
+            prevMouseY = currentGridY;
+        }
+
+        function startDrag(e) {
+            isDragging = true;
+            mouseMoveHandler(e); // Initialize prevMouse coords
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        canvas.addEventListener('mousedown', startDrag);
+        canvas.addEventListener('mousemove', mouseMoveHandler);
+        canvas.addEventListener('mouseup', endDrag);
+        canvas.addEventListener('mouseleave', endDrag);
+
+        canvas.addEventListener('touchstart', startDrag);
+        canvas.addEventListener('touchmove', mouseMoveHandler);
+        canvas.addEventListener('touchend', endDrag);
+
+        // --- UI Binding ---
+        function bindSlider(id, callback, precision = 5) {
+            const slider = document.getElementById(id);
+            const display = document.getElementById(`val-${id}`);
+            
+            const update = () => {
+                const val = parseFloat(slider.value);
+                display.innerText = val.toFixed(precision);
+                if (callback) callback(val);
+            };
+
+            slider.addEventListener('input', update);
+            update(); // Initial run
+            return update;
+        }
+
+        // Start the application
+        window.onload = function() {
+            initializeSimulation();
+            
+            // Bind sliders after fluid is initialized
+            bindSlider('diffusion', (val) => fluid.diff = val);
+            bindSlider('vorticity', (val) => fluid.vorticityStrength = val, 1);
+            bindSlider('decay', (val) => fluid.decayRate = val, 2);
+            
+            document.getElementById('res').addEventListener('change', () => {
+                initializeSimulation();
+            });
+            bindSlider('res', (val) => document.getElementById('val-res').innerText = `${val}x${val}`, 0);
+            
+            updateAndDraw();
+        };
+
+    </script>
+</body>
+</html>
