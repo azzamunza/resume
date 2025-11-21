@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Aaron Munro - Resume Archive">
     <title>Resume Archive - Aaron Munro</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="stylesheet" href="../css/style.css">
     <style>
         * {
@@ -1011,7 +1012,18 @@
         // GitHub OAuth and File Editor Functionality
         // ============================================
 
-        const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY'; // GitHub OAuth App Client ID
+        // Backend API URL for OAuth
+        // For production: Set this to your deployed Vercel backend URL (e.g., 'https://resume-backend.vercel.app')
+        // For local development: Use 'http://localhost:3000'
+        // Leave as placeholder to show configuration needed error message
+        window.BACKEND_API_URL = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000' 
+            : 'https://your-backend-url.vercel.app';
+        
+        // NOTE: GitHub OAuth Client ID is intentionally public (client-side)
+        // The Client Secret is NEVER exposed and is only used server-side in the backend
+        // This Client ID is kept for Device Flow reference but is not actively used
+        const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY'; // GitHub OAuth App Client ID (Device Flow - not actively used)
         const GITHUB_REPO_OWNER = 'azzamunza';
         const GITHUB_REPO_NAME = 'resume';
         const GITHUB_BRANCH = 'main';
@@ -1063,44 +1075,30 @@
         }
 
         // Handle authentication using GitHub Device Flow
+        // NOTE: This Device Flow method is blocked by CORS in browsers.
+        // The backend OAuth integration (github-oauth-backend.js) should override this function.
+        // This is kept as fallback for documentation purposes.
         async function handleAuth() {
+            // Show a helpful message if backend is not configured
+            if (!window.BACKEND_API_URL || window.BACKEND_API_URL.includes('your-backend-url')) {
+                alert(
+                    'GitHub Authentication is not yet configured.\n\n' +
+                    'The backend server needs to be deployed and configured.\n\n' +
+                    'Please see BACKEND_DEPLOYMENT.md for setup instructions.\n\n' +
+                    'Direct browser authentication with GitHub Device Flow is blocked by CORS policy.'
+                );
+                return;
+            }
+            
             try {
-                // Step 1: Request device and user codes
-                const deviceCodeResponse = await fetch('https://github.com/login/device/code', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        client_id: GITHUB_CLIENT_ID,
-                        scope: 'repo'
-                    })
-                });
-
-                if (!deviceCodeResponse.ok) {
-                    throw new Error('Failed to initiate device flow');
-                }
-
-                const deviceData = await deviceCodeResponse.json();
-                
-                // Show user code and instructions
-                const authMessage = 
-                    `GitHub Authentication\n\n` +
-                    `Please follow these steps:\n\n` +
-                    `1. Go to: ${deviceData.verification_uri}\n` +
-                    `2. Enter this code: ${deviceData.user_code}\n` +
-                    `3. Authorize the application\n\n` +
-                    `This window will automatically update once you've authorized.\n\n` +
-                    `Verification URL: ${deviceData.verification_uri}\n` +
-                    `User Code: ${deviceData.user_code}`;
-                
-                // Create a custom modal instead of alert for better UX
-                showAuthModal(deviceData.verification_uri, deviceData.user_code);
-                
-                // Step 2: Poll for access token
-                startDeviceFlowPolling(deviceData.device_code, deviceData.interval);
-                
+                // This will be blocked by CORS - shown here for reference only
+                // The github-oauth-backend.js script overrides this function when loaded
+                alert(
+                    'Authentication Error:\n\n' +
+                    'GitHub Device Flow authentication is blocked by browser CORS policy.\n\n' +
+                    'Please ensure the backend OAuth server is properly deployed and configured.\n\n' +
+                    'See BACKEND_DEPLOYMENT.md for instructions.'
+                );
             } catch (error) {
                 console.error('Authentication error:', error);
                 alert('Authentication failed: ' + error.message);
@@ -1201,7 +1199,13 @@
         }
 
         // Poll for access token
+        // NOTE: Device Flow polling is blocked by CORS - kept for reference only
         function startDeviceFlowPolling(deviceCode, interval) {
+            // This function is blocked by CORS and should not be called
+            // The backend OAuth implementation handles authentication properly
+            console.warn('Device Flow polling is disabled due to CORS restrictions. Use backend OAuth instead.');
+            return;
+            
             // Clear any existing polling
             if (deviceFlowPollingInterval) {
                 clearInterval(deviceFlowPollingInterval);
@@ -1489,5 +1493,7 @@
             console.log(`[${type.toUpperCase()}] ${message}`);
         }
     </script>
+    <!-- Backend OAuth Integration - Overrides Device Flow when backend is configured -->
+    <script src="../js/github-oauth-backend.js"></script>
 </body>
 </html>
