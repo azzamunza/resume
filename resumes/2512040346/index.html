@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Digital Content Producer Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root {
+      /* Brand Colours */
+      --color-primary: #00695C;
+      --color-secondary: #0288D1;
+      --color-accent: #FFC107;
+      --color-text-primary: #212121;
+      --color-text-secondary: #424242;
+      --color-background: #FFFFFF;
+      --color-surface: #F5F5F5;
+
+      /* Typography */
+      --font-primary: 'Source Sans Pro', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      --font-secondary: 'Source Sans Pro', sans-serif;
+      --font-weight-light: 300;
+      --font-weight-regular: 400;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      --font-size-h1: 42px;
+      --font-size-h2: 28px;
+      --font-size-h3: 20px;
+      --font-size-h4: 16px;
+      --font-size-body: 15px;
+      --font-size-small: 14px;
+
+      /* Spacing */
+      --space-xxs: 4px;
+      --space-xs: 8px;
+      --space-sm: 12px;
+      --space-md: 20px;
+      --space-lg: 28px;
+      --space-xl: 36px;
+
+      --border-radius: 6px;
+      --section-spacing: var(--space-lg);
+      --content-max-width: 1060px;
+
+      /* Print */
+      --print-padding: 0;
+    }
+
+    html { box-sizing: border-box; background: var(--color-background); color: var(--color-text-primary); }
+    *, *::before, *::after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-body);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      color: var(--color-text-primary);
+      background: var(--color-background);
+    }
+
+    .resume-wrapper {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--color-background);
+    }
+
+    header#contact-header {
+      margin-bottom: var(--section-spacing);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--color-surface);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .candidate-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xxs);
+      min-width: 260px;
+    }
+
+    .candidate-name {
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary);
+      margin: 0;
+    }
+    .candidate-title {
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      margin: 0;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm) var(--space-lg);
+      font-size: var(--font-size-small);
+      color: var(--color-text-secondary);
+      margin-top: var(--space-xs);
+    }
+    .contact-details span {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xxs);
+      white-space: nowrap;
+    }
+    .contact-details a {
+      color: var(--color-secondary);
+      text-decoration: none;
+    }
+    .contact-details a:focus,
+    .contact-details a:hover {
+      text-decoration: underline;
+    }
+
+    .export-actions {
+      display: flex;
+      gap: var(--space-xs);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--color-secondary);
+      background: #fff;
+      color: var(--color-secondary);
+      border-radius: var(--border-radius);
+      padding: 10px 12px;
+      font-size: var(--font-size-small);
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .btn.primary {
+      background: var(--color-secondary);
+      color: #fff;
+      border-color: var(--color-secondary);
+    }
+    .btn:focus,
+    .btn:hover {
+      filter: brightness(0.95);
+    }
+
+    main {
+      margin-top: var(--section-spacing);
+    }
+
+    /* Two-column responsive layout */
+    .content-grid {
+      display: flex;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: var(--section-spacing);
+    }
+    .column-left { flex: 1 1 60%; min-width: 0; }
+    .column-right { flex: 1 1 40%; min-width: 280px; }
+
+    /* Section Headings */
+    .section-title {
+      font-size: var(--font-size-h2);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+      margin: 0 0 var(--space-sm) 0;
+    }
+
+    /* EXPERIENCE */
+    #experience .job-entry {
+      margin: 0 0 var(--space-lg) 0;
+      padding: 0 0 var(--space-md) 0;
+      border-bottom: 1px solid var(--color-surface);
+    }
+    #experience .job-entry:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .job-entry h3 {
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-secondary);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .job-meta {
+      font-size: var(--font-size-small);
+      color: var(--color-text-secondary);
+      margin: 0 0 var(--space-xs) 0;
+    }
+    .job-duties {
+      margin: 0 0 0 var(--space-sm);
+      padding: 0;
+      list-style: disc outside;
+    }
+    .job-duties li {
+      margin-bottom: var(--space-xs);
+    }
+
+    /* Specialised projects */
+    #special-projects {
+      background: var(--color-surface);
+      border-radius: var(--border-radius);
+      padding: var(--space-md);
+    }
+    .proj-detail {
+      margin: 0;
+      color: var(--color-text-primary);
+    }
+
+    /* Certifications & Education */
+    .cert-list {
+      margin: 0 0 0 var(--space-sm);
+      padding: 0;
+      list-style: disc outside;
+    }
+    .cert-list li { margin-bottom: var(--space-xs); }
+
+    /* Skills */
+    #skills {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .skill-column {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .skill-section-label {
+      font-size: var(--font-size-h4);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+    }
+    .skill-list {
+      margin: 0 0 0 var(--space-sm);
+      padding: 0;
+      list-style: disc outside;
+    }
+    .skill-list li { margin-bottom: var(--space-xxs); }
+
+    /* Portfolio */
+    #portfolio .video-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+    .video-card {
+      background: var(--color-surface);
+      border-radius: var(--border-radius);
+      padding: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      box-shadow: 0 1px 6px rgba(33,33,33,0.06);
+    }
+    .video-card h4 {
+      margin: 0;
+      font-size: var(--font-size-h4);
+      color: var(--color-secondary);
+      font-weight: var(--font-weight-semibold);
+    }
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: var(--border-radius);
+      background: #000;
+    }
+    .video-desc {
+      font-size: var(--font-size-small);
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    footer {
+      margin-top: var(--section-spacing);
+      padding-top: var(--space-md);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-small);
+      text-align: center;
+    }
+
+    /* Mobile (≤480px) */
+    @media (max-width: 480px) {
+      .resume-wrapper { padding: var(--space-lg) var(--space-sm); }
+      .header-top { flex-direction: column; align-items: flex-start; }
+      .contact-details { flex-direction: column; gap: var(--space-xxs); }
+      .content-grid { flex-direction: column; }
+      .column-right { min-width: 0; }
+    }
+
+    /* Tablet (481–768px) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .content-grid { flex-direction: column; }
+      .column-right { min-width: 0; }
+    }
+
+    /* Desktop (≥769px): already two-column via .content-grid flex */
+    @media (min-width: 769px) {
+      /* no additional rules needed */
+    }
+
+    /* Print */
+    @page {
+      size: A4 portrait;
+      margin: 18mm 15mm;
+    }
+    @media print {
+      body, .resume-wrapper {
+        box-shadow: none !important;
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .resume-wrapper { padding: 0; max-width: 100%; }
+      .export-actions, .video-card iframe { display: none !important; }
+      .content-grid { display: block; }
+      .column { gap: var(--space-md); }
+      header, footer, section, article { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="resume-wrapper">
+    <header id="contact-header" role="banner" aria-labelledby="contact-h">
+      <div class="header-top">
+        <div class="candidate-block">
+          <h1 class="candidate-name" id="contact-h">Aaron Munro</h1>
+          <h2 class="candidate-title">Digital Content Producer – Animator/Motion Designer</h2>
+        </div>
+        <div class="export-actions" aria-label="Export actions">
+          <button type="button" class="btn primary" id="btn-pdf" aria-label="Download as PDF">Download as PDF</button>
+          <button type="button" class="btn" id="btn-docx" aria-label="Download résumé as DOCX">Download as DOCX</button>
+          <button type="button" class="btn" id="btn-cover" aria-label="Download cover letter as DOCX">Download Cover Letter</button>
+        </div>
+      </div>
+      <div class="contact-details">
+        <span><strong>Email:</strong> <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a></span>
+        <span><strong>Phone:</strong> <a href="tel:+61477742636" aria-label="Call 04 7774 2636">0477742636</a></span>
+        <span><strong>Location:</strong> Forrestfield, WA 6058, Australia</span>
+        <span><strong>Website:</strong> <a href="http://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a></span>
+      </div>
+    </header>
+
+    <main role="main">
+      <div class="content-grid">
+        <div class="column column-left">
+          <section id="experience" aria-labelledby="exp-h">
+            <h2 class="section-title" id="exp-h">Work Experience</h2>
+
+            <article class="job-entry">
+              <h3>3D Developer (Specialised in 3D Development)</h3>
+              <p class="job-meta">Viewport XR | 2023 – 2024</p>
+              <ul class="job-duties">
+                <li>Specialised in Unreal Engine Development for immersive experiences, including advanced real-time 3D graphics</li>
+                <li>Developed 3D models and interactive objects using Unreal and Unity, vehicle and character rigging and animation</li>
+                <li>Produced video content with After Effects, Adobe Premiere, and Davinci Resolve</li>
+                <li>Executed simulations with Embergen and developed particle effects using TYFlow</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Sole Trader, Freelance 3D Artist/Developer & Web Developer</h3>
+              <p class="job-meta">Vector 6 | 2016 – 2023</p>
+              <ul class="job-duties">
+                <li>Produced 3D visualisation and animation projects for clients using 3DS Max, Zbrush, Substance Suite, and Octane Render</li>
+                <li>Automated media workflows and developed internal creative tools using Python and API integrations</li>
+                <li>Developed vector and UI design assets, and animated graphics using Adobe XD, Animate, and Photoshop</li>
+                <li>Worked on VR collaborations utilising Unity for scene creation, GUI, and interactive animation</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Senior 3D Artist/Developer</h3>
+              <p class="job-meta">Minnovare | 2019</p>
+              <ul class="job-duties">
+                <li>Developed simulations and animations for underground mine core drilling visualisations</li>
+                <li>Produced high-quality 3D content to showcase technical systems</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>Senior 3D Artist/Developer</h3>
+              <p class="job-meta">Last Pixel | October 2006 – March 2016</p>
+              <ul class="job-duties">
+                <li>Led project teams in 3D animation, storyboarding, project delivery, and client liaison</li>
+                <li>Developed photo-realistic PBR materials, complex assets, and animated 3D content for major infrastructure and built environments</li>
+                <li>Handled advanced post-production using Adobe After Effects, Premiere, and custom workflow automation</li>
+              </ul>
+            </article>
+
+            <article class="job-entry">
+              <h3>3D Developer/Artist (Collaborator)</h3>
+              <p class="job-meta">Spacescan Collaboration | October 2017 – January 2023</p>
+              <ul class="job-duties">
+                <li>Collaborated on photogrammetry-based visualisations and produced optimised 3D models for Unreal Engine</li>
+              </ul>
+            </article>
+          </section>
+        </div>
+
+        <div class="column column-right">
+          <section id="special-projects" aria-labelledby="proj-h">
+            <h2 class="section-title" id="proj-h">Specialised Project Experience</h2>
+            <p class="proj-detail">Major contributor to virtual and real-time 3D environments for VR and multimedia projects, including the Elizabeth Quay, Perth Underground Bus Port, and Yagan Square city development visualisations. Developed dynamic assets for advanced animation workflows and led technical innovation in internal tool creation and media pipeline automation.</p>
+          </section>
+
+          <section id="certifications" aria-labelledby="cert-h">
+            <h2 class="section-title" id="cert-h">Certifications & Education</h2>
+            <ul class="cert-list">
+              <li>AI Generalist Course – Core AI Methodologies, Workflow Automation, Generative Media Production, Data-Driven Business Applications (August 2025)</li>
+              <li>Advanced Diploma of Information Technology Interactive Multimedia (1998)</li>
+              <li>Certificate IV of Information Technology Interactive Multimedia (1997)</li>
+            </ul>
+          </section>
+
+          <section id="skills" aria-labelledby="skills-h">
+            <h2 class="section-title" id="skills-h">Relevant Skills</h2>
+            <div class="skill-column">
+              <div class="skill-section-label">Technical Skills</div>
+              <ul class="skill-list">
+                <li>3DS Max</li>
+                <li>Zbrush</li>
+                <li>Unreal Engine</li>
+                <li>Unity</li>
+                <li>CAT animation</li>
+                <li>Substance Suite (Painter, Designer)</li>
+                <li>Octane Render</li>
+                <li>V-Ray</li>
+                <li>Corona</li>
+                <li>Embergen</li>
+                <li>TYFlow</li>
+                <li>Railclone</li>
+                <li>Forest Pack Pro</li>
+                <li>SpeedTree</li>
+                <li>Adobe Photoshop</li>
+                <li>Adobe Illustrator</li>
+                <li>Adobe After Effects</li>
+                <li>Adobe Premiere</li>
+                <li>Davinci Resolve</li>
+                <li>Adobe Animate</li>
+                <li>FMETP streaming</li>
+                <li>Matterport</li>
+                <li>Reality Capture</li>
+                <li>Python programming</li>
+                <li>PHP/CSS</li>
+                <li>HTML/CSS/JavaScript (basic)</li>
+              </ul>
+            </div>
+            <div class="skill-column">
+              <div class="skill-section-label">Core Competencies</div>
+              <ul class="skill-list">
+                <li>2D and 3D animation</li>
+                <li>Video content production</li>
+                <li>Storyboarding and creative planning</li>
+                <li>Project management</li>
+                <li>Script collaboration</li>
+                <li>Material and texture development</li>
+                <li>Photogrammetry and 3D scanning</li>
+                <li>Client liaison</li>
+                <li>Workflow automation</li>
+                <li>Attention to detail</li>
+                <li>Collaboration within production teams</li>
+                <li>Problem solving</li>
+                <li>Time management</li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="portfolio" aria-labelledby="port-h">
+            <h2 class="section-title" id="port-h">Portfolio Gallery</h2>
+            <div class="video-gallery">
+              <div class="video-card">
+                <h4>Projects and Dev over the last few years</h4>
+                <iframe src="https://www.youtube.com/embed/rvEkQWkZ8uw" title="Projects and Dev over the last few years portfolio video" allowfullscreen></iframe>
+                <div class="video-desc">Showcases use of real-time engines, 2D and 3D animation, character rigging, Unity, Octane Renderer, photogrammetry, demonstrating advanced proficiency and creative approaches directly aligned to multimedia production, animation, and content delivery.</div>
+              </div>
+              <div class="video-card">
+                <h4>Showreel Aaron Munro 2016</h4>
+                <iframe src="https://www.youtube.com/embed/9wuhG46Dmxc" title="Showreel Aaron Munro 2016 portfolio video" allowfullscreen></iframe>
+                <div class="video-desc">Highlights a variety of animation, 3D development and project work produced during time at Last Pixel, directly relevant to high-quality animation and video-based content.</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      &copy; 2024 Aaron Munro. This résumé and all content are confidential and provided for the purposes of recruitment/assessment only
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const btnPDF = document.getElementById('btn-pdf');
+      const btnDOCX = document.getElementById('btn-docx');
+      const btnCover = document.getElementById('btn-cover');
+
+      if (btnPDF) {
+        btnPDF.addEventListener('click', () => window.print());
+      }
+
+      async function getDownloads() {
+        try {
+          const res = await fetch('./downloads.json', { cache: 'no-cache' });
+          if (!res.ok) throw new Error('downloads.json not found');
+          const data = await res.json();
+          return (data && Array.isArray(data.downloads)) ? data.downloads : [];
+        } catch (e) {
+          console.warn('Download manifest unavailable:', e.message);
+          return [];
+        }
+      }
+
+      function triggerDownload(path, filename) {
+        if (!path) return;
+        const a = document.createElement('a');
+        a.href = path;
+        a.download = filename || '';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }
+
+      async function handleDocxClick(kind) {
+        const list = await getDownloads();
+        if (!list.length) return;
+        const map = Object.fromEntries(list.map(item => [item.id, item]));
+        if (kind === 'resume' && map.resume) {
+          triggerDownload(map.resume.path, map.resume.name + '.docx');
+        } else if (kind === 'cover' && map.coverLetter) {
+          triggerDownload(map.coverLetter.path, map.coverLetter.name + '.docx');
+        }
+      }
+
+      if (btnDOCX) {
+        btnDOCX.addEventListener('click', () => handleDocxClick('resume'));
+      }
+      if (btnCover) {
+        btnCover.addEventListener('click', () => handleDocxClick('cover'));
+      }
+    })();
+  </script>
+</body>
+</html>
