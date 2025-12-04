@@ -1,0 +1,295 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Results - Perth, WA</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; margin: 0; }
+        .container { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; max-width: 1400px; margin: 0 auto; }
+        .job-cards-column { flex: 7; display: flex; flex-direction: column; gap: 20px; min-width: 60%; }
+        .metadata-sidebar { flex: 3; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); height: fit-content; min-width: 300px; position: sticky; top: 20px; }
+        .job-card { background: white; border-radius: 8px; padding: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex; flex-wrap: wrap; align-items: flex-start; border-left: 5px solid #3498db; transition: transform 0.2s; }
+        .job-card:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
+        .card-content { flex: 1; padding-right: 30px; min-width: 300px; }
+        .card-chart-container { width: 320px; height: 320px; flex-shrink: 0; display: flex; justify-content: center; align-items: center; background: #fafafa; border-radius: 8px; padding: 10px; }
+        h2 { color: #2c3e50; margin-top: 0; font-size: 1.4rem; }
+        h3 { color: #7f8c8d; margin-bottom: 10px; font-size: 1rem; font-weight: 600; }
+        h4 { color: #34495e; margin: 15px 0 5px 0; font-size: 0.95rem; }
+        p { line-height: 1.6; color: #555; font-size: 0.95rem; margin-top: 5px; }
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .tag { background: #e1f5fe; color: #0277bd; padding: 4px 10px; border-radius: 15px; font-size: 0.85rem; font-weight: 500; }
+        .btn { display: inline-block; padding: 10px 20px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-top: 15px; font-weight: 600; transition: background 0.3s; }
+        .btn:hover { background: #2980b9; }
+        .meta-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+        .meta-item:last-child { border-bottom: none; }
+        .meta-label { font-weight: 700; display: block; margin-bottom: 5px; color: #2c3e50; }
+        .meta-value { color: #555; }
+        .match-score { display: inline-block; padding: 5px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 10px; }
+        .match-high { background-color: #d4edda; color: #155724; }
+        .match-med { background-color: #fff3cd; color: #856404; }
+        .match-low { background-color: #f8d7da; color: #721c24; }
+        @media (max-width: 1100px) { .container { flex-direction: column; } .metadata-sidebar { order: -1; position: static; } .job-card { flex-direction: column; } .card-chart-container { width: 100%; height: 300px; margin-top: 25px; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column: Job Cards -->
+        <div class="job-cards-column">
+            
+            <!-- Job Card 1: Senior 3D Artist -->
+            <div class="job-card">
+                <div class="card-content">
+                    <div class="match-score match-high">Strong Match (8.5/10)</div>
+                    <h2>Senior 3D Artist</h2>
+                    <h3>Harp Collective &bull; Perth, WA (Jolimont)</h3>
+                    <p><strong>Source:</strong> harpcollective.com.au &bull; <strong>Posted:</strong> Recent (Active)</p>
+                    
+                    <h4>Summary</h4>
+                    <p>Harp Collective is seeking a talented 3D Artist with 4-5 years of experience to join their studio in Jolimont. The role focuses on high-end architectural and product visualisation using 3ds Max, Corona, and Photoshop. This position aligns well with your 20 years of 3ds Max experience and background in architectural visualisation, though it requires adapting to Corona (from V-Ray/Octane).</p>
+                    
+                    <div class="tags">
+                        <span class="tag">3ds Max</span>
+                        <span class="tag">Corona Renderer</span>
+                        <span class="tag">Architectural Viz</span>
+                        <span class="tag">Photoshop</span>
+                        <span class="tag">Product Rendering</span>
+                    </div>
+
+                    <a href="https://www.harpcollective.com.au/jobs" target="_blank" class="btn">View Job Listing</a>
+                </div>
+                <div class="card-chart-container">
+                    <canvas id="chart1"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Card 2: Digital Content Producer -->
+            <div class="job-card">
+                <div class="card-content">
+                    <div class="match-score match-high">Strong Match (9.0/10)</div>
+                    <h2>Digital Content Producer</h2>
+                    <h3>Epigroup &bull; Perth, WA</h3>
+                    <p><strong>Source:</strong> epigroup.com.au / Seek &bull; <strong>Posted:</strong> ~9 days ago</p>
+                    
+                    <h4>Summary</h4>
+                    <p>This role demands a creative producer capable of generating bold 2D/3D content and driving storytelling for a growing digital team. The position is highly relevant to your background in video production (Premiere/After Effects), 3D animation, and VR/immersive media experiences. It offers an opportunity to leverage your full multimedia skillset including photography and post-production.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">Video Production</span>
+                        <span class="tag">3D Animation</span>
+                        <span class="tag">Storytelling</span>
+                        <span class="tag">Adobe Creative Suite</span>
+                        <span class="tag">VR/Immersive</span>
+                    </div>
+
+                    <a href="https://epigroup.com.au/careers" target="_blank" class="btn">View Job Listing</a>
+                </div>
+                <div class="card-chart-container">
+                    <canvas id="chart2"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Card 3: Unity Game Developer -->
+            <div class="job-card">
+                <div class="card-content">
+                    <div class="match-score match-med">Medium Match (6.5/10)</div>
+                    <h2>Unity Game Developer</h2>
+                    <h3>Imperfect Media &bull; Perth, WA</h3>
+                    <p><strong>Source:</strong> imperfectmedia.com.au &bull; <strong>Posted:</strong> ~3 days ago</p>
+                    
+                    <h4>Summary</h4>
+                    <p>A role focused on building a 2D Action-Platformer using Unity, requiring implementation of core gameplay mechanics and enemy AI logic. While you possess Unity and general logic/scripting skills, the specific requirement for deep C# programming and "Metroidvania" style game mechanics may require a technical ramp-up compared to your visualisation-heavy background.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">Unity</span>
+                        <span class="tag">C# Programming</span>
+                        <span class="tag">Game Mechanics</span>
+                        <span class="tag">AI Logic</span>
+                        <span class="tag">2D Platformer</span>
+                    </div>
+
+                    <a href="https://imperfectmedia.com.au/" target="_blank" class="btn">View Job Listing</a>
+                </div>
+                <div class="card-chart-container">
+                    <canvas id="chart3"></canvas>
+                </div>
+            </div>
+
+            <!-- Job Card 4: Senior Software Developer (3D Support) -->
+            <div class="job-card">
+                <div class="card-content">
+                    <div class="match-score match-med">Medium Match (6.0/10)</div>
+                    <h2>Senior Software Developer (3D Design Team Support)</h2>
+                    <h3>ASC &bull; Rockingham, Perth WA</h3>
+                    <p><strong>Source:</strong> asc.com.au &bull; <strong>Posted:</strong> ~7 hours ago</p>
+                    
+                    <h4>Summary</h4>
+                    <p>A specialised role supporting the 3D Modelling Design Team at HMAS Stirling, involving software development for training environments and potential simulation work. Your background in Python, automation, and understanding of 3D pipelines makes you a unique candidate, although the core software engineering requirements (likely C++/Java) might be a stretch without specific evidence in your history.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">Software Development</span>
+                        <span class="tag">3D Pipeline Support</span>
+                        <span class="tag">Simulation</span>
+                        <span class="tag">Python/Automation</span>
+                        <span class="tag">Defence Industry</span>
+                    </div>
+
+                    <a href="https://www.asc.com.au/careers/" target="_blank" class="btn">View Job Listing</a>
+                </div>
+                <div class="card-chart-container">
+                    <canvas id="chart4"></canvas>
+                </div>
+            </div>
+
+             <!-- Job Card 5: Video Game Software Engineer -->
+             <div class="job-card">
+                <div class="card-content">
+                    <div class="match-score match-low">Low Match (4.0/10)</div>
+                    <h2>Video Game Software Engineer</h2>
+                    <h3>Titanium Studios &bull; South Perth, WA</h3>
+                    <p><strong>Source:</strong> titaniumstudios.com &bull; <strong>Posted:</strong> ~13 days ago</p>
+                    
+                    <h4>Summary</h4>
+                    <p>This position requires strong C/C++ skills for engineering services provided to global game studios. While you have extensive Unreal Engine experience, your profile focuses on the artistic and technical art side (Blueprints/Python) rather than core C++ engine programming, making this a lower suitability match unless you have undisclosed C++ proficiency.</p>
+                    
+                    <div class="tags">
+                        <span class="tag">C/C++</span>
+                        <span class="tag">Game Engineering</span>
+                        <span class="tag">Unreal/Unity</span>
+                        <span class="tag">Console Development</span>
+                    </div>
+
+                    <a href="http://titaniumstudios.com/" target="_blank" class="btn">View Job Listing</a>
+                </div>
+                <div class="card-chart-container">
+                    <canvas id="chart5"></canvas>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Right Column: Metadata Sidebar -->
+        <div class="metadata-sidebar">
+            <div class="meta-item">
+                <span class="meta-label">Candidate Name</span>
+                <span class="meta-value">Aaron Munro</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Total Jobs Found</span>
+                <span class="meta-value">5 Relevant Positions</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Search Date</span>
+                <span class="meta-value">December 04, 2025</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Locations</span>
+                <span class="meta-value">Perth, WA (All Suburbs)</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Search Status</span>
+                <span class="meta-value">
+                    <ul style="padding-left: 20px; margin-top: 5px;">
+                        <li><strong>Seek:</strong> Active Results</li>
+                        <li><strong>Harp Collective:</strong> Direct Listings Found</li>
+                        <li><strong>Titanium Studios:</strong> Direct Listings Found</li>
+                        <li><strong>Imperfect Media:</strong> Direct Listings Found</li>
+                        <li><strong>Epigroup:</strong> Direct Listings Found</li>
+                    </ul>
+                </span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Top Skills Matched</span>
+                <span class="meta-value">3ds Max, Video Production, Unreal Engine, Architectural Viz, Automation (Python)</span>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Chart Configuration
+        const createChart = (ctx, labels, candidateData, jobData) => {
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Candidate Skills',
+                        data: candidateData,
+                        fill: true,
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgb(52, 152, 219)',
+                        pointBackgroundColor: 'rgb(52, 152, 219)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(52, 152, 219)'
+                    }, {
+                        label: 'Job Requirements',
+                        data: jobData,
+                        fill: true,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgb(255, 99, 132)',
+                        pointBackgroundColor: 'rgb(255, 99, 132)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: { line: { borderWidth: 2 } },
+                    scales: {
+                        r: {
+                            angleLines: { display: true },
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                            pointLabels: { font: { size: 11 } }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 10 } }
+                    }
+                }
+            });
+        };
+
+        // Chart 1: Senior 3D Artist (Harp)
+        createChart(document.getElementById('chart1'), 
+            ['3ds Max', 'Corona/V-Ray', 'Arch Viz', 'Photoshop', 'Project Mgmt'], 
+            [10, 8, 9, 9, 8],  // Candidate: Max(10), Corona(8-implied), Arch(9), PS(9), PM(8)
+            [10, 10, 10, 8, 6] // Job: Max(10), Corona(10), Arch(10), PS(8), PM(6)
+        );
+
+        // Chart 2: Digital Content Producer (Epigroup)
+        createChart(document.getElementById('chart2'), 
+            ['Video Editing', '3D Generalist', 'Storytelling', 'Drone/Camera', 'Animation'], 
+            [9, 9, 8, 7, 8],   // Candidate: Video(9), 3D(9), Story(8), Photo/Cam(7), Anim(8)
+            [9, 8, 9, 6, 8]    // Job: Video(9), 3D(8), Story(9), Cam(6), Anim(8)
+        );
+
+        // Chart 3: Unity Game Developer (Imperfect)
+        createChart(document.getElementById('chart3'), 
+            ['Unity Engine', 'C# Coding', 'Game Logic', '2D Art', 'Optimization'], 
+            [7, 4, 6, 6, 7],   // Candidate: Unity(7), C#(4), Logic(6), 2D(6), Opt(7)
+            [8, 10, 9, 5, 8]   // Job: Unity(8), C#(10), Logic(9), 2D(5), Opt(8)
+        );
+
+        // Chart 4: Senior Software Dev (ASC)
+        createChart(document.getElementById('chart4'), 
+            ['Software Dev', '3D Pipeline', 'Python', 'Simulation', 'Security Clearance'], 
+            [5, 9, 8, 7, 10],  // Candidate: Dev(5-General), 3D(9), Py(8), Sim(7), Citizen(10)
+            [9, 7, 6, 8, 10]   // Job: Dev(9), 3D(7), Py(6), Sim(8), Clear(10)
+        );
+
+        // Chart 5: Video Game Engineer (Titanium)
+        createChart(document.getElementById('chart5'), 
+            ['C++', 'Game Engine Arch', 'Unreal', 'Console Dev', 'Maths/Physics'], 
+            [2, 3, 9, 2, 6],   // Candidate: C++(2), Arch(3), Unreal(9), Console(2), Math(6)
+            [10, 9, 7, 8, 8]   // Job: C++(10), Arch(9), Unreal(7), Console(8), Math(8)
+        );
+    </script>
+</body>
+</html>
+ 
