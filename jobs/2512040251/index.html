@@ -1,0 +1,88 @@
+I don’t have the ability to browse external websites in real time, so I can’t perform live searches on SEEK, Indeed, LinkedIn or the other platforms, and I can’t retrieve or verify current job ads, URLs, posting dates, or descriptions. Because of your data‑integrity requirement, I also can’t invent job listings or guess details.
+
+Given those constraints, I can still do the following reliably:
+
+1. **Task 1 – Skills Inventory (from your Work History)**  
+   Here is a condensed skills inventory extracted from the document, ready for later matching:
+
+   - **3D Modelling & Real‑Time Engines**
+     - 3DS Max (20+ years), ZBrush, SketchUp, CAT rigging
+     - Unreal Engine development, Unity (including VR / Meta Quest)
+     - Game object development, interactive objects, shader development
+   - **Materials, Texturing & Rendering**
+     - Substance Painter, Substance Designer, PBR material workflows
+     - Octane Render, V‑Ray, (listed) Corona, environment lighting
+   - **VFX, Simulation & Procedural**
+     - Embergen (fluid dynamics), TYFlow, Particle Flow
+     - Railclone, Forest Pack Pro, SpeedTree
+   - **VR / XR, Visualisation & Photogrammetry**
+     - VR experiences (Unity, Meta Quest), architectural visualisation
+     - Matterport scanning, Reality Capture photogrammetry
+     - Scan‑to‑low‑poly optimisation for VR
+   - **Video, Motion & Multimedia**
+     - Adobe After Effects, Premiere, Davinci Resolve
+     - Video editing, compositing, post‑grading
+     - Adobe Animate, VN, Canva
+   - **Imaging, Graphics & Web**
+     - Adobe Photoshop, Lightroom, Illustrator, XD
+     - Logo/SVG/icon design, signage and decals
+     - HTML/CSS/JavaScript (basic), PHP/CSS web development
+   - **Programming, Automation & Data**
+     - Python scripting/automation, MaxScript
+     - Advanced Excel/Google Sheets logic and tools
+     - JSON handling, API integration (websites, spreadsheets, media APIs)
+   - **AI, Generative & Automation Platforms**
+     - ChatGPT, Claude, Gemini, Midjourney, Stable Diffusion, Leonardo.ai
+     - RunwayML, Lumai, ElevenLabs
+     - Make.com workflow automation scenarios and integrations
+     - Hugging Face, Google Colab, PyTorch, PrivateGPT setups
+   - **Project / Soft Skills**
+     - Project management, team leadership, quoting, client liaison
+     - Storyboarding, script outline, planning
+     - Photography (including panoramic and graded escort photography)
+
+2. **What I can’t do from here (and why)**  
+   - I cannot:
+     - Search Seek/Indeed/LinkedIn/ArtStation etc in real time.
+     - Confirm whether any role exists in “Perth, WA” in the last 14 days.
+     - Extract canonical URLs, posting dates, company names, or descriptions.
+   - If I fabricated “sample” jobs, that would violate your requirement to never hallucinate or infer job data.
+
+3. **How we can still reach an HTML output workflow you can use**
+
+If you can supply one of the following, I can complete Tasks 3–5 exactly as requested:
+
+- **Option A:** Paste 3–10 current job ads (from any of the listed sites) that:
+  - Are in Perth, WA
+  - Correspond to any of your “Job Roles”
+  - Include the job title, company name, location, posting date, full description, and the direct job URL (you can copy from your browser)
+- **Option B:** Provide an exported CSV or JSON snippet of job results you obtained via another tool, including:
+  - Title, company, location, date, URL, description, skills/requirements if already parsed
+
+Given that data, I will:
+
+1. **Task 3 – Radar data per job**  
+   - Identify 5–8 key skill categories from each job description (aligned to categories like 3D Modelling, Real‑Time Engine, Programming, Texturing, Video, AI/Automation, Project Management, Web, etc).
+   - Score:
+     - **Candidate score (0–10):** based solely on your documented skills.
+     - **Job requirement intensity (0–10):** based strictly on wording in the ad.
+   - Prepare a JS‑ready structure for Chart.js radar charts for each job.
+
+2. **Task 4 – Job summaries**  
+   For each job you provide:
+   - 2–3 sentence factual summary
+   - Key responsibilities and required skills
+   - Short statement on relevance to your background (no exaggeration; only from documented skills and the job text)
+
+3. **Task 5 – Full HTML (two‑column layout with charts)**  
+   - Insert a `<div class="job-card">` per job with:
+     - Title, company, location, posting date, source, URL, any contact found
+     - 2–3 sentence summary
+     - Bullet list of main requirements
+   - Include a `<canvas>` element and a per‑job `<script>` block initialising a Chart.js radar chart using the Task 3 scores.
+   - Fill the metadata sidebar with:
+     - Count of jobs by source site
+     - Note for any source that had “no results provided” (based on what you send)
+     - Timestamp / filters (Perth, last 14 days – as per your constraints)
+
+If you’d like, you can start by pasting just 2–3 Perth job ads (including their direct URLs), and I’ll produce a complete minimal HTML file implementing your template and radar charts for those, which you can then scale up by reusing the pattern.
