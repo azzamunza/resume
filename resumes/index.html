@@ -312,11 +312,87 @@
             transform: translateY(-2px);
         }
 
+        .job-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
         .job-card-date {
             font-weight: 700;
             color: #00205B;
             font-size: 1.1rem;
-            margin-bottom: 10px;
+        }
+
+        .job-card-toggle {
+            background: #00B8E8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-card-toggle:hover {
+            background: #0096c7;
+        }
+
+        .job-card-toggle .toggle-icon {
+            font-size: 0.8rem;
+            transition: transform 0.3s;
+        }
+
+        .job-card.expanded .job-card-toggle .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .job-card-summary {
+            display: block;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .job-card.expanded .job-card-summary {
+            display: none;
+        }
+
+        .job-card-summary h4 {
+            margin: 0 0 10px 0;
+            color: #00205B;
+            font-size: 1rem;
+        }
+
+        .job-card-summary ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .job-card-summary li {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        .job-card-summary .company-name {
+            font-weight: 600;
+            color: #00205B;
+        }
+
+        .job-card-summary .job-title {
+            color: #333;
+        }
+
+        .job-card-summary .loading {
+            font-style: italic;
+            color: #999;
         }
 
         .job-card-link {
@@ -332,12 +408,26 @@
             text-decoration: underline;
         }
 
+        .job-card-iframe-container {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .job-card.expanded .job-card-iframe-container {
+            display: block;
+        }
+
         .job-card iframe {
             width: 100%;
             height: 400px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            margin-top: 10px;
+            transition: height 0.3s ease;
+        }
+
+        .job-card.expanded iframe {
+            height: auto;
+            min-height: 600px;
         }
 
         @media (max-width: 1200px) {
@@ -847,6 +937,63 @@
             return fileItem;
         }
 
+        // Extract job summary from iframe content
+        function extractJobSummary(iframe) {
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const jobCards = iframeDoc.querySelectorAll('.job-card');
+                const jobs = [];
+                
+                jobCards.forEach(jobCard => {
+                    const titleElement = jobCard.querySelector('h2');
+                    const companyElement = jobCard.querySelector('h3');
+                    
+                    if (titleElement && companyElement) {
+                        const title = titleElement.textContent.trim();
+                        const company = companyElement.textContent.trim().split('•')[0].trim();
+                        jobs.push({ title, company });
+                    }
+                });
+                
+                return jobs;
+            } catch (error) {
+                // Cross-origin or other error - can't access iframe content
+                console.log('Could not extract job summary:', error);
+                return null;
+            }
+        }
+
+        // Toggle job card expansion
+        function toggleJobCard(card, iframe, summaryContainer) {
+            const isExpanded = card.classList.contains('expanded');
+            
+            if (isExpanded) {
+                // Collapse the card
+                card.classList.remove('expanded');
+                iframe.style.height = '400px';
+            } else {
+                // Expand the card
+                card.classList.add('expanded');
+                
+                // Try to set iframe height to content height
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc && iframeDoc.body) {
+                        // Wait a bit for content to render, then set height
+                        setTimeout(() => {
+                            const contentHeight = iframeDoc.body.scrollHeight;
+                            iframe.style.height = Math.max(contentHeight + 20, 600) + 'px';
+                        }, 100);
+                    } else {
+                        iframe.style.height = '800px'; // Fallback for cross-origin iframes
+                    }
+                } catch (error) {
+                    // Cross-origin iframe - use a reasonable default
+                    iframe.style.height = '800px';
+                }
+            }
+        }
+
         // Generate job cards
         async function generateJobCards(jobsData) {
             const jobCardsContainer = document.getElementById('job-cards');
@@ -857,18 +1004,34 @@
                 return;
             }
 
-            jobsData.forEach(jobData => {
+            jobsData.forEach((jobData, index) => {
                 const folder = jobData.name;
                 const files = jobData.files;
 
                 const card = document.createElement('div');
                 card.className = 'job-card';
 
-                // Date
+                // Header with date and toggle button
+                const header = document.createElement('div');
+                header.className = 'job-card-header';
+
                 const dateDiv = document.createElement('div');
                 dateDiv.className = 'job-card-date';
                 dateDiv.textContent = formatDate(folder);
-                card.appendChild(dateDiv);
+                header.appendChild(dateDiv);
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'job-card-toggle';
+                toggleButton.innerHTML = '<span class="toggle-text">Expand</span><span class="toggle-icon">▼</span>';
+                header.appendChild(toggleButton);
+
+                card.appendChild(header);
+
+                // Summary section (shown when collapsed)
+                const summaryContainer = document.createElement('div');
+                summaryContainer.className = 'job-card-summary';
+                summaryContainer.innerHTML = '<div class="loading">Loading job summary...</div>';
+                card.appendChild(summaryContainer);
 
                 // Link to job listing
                 if (files.html) {
@@ -879,11 +1042,38 @@
                     link.target = '_blank';
                     card.appendChild(link);
 
-                    // Embed iframe to show preview
+                    // Iframe container (shown when expanded)
+                    const iframeContainer = document.createElement('div');
+                    iframeContainer.className = 'job-card-iframe-container';
+
                     const iframe = document.createElement('iframe');
                     iframe.src = `../jobs/${folder}/${files.html}`;
                     iframe.title = `Job listing from ${formatDate(folder)}`;
-                    card.appendChild(iframe);
+                    iframeContainer.appendChild(iframe);
+                    card.appendChild(iframeContainer);
+
+                    // Extract summary when iframe loads
+                    iframe.addEventListener('load', () => {
+                        const jobs = extractJobSummary(iframe);
+                        
+                        if (jobs && jobs.length > 0) {
+                            summaryContainer.innerHTML = `
+                                <h4>Jobs Listed (${jobs.length}):</h4>
+                                <ul>
+                                    ${jobs.map(job => `<li><span class="company-name">${job.company}</span> - <span class="job-title">${job.title}</span></li>`).join('')}
+                                </ul>
+                            `;
+                        } else {
+                            summaryContainer.innerHTML = '<div class="loading">Click "Expand" to view job details</div>';
+                        }
+                    });
+
+                    // Toggle button click handler
+                    toggleButton.addEventListener('click', () => {
+                        toggleJobCard(card, iframe, summaryContainer);
+                        const isExpanded = card.classList.contains('expanded');
+                        toggleButton.querySelector('.toggle-text').textContent = isExpanded ? 'Collapse' : 'Expand';
+                    });
                 }
 
                 jobCardsContainer.appendChild(card);
