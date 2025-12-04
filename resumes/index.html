@@ -937,6 +937,12 @@
             return fileItem;
         }
 
+        // Constants for iframe sizing
+        const IFRAME_PADDING = 20;
+        const MIN_EXPANDED_HEIGHT = 600;
+        const FALLBACK_EXPANDED_HEIGHT = 800;
+        const IFRAME_RENDER_DELAY = 100;
+
         // Extract job summary from iframe content
         function extractJobSummary(iframe) {
             try {
@@ -950,7 +956,9 @@
                     
                     if (titleElement && companyElement) {
                         const title = titleElement.textContent.trim();
-                        const company = companyElement.textContent.trim().split('•')[0].trim();
+                        // Split on bullet or dash separators to extract company name
+                        const companyText = companyElement.textContent.trim();
+                        const company = companyText.split(/[•–—-]/)[0].trim();
                         jobs.push({ title, company });
                     }
                 });
@@ -979,17 +987,17 @@
                 try {
                     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                     if (iframeDoc && iframeDoc.body) {
-                        // Wait a bit for content to render, then set height
+                        // Wait for content to render, then set height
                         setTimeout(() => {
                             const contentHeight = iframeDoc.body.scrollHeight;
-                            iframe.style.height = Math.max(contentHeight + 20, 600) + 'px';
-                        }, 100);
+                            iframe.style.height = Math.max(contentHeight + IFRAME_PADDING, MIN_EXPANDED_HEIGHT) + 'px';
+                        }, IFRAME_RENDER_DELAY);
                     } else {
-                        iframe.style.height = '800px'; // Fallback for cross-origin iframes
+                        iframe.style.height = FALLBACK_EXPANDED_HEIGHT + 'px'; // Fallback for cross-origin iframes
                     }
                 } catch (error) {
                     // Cross-origin iframe - use a reasonable default
-                    iframe.style.height = '800px';
+                    iframe.style.height = FALLBACK_EXPANDED_HEIGHT + 'px';
                 }
             }
         }
