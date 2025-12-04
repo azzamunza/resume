@@ -549,7 +549,8 @@ This section consolidates all AI skills and related applications from profession
 **Other:**
 
 * I am not a qualified Interior Designer  
-* I do not have a Diploma in Screen and Media (Animation & Game Art)  
+* I do not have a Diploma in Screen and Media (Animation & Game Art)
+* I do not have experience with Corona  
   ---
 
   ## **X. Writing Style Guidelines (To Avoid Hallucinations/Inferences)**
