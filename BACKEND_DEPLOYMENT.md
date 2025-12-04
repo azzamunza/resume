@@ -190,7 +190,7 @@ Find the constants at the top of the script section and update:
 
 ```javascript
 // Old (Device Flow)
-const GITHUB_CLIENT_ID = 'Ov23liDEPGpyLygXjFwY';
+const GITHUB_CLIENT_ID = 'your_github_client_id';
 const GITHUB_REPO_OWNER = 'azzamunza';
 const GITHUB_REPO_NAME = 'resume';
 const GITHUB_BRANCH = 'main';
@@ -589,12 +589,15 @@ For Heroku deployment:
 
 ### 1. Enable Compression
 
-The server uses compression for better performance:
+To enable compression for better performance, add this to your `server/index.js`:
 
 ```javascript
-// Already included in server/index.js
+// Add compression middleware
 const compression = require('compression');
 app.use(compression());
+
+// Then install the package:
+// npm install compression
 ```
 
 ### 2. Session Store Optimization
@@ -741,7 +744,10 @@ If using Redis for sessions:
 redis-cli --rdb /backup/dump.rdb
 
 # Restore Redis data
-redis-cli --rdb /backup/dump.rdb
+# Copy the dump.rdb file to Redis data directory, then restart Redis
+cp /backup/dump.rdb /var/lib/redis/dump.rdb
+# Or restore with redis-cli
+redis-cli < /backup/redis-backup.aof
 ```
 
 ### Configuration Backup
@@ -853,7 +859,8 @@ curl -X POST -b cookies.txt https://your-backend/api/auth/logout
 openssl rand -base64 32
 
 # Set all variables at once (Heroku)
-cat .env | xargs heroku config:set
+# Filter out comments and empty lines
+heroku config:set $(cat .env | grep -v '^#' | grep -v '^$' | xargs)
 
 # Test specific variable
 echo $GITHUB_CLIENT_ID
