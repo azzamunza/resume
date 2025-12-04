@@ -387,4 +387,580 @@ After successful deployment:
 
 ---
 
+## Environment Variable Validation
+
+Before going to production, validate your environment variables are correctly set:
+
+### Validation Script
+
+Create a test script to verify your deployment:
+
+```bash
+#!/bin/bash
+# test-backend.sh - Validate backend deployment
+
+BACKEND_URL="${1:-https://your-backend-url.vercel.app}"
+
+echo "Testing backend at: $BACKEND_URL"
+echo ""
+
+# Test 1: Health Check
+echo "1. Testing /health endpoint..."
+HEALTH=$(curl -s "$BACKEND_URL/health")
+if echo "$HEALTH" | grep -q "ok"; then
+    echo "   ✅ Health check passed"
+else
+    echo "   ❌ Health check failed"
+    echo "   Response: $HEALTH"
+fi
+echo ""
+
+# Test 2: Auth Endpoint
+echo "2. Testing /api/auth/github endpoint..."
+AUTH=$(curl -s "$BACKEND_URL/api/auth/github")
+if echo "$AUTH" | grep -q "authUrl"; then
+    echo "   ✅ Auth endpoint responding"
+else
+    echo "   ❌ Auth endpoint failed"
+    echo "   Response: $AUTH"
+fi
+echo ""
+
+# Test 3: CORS Headers
+echo "3. Testing CORS configuration..."
+CORS=$(curl -s -I -X OPTIONS \
+  -H "Origin: https://azzamunza.github.io" \
+  -H "Access-Control-Request-Method: GET" \
+  "$BACKEND_URL/api/auth/status")
+if echo "$CORS" | grep -q "access-control-allow-origin"; then
+    echo "   ✅ CORS headers present"
+else
+    echo "   ⚠️  CORS headers not found (may need authentication)"
+fi
+echo ""
+
+echo "Validation complete!"
+```
+
+### Manual Validation Checklist
+
+Verify each environment variable is set correctly:
+
+```bash
+# For Vercel
+vercel env ls
+
+# For Heroku
+heroku config
+
+# For Railway
+railway variables
+```
+
+**Required Variables Checklist:**
+- [ ] `GITHUB_CLIENT_ID` - Should start with `Ov23` or similar
+- [ ] `GITHUB_CLIENT_SECRET` - Should be 40 characters
+- [ ] `CALLBACK_URL` - Should match your backend URL + `/api/auth/callback`
+- [ ] `FRONTEND_URL` - Should match `https://azzamunza.github.io` exactly
+- [ ] `SESSION_SECRET` - Should be at least 32 characters
+- [ ] `NODE_ENV` - Should be `production`
+
+## Practical Examples
+
+### Example 1: Testing OAuth Flow with curl
+
+```bash
+# Step 1: Get authorization URL
+curl https://your-backend-url.vercel.app/api/auth/github
+
+# Response:
+# {"authUrl":"https://github.com/login/oauth/authorize?client_id=..."}
+
+# Step 2: Visit the authUrl in browser, authorize, and you'll be redirected
+
+# Step 3: After authorization, check auth status
+curl -b cookies.txt -c cookies.txt \
+  https://your-backend-url.vercel.app/api/auth/status
+
+# Response if authenticated:
+# {"authenticated":true,"user":{"login":"username",...}}
+```
+
+### Example 2: Environment Variable Templates
+
+#### Development (.env.development)
+```env
+GITHUB_CLIENT_ID=Ov23li...
+GITHUB_CLIENT_SECRET=your_dev_secret
+CALLBACK_URL=http://localhost:3000/api/auth/callback
+FRONTEND_URL=http://localhost:8000
+SESSION_SECRET=dev-secret-at-least-32-characters-long
+PORT=3000
+NODE_ENV=development
+```
+
+#### Production (.env.production - DO NOT COMMIT)
+```env
+GITHUB_CLIENT_ID=Ov23li...
+GITHUB_CLIENT_SECRET=your_prod_secret
+CALLBACK_URL=https://your-app.vercel.app/api/auth/callback
+FRONTEND_URL=https://azzamunza.github.io
+SESSION_SECRET=strong-random-production-secret-at-least-32-chars
+NODE_ENV=production
+```
+
+### Example 3: Testing GitHub API Proxy
+
+```bash
+# After authentication with cookies saved
+curl -b cookies.txt \
+  https://your-backend-url.vercel.app/api/github/user
+
+# Expected response:
+# {"login":"username","name":"Your Name",...}
+
+# Get repository info
+curl -b cookies.txt \
+  https://your-backend-url.vercel.app/api/github/repos/azzamunza/resume
+
+# Get file contents
+curl -b cookies.txt \
+  "https://your-backend-url.vercel.app/api/github/repos/azzamunza/resume/contents/data/SearchSites.md"
+```
+
+## CI/CD Integration
+
+### Automated Deployment with GitHub Actions
+
+Create `.github/workflows/deploy-backend.yml`:
+
+```yaml
+name: Deploy Backend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server/**'
+      - 'vercel.json'
+      - 'Procfile'
+
+jobs:
+  deploy-vercel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+  deploy-heroku:
+    runs-on: ubuntu-latest
+    if: false  # Enable if using Heroku
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.14
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+```
+
+### Required GitHub Secrets
+
+For Vercel deployment, add these secrets to your GitHub repository:
+- `VERCEL_TOKEN` - Get from Vercel account settings
+- `VERCEL_ORG_ID` - Found in Vercel project settings
+- `VERCEL_PROJECT_ID` - Found in Vercel project settings
+
+For Heroku deployment:
+- `HEROKU_API_KEY` - From Heroku account settings
+- `HEROKU_APP_NAME` - Your Heroku app name
+- `HEROKU_EMAIL` - Your Heroku account email
+
+## Performance Optimization
+
+### 1. Enable Compression
+
+The server uses compression for better performance:
+
+```javascript
+// Already included in server/index.js
+const compression = require('compression');
+app.use(compression());
+```
+
+### 2. Session Store Optimization
+
+For production with high traffic, use a persistent session store:
+
+```bash
+npm install connect-redis redis
+```
+
+```javascript
+// server/index.js - Add Redis session store
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
+const redisClient = redis.createClient({
+    url: process.env.REDIS_URL
+});
+
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}));
+```
+
+### 3. Rate Limiting
+
+Protect your API from abuse:
+
+```bash
+npm install express-rate-limit
+```
+
+```javascript
+// server/index.js
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.use('/api/', limiter);
+```
+
+### 4. Caching Strategy
+
+Add caching headers for static responses:
+
+```javascript
+// Cache health check for 1 minute
+app.get('/health', (req, res) => {
+    res.set('Cache-Control', 'public, max-age=60');
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+```
+
+### 5. Connection Pooling
+
+For high-traffic applications, configure connection pooling:
+
+```javascript
+// Use node-fetch with keep-alive
+const fetch = require('node-fetch');
+const http = require('http');
+const https = require('https');
+
+const httpAgent = new http.Agent({
+    keepAlive: true,
+    maxSockets: 50
+});
+
+const httpsAgent = new https.Agent({
+    keepAlive: true,
+    maxSockets: 50
+});
+
+// Use in GitHub API calls
+const response = await fetch(githubApiUrl, {
+    agent: githubApiUrl.startsWith('https') ? httpsAgent : httpAgent
+});
+```
+
+## Scaling Considerations
+
+### Horizontal Scaling
+
+**Vercel**: Automatically scales with serverless functions
+- No configuration needed
+- Handles traffic spikes automatically
+- Each request gets its own isolated execution
+
+**Heroku**: Add more dynos for horizontal scaling
+```bash
+heroku ps:scale web=2
+```
+
+**Railway**: Auto-scales based on traffic
+- Configure in Railway dashboard
+- Set minimum and maximum instances
+
+### Vertical Scaling
+
+**Heroku**: Upgrade dyno type
+```bash
+heroku ps:type web=standard-2x
+```
+
+**Railway**: Adjust resources in dashboard
+- Increase memory allocation
+- Increase CPU allocation
+
+### Load Balancing
+
+For high-availability deployments:
+
+1. **Multi-region deployment**
+   - Deploy to multiple regions
+   - Use DNS-based routing (e.g., Cloudflare)
+
+2. **CDN integration**
+   - Use Vercel's built-in CDN
+   - Or add Cloudflare in front of Heroku/Railway
+
+3. **Health check endpoints**
+   - Ensure `/health` endpoint is fast
+   - Return appropriate HTTP status codes
+   - Monitor response times
+
+## Backup and Disaster Recovery
+
+### Session Data Backup
+
+If using Redis for sessions:
+
+```bash
+# Backup Redis data
+redis-cli --rdb /backup/dump.rdb
+
+# Restore Redis data
+redis-cli --rdb /backup/dump.rdb
+```
+
+### Configuration Backup
+
+**Backup environment variables:**
+
+```bash
+# Vercel
+vercel env pull .env.backup
+
+# Heroku
+heroku config -s > .env.backup
+
+# Railway
+railway variables > .env.backup
+```
+
+⚠️ **IMPORTANT**: Store these backups securely, they contain secrets!
+
+### Disaster Recovery Plan
+
+1. **Backend Server Down**
+   - Frontend falls back to Device Flow (if still configured)
+   - Users can still view content
+   - Edit functionality temporarily unavailable
+
+2. **Database/Session Store Down**
+   - Users need to re-authenticate
+   - No data loss (stateless authentication)
+   - Session tokens can be regenerated
+
+3. **GitHub OAuth App Issues**
+   - Create new OAuth App
+   - Update environment variables
+   - Redeploy backend
+   - Users need to re-authorize
+
+4. **Complete Service Failure**
+   - Deploy to alternative platform
+   - Update DNS/frontend configuration
+   - Restore environment variables from backup
+   - Test thoroughly before directing traffic
+
+### Rollback Strategy
+
+**Quick Rollback (Vercel)**:
+```bash
+vercel rollback
+```
+
+**Quick Rollback (Heroku)**:
+```bash
+heroku releases:rollback v123
+```
+
+**Manual Rollback**:
+```bash
+git revert HEAD
+git push origin main
+# Trigger redeployment
+```
+
+## Quick Reference Cheat Sheet
+
+### Essential Commands
+
+```bash
+# Vercel
+vercel                     # Deploy to preview
+vercel --prod             # Deploy to production
+vercel logs               # View logs
+vercel env ls             # List environment variables
+vercel rollback           # Rollback deployment
+
+# Heroku
+heroku logs --tail        # Stream logs
+heroku restart            # Restart server
+heroku ps                 # Check status
+heroku config             # View environment variables
+heroku releases           # View deployment history
+
+# Railway
+railway logs              # View logs
+railway up                # Deploy
+railway status            # Check status
+railway variables         # List environment variables
+```
+
+### Testing Endpoints
+
+```bash
+# Health check
+curl https://your-backend/health
+
+# Auth status (requires authentication)
+curl -b cookies.txt https://your-backend/api/auth/status
+
+# Get user info (requires authentication)
+curl -b cookies.txt https://your-backend/api/github/user
+
+# Logout
+curl -X POST -b cookies.txt https://your-backend/api/auth/logout
+```
+
+### Environment Variables Quick Setup
+
+```bash
+# Generate session secret
+openssl rand -base64 32
+
+# Set all variables at once (Heroku)
+cat .env | xargs heroku config:set
+
+# Test specific variable
+echo $GITHUB_CLIENT_ID
+```
+
+## Frequently Asked Questions
+
+### Q: Can I use a different OAuth provider?
+
+A: The current implementation is GitHub-specific, but the architecture can be adapted for other OAuth providers (GitLab, Bitbucket, etc.) by modifying the OAuth endpoints in `server/index.js`.
+
+### Q: How long do sessions last?
+
+A: Sessions expire after 24 hours by default. Users need to re-authenticate after that period. You can adjust this in the session configuration.
+
+### Q: Can I deploy to multiple environments?
+
+A: Yes! Deploy separate instances for development, staging, and production. Use different GitHub OAuth Apps for each environment.
+
+### Q: What happens if my backend is down?
+
+A: The frontend won't be able to authenticate or save files. Consider implementing a fallback to Device Flow or showing a maintenance message.
+
+### Q: How much does it cost to run?
+
+A: For personal use, free tiers are usually sufficient:
+- Vercel: Free with generous limits
+- Heroku: Free tier available (with credit card)
+- Railway: $5 free credit/month
+
+### Q: Can I use a custom domain?
+
+A: Yes! All platforms support custom domains:
+- Vercel: Add domain in dashboard, update DNS
+- Heroku: `heroku domains:add your-domain.com`
+- Railway: Add custom domain in project settings
+
+### Q: How do I rotate secrets?
+
+A: 
+1. Generate new CLIENT_SECRET in GitHub OAuth App
+2. Update environment variable in your platform
+3. Redeploy (or restart if no code changes needed)
+4. Old sessions will be invalidated
+
+### Q: Can I see who's authenticated?
+
+A: Check your server logs. Each authentication logs the user's GitHub username. For more detailed analytics, integrate a logging service.
+
+### Q: What about GDPR/privacy compliance?
+
+A: The backend stores minimal data (session IDs and OAuth tokens). Sessions expire after 24 hours. No personal data is permanently stored. Review your specific requirements and add appropriate privacy policy.
+
+### Q: Can I use this with a private repository?
+
+A: Yes! The OAuth App requests `repo` scope which includes private repository access. Just ensure the authenticating user has access to the private repository.
+
+### Q: How do I update the backend code?
+
+A:
+1. Make changes to `server/index.js`
+2. Test locally
+3. Commit changes
+4. Deploy: `vercel --prod` or `git push heroku main`
+5. Monitor logs for any issues
+
+### Q: Can I add more API endpoints?
+
+A: Absolutely! Add new routes in `server/index.js`. Use the `requireAuth` middleware for protected endpoints. See examples in the server README.
+
+### Q: What about webhooks?
+
+A: You can add webhook endpoints to your backend. See GitHub Webhooks documentation and add routes like:
+```javascript
+app.post('/api/webhooks/github', (req, res) => {
+    // Handle webhook
+});
+```
+
+## Additional Resources
+
+### Documentation
+- [Express.js Documentation](https://expressjs.com/)
+- [GitHub OAuth Documentation](https://docs.github.com/en/developers/apps/building-oauth-apps)
+- [Vercel Documentation](https://vercel.com/docs)
+- [Heroku Documentation](https://devcenter.heroku.com/)
+- [Railway Documentation](https://docs.railway.app/)
+
+### Security
+- [OWASP Top 10](https://owasp.org/www-project-top-ten/)
+- [Express Security Best Practices](https://expressjs.com/en/advanced/best-practice-security.html)
+- [Node.js Security Checklist](https://github.com/goldbergyoni/nodebestpractices#6-security-best-practices)
+
+### Monitoring Tools
+- [UptimeRobot](https://uptimerobot.com/) - Free uptime monitoring
+- [Sentry](https://sentry.io/) - Error tracking
+- [LogRocket](https://logrocket.com/) - Session replay and monitoring
+- [Datadog](https://www.datadoghq.com/) - Application performance monitoring
+
+### Community
+- [GitHub Discussions](https://github.com/azzamunza/resume/discussions)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/github-oauth)
+
+---
+
 For detailed API documentation, see `server/README.md`.
+
+**Document Version**: 2.0  
+**Last Updated**: December 2024  
+**Maintained By**: Aaron Munro (azzamunza@gmail.com)
