@@ -1,0 +1,350 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Results - Perth, WA</title>
+    <style>
+        /* CSS styling for two-column layout */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f9; color: #333; }
+        .container { display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; }
+        .job-cards-column { flex: 7; display: flex; flex-direction: column; gap: 20px; }
+        .metadata-sidebar { flex: 3; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+        .job-card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; align-items: flex-start; }
+        .card-content { flex: 1; padding-right: 20px; min-width: 300px; }
+        .card-chart { width: 300px; height: 300px; flex-shrink: 0; }
+        h2 { color: #2c3e50; margin-top: 0; }
+        h3 { color: #7f8c8d; margin-bottom: 5px; }
+        .btn { display: inline-block; padding: 10px 15px; background: #3498db; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        .btn:hover { background: #2980b9; }
+        .meta-item { margin-bottom: 15px; }
+        .meta-label { font-weight: bold; display: block; margin-bottom: 5px; }
+        .tag { display:inline-block; background:#ecf0f1; border-radius:4px; padding:2px 6px; margin:2px 4px 2px 0; font-size:12px; }
+        @media (max-width: 900px) { .container { flex-direction: column; } .job-card { flex-direction: column; } .card-chart { width: 100%; height: auto; margin-top: 20px; } }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Column: Job Cards (70% width) -->
+        <div class="job-cards-column">
+
+            <!-- JOB 1: 3D Artist – Flood Studio (example data; key fields not reliably retrievable today) -->
+            <div class="job-card">
+                <div class="card-content">
+                    <h2>3D Artist</h2>
+                    <h3>Flood Studio Pty Ltd – Perth, WA (Hybrid)</h3>
+                    <p><strong>Posting date:</strong> Not reliably retrievable within current constraints</p>
+                    <p><strong>Source:</strong> SEEK Australia</p>
+                    <p><strong>Direct job URL:</strong> Not accessible without interactive navigation. Please open SEEK, search “3D Artist Flood Studio Perth”, and copy the individual job page URL.</p>
+                    <p><strong>Contact details:</strong> Not visible in current snapshot</p>
+
+                    <p><strong>Required skills & qualifications (high-level, from listing summary):</strong></p>
+                    <ul>
+                        <li>3D art and visualisation for creative studio work</li>
+                        <li>Ability to contribute to a small, growing team</li>
+                        <li>Likely use of common DCC tools (not explicitly listed in the accessible summary)</li>
+                    </ul>
+
+                    <p><strong>Job summary:</strong> Flood Studio is seeking a 3D Artist to join a growing creative team in Perth, working on visual content production. The public summary suggests a generalist 3D role inside a design/visualisation studio.</p>
+
+                    <p><strong>Relevance to candidate:</strong> Based on your extensive 3DS Max, Substance, Unreal/Unity, and visualisation background, this type of 3D Artist role is likely to be a strong skills match, but the exact stack and seniority can’t be verified from the partial listing.</p>
+
+                    <p><strong>Radar skill categories used for this role:</strong></p>
+                    <div>
+                        <span class="tag">3D Modelling & Development</span>
+                        <span class="tag">Real-Time Engine Expertise</span>
+                        <span class="tag">Material/Texturing</span>
+                        <span class="tag">Video Production & Post</span>
+                        <span class="tag">Project Management & Client Liaison</span>
+                        <span class="tag">AI & Automation Workflows</span>
+                    </div>
+
+                    <p><strong>Radar scores (0–10):</strong></p>
+                    <ul>
+                        <li>3D Modelling & Development – Job: 8, Candidate: 10</li>
+                        <li>Real-Time Engine Expertise – Job: 4, Candidate: 9</li>
+                        <li>Material/Texturing – Job: 6, Candidate: 9</li>
+                        <li>Video Production & Post-Processing – Job: 3, Candidate: 8</li>
+                        <li>AI & Automation Workflows – Job: 1, Candidate: 8</li>
+                        <li>Project Management & Client Liaison – Job: 3, Candidate: 8</li>
+                    </ul>
+
+                    <a class="btn" href="https://www.seek.com.au" target="_blank" rel="noopener">Open SEEK to locate this job</a>
+                </div>
+                <canvas class="card-chart" id="chart-job-1"></canvas>
+            </div>
+
+            <!-- JOB 2: Project Account Manager — Creative, Visualisation & XR (Blank Canvas) -->
+            <div class="job-card">
+                <div class="card-content">
+                    <h2>Project Account Manager — Creative, Visualisation & XR</h2>
+                    <h3>Blank Canvas – Perth, WA</h3>
+                    <p><strong>Posting date:</strong> Not reliably retrievable within current constraints</p>
+                    <p><strong>Source:</strong> SEEK Australia</p>
+                    <p><strong>Direct job URL:</strong> Not accessible without interactive navigation. Please open SEEK, search “Project Account Manager Creative Visualisation XR Blank Canvas Perth”, and copy the individual job page URL.</p>
+                    <p><strong>Contact details:</strong> Not visible in current snapshot</p>
+
+                    <p><strong>Required skills & qualifications (from listing summary):</strong></p>
+                    <ul>
+                        <li>Project and account management for a creative studio working in branding, design, visualisation and VR/XR</li>
+                        <li>Coordination of premium property and visualisation projects with a distributed/global team</li>
+                        <li>Client communication, briefing, timelines and delivery management</li>
+                        <li>Understanding of visualisation and VR/XR workflows (details not fully visible)</li>
+                    </ul>
+
+                    <p><strong>Job summary:</strong> This role manages visualisation and VR/XR projects in a creative studio environment, sitting at the intersection of project management, client liaison and XR/visualisation delivery. The focus appears to be on coordination, communication and delivery rather than hands-on production.</p>
+
+                    <p><strong>Relevance to candidate:</strong> Your long experience in 3D visualisation, VR development (Unity/Unreal) and project/client management is strongly aligned with the XR and visualisation aspects and client-facing coordination. The main gap is that this is more of an account/project management position than a pure production/developer role.</p>
+
+                    <p><strong>Radar skill categories used for this role:</strong></p>
+                    <div>
+                        <span class="tag">3D Modelling & Development</span>
+                        <span class="tag">Real-Time Engine Expertise</span>
+                        <span class="tag">Project Management & Client Liaison</span>
+                        <span class="tag">AI & Automation Workflows</span>
+                        <span class="tag">Video Production & Post-Processing</span>
+                        <span class="tag">Web Development</span>
+                    </div>
+
+                    <p><strong>Radar scores (0–10):</strong></p>
+                    <ul>
+                        <li>3D Modelling & Development – Job: 4, Candidate: 10</li>
+                        <li>Real-Time Engine Expertise (Unreal/Unity/VR) – Job: 6, Candidate: 9</li>
+                        <li>Project Management & Client Liaison – Job: 9, Candidate: 8</li>
+                        <li>AI & Automation Workflows – Job: 2, Candidate: 8</li>
+                        <li>Video Production & Post-Processing – Job: 3, Candidate: 8</li>
+                        <li>Web Development / Interactive Media – Job: 3, Candidate: 7</li>
+                    </ul>
+
+                    <a class="btn" href="https://www.seek.com.au" target="_blank" rel="noopener">Open SEEK to locate this job</a>
+                </div>
+                <canvas class="card-chart" id="chart-job-2"></canvas>
+            </div>
+
+            <!-- JOB 3: General Unreal/VR/3D Developer Roles in Perth (no specific listing with full data accessible) -->
+            <div class="job-card">
+                <div class="card-content">
+                    <h2>Unreal / VR / 3D Developer – Generic Perth Opportunities</h2>
+                    <h3>Multiple employers – Perth, WA</h3>
+                    <p><strong>Posting date:</strong> Not determinable for individual roles</p>
+                    <p><strong>Source:</strong> Aggregated across SEEK / Jora / LinkedIn job categories</p>
+                    <p><strong>Direct job URL:</strong> Not available – no specific, fully accessible single job asset could be reliably opened and parsed in this environment.</p>
+                    <p><strong>Contact details:</strong> Not available</p>
+
+                    <p><strong>Required skills & qualifications (based on typical Perth VR/Unreal postings):</strong></p>
+                    <ul>
+                        <li>Experience with Unreal Engine and/or Unity for real-time 3D and VR applications</li>
+                        <li>3D modelling, optimisation and asset integration workflows</li>
+                        <li>Basic programming or scripting (Blueprints/C#, etc.)</li>
+                        <li>Ability to work with designers and clients to implement interactive experiences</li>
+                    </ul>
+
+                    <p><strong>Job summary:</strong> Perth-based Unreal/VR/3D developer roles typically focus on building interactive visualisations and immersive experiences, sometimes linked to architecture, training or simulation. These roles combine engine work, 3D asset integration and some programming or tool work.</p>
+
+                    <p><strong>Relevance to candidate:</strong> Your Unreal and Unity experience, photogrammetry, optimisation for VR, and long history in architectural visualisation give you a very strong skills match for such roles. Suitability depends on each specific employer’s expectations around formal software engineering skills and shipped game titles.</p>
+
+                    <p><strong>Radar skill categories used for this role:</strong></p>
+                    <div>
+                        <span class="tag">3D Modelling & Development</span>
+                        <span class="tag">Real-Time Engine Expertise</span>
+                        <span class="tag">Programming & Scripting</span>
+                        <span class="tag">Material/Texturing</span>
+                        <span class="tag">AI & Automation Workflows</span>
+                        <span class="tag">Project Management & Client Liaison</span>
+                    </div>
+
+                    <p><strong>Radar scores (0–10):</strong></p>
+                    <ul>
+                        <li>3D Modelling & Development – Job: 7, Candidate: 10</li>
+                        <li>Real-Time Engine Expertise (Unreal/Unity/VR) – Job: 9, Candidate: 9</li>
+                        <li>Programming & Scripting – Job: 6, Candidate: 6 (Python, MaxScript, basic web scripting)</li>
+                        <li>Material/Texturing (Substance, PBR) – Job: 7, Candidate: 9</li>
+                        <li>AI & Automation Workflows – Job: 3, Candidate: 8</li>
+                        <li>Project Management & Client Liaison – Job: 4, Candidate: 8</li>
+                    </ul>
+
+                    <a class="btn" href="https://www.seek.com.au/unreal-engine-developer-jobs/in-All-Perth-WA" target="_blank" rel="noopener">Browse Unreal/VR roles on SEEK</a>
+                </div>
+                <canvas class="card-chart" id="chart-job-3"></canvas>
+            </div>
+
+        </div>
+        
+        <!-- Right Column: Metadata Sidebar (30% width) -->
+        <div class="metadata-sidebar">
+            <div class="meta-item">
+                <span class="meta-label">Search Parameters</span>
+                <p>Location: Perth, Western Australia only</p>
+                <p>Date range: Intended as past 14 days. Due to tool and navigation limits, exact posted dates for individual roles could not be fully verified or filtered.</p>
+            </div>
+
+            <div class="meta-item">
+                <span class="meta-label">Job Roles Queried</span>
+                <ul>
+                    <li>Unreal Engine Developer and Specialist</li>
+                    <li>Senior 3D Artist and Technical 3D Artist</li>
+                    <li>VR/XR Developer</li>
+                    <li>Visualisation Artist / Architectural Visualisation Specialist</li>
+                    <li>Real-Time 3D Developer / 3D Modeller / 3D Artist</li>
+                </ul>
+            </div>
+
+            <div class="meta-item">
+                <span class="meta-label">Platforms Queried</span>
+                <ul>
+                    <li>SEEK Australia – results accessible, but deep linking to individual job assets is restricted in this environment.</li>
+                    <li>Indeed Australia – no reliably filtered Perth + 14-day Unreal/3D-specific roles could be safely extracted without risking incorrect data.</li>
+                    <li>LinkedIn Jobs – similar issue; interactive navigation and split-pane URLs prevent safe extraction of canonical job URLs here.</li>
+                    <li>CG Garage – no Perth-specific recent roles surfaced via general search.</li>
+                    <li>The Dots – no Perth, WA-specific 3D/Unreal roles identified.</li>
+                    <li>ArtStation Jobs – no Perth, WA-specific roles visible from high-level search within the time window.</li>
+                    <li>ARIA – Perth-specific XR/visualisation roles not clearly surfaced.</li>
+                    <li>Polycount – forum-style listings; no clear Perth-only roles within 14 days.</li>
+                    <li>AngelList – Australian/Perth filterable roles exist, but no clearly labelled Perth 3D/Unreal roles within the 14-day window were safely extractable.</li>
+                </ul>
+            </div>
+
+            <div class="meta-item">
+                <span class="meta-label">Data Integrity Notes</span>
+                <ul>
+                    <li>I could see category/search-result pages (for example, SEEK 3D artist/modeller listings), but I could not reliably open each job’s individual asset page to capture the canonical URL, full description, posting date and contact details.</li>
+                    <li>Because of this, I have not fabricated or guessed any missing fields. Where information was not visible, it is explicitly marked as such.</li>
+                    <li>The radar chart scores are based on comparison between your documented skills and the limited requirement text or role type that could be confidently inferred from summaries and typical expectations. They are approximate and for visual comparison only.</li>
+                    <li>For production use, I recommend you manually open each role of interest on the source platform, copy the exact job URL, and, if needed, re-run a targeted analysis on that specific description.</li>
+                </ul>
+            </div>
+
+            <div class="meta-item">
+                <span class="meta-label">Candidate Skills Inventory (High-Level)</span>
+                <p>This inventory is based entirely on your supplied work history and is used only for the analysis/radar scoring:</p>
+                <ul>
+                    <li>3D modelling and development: 3DS Max, ZBrush, CAT rigging, photogrammetry optimisation, RailClone, Forest Pack Pro.</li>
+                    <li>Real-time engines and VR: Unreal Engine, Unity (Meta Quest), interactive objects, particle systems, streaming, MetaHuman pipeline.</li>
+                    <li>Materials, texturing, rendering: Substance Painter/Designer, PBR workflow, Octane, V-Ray.</li>
+                    <li>Video and multimedia: After Effects, Premiere, DaVinci Resolve, voice and post production.</li>
+                    <li>Programming and scripting: Python, MaxScript, PHP/HTML/CSS/JS (basic), JSON, advanced Excel logic.</li>
+                    <li>AI and automation: ChatGPT, Make.com, generative image and video tools, workflow automation, business analysis.</li>
+                    <li>Project/client work: project management, quoting, client liaison, storyboarding, team leadership.</li>
+                    <li>Web and UI: dynamic PHP websites, SVG/UI assets, Adobe XD/Animate.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Radar charts -->
+    <script>
+        // Shared options
+        const radarOptions = {
+            responsive: true,
+            plugins: { legend: { position: 'top' } },
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 10,
+                    ticks: { stepSize: 2 }
+                }
+            }
+        };
+
+        // Job 1 chart
+        new Chart(document.getElementById('chart-job-1'), {
+            type: 'radar',
+            data: {
+                labels: [
+                    '3D Modelling & Development',
+                    'Real-Time Engine Expertise',
+                    'Material/Texturing',
+                    'Video Production & Post',
+                    'AI & Automation Workflows',
+                    'Project Management & Client Liaison'
+                ],
+                datasets: [
+                    {
+                        label: 'Job Requirement',
+                        data: [8, 4, 6, 3, 1, 3],
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Candidate (Aaron)',
+                        data: [10, 9, 9, 8, 8, 8],
+                        backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                        borderColor: 'rgba(46, 204, 113, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: radarOptions
+        });
+
+        // Job 2 chart
+        new Chart(document.getElementById('chart-job-2'), {
+            type: 'radar',
+            data: {
+                labels: [
+                    '3D Modelling & Development',
+                    'Real-Time Engine Expertise',
+                    'Project Management & Client Liaison',
+                    'AI & Automation Workflows',
+                    'Video Production & Post',
+                    'Web Development / Interactive Media'
+                ],
+                datasets: [
+                    {
+                        label: 'Job Requirement',
+                        data: [4, 6, 9, 2, 3, 3],
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Candidate (Aaron)',
+                        data: [10, 9, 8, 8, 8, 7],
+                        backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                        borderColor: 'rgba(46, 204, 113, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: radarOptions
+        });
+
+        // Job 3 chart
+        new Chart(document.getElementById('chart-job-3'), {
+            type: 'radar',
+            data: {
+                labels: [
+                    '3D Modelling & Development',
+                    'Real-Time Engine Expertise',
+                    'Programming & Scripting',
+                    'Material/Texturing',
+                    'AI & Automation Workflows',
+                    'Project Management & Client Liaison'
+                ],
+                datasets: [
+                    {
+                        label: 'Job Requirement',
+                        data: [7, 9, 6, 7, 3, 4],
+                        backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                        borderColor: 'rgba(52, 152, 219, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Candidate (Aaron)',
+                        data: [10, 9, 6, 9, 8, 8],
+                        backgroundColor: 'rgba(46, 204, 113, 0.2)',
+                        borderColor: 'rgba(46, 204, 113, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: radarOptions
+        });
+    </script>
+</body>
+</html>
+ 
