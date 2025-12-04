@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <title>Aaron Munro – Senior 3D Artist Résumé</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{
+      --primary:#111111;
+      --text-main:#222222;
+      --text-muted:#666666;
+      --bg:#FFFFFF;
+      --accent:#FF6644;
+
+      --font-heading: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --font-body: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+      --h1-size: 38px;
+      --h2-size: 20px;
+      --h3-size: 16px;
+
+      --space-0: 0;
+      --space-1: 6px;
+      --space-2: 10px;
+      --space-3: 14px;
+      --space-4: 18px;
+      --space-5: 22px;
+      --space-6: 26px;
+      --gutter: 22px;
+      --maxw: 980px;
+      --border:#e9e9e9;
+    }
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text-main);
+      font-family:var(--font-body);
+      line-height:1.55;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    #resume{
+      max-width:var(--maxw);
+      margin:0 auto;
+      background:var(--bg);
+    }
+
+    header[role="banner"]{
+      padding: var(--space-6) var(--space-4) var(--space-4);
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      justify-content:space-between;
+      border-bottom:2px solid var(--accent);
+      gap: var(--space-3);
+    }
+    h1{
+      font-family:var(--font-heading);
+      font-size:var(--h1-size);
+      line-height:1.15;
+      letter-spacing:0.5px;
+      margin:0 0 var(--space-1) 0;
+      color:var(--primary);
+    }
+    .tagline{
+      color:var(--text-muted);
+      font-weight:600;
+      font-size:14px;
+      letter-spacing:0.4px;
+    }
+    .location{
+      font-size:14px;
+      color:var(--text-muted);
+      margin-top:2px;
+    }
+    .contacts{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px 18px;
+      align-items:center;
+      justify-content:flex-end;
+    }
+    .contacts a, .contacts span{
+      font-size:14px;
+      color:var(--text-muted);
+      text-decoration:none;
+    }
+    .contacts a:focus, .contacts a:hover{
+      color:var(--primary);
+      text-decoration:underline;
+      text-underline-offset:2px;
+    }
+
+    .actions{
+      width:100%;
+      display:flex;
+      gap:10px;
+      margin-top: var(--space-2);
+      flex-wrap:wrap;
+    }
+    .btn{
+      appearance:none;
+      border:1px solid var(--accent);
+      background:#fff;
+      color:var(--primary);
+      padding:8px 12px;
+      border-radius:6px;
+      font-size:14px;
+      cursor:pointer;
+    }
+    .btn:hover{ background:#fff4f0; }
+    .btn:focus{ outline:2px solid var(--accent); outline-offset:1px; }
+
+    main[role="main"]{
+      padding: var(--space-4);
+    }
+
+    /* Layout: independent columns */
+    .layout{
+      display:flex;
+      flex-direction:column;
+      gap: var(--gutter);
+    }
+    .col{
+      display:flex;
+      flex-direction:column;
+      gap: var(--space-5);
+      min-width:0;
+    }
+
+    section{
+      margin:0;
+      padding:0;
+      border:0;
+    }
+    h2{
+      font-family:var(--font-heading);
+      font-size:var(--h2-size);
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+      color:var(--accent);
+      margin:0 0 var(--space-2) 0;
+      border-bottom:1px solid var(--accent);
+      padding-bottom:6px;
+    }
+    h3{
+      font-family:var(--font-heading);
+      font-size:var(--h3-size);
+      margin:0 0 2px 0;
+      color:var(--primary);
+      font-weight:700;
+    }
+    .meta{
+      font-size:14px;
+      color:var(--text-muted);
+      margin:0 0 var(--space-1) 0;
+    }
+    .summary p{
+      margin:0;
+    }
+
+    /* Lists */
+    ul{
+      margin:0;
+      padding-left:18px;
+    }
+    li{ margin: 0 0 8px 0; }
+
+    /* Skills */
+    .skills-wrap{
+      display:flex;
+      flex-direction:column;
+      gap: var(--space-3);
+    }
+    .skill-group h4{
+      margin:0 0 6px 0;
+      font-size:14px;
+      color:var(--primary);
+      font-weight:700;
+    }
+    .skill-list{
+      columns:2;
+      column-gap:28px;
+      list-style:disc;
+      padding-left:18px;
+    }
+    .skill-list li{ break-inside:avoid; }
+
+    /* Experience */
+    .job{
+      break-inside:avoid;
+      padding:0;
+      margin:0;
+    }
+
+    /* Portfolio */
+    .portfolio-item{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      break-inside:avoid;
+      padding:10px;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fafafa;
+    }
+    .portfolio-text{
+      flex:1 1 auto;
+      min-width:0;
+    }
+    .portfolio-text h4{
+      margin:0 0 4px 0;
+      font-size:15px;
+      font-weight:700;
+      color:var(--primary);
+      font-family:var(--font-heading);
+    }
+    .portfolio-text p{
+      margin:0;
+      font-size:13px;
+      color:var(--text-muted);
+    }
+    .frame{
+      flex:0 0 300px;
+      max-width:300px;
+      min-width:200px;
+      aspect-ratio:16/9;
+      border-radius:6px;
+      overflow:hidden;
+      background:#000;
+    }
+    .frame iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    footer[role="contentinfo"]{
+      padding: var(--space-4);
+      border-top:2px solid var(--accent);
+      color:var(--text-muted);
+      font-size:13px;
+      text-align:right;
+    }
+
+    /* Tablet 481–768: balanced */
+    @media (min-width:481px) and (max-width:768px){
+      main[role="main"]{ padding: var(--space-4); }
+      .frame{ max-width:45vw; }
+    }
+
+    /* Desktop ≥769: two independent columns */
+    @media (min-width:769px){
+      .layout{
+        flex-direction:row;
+        align-items:flex-start;
+      }
+      .left{
+        flex:0 0 36%;
+      }
+      .right{
+        flex:1 1 auto;
+      }
+    }
+
+    /* Mobile ≤480: single column */
+    @media (max-width:480px){
+      header[role="banner"]{ padding: var(--space-5) var(--space-3) var(--space-3); }
+      main[role="main"]{ padding: var(--space-3); }
+      h1{ font-size:28px; }
+      .skill-list{ columns:1; }
+      .frame{ max-width:100%; min-width:0; }
+    }
+
+    /* Print */
+    @media print{
+      header .actions{ display:none !important; }
+      #resume{ max-width:100%; box-shadow:none; }
+      main[role="main"]{ padding: 0; }
+      .layout{ display:block; }
+      .col{ gap:14px; }
+      .frame{ page-break-inside:avoid; }
+      a[href]::after{
+        content:" (" attr(href) ")";
+        font-size:11px;
+        color:var(--text-muted);
+      }
+      @page{ size: A4 portrait; margin: 18mm 15mm; }
+    }
+  </style>
+</head>
+<body>
+  <div id="resume" role="document" aria-label="Résumé of Aaron Munro">
+    <header role="banner" aria-label="Header and contact">
+      <div>
+        <h1>Aaron Munro</h1>
+        <div class="tagline">Senior 3D Artist</div>
+        <div class="location">Forrestfield, WA, Australia</div>
+      </div>
+      <div class="contacts" aria-label="Contact details">
+        <a href="mailto:azzamunza@gmail.com">azzamunza@gmail.com</a>
+        <a href="tel:+61477742636" aria-label="Phone">0477742636</a>
+        <a href="https://www.vector6.com.au/resume" target="_blank" rel="noopener">www.vector6.com.au/resume</a>
+      </div>
+      <div class="actions" aria-label="Export actions">
+        <button class="btn" id="btn-pdf" type="button">Download as PDF</button>
+        <button class="btn" id="btn-docx" type="button">Download as DOCX</button>
+        <button class="btn" id="btn-cover" type="button">Download Cover Letter</button>
+      </div>
+    </header>
+
+    <main role="main">
+      <div class="layout" aria-label="Two column layout">
+        <!-- Left Column -->
+        <div class="col left" aria-label="Left column sidebar">
+          <section id="summary" class="summary" aria-labelledby="summary-h">
+            <h2 id="summary-h">Professional Summary</h2>
+            <p>Aaron Munro is an experienced 3D artist and visualisation specialist with over 20 years' experience, including more than 10 years in senior roles focusing on architectural visualisation and product CGI. He is highly proficient in 3ds Max, Corona, V-Ray, Photoshop, and is skilled in creating photorealistic renders for both architecture and infrastructure projects. Aaron's background covers end-to-end project management, 3D modelling, shader and material development, rendering, and post production, working with teams and clients on complex, high-end deliverables. His portfolio demonstrates creative, organised, and efficient work on significant projects for Australian and international clients.</p>
+          </section>
+
+          <section id="skills" aria-labelledby="skills-h">
+            <h2 id="skills-h">Skills</h2>
+            <div class="skills-wrap">
+              <div class="skill-group">
+                <h4>Technical Skills</h4>
+                <ul class="skill-list">
+                  <li>3ds Max</li>
+                  <li>Corona Render</li>
+                  <li>V-Ray</li>
+                  <li>Photoshop</li>
+                  <li>Substance Suite</li>
+                  <li>Zbrush</li>
+                  <li>Octane Render</li>
+                  <li>Railclone</li>
+                  <li>Forest Pack Pro</li>
+                  <li>Unreal Engine</li>
+                  <li>Unity</li>
+                  <li>After Effects</li>
+                  <li>Premiere</li>
+                  <li>Davinci Resolve</li>
+                  <li>Matterport</li>
+                  <li>Reality Capture</li>
+                  <li>AutoCAD</li>
+                  <li>Revit</li>
+                </ul>
+              </div>
+              <div class="skill-group">
+                <h4>Core Competencies</h4>
+                <ul class="skill-list">
+                  <li>3D modelling</li>
+                  <li>Photoreal lighting</li>
+                  <li>Shader creation</li>
+                  <li>Styling of interior scenes</li>
+                  <li>Camera composition</li>
+                  <li>Retouching and post production</li>
+                  <li>Project management</li>
+                  <li>Client liaison</li>
+                  <li>Workflow automation</li>
+                  <li>Highly organised</li>
+                  <li>Efficiency</li>
+                  <li>Team leadership</li>
+                  <li>Technical problem-solving</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section id="certifications" aria-labelledby="certs-h">
+            <h2 id="certs-h">Certifications</h2>
+            <p>AI Generalist Course, completed August 2025 – covers core AI methodologies, workflow automation, and generative media production.</p>
+          </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col right" aria-label="Right column content">
+          <section id="experience" aria-labelledby="exp-h">
+            <h2 id="exp-h">Work Experience</h2>
+
+            <article class="job" aria-labelledby="job-vpxr">
+              <h3 id="job-vpxr">Specialised in 3D Development</h3>
+              <p class="meta">Viewport XR — 2023 – 2024</p>
+              <ul>
+                <li>Specialised in advanced real-time 3D graphics, including 3D modelling and shader development with 3ds Max.</li>
+                <li>Developed custom assets and visual effects for immersive architectural and infrastructure projects.</li>
+                <li>Produced video content using After Effects, Premiere, and Davinci Resolve.</li>
+                <li>Executed dynamic particle simulations and fluid dynamics using TYFlow and Embergen.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-vector6">
+              <h3 id="job-vector6">Sole Trader, Freelance 3D Artist/Developer &amp; Web Developer</h3>
+              <p class="meta">Vector 6 — 2016 – 2023</p>
+              <ul>
+                <li>Collaborated on varied 3D visualisation projects for architecture and product visualisation, including interior scenes fully modelled and rendered with 3ds Max and Octane.</li>
+                <li>Developed and optimised 3D models, executed material and texture creation using Substance Suite and Photoshop.</li>
+                <li>Produced high-quality photography and post-production grading for visualisation purposes.</li>
+                <li>Handled project management and developed internal software to streamline asset tracking and collaborative workflows.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-minnovare">
+              <h3 id="job-minnovare">Senior 3D Artist/Developer</h3>
+              <p class="meta">Minnovare — 2019</p>
+              <ul>
+                <li>Created simulations and animations for showcasing mining technology, involving 3D modelling, animation, and photoreal renders.</li>
+                <li>Worked on technical visualisation requiring accurate representation and creative scene styling.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-lastpixel">
+              <h3 id="job-lastpixel">Senior 3D Artist/Developer</h3>
+              <p class="meta">Last Pixel — October 2006 – March 2016</p>
+              <ul>
+                <li>Led high-end architectural visualisation and CGI projects, including the full development pipeline from client brief to delivery.</li>
+                <li>Produced photo-realistic 3D assets, lighting, and shading using 3ds Max, V-Ray, Corona, and Substance Suite.</li>
+                <li>Managed project teams, client communications, time management, and project deliveries.</li>
+                <li>Developed custom dynamic assets with Railclone and Forest Pack Pro for large architectural environments.</li>
+                <li>Performed advanced post-production, video editing, and image retouching in Photoshop and After Effects.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-3dmillipede">
+              <h3 id="job-3dmillipede">3D Artist</h3>
+              <p class="meta">3D Millipede — March 2005 – March 2006</p>
+              <ul>
+                <li>Converted 2D architectural CAD plans to 3D models and rendered photorealistic images with 3ds Max.</li>
+                <li>Overlaid models onto site photography for client visualisations.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-cellmedia">
+              <h3 id="job-cellmedia">Lead 3D Artist</h3>
+              <p class="meta">Cell Media — August 2003 – December 2004</p>
+              <ul>
+                <li>Developed character animation, mechanical rigging, and training induction 3D content using 3ds Max and Photoshop.</li>
+                <li>Produced post production visual effects, storyboarding, and video output with After Effects.</li>
+              </ul>
+            </article>
+
+            <article class="job" aria-labelledby="job-ibp">
+              <h3 id="job-ibp">3D Artist</h3>
+              <p class="meta">IBP Interactive Business Presentations — November 1999 – June 2003</p>
+              <ul>
+                <li>Developed 3D models and animations for interactive business presentations using 3ds Max and Photoshop.</li>
+                <li>Handled video editing, DVD production, and website development as part of visual deliverables.</li>
+              </ul>
+            </article>
+          </section>
+
+          <section id="projects" aria-labelledby="projects-h">
+            <h2 id="projects-h">Projects</h2>
+            <p>Major involvement in large-scale infrastructure and architectural projects such as Elizabeth Quay, Perth Underground Bus Port, Fremantle Ports Outer Harbour, and Butler to Perth Rail Link. Led development of custom procedural assets using Railclone and Forest Pack Pro.</p>
+          </section>
+
+          <section id="portfolio" aria-labelledby="portfolio-h">
+            <h2 id="portfolio-h">Portfolio</h2>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>Projects and Dev over the last few years</h4>
+                <p>Showcases architectural visualisation, real-time 3D, 3ds Max, Octane Renderer, Unity VR, and complex shading—demonstrates capability for high-end photo-realistic CGI.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="Projects and Dev over the last few years" src="https://www.youtube.com/embed/rvEkQWkZ8uw" allowfullscreen></iframe>
+              </div>
+            </article>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>Short 3D clip of a small estate rendered in Octane</h4>
+                <p>Demonstrates high-quality rendering of architectural environments, modelling, lighting, and post production in a real-world project.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="Short 3D clip of a small estate rendered in Octane" src="https://www.youtube.com/embed/ggY59ujm3l8" allowfullscreen></iframe>
+              </div>
+            </article>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>Showreel Aaron Munro 2016</h4>
+                <p>Portfolio highlights from time at Last Pixel, evidencing lead involvement in architectural CGI, advanced modelling, rendering, and post production.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="Showreel Aaron Munro 2016" src="https://www.youtube.com/embed/9wuhG46Dmxc" allowfullscreen></iframe>
+              </div>
+            </article>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>Busport - 3D Development Visualisation</h4>
+                <p>Example of architectural visualisation for major infrastructure, aligning with role focus on high-end CGI and architectural projects.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="Busport - 3D Development Visualisation" src="https://www.youtube.com/embed/piMQ2ZpvQGs" allowfullscreen></iframe>
+              </div>
+            </article>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>City Square Perth</h4>
+                <p>Features architectural 3D visualisation, scene styling, and rendering, relevant to high-quality CGI requirements.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="City Square Perth" src="https://www.youtube.com/embed/12SBRSakmAc" allowfullscreen></iframe>
+              </div>
+            </article>
+
+            <article class="portfolio-item">
+              <div class="portfolio-text">
+                <h4>Outer Harbour 3D Development Visualisation</h4>
+                <p>Demonstrates complex modelling and rendering of built environments, appropriate for architectural and infrastructure CGI.</p>
+              </div>
+              <div class="frame" aria-hidden="false">
+                <iframe title="Outer Harbour 3D Development Visualisation" src="https://www.youtube.com/embed/MpF3HvBJKMo" allowfullscreen></iframe>
+              </div>
+            </article>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer role="contentinfo">
+      © <span id="year"></span> Aaron Munro. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // PDF export
+    document.getElementById('btn-pdf').addEventListener('click', function(){
+      window.print();
+    });
+
+    // Helper to fetch local downloads.json and trigger download
+    async function downloadFromManifest(id){
+      try{
+        const res = await fetch('./downloads.json', {cache:'no-store'});
+        if(!res.ok) throw new Error('downloads.json not found');
+        const data = await res.json();
+        const item = (data.downloads || []).find(d => d.id === id);
+        if(!item) throw new Error('Item not found: ' + id);
+        const a = document.createElement('a');
+        a.href = item.path;
+        a.download = item.name || '';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      }catch(err){
+        alert('Unable to download file. ' + err.message);
+      }
+    }
+
+    document.getElementById('btn-docx').addEventListener('click', function(){
+      downloadFromManifest('resume');
+    });
+    document.getElementById('btn-cover').addEventListener('click', function(){
+      downloadFromManifest('coverLetter');
+    });
+  </script>
+</body>
+</html>
