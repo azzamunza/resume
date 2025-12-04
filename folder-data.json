@@ -5,8 +5,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251204-0424_Senior-3D-Artist.docx",
-        "coverLetter": null,
-        "applicationData": null
+        "coverLetter": "Cover-Letter_251204-0424_Harp-Collective.docx",
+        "applicationData": {
+          "Company": "Harp Collective",
+          "Job Title": "Senior 3D Artist",
+          "Job Listing URL": "https://harpcollective.com.au/3d-artist-jobs/senior-3d-artist-job/"
+        }
       }
     },
     {
@@ -301,5 +305,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-12-04T04:24:26.241Z"
+  "lastUpdated": "2025-12-04T04:25:12.001Z"
 }
