@@ -5,8 +5,12 @@
       "files": {
         "html": "index.html",
         "resume": "Resume_251204-0451_Digital-Content-Producer-Animator-Motion-Designer.docx",
-        "coverLetter": null,
-        "applicationData": null
+        "coverLetter": "Cover-Letter_251204-0451_Epigroup.docx",
+        "applicationData": {
+          "Company": "Epigroup",
+          "Job Title": "Digital Content Producer – Animator/Motion Designer",
+          "Job Listing URL": "https://www.seek.com.au/job/88575418?ref=search-standalone&type=standard&origin=showNewTab#sol=b3e2689c50c18a3f1192588142d910fe486c4275"
+        }
       }
     },
     {
@@ -314,5 +318,5 @@
       }
     }
   ],
-  "lastUpdated": "2025-12-04T04:51:16.661Z"
+  "lastUpdated": "2025-12-04T04:52:09.165Z"
 }
