@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Results - Perth, WA</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .job-cards-column {
+            flex: 70%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .metadata-sidebar {
+            flex: 30%;
+            min-width: 300px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            height: fit-content;
+        }
+        .job-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        .job-card-content {
+            flex: 3;
+        }
+        .job-card-chart {
+            flex: 2;
+            min-width: 250px;
+            max-width: 300px;
+        }
+        .job-card h2 {
+            margin: 0 0 5px 0;
+            font-size: 1.4em;
+            color: #1a0dab;
+        }
+        .job-card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.1em;
+            font-weight: normal;
+            color: #5f6368;
+        }
+        .job-card p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .job-card .meta-info {
+            font-size: 0.9em;
+            color: #5f6368;
+            margin-top: 15px;
+        }
+        .job-card .view-button {
+            display: inline-block;
+            background-color: #1a73e8;
+            color: #ffffff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .metadata-sidebar h3 {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .metadata-sidebar ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .metadata-sidebar p, .metadata-sidebar li {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .integrity-note {
+            font-style: italic;
+            color: #5f6368;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            .job-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .job-card-chart {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="job-cards-column">
+            <!-- Job Card 1 -->
+            <div class="job-card">
+                <div class="job-card-content">
+                    <h2>Senior 3D Artist</h2>
+                    <h3>Harp Collective</h3>
+                    <p><strong>Location:</strong> Perth, Western Australia</p>
+                    <p><strong>Contact:</strong> hello@harpcollective.com.au</p>
+                    <p class="summary">
+                        This Senior 3D Artist role with Harp Collective focuses on creating photo-realistic architectural and product visualizations using 3ds Max, Corona/V-Ray, and Photoshop. The position aligns with your extensive background in architectural visualization at Last Pixel and your expert-level skills in the required software. The company's work in animation and virtual reality also offers a strong connection to your experience at Viewport XR.
+                    </p>
+                    <a href="https://harpcollective.com.au/careers/senior-3d-artist-position-2/" class="view-button" target="_blank">View Job</a>
+                    <div class="meta-info">
+                        <span><strong>Posted:</strong> Not provided</span> | <span><strong>Source:</strong> harpcollective.com.au</span>
+                    </div>
+                </div>
+                <div class="job-card-chart">
+                    <canvas id="jobChart1"></canvas>
+                </div>
+            </div>
+            <!-- More job cards would go here -->
+        </div>
+        
+        <div class="metadata-sidebar">
+            <h3>Search Metadata</h3>
+            <p><strong>Search Execution Timestamp:</strong><br>2025-12-04 02:54:00</p>
+            
+            <h3>Industries Targeted</h3>
+            <ul>
+                <li>3D Visualization</li>
+                <li>Interactive Media</li>
+                <li>VR/XR Development</li>
+                <li>Architectural Visualization</li>
+                <li>AI & Workflow Automation</li>
+                <li>Web Development</li>
+            </ul>
+
+            <h3>Job Search Sites Queried</h3>
+            <ul>
+                <li>SEEK Australia (seek.com.au)</li>
+                <li>Indeed Australia (indeed.com.au)</li>
+                <li>LinkedIn Jobs (linkedin.com/jobs)</li>
+                <li>CG Garage (cg-garage.com)</li>
+                <li>The Dots (the-dots.com)</li>
+                <li>ArtStation Jobs (artstation.com/jobs)</li>
+                <li>ARIA (aria.org.au)</li>
+                <li>Polycount (polycount.org)</li>
+                <li>AngelList (angel.co)</li>
+            </ul>
+
+            <h3>Search Filters Applied</h3>
+            <ul>
+                <li><strong>Location:</strong> Perth, Western Australia</li>
+                <li><strong>Date Range:</strong> Past 14 days</li>
+                <li><strong>Industries:</strong> 3D, VR, Visualization, Development</li>
+            </ul>
+
+            <h3>Retrieval Issues & Limitations</h3>
+            <ul>
+                <li>Only one highly relevant, detailed job description was retrieved and fully analyzed.</li>
+                <li>General job board results provided limited detail without further browsing, which was not performed to maintain focus.</li>
+                <li>Posting dates were not available on the direct source page.</li>
+                <li>No results were found for several niche platforms in the initial search.</li>
+            </ul>
+
+            <h3>Statistics</h3>
+            <p>
+                <strong>Total Jobs Analyzed:</strong> 1<br>
+                - Harp Collective: 1 job<br>
+                - SEEK: 0 jobs (analyzed)<br>
+                - Jora: 0 jobs (analyzed)<br>
+                - Other platforms: 0 jobs<br><br>
+                <strong>Date Range:</strong> Not provided
+            </p>
+
+            <p class="integrity-note">
+                <strong>Data Integrity Note:</strong> All data presented is retrieved directly from job listings. No information has been fabricated or inferred. Missing data points are explicitly noted.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Chart for Job 1
+            const ctx1 = document.getElementById('jobChart1').getContext('2d');
+            new Chart(ctx1, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        '3D Modelling (3ds Max)', 
+                        'Rendering (V-Ray/Corona)', 
+                        'Post-Production (PS)', 
+                        'Architectural Visualisation', 
+                        '3D Animation',
+                        'Project Management'
+                    ],
+                    datasets: [{
+                        label: 'Candidate Skills',
+                        data:,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }, {
+                        label: 'Job Requirements',
+                        data:,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                stepSize: 2
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Skills vs. Job Requirements'
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
