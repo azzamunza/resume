@@ -494,6 +494,216 @@ This section consolidates all AI skills and related applications from profession
   ### **E. AI Usage Insights**
 
 * Uses AI in some form daily. Is aware of challenges, including ensuring responses follow specific instructions, accurately recalling details, and handling large datasets in precise formats. Often requires breaking outputs into manageable chunks.  
+
+
+
+# AI + Automation Methods — Single Source of Truth (by repo)
+
+> Scope note: This inventory is based on implementation artifacts in the repos below.
+> Per instruction, **no claims are sourced from** `resume/data/work-history.md` (that file is handled separately).
+
+---
+
+### AI and Automation experience
+
+### LLM-assisted content transformation into publishable web pages (article HTML generation)
+**General description:** Converts structured news inputs into consistent, shareable standalone HTML article pages with embedded metadata for indexing and display.
+
+**Where it lives:**
+- `news-data.json`
+- `extract-articles.js`
+- `articles/`
+- `README-ARTICLES.md`
+- `Magazine_Article_Prompt.txt`
+- `Website_HTML_Template_Generator.html`
+
+---
+
+### Automated content indexing + continuous sync (file watcher → JSON registry)
+**General description:** Watches generated/edited article files and regenerates a JSON registry by extracting metadata, keeping the site index updated automatically.
+
+**Where it lives:**
+- `watch-articles.js`
+- `articles/`
+- `articles.json`
+- `README-ARTICLES.md`
+
+---
+
+### Automated QA for generated content (URL validation, HTML validation, reports)
+**General description:** Runs scripted validation across generated HTML (broken links/media, structure checks) and outputs machine-readable reports; may attempt automated fixes for URLs.
+
+**Where it lives:**
+- `validate-urls.js`
+- `validate-html.js`
+- `verify-articles.js`
+- `fix-article-urls.js`
+- `enhance-article-images.js`
+- `article-verification-report.json`
+- `html-validation-report.json`
+- `README-ARTICLES.md`
+- `README-IMAGE-FIX.md`
+- `README-IMAGE-ENHANCEMENT.md`
+
+---
+
+### Browser-based configuration editing with immediate application + automated GitHub upload
+**General description:** “Local-first” config edits apply instantly via `localStorage`, then the system syncs changes back to GitHub via API to persist them.
+
+**Where it lives:**
+- `config.html`
+- `config.json`
+- `test-config-integration.html`
+- `README-CONFIG-UPLOAD.md`
+- `index.html`
+
+---
+
+### Structured media/layout constraints for consistent outputs (rules-based generation approach)
+**General description:** Applies consistent, repeatable output constraints (fallbacks, ordering rules, responsiveness expectations) across many generated pages so they don’t require manual per-page polishing.
+
+**Where it lives:**
+- `Magazine_Article_Prompt.txt`
+- `README-IMAGE-FIX.md`
+- `validate-html.js`
+- `css/`
+- `articles/`
+
+---
+
+## Repo: `AmyCRM`
+
+### Secure “GitHub as a database” automation (CRUD via GitHub Contents API)
+**General description:** Stores application data as JSON in a GitHub repo and automates read/write operations so the app can persist state without a traditional database.
+
+**Where it lives:**
+- `index.html`
+
+---
+
+### Security automation pattern: Cloudflare Worker as a GitHub API proxy
+**General description:** Routes GitHub API operations through a serverless proxy so the frontend doesn’t directly hold GitHub tokens; centralises authenticated requests.
+
+**Where it lives:**
+- `index.html` (references configured worker URL; loads proxy client code such as `api-proxy.js`)
+
+---
+
+### Encrypted-at-rest record automation (store encrypted blobs, decrypt in-app)
+**General description:** Encrypts sensitive CRM content before storage and decrypts for viewing/editing; supports multiple encryption backends depending on configuration.
+
+**Where it lives:**
+- `encryption.js`
+
+---
+
+### Operational automation inside the app (autosave, archiving/deletion flows, editor workflow automation)
+**General description:** Adds automation around data capture and safety—autosave queues/timers, controlled deletes/archives, and operational tooling inside the UI.
+
+**Where it lives:**
+- `modules/communications-tab.js`
+
+---
+
+## Repo: `beachtime`
+
+### Copilot/agent-driven iterative delivery (feature branches + merged enhancements)
+**General description:** AI-assisted iteration across many feature branches to rapidly refine UI/logic, add chart controls, and expand features.
+
+**Where it lives:**
+- Repo branch history (`copilot/*`)
+
+---
+
+### Interactive simulation/visualisation automation (time slider drives system state)
+**General description:** A time-of-day slider controls a set of dependent visual systems in real time (animation state, displayed conditions, chart updates).
+
+**Where it lives:**
+- `fishing.html`
+- `fishing-script.js`
+
+---
+
+### Automated tide prediction via harmonic model integration
+**General description:** Client-side harmonic prediction computes tide height/time series from constituent data, enabling real-time tide-driven scoring/visualisation.
+
+**Where it lives:**
+- `tide-harmonic.js`
+- `data/tide-stations.json`
+
+---
+
+### Data ingestion automation prototype (OCR extraction from authoritative PNG tables)
+**General description:** An OCR pipeline concept to extract tide tables from images into structured data.
+
+**Where it lives:**
+- Repo OCR scripts/docs (filenames intentionally not re-listed)
+
+---
+
+### Automation enablement docs: “AI/OCR-friendly” specification of source data structure
+**General description:** Documents the grid semantics and parsing rules of the source images so automated extraction (OCR/AI) is deterministic and testable.
+
+**Where it lives:**
+- Repo documentation (filenames intentionally not re-listed)
+
+---
+
+### Automation validation methodology (cross-source verification + risk flagging)
+**General description:** Validates generated tide data against references and documents known inaccuracies/limits plus remediation paths.
+
+**Where it lives:**
+- Repo documentation (filenames intentionally not re-listed)
+
+---
+
+## Repo: `resume` (excluding work-history content)
+
+### Prompt engineering as an automation asset (job-search agent spec)
+**General description:** Defines a structured job-search + analysis spec (role, constraints, sequential tasks, extraction schema) designed to be automation-safe and to produce structured HTML outputs.
+
+**Where it lives:**
+- `data/job-search-prompt.md`
+- `data/SearchSites.md`
+- `data/JobRoles.md`
+
+---
+
+### Automation-friendly canonical URL enforcement (prevent split-view links)
+**General description:** Includes explicit rules to force extraction of direct job-asset URLs and reject split-view/search URLs, improving stability for archiving and review.
+
+**Where it lives:**
+- `data/job-search-prompt.md`
+
+---
+
+### Automated artefact archiving + indexing (resume/job runs)
+**General description:** Stores outputs (HTML/DOCX/job pages) in date-stamped folders and generates machine-readable indices so the archive UI can list and link artefacts automatically.
+
+**Where it lives:**
+- `generate-folder-data.js`
+- `generate-downloads.js`
+- `folder-data.json` (generated)
+- `resumes/index.html` (archive UI)
+
+---
+
+### CI automation (GitHub Actions regenerates metadata and commits changes)
+**General description:** On push (or manual dispatch), runs Node scripts to regenerate indices and commits changes back to the repo automatically so the archive stays current.
+
+**Where it lives:**
+- `.github/workflows/generate-folder-data.yml`
+
+---
+
+### Secure browser-based editing for automation inputs (OAuth backend + GitHub proxy)
+**General description:** Uses a backend OAuth server to handle GitHub OAuth Web Application Flow and proxy GitHub API requests (avoids CORS and keeps secrets server-side), enabling authenticated in-browser editing of automation prompt/config files.
+
+**Where it lives:**
+- `server/README.md`
+- `examples/README.md`
+- `resumes/index.html` (editor UI scaffolding)
+
   ---
 
   ## **IX. Professional Context and Limitations**
