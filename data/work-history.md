@@ -497,14 +497,7 @@ This section consolidates all AI skills and related applications from profession
 
 
 
-# AI + Automation Methods — Single Source of Truth (by repo)
-
-> Scope note: This inventory is based on implementation artifacts in the repos below.
-> Per instruction, **no claims are sourced from** `resume/data/work-history.md` (that file is handled separately).
-
----
-
-### AI and Automation experience
+# AI + Automation Methods Experience
 
 ### LLM-assisted content transformation into publishable web pages (article HTML generation)
 **General description:** Converts structured news inputs into consistent, shareable standalone HTML article pages with embedded metadata for indexing and display.
